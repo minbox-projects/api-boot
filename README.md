@@ -94,7 +94,7 @@ yuqiyu999
 
 #### 钉钉群
 
-![](https://github.com/hengboy/api-boot/dingding_group.JPG)
+![](https://github.com/hengboy/api-boot/blob/master/dingding_group.JPG)
 
 ### 目录概述
 
