@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>api-boot</artifactId>
+        <groupId>org.minbox.framework</groupId>
+        <version>0.1.1.RELEASE</version>
+        <relativePath>../..</relativePath>
+    </parent>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>api-boot-dependencies</artifactId>
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+        <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
+        <mybatis.enhance.version>1.1.0.RELEASE</mybatis.enhance.version>
+        <mybatis.pageable.version>1.0.6.RELEASE</mybatis.pageable.version>
+        <druid.starter.version>1.1.14</druid.starter.version>
+        <fastjson.version>1.2.56</fastjson.version>
+        <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
+        <spring.security.jwt.version>1.0.10.RELEASE</spring.security.jwt.version>
+        <reflections.version>0.9.11</reflections.version>
+        <guava.version>20.0</guava.version>
+        <swagger.version>2.9.2</swagger.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!--springboot dependencies-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--ApiBoot Starter-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--ApiBoot AutoConfigure-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--ApiBoot Converter-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-http-converter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--ApiBoot Security-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--ApiBoot Swagger-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-swagger</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--ApiBoot Common-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--fastJson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!--druid-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.starter.version}</version>
+            </dependency>
+            <!--mybatis enhance-->
+            <dependency>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>spring-boot-starter-mybatis-enhance</artifactId>
+                <version>${mybatis.enhance.version}</version>
+            </dependency>
+            <!--mybatis pageable-->
+            <dependency>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>spring-boot-starter-mybatis-pageable</artifactId>
+                <version>${mybatis.pageable.version}</version>
+            </dependency>
+            <!--security oauth2-->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security.oauth2.version}</version>
+            </dependency>
+            <!--jwt-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring.security.jwt.version}</version>
+            </dependency>
+            <!--reflections-->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
+            <!--google guava-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-bean-validators</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>

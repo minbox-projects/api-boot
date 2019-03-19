@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-boot-sample-security-oauth-jwt
+api:
+  boot:
+    security:
+      # Spring Security 内存方式用户列表示例
+      users:
+        - username: hengboy
+          password: 123456
+    oauth:
+      jwt:
+        # 开启Jwt转换AccessToken
+        enable: true
+        # 转换Jwt时所需加密key，默认为ApiBoot
+        sign-key: 恒宇少年 - 于起宇
