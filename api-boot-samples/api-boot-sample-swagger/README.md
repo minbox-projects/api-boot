@@ -16,6 +16,10 @@
 
 >  注意：`ApiBoot`所提供的依赖都不需要添加版本号，但是需要添加版本依赖，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/master/README.md#%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96)
 
+### @EnableApiBootSwagger
+
+在添加依赖后需要通过`@EnableApiBootSwagger`注解进行开启`ApiBoot Swagger`相关的配置信息自动化构建，可以配置在XxxApplication入口类上，也可以是配置类，让`SpringBoot`加载到即可。
+
 ### 相关配置
 
 | 配置参数                                    | 参数介绍                           | 默认值                                                       |
