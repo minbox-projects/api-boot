@@ -14,12 +14,35 @@
 </dependency>
 ```
 
-`ApiBoot`所提供的依赖都不需要添加版本号，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/master/README.md)
+>  注意：`ApiBoot`所提供的依赖都不需要添加版本号，但是需要添加版本依赖，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/master/README.md)
 
 ### 相关配置
 
-
+| 配置参数                                    | 参数介绍                           | 默认值                                                       |
+| ------------------------------------------- | :--------------------------------- | :----------------------------------------------------------- |
+| `api.boot.swagger.enable`                   | 是否启用                           | true                                                         |
+| `api.boot.swagger.title`                    | 文档标题                           | ApiBoot快速集成Swagger文档                                   |
+| `api.boot.swagger.description`              | 文档描述                           | ApiBoot通过自动化配置快速集成Swagger2文档，仅需一个注解、一个依赖即可。 |
+| `api.boot.swagger.base-package`             | 文档扫描的package                  | XxxApplication同级以及子级package                            |
+| `api.boot.swagger.version`                  | 文档版本号                         | api.boot.version                                             |
+| `api.boot.swagger.license`                  | 文档版权                           | ApiBoot                                                      |
+| `api.boot.swagger.license-url`              | 文档版权地址                       | https://github.com/hengboy/api-boot                          |
+| `api.boot.swagger.contact.name`             | 文档编写人名称                     | 恒宇少年                                                     |
+| `api.boot.swagger.contact.website`          | 文档编写人主页                     | http://blog.yuqiyu.com                                       |
+| `api.boot.swagger.contact.email`            | 文档编写人邮箱地址                 | jnyuqy@gmail.com                                             |
+| `api.boot.swagger.authorization.name`       | 整合Oauth2后授权名称               | ApiBoot Security Oauth 认证头信息                            |
+| `api.boot.swagger.authorization.key-name`   | 整合Oauth2后授权Header内的key-name | Authorization                                                |
+| `api.boot.swagger.authorization.auth-regex` | 整合Oauth2后授权表达式             | ^.*$                                                         |
+以上是目前版本的所有配置参数，大多数都存在默认值，可自行修改。
 
 ### 整合ApiBoot Security Oauth
 
+如果你的项目添加了`Oauth2`资源保护，在`Swagger`界面上访问接口时需要设置`AccessToken`到`Header`才可以完成接口的访问，`ApiBoot Security Oauth`默认开放`Swagger`所有相关路径，如果项目内并非通过`ApiBoot Security Oauth2`来做安全认证以及资源保护，需要自行开放`Swagger`相关路径。
+
+整合`ApiBoot Security Oauth`很简单，访问[ApiBoot Security Oauth](https://github.com/hengboy/api-boot/blob/master/api-boot-samples/api-boot-sample-security-oauth-jwt/README.md) 查看。
+
 ### 携带Token访问Api
+
+启动添加`ApiBoot-Swagger`依赖的项目后，访问[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)页面查看`Swagger`所生成的全部文档，页面右侧可以看到**Authorize**，点击后打开配置`AccessToken`的界面，配置的`AccessToken`必须携带类型，如：`Bearer 0798e1c7-64f4-4a2f-aad1-8c616c5aa85b`。
+
+>  注意：通过`ApiBoot Security Oauth`所获取的`AccessToken`类型都为`Bearer`。
