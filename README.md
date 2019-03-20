@@ -1,5 +1,5 @@
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22)[![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.4+_1.5+_2.0+-green.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.4+_1.5+_2.0+-green.svg)
 
 `ApiBoot`是一款基于`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
@@ -96,19 +96,20 @@ yuqiyu999
 
 ![](https://github.com/hengboy/api-boot/blob/master/dingding_group.JPG)
 
-### 目录概述
+### 项目结构
 
 ```
-. framework
-├── converter
-├── enums
-├── event
-├── model
-├── security
-│   ├── delegate
-│   ├── jdbc
-│   ├── properties
-│   └── userdetails
+. api-boot
+├── api-boot-projects
+│   ├── api-boot-autoconfigure
+│   ├── api-boot-common
+│   ├── api-boot-dependencies
+│   ├── api-boot-parent
+│   └── api-boot-starters
+├── api-boot-samples
+│   ├── api-boot-sample-http-converter
+│   ├── api-boot-sample-security-oauth-jwt
+│   └── api-boot-sample-swagger
 └── tools
 ```
 

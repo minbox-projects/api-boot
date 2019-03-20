@@ -2,7 +2,7 @@
 
 Demo列表：
 
-- [ApiBoot Security Oauth](https://github.com/hengboy/api-boot/api-boot-samples/api-boot-sample-security-oauth-jwt)
-- [ApiBoot Swagger](https://github.com/hengboy/api-boot/api-boot-samples/api-boot-sample-swagger)
-- [ApiBoot Http Converter](https://github.com/hengboy/api-boot/api-boot-samples/api-boot-sample-http-converter)
+- [ApiBoot Security Oauth](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-security-oauth-jwt)
+- [ApiBoot Swagger](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-swagger)
+- [ApiBoot Http Converter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-http-converter)
 
