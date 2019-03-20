@@ -87,8 +87,17 @@ public class SwaggerProperties {
      */
     @Data
     public static class Authorization {
-        private String name = "Authorization";
+        /**
+         * 整合Oauth2后授权名称
+         */
+        private String name = "ApiBoot Security Oauth 认证头信息";
+        /**
+         * 整合Oauth2后授权请求头Header内的key-name
+         */
         private String keyName = "Authorization";
+        /**
+         * 整合Oauth2后授权表达式
+         */
         private String authRegex = "^.*$";
     }
 }
