@@ -5,11 +5,16 @@ api:
   boot:
     security:
       # Spring Security 内存方式用户列表示例
-      users:
-        - username: hengboy
-          password: 123456
+      #users:
+        #- username: hengboy
+        #  password: 123456
+        #- username: apiboot
+        #  password: abc321
+      enable-default-store-delegate: false
+      away: jdbc
     oauth:
       jwt:
+        away: jdbc
         # 开启Jwt转换AccessToken
         enable: true
         # 转换Jwt时所需加密key，默认为ApiBoot
