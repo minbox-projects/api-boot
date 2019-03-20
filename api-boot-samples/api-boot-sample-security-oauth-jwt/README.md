@@ -24,7 +24,7 @@
 | ------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------- |
 | `api.boot.security.away`                          | SpringSecurity读取用户的方式，默认为内存方式                 | memory                                                       | all         |
 | `api.boot.security.auth-prefix`                   | 拦截的接口路径前缀，如：/api/users就会被默认拦截             | /api/**                                                      | memory/jdbc |
-| `api.boot.security.users`                         | 配置用户列表，具体使用查看[内存方式介绍]()                   | 无                                                           | memory      |
+| `api.boot.security.users`                         | 配置用户列表，具体使用查看[内存方式介绍](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-security-oauth-jwt#%E5%86%85%E5%AD%98%E6%96%B9%E5%BC%8F%E9%BB%98%E8%AE%A4%E6%96%B9%E5%BC%8F) | 无                                                           | memory      |
 | `api.boot.security.ignoring-urls`                 | `Spring Security`所排除的路径，默认排除Swagger、Actuator相关路径前缀 | /v2/api-docs<br />/swagger-ui.html<br />/swagger-resources/configuration/security<br />/META-INF/resources/webjars/**<br />/swagger-resources<br />/swagger-resources/configuration/ui<br />/actuator/** | memory/jdbc |
 | `api.boot.security.enable-default-store-delegate` | 仅在Jdbc方式生效                                             | true                                                         | jdbc        |
 
