@@ -26,6 +26,7 @@ import java.util.List;
 import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
 
 /**
+ * 整合Spring Security 相关属性配置
  * @author：恒宇少年 - 于起宇
  * <p>
  * DateTime：2019-03-14 15:26

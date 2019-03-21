@@ -3,20 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>api-boot</artifactId>
+        <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
         <version>0.1.1.RELEASE</version>
+        <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>api-boot-project</artifactId>
+    <artifactId>api-boot-plugins</artifactId>
     <packaging>pom</packaging>
+    <description>
+        ApiBoot集成第三方插件集成实现
+    </description>
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+    </properties>
     <modules>
-        <module>api-boot-dependencies</module>
-        <module>api-boot-parent</module>
-        <module>api-boot-autoconfigure</module>
-        <module>api-boot-starters</module>
-        <module>api-boot-common</module>
-        <module>api-boot-plugins</module>
+        <module>api-boot-plugin-alibaba-oss</module>
+        <module>api-boot-plugin</module>
     </modules>
 </project>

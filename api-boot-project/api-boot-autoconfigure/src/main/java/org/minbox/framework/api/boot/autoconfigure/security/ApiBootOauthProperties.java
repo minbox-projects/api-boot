@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
+ * 整合Oauth2 相关属性配置
  * @author：恒宇少年 - 于起宇
  * <p>
  * DateTime：2019-03-14 16:52

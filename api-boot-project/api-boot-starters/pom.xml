@@ -19,6 +19,7 @@
         <module>api-boot-starter-security-oauth-jwt</module>
         <module>api-boot-starter-http-converter</module>
         <module>api-boot-starter-swagger</module>
+        <module>api-boot-starter-alibaba-oss</module>
     </modules>
 
 
