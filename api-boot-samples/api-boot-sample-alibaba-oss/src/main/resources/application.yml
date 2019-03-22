@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-boot-sample-alibaba-oss
+api:
+  boot:
+    oss:
+      # oss存储地域
+      region: beijing
+      # id
+      access-key-id: xxxx
+      # secret
+      access-key-secret: xxxx
+      # 存储空间名称
+      bucket-name: xxx
+      # oss所绑定的域名
+      #domain: http://xxx.xxx.xx

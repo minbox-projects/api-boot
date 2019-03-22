@@ -27,23 +27,23 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
     /**
      * 地域性的endpoint
      */
-    private String endpoint;
+    protected String endpoint;
     /**
      * 存储空间名称
      */
-    private String bucketName;
+    protected String bucketName;
     /**
      * 阿里云账号授权id
      */
-    private String accessKeyId;
+    protected String accessKeyId;
     /**
      * 阿里云账号授权secret
      */
-    private String accessKeySecret;
+    protected String accessKeySecret;
     /**
      * 自定义域名
      */
-    private String domain;
+    protected String domain;
 
     @Override
     public ApiBootObjectStorageResponse upload(String objectName, byte[] bytes) throws ApiBootObjectStorageException {

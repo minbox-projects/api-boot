@@ -15,6 +15,7 @@
         <module>api-boot-sample-http-converter</module>
         <module>api-boot-sample-security-oauth-jwt</module>
         <module>api-boot-sample-swagger</module>
+        <module>api-boot-sample-alibaba-oss</module>
     </modules>
 
     <build>
