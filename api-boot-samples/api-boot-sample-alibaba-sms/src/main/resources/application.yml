@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: api-boot-sample-alibaba-sms
+# ApiBoot Sms
+api:
+  boot:
+    sms:
+      access-key-id: xxxx
+      access-key-secret: xxx
+      sign-name: 签名

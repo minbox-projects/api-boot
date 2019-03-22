@@ -46,7 +46,7 @@ public class ApiBootSmsProperties {
      */
     private long readTimeout = 10000;
     /**
-     * 短信环境
+     * 短信区域环境
      */
     private String profile = "default";
 }

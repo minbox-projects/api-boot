@@ -16,6 +16,7 @@
         <module>api-boot-sample-security-oauth-jwt</module>
         <module>api-boot-sample-swagger</module>
         <module>api-boot-sample-alibaba-oss</module>
+        <module>api-boot-sample-alibaba-sms</module>
     </modules>
 
     <build>
