@@ -18,7 +18,7 @@
     <version>2.1.1.RELEASE</version>
     <name>api-boot</name>
     <description>
-        ApiBoot是一款基于SpringBoot2.x的接口服务集成基础框架，
+        ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，
         内部提供了第三方框架的封装集成，让接口开发者可以选着性完成开箱即用，
         不再为搭建接口框架而犯愁，从而极大的提高开发效率。
     </description>
