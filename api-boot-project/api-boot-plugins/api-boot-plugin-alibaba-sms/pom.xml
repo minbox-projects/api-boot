@@ -8,28 +8,26 @@
         <version>2.1.1.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>api-boot-plugin</artifactId>
-    <description>
-        ApiBoot Plugin 基础依赖
-    </description>
+    <description>ApiBoot集成阿里云国际短信服务</description>
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
+    <artifactId>api-boot-plugin-alibaba-sms</artifactId>
+
     <dependencies>
-        <!--ApiBoot Common-->
+        <!--ApiBoot Plugin-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-common</artifactId>
+            <artifactId>api-boot-plugin</artifactId>
         </dependency>
-        <!--FastJson-->
+        <!--aliyun java jdk-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
         </dependency>
-        <!--lombok-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
         </dependency>
     </dependencies>
 </project>

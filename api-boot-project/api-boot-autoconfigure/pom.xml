@@ -85,5 +85,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--ApiBoot Sms Plugin-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-alibaba-sms</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 </project>

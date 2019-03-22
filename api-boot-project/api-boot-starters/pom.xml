@@ -20,6 +20,7 @@
         <module>api-boot-starter-http-converter</module>
         <module>api-boot-starter-swagger</module>
         <module>api-boot-starter-alibaba-oss</module>
+        <module>api-boot-starter-alibaba-sms</module>
     </modules>
 
 

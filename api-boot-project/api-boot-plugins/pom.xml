@@ -20,5 +20,6 @@
     <modules>
         <module>api-boot-plugin-alibaba-oss</module>
         <module>api-boot-plugin</module>
+        <module>api-boot-plugin-alibaba-sms</module>
     </modules>
 </project>

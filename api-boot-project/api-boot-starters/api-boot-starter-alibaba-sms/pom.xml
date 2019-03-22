@@ -3,33 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>api-boot-plugins</artifactId>
+        <artifactId>api-boot-starters</artifactId>
         <groupId>org.minbox.framework</groupId>
         <version>2.1.1.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>api-boot-plugin</artifactId>
-    <description>
-        ApiBoot Plugin 基础依赖
-    </description>
+
+    <artifactId>api-boot-starter-alibaba-sms</artifactId>
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
     <dependencies>
-        <!--ApiBoot Common-->
+        <!--ApiBoot Starter-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-common</artifactId>
+            <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--FastJson-->
+        <!--ApiBoot Sms Plugin-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-alibaba-sms</artifactId>
         </dependency>
     </dependencies>
 </project>

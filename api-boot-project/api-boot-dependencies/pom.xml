@@ -25,6 +25,8 @@
         <guava.version>20.0</guava.version>
         <swagger.version>2.9.2</swagger.version>
         <alibaba.oss.version>2.8.3</alibaba.oss.version>
+        <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
+        <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -73,7 +75,12 @@
                 <artifactId>api-boot-starter-alibaba-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <!--ApiBoot Alibaba Sms-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-alibaba-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--ApiBoot Common-->
             <dependency>
@@ -147,7 +154,14 @@
                 <version>${swagger.version}</version>
             </dependency>
 
-            <!--alibaba oss-->
+            <!--ApiBoot Plugin-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--ApiBoot & Aliyun Oss-->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
@@ -159,10 +173,20 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!--ApiBoot Plugin-->
+            <!--ApiBoot & Aliyun Sms-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.sdk.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>${aliyun.sdk.dysmsapi.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin</artifactId>
+                <artifactId>api-boot-plugin-alibaba-sms</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
