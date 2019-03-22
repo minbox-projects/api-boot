@@ -1,5 +1,6 @@
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.4+_1.5+_2.0+-green.svg)
+# ApiBoot
+[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg)
 
 `ApiBoot`是一款基于`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
@@ -74,13 +75,10 @@ Demo列表：
 
 项目的版本号格式为 x.x.x 的形式，其中 x 的数值类型为数字，从 0 开始取值，且不限于 0~9 这个范围。
 
-项目目前处于在集成第三方框架阶段，第一位版本号统一使用0，如：0.x.x。
+- SpringBoot1.x版本对应ApiBoot版本1.x.x
+- SpringBoot2.x版本对应ApiBoot版本2.x.x
 
-第三方框架集成阶段，版本升级如下所示：
-
-- 小版本升级会增加第三位版本号的数值，如：0.1.0的小版本升级为：0.1.1。
-
-- 大版本升级会增加第二位版本号的数值，如：0.1.0的大版本升级为：0.2.0。
+集成新的第三方框架为小版本更新，对应修改第三位版本数值，如：2.0.1 -> 2.0.2
 
 ## 开源交流
 
@@ -109,6 +107,8 @@ yuqiyu999
 │   ├── api-boot-parent
 │   └── api-boot-starters
 ├── api-boot-samples
+│   ├── api-boot-sample-alibaba-oss
+│   ├── api-boot-sample-alibaba-sms
 │   ├── api-boot-sample-http-converter
 │   ├── api-boot-sample-security-oauth-jwt
 │   └── api-boot-sample-swagger
