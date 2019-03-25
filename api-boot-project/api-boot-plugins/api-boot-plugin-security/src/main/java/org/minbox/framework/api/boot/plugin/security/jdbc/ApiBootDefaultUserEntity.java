@@ -14,10 +14,8 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.web.jdbc;
+package org.minbox.framework.api.boot.plugin.security.jdbc;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -35,61 +33,49 @@ import java.sql.Timestamp;
  * GitHub：https://github.com/hengboy
  */
 @Data
-@ApiModel
 public class ApiBootDefaultUserEntity {
     /**
      * UI_ID - 用户编号，主键自增
      */
-    @ApiModelProperty("用户编号，主键自增")
     private Integer uiId;
     /**
      * UI_USER_NAME - 用户名
      */
-    @ApiModelProperty("用户名")
     private String uiUserName;
     /**
      * UI_NICK_NAME - 用户昵称
      */
-    @ApiModelProperty("用户昵称")
     private String uiNickName;
     /**
      * UI_PASSWORD - 用户密码
      */
-    @ApiModelProperty("用户密码")
     private String uiPassword;
     /**
      * UI_EMAIL - 用户邮箱地址
      */
-    @ApiModelProperty("用户邮箱地址")
     private String uiEmail;
     /**
      * UI_AGE - 用户年龄
      */
-    @ApiModelProperty("用户年龄")
     private Integer uiAge;
     /**
      * UI_ADDRESS - 用户地址
      */
-    @ApiModelProperty("用户地址")
     private String uiAddress;
     /**
      * UI_IS_LOCKED - 是否锁定
      */
-    @ApiModelProperty("是否锁定")
     private String uiIsLocked;
     /**
      * UI_IS_ENABLED - 是否启用
      */
-    @ApiModelProperty("是否启用")
     private String uiIsEnabled;
     /**
      * UI_STATUS - O：正常，D：已删除
      */
-    @ApiModelProperty("O：正常，D：已删除")
     private String uiStatus;
     /**
      * UI_CREATE_TIME - 用户创建时间
      */
-    @ApiModelProperty("用户创建时间")
     private Timestamp uiCreateTime;
 }

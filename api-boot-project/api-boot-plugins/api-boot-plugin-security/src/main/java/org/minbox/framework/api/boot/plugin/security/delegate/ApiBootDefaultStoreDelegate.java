@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.web.delegate;
+package org.minbox.framework.api.boot.plugin.security.delegate;
 
-import org.minbox.framework.api.boot.autoconfigure.security.web.userdetails.ApiBootDefaultUserDetails;
-import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import com.google.common.base.CaseFormat;
+import org.minbox.framework.api.boot.common.exception.ApiBootException;
+import org.minbox.framework.api.boot.plugin.security.userdetails.ApiBootDefaultUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

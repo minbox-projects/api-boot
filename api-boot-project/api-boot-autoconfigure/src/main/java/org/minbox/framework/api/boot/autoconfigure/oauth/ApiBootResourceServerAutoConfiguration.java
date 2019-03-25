@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.resource;
+package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,16 +14,18 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security;
+package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import lombok.Data;
+import org.minbox.framework.api.boot.autoconfigure.security.SecurityAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
+import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
  * 整合Oauth2 相关属性配置
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
  * DateTime：2019-03-14 16:52
@@ -57,7 +59,7 @@ public class ApiBootOauthProperties {
     /**
      * 客户端授权类型集合
      */
-    private String[] grantTypes = new String[]{"password"};
+    private String[] grantTypes = new String[]{"password", "refresh_token"};
     /**
      * 客户端作用域集合
      */

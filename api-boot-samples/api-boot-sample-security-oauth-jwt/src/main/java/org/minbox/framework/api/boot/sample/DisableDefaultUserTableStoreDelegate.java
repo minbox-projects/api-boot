@@ -3,7 +3,7 @@ package org.minbox.framework.api.boot.sample;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.minbox.framework.api.boot.autoconfigure.security.web.delegate.ApiBootStoreDelegate;
+import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

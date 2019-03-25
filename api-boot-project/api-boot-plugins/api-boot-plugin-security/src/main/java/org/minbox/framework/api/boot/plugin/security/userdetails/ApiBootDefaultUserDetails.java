@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.web.userdetails;
+package org.minbox.framework.api.boot.plugin.security.userdetails;
 
-import org.minbox.framework.api.boot.autoconfigure.security.web.jdbc.ApiBootDefaultUserEntity;
-import org.minbox.framework.api.boot.common.enums.YesOrNo;
 import lombok.Data;
+import org.minbox.framework.api.boot.common.enums.YesOrNo;
+import org.minbox.framework.api.boot.plugin.security.jdbc.ApiBootDefaultUserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

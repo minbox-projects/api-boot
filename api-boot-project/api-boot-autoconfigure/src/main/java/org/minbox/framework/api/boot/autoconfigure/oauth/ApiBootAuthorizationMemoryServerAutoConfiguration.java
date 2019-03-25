@@ -14,25 +14,20 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.authorization;
+package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import javax.annotation.PostConstruct;
-
-import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
-
+import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 
 /**
@@ -47,49 +42,31 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthP
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(AuthorizationServerConfigurerAdapter.class)
+@ConditionalOnClass(ApiBootAuthorizationServerConfiguration.class)
+@EnableConfigurationProperties(ApiBootOauthProperties.class)
+@EnableAuthorizationServer
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "memory", matchIfMissing = true)
-@Import(ApiBootAuthorizationServerAutoConfiguration.class)
-public class ApiBootAuthorizationMemoryServerAutoConfiguration {
-    /**
-     * 注入客户端详情配置
-     */
-    @Autowired
-    private ClientDetailsServiceConfigurer clientDetailsServiceConfigurer;
+public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
+    public ApiBootAuthorizationMemoryServerAutoConfiguration(ApiBootOauthProperties apiBootOauthProperties) {
+        super(apiBootOauthProperties);
+    }
 
-    /**
-     * 加密方式
-     */
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    /**
-     * 注入属性配置
-     */
-    @Autowired
-    private ApiBootOauthProperties apiBootOauthProperties;
-
-    /**
-     * 配置内存方式Oauth2的客户端信息
-     *
-     * @throws Exception 异常信息
-     */
-    @PostConstruct
-    public void configure() throws Exception {
-        clientDetailsServiceConfigurer.inMemory()
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
                 .withClient(apiBootOauthProperties.getClientId())
-                .secret(passwordEncoder.encode(apiBootOauthProperties.getClientSecret()))
                 .authorizedGrantTypes(apiBootOauthProperties.getGrantTypes())
+                .secret(passwordEncoder().encode(apiBootOauthProperties.getClientSecret()))
                 .scopes(apiBootOauthProperties.getScopes());
     }
 
     /**
-     * 令牌存储方式（内存方式）
+     * 配置内存方式令牌存储
      *
-     * @return Token存储方式
+     * @return TokenStore
      */
     @Bean
-    TokenStore memoryTokenStore() {
+    public TokenStore memoryTokenStore() {
         return new InMemoryTokenStore();
     }
 }

@@ -14,10 +14,10 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.web.userdetails;
+package org.minbox.framework.api.boot.plugin.security.userdetails;
 
-import org.minbox.framework.api.boot.autoconfigure.security.web.delegate.ApiBootStoreDelegate;
 import org.minbox.framework.api.boot.common.event.LoadUserEvent;
+import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

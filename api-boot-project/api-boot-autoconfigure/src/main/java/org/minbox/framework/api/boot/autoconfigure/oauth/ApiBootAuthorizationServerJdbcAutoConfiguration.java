@@ -14,24 +14,24 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.authorization;
+package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
+import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
  * ApiBoot 授权服务器Jdbc方式实现
@@ -45,47 +45,31 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootOauthP
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(AuthorizationServerConfigurerAdapter.class)
+@EnableConfigurationProperties(ApiBootOauthProperties.class)
+@EnableAuthorizationServer
+@ConditionalOnClass(ApiBootAuthorizationServerConfiguration.class)
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "jdbc")
-@Import(ApiBootAuthorizationServerAutoConfiguration.class)
-public class ApiBootAuthorizationServerJdbcAutoConfiguration {
-    /**
-     * oauth2表所处数据库的数据源
-     */
-    @Autowired
+@AutoConfigureAfter(DataSourceAutoConfiguration.class)
+public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration{
     private DataSource dataSource;
-    /**
-     * 密码加密方式
-     */
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    /**
-     * 注入客户端详情配置
-     */
-    @Autowired
-    private ClientDetailsServiceConfigurer clientDetailsServiceConfigurer;
 
-    /**
-     * 配置Jdbc方式Oauth2的客户端信息
-     *
-     * @throws Exception 异常信息
-     */
-    @PostConstruct
-    public void configure() throws Exception {
-        clientDetailsServiceConfigurer
-                // 配置数据源
-                .jdbc(dataSource)
-                // 配置密码加密方式
-                .passwordEncoder(passwordEncoder);
+    public ApiBootAuthorizationServerJdbcAutoConfiguration(ApiBootOauthProperties apiBootOauthProperties, DataSource dataSource) {
+        super(apiBootOauthProperties);
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(dataSource);
     }
 
     /**
-     * 令牌存储方式（数据库方式）
+     * 配置内存方式令牌存储
      *
-     * @return Token存储方式
+     * @return TokenStore
      */
     @Bean
-    TokenStore jdbcTokenStore() {
+    public TokenStore jdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
     }
 }

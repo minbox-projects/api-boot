@@ -14,33 +14,29 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security;
+package org.minbox.framework.api.boot.plugin.security.delegate;
 
-import lombok.Data;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * SpringSecurity 内存方式用户配置
+ * ApiBoot的数据存储委托接口
  *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-03-14 15:42
+ * DateTime：2019-03-14 16:02
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-@Data
-public class SecurityUser {
+public interface ApiBootStoreDelegate {
     /**
-     * 用户名
+     * 根据用户名查询用户信息
+     *
+     * @param username 用户名
+     * @return 用户对象信息
+     * @throws UsernameNotFoundException 用户不存的异常跑出
      */
-    private String username;
-    /**
-     * 用户密码
-     */
-    private String password;
-    /**
-     * 用户角色集合
-     */
-    private String[] roles = new String[]{"api"};
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }
