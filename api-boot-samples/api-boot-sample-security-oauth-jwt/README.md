@@ -12,7 +12,7 @@
 </dependency>
 ```
 
-> `ApiBoot`所提供的依赖都不需要添加版本号，但是需要添加版本依赖，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/master/README.md#%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96)
+> `ApiBoot`所提供的依赖都不需要添加版本号，但是需要添加版本依赖，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/1.x/README.md#%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96)
 
 ### 配置参数列表
 
@@ -24,7 +24,7 @@
 | ------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------- |
 | `api.boot.security.away`                          | SpringSecurity读取用户的方式，默认为内存方式                 | memory                                                       | all         |
 | `api.boot.security.auth-prefix`                   | 拦截的接口路径前缀，如：/api/users就会被默认拦截             | /api/**                                                      | memory/jdbc |
-| `api.boot.security.users`                         | 配置用户列表，具体使用查看[内存方式介绍](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-security-oauth-jwt#%E5%86%85%E5%AD%98%E6%96%B9%E5%BC%8F%E9%BB%98%E8%AE%A4%E6%96%B9%E5%BC%8F) | 无                                                           | memory      |
+| `api.boot.security.users`                         | 配置用户列表，具体使用查看[内存方式介绍](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-security-oauth-jwt#%E5%86%85%E5%AD%98%E6%96%B9%E5%BC%8F%E9%BB%98%E8%AE%A4%E6%96%B9%E5%BC%8F) | 无                                                           | memory      |
 | `api.boot.security.ignoring-urls`                 | `Spring Security`所排除的路径，默认排除Swagger、Actuator相关路径前缀 | /v2/api-docs<br />/swagger-ui.html<br />/swagger-resources/configuration/security<br />/META-INF/resources/webjars/**<br />/swagger-resources<br />/swagger-resources/configuration/ui<br />/actuator/** | memory/jdbc |
 | `api.boot.security.enable-default-store-delegate` | 仅在Jdbc方式生效                                             | true                                                         | jdbc        |
 
@@ -208,7 +208,7 @@ public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegat
 
 **创建Oauth所需表结构**
 
-`Oauth2`如果使用`Jdbc`方式进行存储`access_token`、`client_details`时，需要在数据库内初始化`Oauth2`所需相关表结构，[oauth-mysql.sql](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters/api-boot-starter-security-oauth-jwt/oauth-mysql.sql)
+`Oauth2`如果使用`Jdbc`方式进行存储`access_token`、`client_details`时，需要在数据库内初始化`Oauth2`所需相关表结构，[oauth-mysql.sql](https://github.com/hengboy/api-boot/tree/1.x/api-boot-project/api-boot-starters/api-boot-starter-security-oauth-jwt/oauth-mysql.sql)
 
 **添加客户端数据**
 

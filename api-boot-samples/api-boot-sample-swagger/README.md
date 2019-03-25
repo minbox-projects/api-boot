@@ -14,7 +14,7 @@
 </dependency>
 ```
 
->  注意：`ApiBoot`所提供的依赖都不需要添加版本号，但是需要添加版本依赖，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/master/README.md#%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96)
+>  注意：`ApiBoot`所提供的依赖都不需要添加版本号，但是需要添加版本依赖，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/1.x/README.md#%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96)
 
 ### @EnableApiBootSwagger
 
@@ -43,7 +43,7 @@
 
 如果你的项目添加了`Oauth2`资源保护，在`Swagger`界面上访问接口时需要设置`AccessToken`到`Header`才可以完成接口的访问，`ApiBoot Security Oauth`默认开放`Swagger`所有相关路径，如果项目内并非通过`ApiBoot Security Oauth2`来做安全认证以及资源保护，需要自行开放`Swagger`相关路径。
 
-整合`ApiBoot Security Oauth`很简单，访问[ApiBoot Security Oauth](https://github.com/hengboy/api-boot/blob/master/api-boot-samples/api-boot-sample-security-oauth-jwt/README.md) 查看。
+整合`ApiBoot Security Oauth`很简单，访问[ApiBoot Security Oauth](https://github.com/hengboy/api-boot/blob/1.x/api-boot-samples/api-boot-sample-security-oauth-jwt/README.md) 查看。
 
 ### 携带Token访问Api
 

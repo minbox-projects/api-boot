@@ -1,6 +1,6 @@
 
 # ApiBoot
-[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/weibocom/motan/blob/1.x/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg)
 
 `ApiBoot`是一款基于`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
@@ -21,7 +21,7 @@
 - **阿里云OSS资源处理**：集成阿里云OSS提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
 - **阿里云短信**：集成阿里云提供的SMS服务，简单配置即可完成短信发送，覆盖全球的短信服务，友好、高效、智能的互联化通讯能力，帮助企业迅速搭建客户触达通道。
 
-更多功能请参考 [更多功能列表](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
+更多功能请参考 [更多功能列表](https://github.com/hengboy/api-boot/tree/1.x/api-boot-project/api-boot-starters)
 
 ## 组件
 
@@ -33,7 +33,7 @@
 - **[Mybatis Pageable](https://github.com/hengboy/mybatis-pageable)**：`MyBatis-Pageable`是一款自动化分页的插件，基于`MyBatis`内部的插件`Interceptor`拦截器编写完成，拦截`Executor.query`的两个重载方法计算出分页的信息以及根据配置的数据库`Dialect`自动执行不同的查询语句完成总数量的统计。
 - **[Code Builder](https://github.com/hengboy/code-builder)**：`code-builder`是一款代码生成`maven mojo`插件，通过简单的配置就可以完成数据库内`Table`转换`Entity`或者其他实体类，想怎么生成完全根据你的个人业务逻辑，`code-builder`尽可能的完善的提供数据库内的一些定义的信息，让你更方便更灵活的来生成`Java`文件。
 
-更多组件请参考[更多集成组件](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
+更多组件请参考[更多集成组件](https://github.com/hengboy/api-boot/tree/1.x/api-boot-project/api-boot-starters)
 
 ## 怎么使用？
 
@@ -65,11 +65,11 @@
 
 Demo列表：
 
-- [ApiBoot Security Oauth](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-security-oauth-jwt)
-- [ApiBoot Swagger](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-swagger)
-- [ApiBoot Http Converter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-http-converter)
-- [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-oss)
-- [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-sms)
+- [ApiBoot Security Oauth](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-security-oauth-jwt)
+- [ApiBoot Swagger](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-swagger)
+- [ApiBoot Http Converter](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-http-converter)
+- [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-alibaba-oss)
+- [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-alibaba-sms)
 
 ## 版本管理规范
 
@@ -94,7 +94,7 @@ yuqiyu999
 
 #### 钉钉群
 
-![](https://github.com/hengboy/api-boot/blob/master/dingding_group.JPG)
+![](https://github.com/hengboy/api-boot/blob/1.x/dingding_group.JPG)
 
 ### 项目结构
 
