@@ -21,6 +21,7 @@ import com.alibaba.fastjson.serializer.ValueFilter;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.minbox.framework.api.boot.common.tools.ClassTools;
+import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -30,10 +31,10 @@ import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.util.ObjectUtils;
 
 import java.util.*;
@@ -51,7 +52,7 @@ import java.util.*;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(FastJsonHttpMessageConverter.class)
+@ConditionalOnClass({FastJsonHttpMessageConverter.class, ConfigurationBuilder.class})
 @AutoConfigureBefore(HttpMessageConvertersAutoConfiguration.class)
 @ConditionalOnProperty(
         prefix = "spring.http.converters",
@@ -79,7 +80,7 @@ public class HttpMessageConverterAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    HttpMessageConverters fastJsonHttpMessageConverters() {
+    HttpMessageConverter fastJsonHttpMessageConverters() {
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         //创建fastJson配置实体类
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
@@ -95,7 +96,7 @@ public class HttpMessageConverterAutoConfiguration {
         // 设置自定义的valueFilter
         fastJsonConfig.setSerializeFilters(getDefineFilters());
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        return new HttpMessageConverters(fastConverter);
+        return fastConverter;
     }
 
     /**

@@ -17,6 +17,7 @@
 package org.minbox.framework.api.boot.autoconfigure.security;
 
 import lombok.Data;
+import org.minbox.framework.api.boot.plugin.security.SecurityUser;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

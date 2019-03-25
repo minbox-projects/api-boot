@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
+    <!--<parent>
         <groupId>org.minbox.framework</groupId>
         <artifactId>oss-parent</artifactId>
         <version>0.1.0.RELEASE</version>
         <relativePath>../oss-parent</relativePath>
-    </parent>
+    </parent>-->
     <packaging>pom</packaging>
     <modules>
         <module>api-boot-project</module>
@@ -15,7 +15,7 @@
     </modules>
     <groupId>org.minbox.framework</groupId>
     <artifactId>api-boot</artifactId>
-    <version>2.0.1.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
     <name>api-boot</name>
     <description>
         ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，
@@ -23,4 +23,18 @@
         不再为搭建接口框架而犯愁，从而极大的提高开发效率。
     </description>
     <url>https://github.com/hengboy/api-boot</url>
+    <build>
+        <plugins>
+            <!--jdk version-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

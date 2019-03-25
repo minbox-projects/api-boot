@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package org.minbox.framework.api.boot.autoconfigure.security.web.delegate;
+package org.minbox.framework.api.boot.plugin.security.delegate;
 
-import org.minbox.framework.api.boot.autoconfigure.security.web.userdetails.ApiBootDefaultUserDetails;
-import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import com.google.common.base.CaseFormat;
+import org.minbox.framework.api.boot.common.exception.ApiBootException;
+import org.minbox.framework.api.boot.plugin.security.userdetails.ApiBootDefaultUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +67,9 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         ApiBootDefaultUserDetails userDetails = findUser(username);
+        if (userDetails == null) {
+            throw new UsernameNotFoundException("用户：" + username + "不存在");
+        }
         logger.debug("Load user ：{} complete.", username);
         return userDetails;
     }

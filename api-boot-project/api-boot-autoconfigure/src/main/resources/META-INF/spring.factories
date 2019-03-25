@@ -1,10 +1,10 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  org.minbox.framework.api.boot.autoconfigure.security.web.ApiBootWebSecurityMemoryAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.security.web.ApiBootWebSecurityJdbcAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.security.resource.ApiBootResourceServerAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.security.authorization.ApiBootAuthorizationMemoryServerAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.security.authorization.ApiBootAuthorizationServerJdbcAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.converter.HttpMessageConverterAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.oss.ApiBootOssAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.sms.ApiBootSmsAutoConfiguration
+  org.minbox.framework.api.boot.autoconfigure.sms.ApiBootSmsAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.security.ApiBootWebSecurityMemoryAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.security.ApiBootWebSecurityJdbcAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootAuthorizationServerJdbcAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootAuthorizationServerMemoryAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootResourceServerAutoConfiguration
