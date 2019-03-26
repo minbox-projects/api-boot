@@ -2,7 +2,7 @@
 # ApiBoot
 [![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg)
 
-`ApiBoot`是一款基于`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
+`ApiBoot`是一款基于`SpringBoot1.x`、`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
 
 - [我的博客 - 恒宇少年De成长之路](http://blog.yuqiyu.com)
@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.0.2.RC1</version>
+      <version>2.0.2.RELEASE</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -114,8 +114,6 @@ yuqiyu999
 │   └── api-boot-sample-swagger
 └── tools
 ```
-
-`ApiBoot`集成框架相关的代码实现都在`org.minbox.framework.api.boot.framework`目录下，如果你需要编写自己的业务尽可能的在`framework`的同级目录创建`package`来进行编写，`ApiBoot`默认扫描`org.minbox.framework.api.boot`目录下的所有类。
 
 ### 开源许可
 
