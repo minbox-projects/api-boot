@@ -27,10 +27,11 @@
         <alibaba.oss.version>2.8.3</alibaba.oss.version>
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
+        <quartz.version>2.3.0</quartz.version>
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!--springboot dependencies-->
+            <!--SpringBoot Dependencies-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -55,30 +56,6 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-http-converter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!--ApiBoot Security-->
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!--ApiBoot Swagger-->
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-starter-swagger</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!--ApiBoot Alibaba Oss-->
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-starter-alibaba-oss</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!--ApiBoot Alibaba Sms-->
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-starter-alibaba-sms</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -112,18 +89,7 @@
                 <artifactId>spring-boot-starter-mybatis-pageable</artifactId>
                 <version>${mybatis.pageable.version}</version>
             </dependency>
-            <!--security oauth2-->
-            <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
-                <version>${security.oauth2.version}</version>
-            </dependency>
-            <!--jwt-->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-jwt</artifactId>
-                <version>${spring.security.jwt.version}</version>
-            </dependency>
+
             <!--reflections-->
             <dependency>
                 <groupId>org.reflections</groupId>
@@ -137,7 +103,7 @@
                 <version>${guava.version}</version>
             </dependency>
 
-            <!--swagger-->
+            <!--ApiBoot Swagger-->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
@@ -153,6 +119,11 @@
                 <artifactId>springfox-bean-validators</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-swagger</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--ApiBoot Plugin-->
             <dependency>
@@ -160,16 +131,31 @@
                 <artifactId>api-boot-plugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--ApiBoot Plugin Security-->
+
+            <!--ApiBoot Security-->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security.oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring.security.jwt.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--ApiBoot Plugin Oauth-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-oauth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -182,6 +168,11 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-alibaba-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -199,6 +190,28 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-alibaba-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--ApiBoot & Quartz-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-quartz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-quartz</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

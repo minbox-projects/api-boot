@@ -2,7 +2,7 @@
 # ApiBoot
 [![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg)
 
-`ApiBoot`是一款基于`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
+`ApiBoot`是一款基于`SpringBoot1.x`、`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
 
 - [我的博客 - 恒宇少年De成长之路](http://blog.yuqiyu.com)
@@ -28,6 +28,7 @@
 - **[Spring Security](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/)**：Spring提供的安全框架，Spring家族式的设计，无缝整合SpringBoot
 - **[OAuth2](https://oauth.net/2/)**：OAuth是一个网络授权的标准。
 - **[JWT](https://jwt.io/)**：JSON Web Token是目前流行的跨域认证解决方案，用于格式化OAuth2生成的Token。
+- **[Quartz](http://www.quartz-scheduler.org)**：分布式定时任务调度框架
 - **[Swagger2](https://swagger.io/)**：Swagger是一款API文档生成工具，自动扫描代码进行生成可运行测试的文档。
 - **[Mybatis Enhance](https://github.com/hengboy/mybatis-enhance)**：`Enhance`是对于原生的`MyBatis`的增强编写，不影响任何原生的使用，使用后完全替代`mybatis-core`、`mybatis-spring`以及`mybatis-spring-boot-starter`，可以使用`SpringBoot`配置文件的形式进行配置相关的内容，尽可能强大的方便快速的集成`MyBatis`。
 - **[Mybatis Pageable](https://github.com/hengboy/mybatis-pageable)**：`MyBatis-Pageable`是一款自动化分页的插件，基于`MyBatis`内部的插件`Interceptor`拦截器编写完成，拦截`Executor.query`的两个重载方法计算出分页的信息以及根据配置的数据库`Dialect`自动执行不同的查询语句完成总数量的统计。
@@ -70,6 +71,7 @@ Demo列表：
 - [ApiBoot Http Converter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-http-converter)
 - [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-oss)
 - [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-sms)
+- [ApiBoot Quartz](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-quartz)
 
 ## 版本管理规范
 
@@ -114,8 +116,6 @@ yuqiyu999
 │   └── api-boot-sample-swagger
 └── tools
 ```
-
-`ApiBoot`集成框架相关的代码实现都在`org.minbox.framework.api.boot.framework`目录下，如果你需要编写自己的业务尽可能的在`framework`的同级目录创建`package`来进行编写，`ApiBoot`默认扫描`org.minbox.framework.api.boot`目录下的所有类。
 
 ### 开源许可
 
