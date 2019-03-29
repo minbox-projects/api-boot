@@ -33,7 +33,6 @@ public interface ApiBootQuartzService {
      *
      * @param jobWrapper 定时任务封装对象
      * @return Job Key
-     * @throws SchedulerException 调度器异常
      */
     String newJob(ApiBootJobWrapper jobWrapper);
 
@@ -41,7 +40,6 @@ public interface ApiBootQuartzService {
      * 删除一个任务
      *
      * @param jobKey Job Key
-     * @throws SchedulerException 调度器异常
      */
     void deleteJob(String jobKey);
 
@@ -49,7 +47,6 @@ public interface ApiBootQuartzService {
      * 删除一系列任务
      *
      * @param jobKeys Job Key Array
-     * @throws SchedulerException 调度器异常
      */
     void deleteJobs(String... jobKeys);
 
@@ -57,7 +54,6 @@ public interface ApiBootQuartzService {
      * 删除集合内的所有任务
      *
      * @param jobKeys Job Key Collection
-     * @throws SchedulerException 调度器异常
      */
     void deleteJobs(Collection<String> jobKeys);
 
@@ -65,7 +61,6 @@ public interface ApiBootQuartzService {
      * 暂停一个任务
      *
      * @param jobKey Job Key
-     * @throws SchedulerException 调度器异常
      */
     void pauseJob(String jobKey);
 
@@ -73,7 +68,6 @@ public interface ApiBootQuartzService {
      * 暂停传递的所有任务
      *
      * @param jobKeys Job Key Array
-     * @throws SchedulerException 调度器异常
      */
     void pauseJobs(String... jobKeys);
 
@@ -81,7 +75,6 @@ public interface ApiBootQuartzService {
      * 暂停集合内的所有任务
      *
      * @param jobKeys Job Key Collection
-     * @throws SchedulerException 调度器异常
      */
     void pauseJobs(Collection<String> jobKeys);
 
@@ -111,7 +104,6 @@ public interface ApiBootQuartzService {
      *
      * @param jobKey Job Key
      * @param cron   Job Cron Expression
-     * @throws SchedulerException 调度器异常
      */
     void updateJobCron(String jobKey, String cron);
 
@@ -120,21 +112,20 @@ public interface ApiBootQuartzService {
      *
      * @param jobKey       Job Key
      * @param jobStartTime Job New Start Time
-     * @throws SchedulerException 调度器异常
      */
     void updateJobStartTime(String jobKey, Date jobStartTime);
 
     /**
      * 启动所有定时任务
      *
-     * @throws SchedulerException
+     * @throws SchedulerException 调度器异常
      */
     void startAllJobs() throws SchedulerException;
 
     /**
      * 关闭所有定时任务
      *
-     * @throws SchedulerException
+     * @throws SchedulerException 调度器异常
      */
     void shutdownAllJobs() throws SchedulerException;
 }

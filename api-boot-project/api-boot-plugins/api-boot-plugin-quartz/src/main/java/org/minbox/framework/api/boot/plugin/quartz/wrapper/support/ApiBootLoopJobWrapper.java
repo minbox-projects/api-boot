@@ -44,6 +44,8 @@ public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
      * @param loopIntervalTime 循环间隔次数
      * @param repeatTimes      重复次数
      * @param startAtTime      开始时间
+     * @param param            参数
+     * @param jobClass         任务执行类
      */
     @Builder(builderMethodName = "Context", buildMethodName = "wrapper")
     public ApiBootLoopJobWrapper(String jobKey, Class<? extends QuartzJobBean> jobClass, int repeatTimes, int loopIntervalTime, Date startAtTime, ApiBootJobParamWrapper param) {

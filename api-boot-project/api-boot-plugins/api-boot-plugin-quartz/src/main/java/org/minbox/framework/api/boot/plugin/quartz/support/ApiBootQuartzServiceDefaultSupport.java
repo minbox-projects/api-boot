@@ -64,7 +64,6 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
      *
      * @param jobWrapper 定时任务封装对象
      * @return Job Key
-     * @throws SchedulerException 调度器异常
      */
     @Override
     public String newJob(ApiBootJobWrapper jobWrapper) {
@@ -98,7 +97,6 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
      * 删除任务
      *
      * @param jobKey Job Key
-     * @throws SchedulerException 调度器异常
      */
     @Override
     public void deleteJob(String jobKey) {
@@ -143,7 +141,6 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
      * 暂停定时任务
      *
      * @param jobKey Job Key
-     * @throws SchedulerException 调度器异常
      */
     @Override
     public void pauseJob(String jobKey) {
@@ -221,7 +218,6 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
      *
      * @param jobKey Job Key
      * @param cron   Job Cron Expression
-     * @throws SchedulerException 调度器异常
      */
     @Override
     public void updateJobCron(String jobKey, String cron) {
@@ -243,7 +239,6 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
      *
      * @param jobKey       Job Key
      * @param jobStartTime Job New Start Time
-     * @throws SchedulerException 调度器信息
      */
     @Override
     public void updateJobStartTime(String jobKey, Date jobStartTime) {

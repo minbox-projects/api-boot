@@ -26,7 +26,7 @@ public class ApiBootJobParamWrapper {
     /**
      * 实例化参数对象
      *
-     * @return
+     * @return ApiBootJobParamWrapper Instance
      */
     public static ApiBootJobParamWrapper wrapper() {
         return new ApiBootJobParamWrapper();
