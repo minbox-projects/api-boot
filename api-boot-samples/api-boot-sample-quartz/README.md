@@ -106,7 +106,7 @@ String jobKey = apiBootQuartzService.newJob(ApiBootCronJobWrapper.Context()
                         .jobClass(DemoJob.class)
                         .cron("0/5 * * * * ?")
                         .param(
-                                ApiBootJobParamWrapper.wrapper()                                     																											 .put("param", "测试"))
+                                ApiBootJobParamWrapper.wrapper().put("param", "测试"))
                         .wrapper());
 ```
 
