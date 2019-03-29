@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>1.0.1.RELEASE</version>
+        <version>1.0.2.RC1</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
