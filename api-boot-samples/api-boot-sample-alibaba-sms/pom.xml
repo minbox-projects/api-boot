@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-samples</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>1.0.2.RC1</version>
+        <version>1.0.1.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>ApiBoot集成阿里云国际短信服务.</description>
@@ -31,7 +31,7 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-dependencies</artifactId>
-                <version>1.0.2.RC1</version>
+                <version>1.0.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
