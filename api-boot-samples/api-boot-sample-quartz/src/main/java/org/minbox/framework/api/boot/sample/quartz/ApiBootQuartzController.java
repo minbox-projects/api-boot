@@ -1,7 +1,6 @@
 package org.minbox.framework.api.boot.sample.quartz;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.alibaba.fastjson.JSON;
 import org.minbox.framework.api.boot.plugin.quartz.ApiBootQuartzService;
 import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobParamWrapper;
 import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper;
@@ -33,7 +32,7 @@ public class ApiBootQuartzController {
      * 注入ApiBoot Quartz Service
      */
     @Autowired
-    private ApiBootQuartzService quartzService;
+    private ApiBootQuartzService apiBootQuartzService;
 
     /**
      * 创建loop 任务
@@ -42,7 +41,7 @@ public class ApiBootQuartzController {
      */
     @GetMapping(value = "/start-loop-job")
     public String startLoopJob() {
-        return quartzService.newJob(
+        return apiBootQuartzService.newJob(
                 ApiBootLoopJobWrapper.Context()
                         // 参数
                         .param(
@@ -72,13 +71,13 @@ public class ApiBootQuartzController {
         Map paramMap = new HashMap(1);
         paramMap.put("paramKey", "参数值");
 
-        return quartzService.newJob(
+        return apiBootQuartzService.newJob(
                 ApiBootOnceJobWrapper.Context()
                         .jobClass(DemoJob.class)
                         // 参数
                         .param(
                                 ApiBootJobParamWrapper.wrapper()
-                                        .put("map", paramMap)
+                                        .put("mapJson", JSON.toJSONString(paramMap))
                         )
                         // 开始时间，2秒后执行
                         .startAtTime(new Date(System.currentTimeMillis() + 2000))
@@ -94,13 +93,13 @@ public class ApiBootQuartzController {
     @GetMapping(value = "/start-cron-job")
     public String startCronJob() {
 
-        return quartzService.newJob(
+        return apiBootQuartzService.newJob(
                 ApiBootCronJobWrapper.Context()
                         .jobClass(DemoJob.class)
                         .cron("0/5 * * * * ?")
                         .param(
                                 ApiBootJobParamWrapper.wrapper()
-                                        .put("entity", new JobParam("测试"))
+                                        .put("param", "测试")
                         )
                         .wrapper()
         );
@@ -113,7 +112,7 @@ public class ApiBootQuartzController {
      */
     @GetMapping(value = "/delete-job")
     public void deleteJob(String jobKey) {
-        quartzService.deleteJob(jobKey);
+        apiBootQuartzService.deleteJob(jobKey);
     }
 
     /**
@@ -123,7 +122,7 @@ public class ApiBootQuartzController {
      */
     @GetMapping(value = "/pause-job")
     public void pauseJob(String jobKey) {
-        quartzService.pauseJob(jobKey);
+        apiBootQuartzService.pauseJob(jobKey);
     }
 
     /**
@@ -133,7 +132,7 @@ public class ApiBootQuartzController {
      */
     @GetMapping(value = "/resume-job")
     public void resumeJob(String jobKey) {
-        quartzService.resumeJob(jobKey);
+        apiBootQuartzService.resumeJob(jobKey);
     }
 
     /**
@@ -143,15 +142,6 @@ public class ApiBootQuartzController {
      */
     @GetMapping(value = "/update-cron")
     public void updateCron(String jobKey) {
-        quartzService.updateJobCron(jobKey, "0/5 * * * * ?");
-    }
-
-    /**
-     * 测试任务参数使用实体
-     */
-    @Data
-    @AllArgsConstructor
-    class JobParam {
-        private String paramName;
+        apiBootQuartzService.updateJobCron(jobKey, "0/5 * * * * ?");
     }
 }
