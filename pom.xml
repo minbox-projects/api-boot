@@ -15,7 +15,7 @@
     </modules>
     <groupId>org.minbox.framework</groupId>
     <artifactId>api-boot</artifactId>
-    <version>1.0.1.RELEASE</version>
+    <version>1.0.2.RC1</version>
     <name>api-boot</name>
     <description>
         ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，
