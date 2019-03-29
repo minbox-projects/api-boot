@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengyuboy
+ * GitHub：https://github.com/hengboy
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApiBootSmsSampleApplication.class)

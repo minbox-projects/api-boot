@@ -13,7 +13,7 @@ import org.minbox.framework.api.boot.plugin.sms.response.ApiBootSmsResponse;
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengyuboy
+ * GitHub：https://github.com/hengboy
  */
 public interface ApiBootSmsService {
     /**

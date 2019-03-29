@@ -10,6 +10,7 @@ ApiBoot`提供的所有封装依赖对应第三方框架关系如下所示：
 | [api-boot-starter-swagger](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-swagger) | 集成Swagger2作为接口服务文档                 |
 | [api-boot-starter-alibaba-oss](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-oss) | 集成阿里云Oss对象存储接口服务                |
 | [api-boot-starter-alibaba-sms](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-sms) | 集成阿里云国际短信接口服务                   |
+| [api-boot-starter-quartz](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-quartz) | 集成分布式定时任务框架Quartz                 |
 
 
 

@@ -17,6 +17,7 @@
         <module>api-boot-sample-swagger</module>
         <module>api-boot-sample-alibaba-oss</module>
         <module>api-boot-sample-alibaba-sms</module>
+        <module>api-boot-sample-quartz</module>
     </modules>
 
     <build>
