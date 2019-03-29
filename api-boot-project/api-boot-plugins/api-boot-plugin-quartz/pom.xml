@@ -14,6 +14,11 @@
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
     <dependencies>
+        <!--ApiBoot Plugin-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin</artifactId>
+        </dependency>
         <!--Quartz-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -29,17 +34,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
         <!--Spring Context Support-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <scope>compile</scope>
         </dependency>
         <!--Spring Tx-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <scope>compile</scope>
         </dependency>
         <!--lombok-->
         <dependency>

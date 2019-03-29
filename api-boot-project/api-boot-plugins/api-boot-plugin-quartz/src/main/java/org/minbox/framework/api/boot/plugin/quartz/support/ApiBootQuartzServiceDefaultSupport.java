@@ -9,10 +9,12 @@ import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * ApiBoot Quartz Service 默认实现
@@ -69,6 +71,10 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
         try {
             if (ObjectUtils.isEmpty(jobWrapper)) {
                 throw new SchedulerException("When creating a new task, parameters must be passed.");
+            }
+            // 默认使用uuid作为Job Key
+            if (StringUtils.isEmpty(jobWrapper.getJobKey())) {
+                jobWrapper.setJobKey(UUID.randomUUID().toString());
             }
             // cron job
             if (jobWrapper instanceof ApiBootCronJobWrapper) {

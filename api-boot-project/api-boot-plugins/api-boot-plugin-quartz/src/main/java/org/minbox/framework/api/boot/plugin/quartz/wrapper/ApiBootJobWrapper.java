@@ -2,11 +2,11 @@ package org.minbox.framework.api.boot.plugin.quartz.wrapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Job封装接口定义
@@ -29,6 +29,7 @@ public class ApiBootJobWrapper implements Serializable {
     /**
      * 任务key
      */
+    @Setter
     private String jobKey;
     /**
      * 任务Class
@@ -50,14 +51,5 @@ public class ApiBootJobWrapper implements Serializable {
      */
     public Date getStartAtTime() {
         return startAtTime == null ? new Date() : startAtTime;
-    }
-
-    /**
-     * 不传递Job Key时，使用uuid
-     *
-     * @return Job Key
-     */
-    public String getJobKey() {
-        return jobKey == null ? UUID.randomUUID().toString() : jobKey;
     }
 }

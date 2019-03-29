@@ -28,6 +28,7 @@
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
         <quartz.version>2.3.0</quartz.version>
+        <spring.tx.version>5.1.5.RELEASE</spring.tx.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -101,6 +102,12 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <!--Spring Tx-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.tx.version}</version>
             </dependency>
 
             <!--ApiBoot Swagger-->
