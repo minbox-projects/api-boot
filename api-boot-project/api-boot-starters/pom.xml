@@ -21,6 +21,7 @@
         <module>api-boot-starter-swagger</module>
         <module>api-boot-starter-alibaba-oss</module>
         <module>api-boot-starter-alibaba-sms</module>
+        <module>api-boot-starter-quartz</module>
     </modules>
 
 

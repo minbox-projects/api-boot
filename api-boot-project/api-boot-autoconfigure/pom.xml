@@ -110,6 +110,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--ApiBoot Quartz Plugin-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-quartz</artifactId>
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
 </project>

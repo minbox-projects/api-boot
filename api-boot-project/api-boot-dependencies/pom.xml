@@ -27,6 +27,8 @@
         <alibaba.oss.version>2.8.3</alibaba.oss.version>
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
+        <quartz.version>2.3.0</quartz.version>
+        <spring.tx.version>4.3.22.RELEASE</spring.tx.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -136,6 +138,12 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+            <!--Spring Tx-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.tx.version}</version>
+            </dependency>
 
             <!--swagger-->
             <dependency>
@@ -201,6 +209,23 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--ApiBoot & Quartz-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-quartz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-quartz</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

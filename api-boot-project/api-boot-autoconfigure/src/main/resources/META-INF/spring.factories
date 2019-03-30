@@ -7,4 +7,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.minbox.framework.api.boot.autoconfigure.security.ApiBootWebSecurityJdbcAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootAuthorizationServerJdbcAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootAuthorizationServerMemoryAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootResourceServerAutoConfiguration
+  org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootResourceServerAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.quartz.ApiBootQuartzAutoConfiguration
