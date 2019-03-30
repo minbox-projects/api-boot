@@ -18,16 +18,24 @@
 
 ### 相关配置
 
-| 参数名称                                                | 是否必填 | 默认值    | 描述                                       |
-| ------------------------------------------------------- | -------- | --------- | ------------------------------------------ |
-| `api.boot.quartz.job-store-type`                        | 否       | memory    | 任务存储源方式，默认内存方式               |
-| `api.boot.quartz.scheduler-name`                        | 否       | scheduler | 调度器名称                                 |
-| `api.boot.quartz.auto-startup`                          | 否       | true      | 初始化后是否自动启动调度程序               |
-| `api.boot.quartz.startup-delay`                         | 否       | 0         | 初始化完成后启动调度程序的延迟。           |
-| `api.boot.quartz.wait-for-jobs-to-complete-on-shutdown` | 否       | false     | 是否等待正在运行的作业在关闭时完成。       |
-| `api.boot.quartz.overwrite-existing-jobs`               | 否       | false     | 配置的作业是否应覆盖现有的作业定义。       |
-| `api.boot.quartz.properties`                            | 否       |           | Quartz自定义的配置属性，具体参考quartz配置 |
-| `api.boot.quartz.jdbc`                                  | 否       |           | 配置数据库方式的Jdbc相关配置               |
+| 参数名称                                                     | 是否必填 | 默认值                                       | 描述                                       |
+| ------------------------------------------------------------ | -------- | -------------------------------------------- | ------------------------------------------ |
+| `api.boot.quartz.job-store-type`                             | 否       | memory                                       | 任务存储源方式，默认内存方式               |
+| `api.boot.quartz.scheduler-name`                             | 否       | scheduler                                    | 调度器名称                                 |
+| `api.boot.quartz.auto-startup`                               | 否       | true                                         | 初始化后是否自动启动调度程序               |
+| `api.boot.quartz.startup-delay`                              | 否       | 0                                            | 初始化完成后启动调度程序的延迟。           |
+| `api.boot.quartz.wait-for-jobs-to-complete-on-shutdown`      | 否       | false                                        | 是否等待正在运行的作业在关闭时完成。       |
+| `api.boot.quartz.overwrite-existing-jobs`                    | 否       | false                                        | 配置的作业是否应覆盖现有的作业定义。       |
+| `api.boot.quartz.properties`                                 | 否       |                                              | Quartz自定义的配置属性，具体参考quartz配置 |
+| `api.boot.quartz.jdbc`                                       | 否       |                                              | 配置数据库方式的Jdbc相关配置               |
+| `api.boot.quartz.prop.job-store-class`                       | 否       | org.quartz.impl.jdbcjobstore.JobStoreTX      | 任务数据源类                               |
+| `api.boot.quartz.prop.job-store-cluster-checkin-interval`    | 否       | 20000                                        | 集群检查时间                               |
+| `api.boot.quartz.prop.scheduler-instance-id`                 | 否       | AUTO                                         | 调度器ID                                   |
+| `api.boot.quartz.prop.scheduler-instance-name`               | 否       | jobScheduler                                 | 调度器名称                                 |
+| `api.boot.quartz.prop.job-store-table-prefix`                | 否       | QRTZ_                                        | 表结构前缀                                 |
+| `api.boot.quartz.prop.job-store-clustered`                   | 否       | true                                         | 是否开启任务数据集群                       |
+| `api.boot.quartz.prop.job-store-driver-delegate-class`       | 否       | org.quartz.impl.jdbcjobstore.StdJDBCDelegate | 任务数据源驱动类                           |
+| `api.boot.quartz.prop.thread-pool-threads-inherit-context-class-loader-of-initializing-thread` | 否       | true                                         | 线程继承上下文类加载或定义线程             |
 
 ### 内存方式
 

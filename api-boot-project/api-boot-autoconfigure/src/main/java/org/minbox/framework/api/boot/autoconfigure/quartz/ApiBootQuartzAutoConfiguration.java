@@ -82,6 +82,7 @@ public class ApiBootQuartzAutoConfiguration {
     /**
      * Quartz Factory Bean
      *
+     * @param jobFactory Job Factory
      * @return SchedulerFactoryBean
      */
     @Bean
@@ -103,13 +104,23 @@ public class ApiBootQuartzAutoConfiguration {
         return schedulerFactoryBean;
     }
 
-
+    /**
+     * Convert Properties
+     *
+     * @param source properties config
+     * @return Properties
+     */
     private Properties asProperties(Map<String, String> source) {
         Properties properties = new Properties();
         properties.putAll(source);
         return properties;
     }
 
+    /**
+     * 处理自定义类定义
+     *
+     * @param schedulerFactoryBean
+     */
     private void customize(SchedulerFactoryBean schedulerFactoryBean) {
         this.customizers.getIfAvailable().stream().forEach((customizer) -> customizer.customize(schedulerFactoryBean));
     }
@@ -118,7 +129,6 @@ public class ApiBootQuartzAutoConfiguration {
      * ApiBoot Quartz Bean Factory
      *
      * @author 恒宇少年
-     * @date 2019-3-30
      */
     protected static class ApiBootQuartzSpringBeanJobFactory extends SpringBeanJobFactory implements ApplicationContextAware {
         /**
@@ -137,6 +147,14 @@ public class ApiBootQuartzAutoConfiguration {
             this.beanFactory = applicationContext.getAutowireCapableBeanFactory();
         }
 
+        /**
+         * 创建Job 实例时调用该方法
+         * 把创建的Job 实例存放到SpringIOC内
+         *
+         * @param bundle TriggerFiredBundle
+         * @return Job Instance
+         * @throws Exception 系统异常
+         */
         @Override
         protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
             Object jobInstance = super.createJobInstance(bundle);
