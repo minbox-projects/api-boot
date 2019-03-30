@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>1.0.2.RC1</version>
+        <version>1.0.2.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,6 +17,7 @@
         <module>api-boot-sample-swagger</module>
         <module>api-boot-sample-alibaba-oss</module>
         <module>api-boot-sample-alibaba-sms</module>
+        <module>api-boot-sample-quartz</module>
     </modules>
 
     <build>
