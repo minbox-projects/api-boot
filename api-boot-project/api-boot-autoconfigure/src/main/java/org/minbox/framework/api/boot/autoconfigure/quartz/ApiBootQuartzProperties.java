@@ -1,8 +1,9 @@
 package org.minbox.framework.api.boot.autoconfigure.quartz;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.quartz.JobStoreType;
-import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceInitializationMode;
 import org.springframework.context.annotation.Configuration;
@@ -69,7 +70,46 @@ public class ApiBootQuartzProperties {
      */
     private final Map<String, String> properties = new HashMap<>();
 
-    private final QuartzProperties.Jdbc jdbc = new QuartzProperties.Jdbc();
+    /**
+     * prop config
+     * all param have default value
+     */
+    private final ApiBootQuartzProperties.Prop prop = new ApiBootQuartzProperties.Prop();
+
+    private final ApiBootQuartzProperties.Jdbc jdbc = new ApiBootQuartzProperties.Jdbc();
+
+    /**
+     * org.minbox.framework.api.boot.autoconfigure.quartz.ApiBootQuartzProperties#properties
+     * <p>
+     * quartz properties config
+     */
+    @Getter
+    @Setter
+    public static class Prop {
+        @PropKey("org.quartz.scheduler.instanceName")
+        private String schedulerInstanceName = "jobScheduler";
+
+        @PropKey("org.quartz.scheduler.instanceId")
+        private String schedulerInstanceId = "AUTO";
+
+        @PropKey("org.quartz.jobStore.class")
+        private String jobStoreClass = "org.quartz.impl.jdbcjobstore.JobStoreTX";
+
+        @PropKey("org.quartz.jobStore.driverDelegateClass")
+        private String jobStoreDriverDelegateClass = "org.quartz.impl.jdbcjobstore.StdJDBCDelegate";
+
+        @PropKey("org.quartz.jobStore.tablePrefix")
+        private String jobStoreTablePrefix = "QRTZ_";
+
+        @PropKey("org.quartz.jobStore.isClustered")
+        private boolean jobStoreClustered = true;
+
+        @PropKey("org.quartz.jobStore.clusterCheckinInterval")
+        private long jobStoreClusterCheckinInterval = 20000;
+
+        @PropKey("org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread")
+        private boolean threadPoolThreadsInheritContextClassLoaderOfInitializingThread = true;
+    }
 
     public static class Jdbc {
 
