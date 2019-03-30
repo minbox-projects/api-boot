@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>1.0.2.RC1</version>
+      <version>1.0.2.RELEASE</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
