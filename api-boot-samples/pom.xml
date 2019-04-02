@@ -18,6 +18,7 @@
         <module>api-boot-sample-alibaba-oss</module>
         <module>api-boot-sample-alibaba-sms</module>
         <module>api-boot-sample-quartz</module>
+        <module>api-boot-sample-datasource-switch</module>
     </modules>
 
     <build>
