@@ -118,5 +118,22 @@
             <optional>true</optional>
         </dependency>
 
+        <!--ApiBoot DataSource Switch-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-datasource-switch</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 </project>

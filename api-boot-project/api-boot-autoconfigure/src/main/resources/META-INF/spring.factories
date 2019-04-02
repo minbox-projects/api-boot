@@ -8,4 +8,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.minbox.framework.api.boot.autoconfigure.converter.HttpMessageConverterAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.oss.ApiBootOssAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.sms.ApiBootSmsAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.quartz.ApiBootQuartzAutoConfiguration
+  org.minbox.framework.api.boot.autoconfigure.quartz.ApiBootQuartzAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.datasource.ApiBootDataSourceSwitchAutoConfiguration

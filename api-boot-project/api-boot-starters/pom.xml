@@ -22,6 +22,7 @@
         <module>api-boot-starter-alibaba-oss</module>
         <module>api-boot-starter-alibaba-sms</module>
         <module>api-boot-starter-quartz</module>
+        <module>api-boot-starter-datasource-switch</module>
     </modules>
 
 

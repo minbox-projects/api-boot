@@ -17,6 +17,7 @@
         <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
         <mybatis.enhance.version>1.1.0.RELEASE</mybatis.enhance.version>
         <mybatis.pageable.version>1.0.6.RELEASE</mybatis.pageable.version>
+        <druid.version>1.1.14</druid.version>
         <druid.starter.version>1.1.14</druid.starter.version>
         <fastjson.version>1.2.56</fastjson.version>
         <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
@@ -73,6 +74,12 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <!--druid-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--druid starter-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
@@ -219,6 +226,18 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-quartz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--ApiBoot DataSource Switch-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-datasource-switch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-datasource-switch</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
