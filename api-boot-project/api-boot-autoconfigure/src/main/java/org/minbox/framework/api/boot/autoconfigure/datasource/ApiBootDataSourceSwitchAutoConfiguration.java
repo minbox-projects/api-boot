@@ -2,10 +2,13 @@ package org.minbox.framework.api.boot.autoconfigure.datasource;
 
 import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSource;
 import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSourceFactoryBean;
-import org.minbox.framework.api.boot.plugin.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
 import org.minbox.framework.api.boot.plugin.datasource.aop.advistor.ApiBootDataSourceSwitchAdvisor;
+import org.minbox.framework.api.boot.plugin.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
 import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceConfig;
+import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidConfig;
 import org.minbox.framework.api.boot.plugin.datasource.routing.ApiBootRoutingDataSource;
+import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootDruidDataSource;
+import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootHikariDataSource;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -76,10 +79,13 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
         dataSourceConfigMap.putAll(apiBootDataSourceSwitchProperties.getHikari());
 
         // convert all datasource config
-        dataSourceConfigMap.keySet().stream().forEach(druidPoolName -> {
-            DataSourceConfig dataSourceConfig = dataSourceConfigMap.get(druidPoolName);
+        dataSourceConfigMap.keySet().stream().forEach(poolName -> {
+            DataSourceConfig dataSourceConfig = dataSourceConfigMap.get(poolName);
             // set data source pool name
-            dataSourceConfig.setPoolName(druidPoolName);
+            dataSourceConfig.setPoolName(poolName);
+            // datasource type
+            dataSourceConfig.setDataSourceType(dataSourceConfig instanceof DataSourceDruidConfig ? ApiBootDruidDataSource.class : ApiBootHikariDataSource.class);
+
             // after convert add to data source list
             dataSourceConfigList.add(dataSourceConfig);
         });
