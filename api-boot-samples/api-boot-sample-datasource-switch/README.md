@@ -80,7 +80,7 @@ api:
       primary: main
       # 配置使用hikari数据源
       hikari:
-        # master datasource config
+        # main datasource config
         main:
           url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=Asia/Shanghai
           username: root
@@ -106,12 +106,12 @@ api:
           password: 123456
           # 默认值为【com.mysql.cj.jdbc.Driver】
           #driver-class-name: com.mysql.cj.jdbc.Driver
-        # slave 1
+        # slave 1  datasource config
         slave_1:
           url: jdbc:mysql://localhost:3306/oauth2?characterEncoding=utf8&serverTimezone=Asia/Shanghai
           username: root
           password: 123456
-        # slave 2
+        # slave 2  datasource config
         slave_2:
           url: jdbc:mysql://localhost:3306/resources?characterEncoding=utf8&serverTimezone=Asia/Shanghai
           username: root
@@ -127,7 +127,7 @@ api:
 ```yaml
 api:
   boot:
-  		# 主数据源，默认值为master
+      # 主数据源，默认值为master
       primary: mysql
       hikari:
         mysql:
