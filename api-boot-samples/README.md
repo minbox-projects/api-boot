@@ -8,4 +8,5 @@ Demo列表：
 - [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-oss)
 - [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-sms)
 - [ApiBoot Quartz](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-quartz)
+- [ApiBoot DataSource Switch](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-datasource-switch)
 
