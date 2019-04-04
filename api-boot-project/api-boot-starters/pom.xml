@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>1.0.2.RELEASE</version>
+        <version>1.0.3.RELEASE</version>
         <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -22,6 +22,7 @@
         <module>api-boot-starter-alibaba-oss</module>
         <module>api-boot-starter-alibaba-sms</module>
         <module>api-boot-starter-quartz</module>
+        <module>api-boot-starter-datasource-switch</module>
     </modules>
 
 

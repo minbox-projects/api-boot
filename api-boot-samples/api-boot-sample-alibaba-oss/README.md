@@ -183,7 +183,7 @@ ApiBootOssOverrideService apiBootOssOverrideService(ApiBootOssProperties apiBoot
 
 `ApiBootOssProperties`属性配置类，是`ApiBoot`内置的，可以在任意地方进行注入，这里目的只是为了拿到相关配置进行构造参数实例化使用。
 
-### v1.0.2.RELEASE规划
+### v1.0.3.RELEASE规划
 
 1. 上传、下载进度条监听
 2. 追加上传

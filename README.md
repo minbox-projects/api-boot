@@ -20,6 +20,7 @@
 - **七牛云资源处理**：集成七牛云提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
 - **阿里云OSS资源处理**：集成阿里云OSS提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
 - **阿里云短信**：集成阿里云提供的SMS服务，简单配置即可完成短信发送，覆盖全球的短信服务，友好、高效、智能的互联化通讯能力，帮助企业迅速搭建客户触达通道。
+- **动态数据源**：完成项目的多数据源配置、内部集成`druid`、`HikariCP`数据源实现方式，配置主从数据源、多数据库类型数据源、多种数据源实现方式集成。
 
 更多功能请参考 [更多功能列表](https://github.com/hengboy/api-boot/tree/1.x/api-boot-project/api-boot-starters)
 
@@ -32,6 +33,7 @@
 - **[Mybatis Enhance](https://github.com/hengboy/mybatis-enhance)**：`Enhance`是对于原生的`MyBatis`的增强编写，不影响任何原生的使用，使用后完全替代`mybatis-core`、`mybatis-spring`以及`mybatis-spring-boot-starter`，可以使用`SpringBoot`配置文件的形式进行配置相关的内容，尽可能强大的方便快速的集成`MyBatis`。
 - **[Mybatis Pageable](https://github.com/hengboy/mybatis-pageable)**：`MyBatis-Pageable`是一款自动化分页的插件，基于`MyBatis`内部的插件`Interceptor`拦截器编写完成，拦截`Executor.query`的两个重载方法计算出分页的信息以及根据配置的数据库`Dialect`自动执行不同的查询语句完成总数量的统计。
 - **[Code Builder](https://github.com/hengboy/code-builder)**：`code-builder`是一款代码生成`maven mojo`插件，通过简单的配置就可以完成数据库内`Table`转换`Entity`或者其他实体类，想怎么生成完全根据你的个人业务逻辑，`code-builder`尽可能的完善的提供数据库内的一些定义的信息，让你更方便更灵活的来生成`Java`文件。
+- **[DataSource Switch](https://github.com/hengboy/api-boot/tree/1.x/api-boot-project/api-boot-plugins/api-boot-plugin-datasource-switch)**：一款多数据源自动切换框架，可配置多种数据库类型数据源集成、主从数据源配置。
 
 更多组件请参考[更多集成组件](https://github.com/hengboy/api-boot/tree/1.x/api-boot-project/api-boot-starters)
 
@@ -47,7 +49,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>1.0.2.RELEASE</version>
+      <version>1.0.3.RELEASE</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -71,6 +73,7 @@ Demo列表：
 - [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-alibaba-oss)
 - [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-alibaba-sms)
 - [ApiBoot Quartz](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-quartz)
+- [ApiBoot DataSource Switch](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-datasource-switch)
 
 ## 版本管理规范
 

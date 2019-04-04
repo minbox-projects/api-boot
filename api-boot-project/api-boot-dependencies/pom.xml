@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>1.0.2.RELEASE</version>
+        <version>1.0.3.RELEASE</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -17,6 +17,8 @@
         <spring.boot.version>1.5.19.RELEASE</spring.boot.version>
         <mybatis.enhance.version>1.1.0.RELEASE</mybatis.enhance.version>
         <mybatis.pageable.version>1.0.6.RELEASE</mybatis.pageable.version>
+        <druid.version>1.1.14</druid.version>
+        <HikariCP.version>3.2.0</HikariCP.version>
         <druid.starter.version>1.1.14</druid.starter.version>
         <fastjson.version>1.2.56</fastjson.version>
         <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
@@ -95,6 +97,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <!--HikariCP DataSource-->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${HikariCP.version}</version>
+            </dependency>
+            <!--druid-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
             </dependency>
             <!--druid-->
             <dependency>
@@ -229,6 +243,17 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!--ApiBoot DataSource Switch-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-datasource-switch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-datasource-switch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

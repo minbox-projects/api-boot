@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>1.0.2.RELEASE</version>
+        <version>1.0.3.RELEASE</version>
         <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -24,5 +24,6 @@
         <module>api-boot-plugin-security</module>
         <module>api-boot-plugin-oauth</module>
         <module>api-boot-plugin-quartz</module>
+        <module>api-boot-plugin-datasource-switch</module>
     </modules>
 </project>

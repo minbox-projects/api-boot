@@ -13,7 +13,7 @@
   <artifactId>api-boot-starter-quartz</artifactId>
 </dependency>
 ```
-
+`ApiBoot`所提供的依赖都不需要添加版本号，具体查看[ApiBoot版本依赖](https://github.com/hengboy/api-boot/blob/1.x/README.md#%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9C%AC%E4%BE%9D%E8%B5%96)
 >  备注：如果使用`ApiBoot Quartz`的内存方式，仅需要添加上面的依赖即可。
 
 ### 相关配置

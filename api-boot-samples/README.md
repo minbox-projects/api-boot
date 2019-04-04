@@ -7,4 +7,6 @@ Demo列表：
 - [ApiBoot Http Converter](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-http-converter)
 - [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-alibaba-oss)
 - [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-alibaba-sms)
+- [ApiBoot Quartz](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-quartz)
+- [ApiBoot DataSource Switch](https://github.com/hengboy/api-boot/tree/1.x/api-boot-samples/api-boot-sample-datasource-switch)
 
