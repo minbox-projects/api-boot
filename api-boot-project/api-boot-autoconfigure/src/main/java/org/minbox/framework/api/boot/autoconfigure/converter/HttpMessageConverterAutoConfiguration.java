@@ -21,6 +21,7 @@ import com.alibaba.fastjson.serializer.ValueFilter;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.minbox.framework.api.boot.common.tools.ClassTools;
+import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -51,7 +52,7 @@ import java.util.*;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(FastJsonHttpMessageConverter.class)
+@ConditionalOnClass({FastJsonHttpMessageConverter.class, ConfigurationBuilder.class})
 @AutoConfigureBefore(HttpMessageConvertersAutoConfiguration.class)
 @ConditionalOnProperty(
         prefix = "spring.http.converters",
