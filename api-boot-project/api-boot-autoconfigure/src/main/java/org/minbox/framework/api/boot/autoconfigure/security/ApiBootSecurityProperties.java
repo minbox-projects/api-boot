@@ -28,6 +28,7 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecuri
 
 /**
  * 整合Spring Security 相关属性配置
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
  * DateTime：2019-03-14 15:26
@@ -60,7 +61,7 @@ public class ApiBootSecurityProperties {
      * 认证接口地址的前缀
      * 默认只拦截/api/**下的接口地址
      */
-    private String authPrefix = "/api/**";
+    private String[] authPrefix = new String[]{"/api/**"};
     /**
      * 认证用户存储方式，默认为内存方式
      *
