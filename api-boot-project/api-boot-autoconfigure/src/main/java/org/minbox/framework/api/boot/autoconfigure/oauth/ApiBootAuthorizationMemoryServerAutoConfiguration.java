@@ -57,7 +57,8 @@ public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAu
                 .withClient(apiBootOauthProperties.getClientId())
                 .authorizedGrantTypes(apiBootOauthProperties.getGrantTypes())
                 .secret(passwordEncoder().encode(apiBootOauthProperties.getClientSecret()))
-                .scopes(apiBootOauthProperties.getScopes());
+                .scopes(apiBootOauthProperties.getScopes())
+                .resourceIds(apiBootOauthProperties.getResourceId());
     }
 
     /**

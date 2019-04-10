@@ -17,13 +17,13 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
  * ApiBoot 接口资源服务器配置
@@ -38,14 +38,22 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  */
 @Configuration
 @ConditionalOnClass(ResourceServerConfigurerAdapter.class)
-@EnableConfigurationProperties(ApiBootSecurityProperties.class)
+@EnableConfigurationProperties({ApiBootSecurityProperties.class, ApiBootOauthProperties.class})
 @EnableResourceServer
 public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
     /**
-     * 注入属性配置
+     * Spring Security Properties
      */
-    @Autowired
     private ApiBootSecurityProperties apiBootSecurityProperties;
+    /**
+     * Oauth2 Properties
+     */
+    private ApiBootOauthProperties apiBootOauthProperties;
+
+    public ApiBootResourceServerAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties, ApiBootOauthProperties apiBootOauthProperties) {
+        this.apiBootSecurityProperties = apiBootSecurityProperties;
+        this.apiBootOauthProperties = apiBootOauthProperties;
+    }
 
     /**
      * 配置开启对指定前缀路径的认证
@@ -61,5 +69,10 @@ public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfig
                 .and()
                 .requestMatchers()
                 .antMatchers(apiBootSecurityProperties.getAuthPrefix());
+    }
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.resourceId(apiBootOauthProperties.getResourceId());
     }
 }

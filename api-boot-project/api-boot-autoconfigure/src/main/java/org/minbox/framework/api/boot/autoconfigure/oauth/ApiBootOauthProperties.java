@@ -65,6 +65,10 @@ public class ApiBootOauthProperties {
      */
     private String[] scopes = new String[]{"api"};
     /**
+     * 资源编号
+     */
+    private String resourceId = "api";
+    /**
      * 配置JWT格式化Oauth2返回的token
      */
     private Jwt jwt = new Jwt();
