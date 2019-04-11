@@ -50,3 +50,23 @@
 启动添加`ApiBoot-Swagger`依赖的项目后，访问[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)页面查看`Swagger`所生成的全部文档，页面右侧可以看到**Authorize**，点击后打开配置`AccessToken`的界面，配置的`AccessToken`必须携带类型，如：`Bearer 0798e1c7-64f4-4a2f-aad1-8c616c5aa85b`。
 
 >  注意：通过`ApiBoot Security Oauth`所获取的`AccessToken`类型都为`Bearer`。
+
+
+
+### ApiBoot Swagger + @EnableWebMvc = 404？
+
+`@EnableWebMvc`注解使用后会覆盖掉`SpringBoot`默认的资源映射路径`/static`, `/public`, `META-INF/resources`, `/resources`等存放静态资源的目录。
+
+`Swagger`资源都存在在`META-INF/resources`目录下，所以会出现404的情况，只需要添加自定义的资源映射处理就可以再次访问默认资源路径下的文件，如下所示：
+
+```java
+@Configuration
+@EnableWebMvc
+public class ApiBootResourceConfig implements WebMvcConfigurer {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("/");
+    }
+}
+```
+
