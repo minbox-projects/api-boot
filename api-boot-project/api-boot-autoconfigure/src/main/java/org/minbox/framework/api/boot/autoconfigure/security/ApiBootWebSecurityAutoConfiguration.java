@@ -17,6 +17,10 @@
 package org.minbox.framework.api.boot.autoconfigure.security;
 
 import org.minbox.framework.api.boot.plugin.security.ApiBootWebSecurityConfiguration;
+import org.minbox.framework.api.boot.plugin.security.point.ApiBootDefaultAuthenticationEntryPoint;
+import org.minbox.framework.api.boot.plugin.security.handler.ApiBootDefaultAccessDeniedHandler;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
@@ -39,9 +43,19 @@ public class ApiBootWebSecurityAutoConfiguration extends ApiBootWebSecurityConfi
      * 注入ApiBoot安全属性
      */
     protected ApiBootSecurityProperties apiBootSecurityProperties;
+    /**
+     * 异常处理
+     */
+    private AccessDeniedHandler accessDeniedHandler;
+    /**
+     * 端点处理
+     */
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
-    public ApiBootWebSecurityAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties) {
+    public ApiBootWebSecurityAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties, AccessDeniedHandler accessDeniedHandler, AuthenticationEntryPoint authenticationEntryPoint) {
         this.apiBootSecurityProperties = apiBootSecurityProperties;
+        this.accessDeniedHandler = accessDeniedHandler;
+        this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
     /**
@@ -61,4 +75,39 @@ public class ApiBootWebSecurityAutoConfiguration extends ApiBootWebSecurityConfi
         return ignoringUrls;
     }
 
+    /**
+     * 返回项目内定义的AccessDeniedHandler实现类实例
+     * 给ApiBoot Security进行配置
+     *
+     * @return
+     */
+    @Override
+    protected AccessDeniedHandler getAccessDeniedHandler() {
+        return ObjectUtils.isEmpty(this.accessDeniedHandler) ? new ApiBootDefaultAccessDeniedHandler() : this.accessDeniedHandler;
+    }
+
+    @Override
+    protected AuthenticationEntryPoint getAuthenticationEntryPoint() {
+        return ObjectUtils.isEmpty(this.authenticationEntryPoint) ? new ApiBootDefaultAuthenticationEntryPoint() : this.authenticationEntryPoint;
+    }
+
+    /**
+     * 配置禁用http basic
+     *
+     * @return true：禁用，false：不禁用
+     */
+    @Override
+    protected boolean disableHttpBasic() {
+        return apiBootSecurityProperties.isDisableHttpBasic();
+    }
+
+    /**
+     * 配置csrf
+     *
+     * @return true：禁用，false：不禁用
+     */
+    @Override
+    protected boolean disableCsrf() {
+        return apiBootSecurityProperties.isDisableCsrf();
+    }
 }

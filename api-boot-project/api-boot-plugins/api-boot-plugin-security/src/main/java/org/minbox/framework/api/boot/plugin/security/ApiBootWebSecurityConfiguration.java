@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * 配置排除的路径列表
      *
@@ -80,7 +82,15 @@ public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapte
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().disable();
+        if (disableHttpBasic()) {
+            http.httpBasic().disable();
+        }
+        if (disableCsrf()) {
+            http.csrf().disable();
+        }
+        // 异常处理器配置
+        http.exceptionHandling().accessDeniedHandler(getAccessDeniedHandler());
+        http.exceptionHandling().authenticationEntryPoint(getAuthenticationEntryPoint());
     }
 
     /**
@@ -93,4 +103,34 @@ public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapte
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    /**
+     * 获取Spring Security 异常处理器
+     * 该方法留给实现类实现，实现类从项目内获取自定义的AccessDeniedHandler实现类IOC实例
+     * 如果实现类不返回实例则使用默认的ApiBootDefaultAccessDeniedHandler进行返回
+     *
+     * @return AccessDeniedHandler
+     */
+    protected abstract AccessDeniedHandler getAccessDeniedHandler();
+
+    /**
+     * 获取认证端点处理
+     *
+     * @return AuthenticationEntryPoint
+     */
+    protected abstract AuthenticationEntryPoint getAuthenticationEntryPoint();
+
+    /**
+     * 查询是否禁用http basic
+     *
+     * @return true：禁用，false：不禁用
+     */
+    protected abstract boolean disableHttpBasic();
+
+    /**
+     * 查询是否禁用csrf
+     *
+     * @return true：禁用，false：不禁用
+     */
+    protected abstract boolean disableCsrf();
 }

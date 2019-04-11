@@ -20,6 +20,7 @@ import org.minbox.framework.api.boot.plugin.security.ApiBootWebSecurityConfigura
 import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootDefaultStoreDelegate;
 import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
 import org.minbox.framework.api.boot.plugin.security.userdetails.ApiBootUserDetailsService;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,6 +29,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
 
@@ -48,9 +51,9 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecuri
 @EnableConfigurationProperties(ApiBootSecurityProperties.class)
 @ConditionalOnClass(ApiBootWebSecurityConfiguration.class)
 @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = "jdbc")
-public class ApiBootWebSecurityJdbcAutoConfiguration extends ApiBootWebSecurityAutoConfiguration{
-    public ApiBootWebSecurityJdbcAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties) {
-        super(apiBootSecurityProperties);
+public class ApiBootWebSecurityJdbcAutoConfiguration extends ApiBootWebSecurityAutoConfiguration {
+    public ApiBootWebSecurityJdbcAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties, ObjectProvider<AccessDeniedHandler> accessDeniedHandler, ObjectProvider<AuthenticationEntryPoint> authenticationEntryPoint) {
+        super(apiBootSecurityProperties, accessDeniedHandler.getIfAvailable(), authenticationEntryPoint.getIfAvailable());
     }
 
     @Override
