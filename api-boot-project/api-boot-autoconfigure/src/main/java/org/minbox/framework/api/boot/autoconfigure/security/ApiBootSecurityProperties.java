@@ -84,4 +84,12 @@ public class ApiBootSecurityProperties {
      * 如果配置该值为false，需要实现ApiBootStoreDelegate接口来完成自定义读取用户数据方法
      */
     private boolean enableDefaultStoreDelegate = true;
+    /**
+     * 禁用Http Basic
+     */
+    private boolean disableHttpBasic = true;
+    /**
+     * 禁用CSRF
+     */
+    private boolean disableCsrf = true;
 }
