@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: api-boot-sample-resource-load
