@@ -117,7 +117,7 @@ public class ResourcePusher {
         resourceFields.stream().forEach(resourceField -> {
             try {
                 // source
-                Field sourceField = getSourceField(method, objectClass, resourceField.source());
+                Field sourceField = getSourceField(method, objectClass, resourceField.source(), resourceField.name());
                 // target
                 Field resourceFieldInstance = getResourceField(method, objectClass, resourceField.name());
 
@@ -156,9 +156,9 @@ public class ResourcePusher {
      * @return
      * @throws NoSuchFieldException
      */
-    private static Field getSourceField(Method method, Class objectClass, String sourceFieldName) throws NoSuchFieldException {
+    private static Field getSourceField(Method method, Class objectClass, String sourceFieldName,String resourceFieldName) throws NoSuchFieldException {
         // cache from memory
-        ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method);
+        ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
         if (ObjectUtils.isEmpty(resourcePushField) || ObjectUtils.isEmpty(resourcePushField.getSourceField())) {
             Field sourceField = objectClass.getDeclaredField(sourceFieldName);
@@ -172,7 +172,7 @@ public class ResourcePusher {
             }
 
             // cache to memory
-            ApiBootResourceContext.setPushFieldToCache(method, resourcePushField);
+            ApiBootResourceContext.setPushFieldToCache(method, resourceFieldName, resourcePushField);
         }
         return resourcePushField.getSourceField();
     }
@@ -186,7 +186,7 @@ public class ResourcePusher {
      */
     private static Field getResourceField(Method method, Class objectClass, String resourceFieldName) throws NoSuchFieldException {
         // cache from memory
-        ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method);
+        ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
         if (ObjectUtils.isEmpty(resourcePushField) || ObjectUtils.isEmpty(resourcePushField.getResourceField())) {
             Field resourceFieldInstance = objectClass.getDeclaredField(resourceFieldName);
@@ -199,7 +199,7 @@ public class ResourcePusher {
                 resourcePushField.setResourceField(resourceFieldInstance);
             }
             // cache to memory
-            ApiBootResourceContext.setPushFieldToCache(method, resourcePushField);
+            ApiBootResourceContext.setPushFieldToCache(method, resourceFieldName, resourcePushField);
         }
 
         return resourcePushField.getResourceField();
