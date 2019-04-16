@@ -2,6 +2,8 @@ package org.minbox.framework.api.boot.autoconfigure.oss;
 
 import com.aliyun.oss.OSSClient;
 import org.minbox.framework.api.boot.plugin.oss.ApiBootOssService;
+import org.minbox.framework.api.boot.plugin.oss.progress.ApiBootObjectStorageProgress;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,9 +33,14 @@ public class ApiBootOssAutoConfiguration {
      * ApiBoot Oss 属性配置
      */
     private ApiBootOssProperties apiBootOssProperties;
+    /**
+     * ApiBoot Progress Provider
+     */
+    private ApiBootObjectStorageProgress apiBootObjectStorageProgress;
 
-    public ApiBootOssAutoConfiguration(ApiBootOssProperties apiBootOssProperties) {
+    public ApiBootOssAutoConfiguration(ApiBootOssProperties apiBootOssProperties, ObjectProvider<ApiBootObjectStorageProgress> apiBootProgressProvider) {
         this.apiBootOssProperties = apiBootOssProperties;
+        this.apiBootObjectStorageProgress = apiBootProgressProvider.getIfAvailable();
     }
 
     /**
@@ -44,6 +51,8 @@ public class ApiBootOssAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     ApiBootOssService apiBootOssService() {
-        return new ApiBootOssService(apiBootOssProperties.getRegion().getEndpoint(), apiBootOssProperties.getBucketName(), apiBootOssProperties.getAccessKeyId(), apiBootOssProperties.getAccessKeySecret(), apiBootOssProperties.getDomain());
+        ApiBootOssService apiBootOssService = new ApiBootOssService(apiBootOssProperties.getRegion().getEndpoint(), apiBootOssProperties.getBucketName(), apiBootOssProperties.getAccessKeyId(), apiBootOssProperties.getAccessKeySecret(), apiBootOssProperties.getDomain());
+        apiBootOssService.setApiBootObjectStorageProgress(apiBootObjectStorageProgress);
+        return apiBootOssService;
     }
 }
