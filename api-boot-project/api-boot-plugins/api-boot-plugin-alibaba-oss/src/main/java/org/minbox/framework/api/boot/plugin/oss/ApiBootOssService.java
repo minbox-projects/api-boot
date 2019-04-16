@@ -2,7 +2,9 @@ package org.minbox.framework.api.boot.plugin.oss;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.*;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
+import org.minbox.framework.api.boot.plugin.oss.progress.ApiBootObjectStorageProgress;
+import org.minbox.framework.api.boot.plugin.oss.progress.OssProgressListener;
 import org.minbox.framework.api.boot.plugin.storage.ApiBootObjectStorageService;
 import org.minbox.framework.api.boot.plugin.storage.exception.ApiBootObjectStorageException;
 import org.minbox.framework.api.boot.plugin.storage.response.ApiBootObjectStorageResponse;
@@ -27,7 +29,6 @@ import java.util.List;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-@AllArgsConstructor
 public class ApiBootOssService implements ApiBootObjectStorageService {
     /**
      * 地域性的endpoint
@@ -49,13 +50,26 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
      * 自定义域名
      */
     protected String domain;
+    /**
+     * ApiBoot Oss Progress
+     */
+    @Setter
+    private ApiBootObjectStorageProgress apiBootObjectStorageProgress;
+
+    public ApiBootOssService(String endpoint, String bucketName, String accessKeyId, String accessKeySecret, String domain) {
+        this.endpoint = endpoint;
+        this.bucketName = bucketName;
+        this.accessKeyId = accessKeyId;
+        this.accessKeySecret = accessKeySecret;
+        this.domain = domain;
+    }
 
     @Override
     public ApiBootObjectStorageResponse upload(String objectName, byte[] bytes) throws ApiBootObjectStorageException {
         try {
             OSSClient ossClient = getOssClient();
             // put byte inputStream
-            ossClient.putObject(bucketName, objectName, new ByteArrayInputStream(bytes));
+            ossClient.putObject(new PutObjectRequest(bucketName, objectName, new ByteArrayInputStream(bytes)).withProgressListener(new OssProgressListener(objectName, apiBootObjectStorageProgress)));
             closeOssClient(ossClient);
         } catch (Exception e) {
             throw new ApiBootObjectStorageException(e.getMessage(), e);
@@ -68,7 +82,7 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
         try {
             OSSClient ossClient = getOssClient();
             // put byte inputStream
-            ossClient.putObject(bucketName, objectName, inputStream);
+            ossClient.putObject(new PutObjectRequest(bucketName, objectName, inputStream).withProgressListener(new OssProgressListener(objectName, apiBootObjectStorageProgress)));
             closeOssClient(ossClient);
         } catch (Exception e) {
             throw new ApiBootObjectStorageException(e.getMessage(), e);
@@ -81,7 +95,7 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
         try {
             OSSClient ossClient = getOssClient();
             // put byte inputStream
-            ossClient.putObject(bucketName, objectName, new File(localFile));
+            ossClient.putObject(new PutObjectRequest(bucketName, objectName, new File(localFile)).withProgressListener(new OssProgressListener(objectName, apiBootObjectStorageProgress)));
             closeOssClient(ossClient);
         } catch (Exception e) {
             throw new ApiBootObjectStorageException(e.getMessage(), e);
@@ -93,7 +107,7 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
     public void download(String objectName, String localFile) throws ApiBootObjectStorageException {
         try {
             OSSClient ossClient = getOssClient();
-            ossClient.getObject(new GetObjectRequest(bucketName, objectName), new File(localFile));
+            ossClient.getObject(new GetObjectRequest(bucketName, objectName).withProgressListener(new OssProgressListener(objectName, apiBootObjectStorageProgress)), new File(localFile));
             closeOssClient(ossClient);
         } catch (Exception e) {
             throw new ApiBootObjectStorageException(e.getMessage(), e);
@@ -242,4 +256,6 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
         }
         return getDefaultObjectUrl(objectName);
     }
+
+
 }
