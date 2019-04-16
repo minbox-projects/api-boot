@@ -1,7 +1,7 @@
 package org.minbox.framework.api.boot.plugin.oss;
 
 import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.model.GetObjectRequest;
+import com.aliyun.oss.model.*;
 import lombok.AllArgsConstructor;
 import org.minbox.framework.api.boot.plugin.storage.ApiBootObjectStorageService;
 import org.minbox.framework.api.boot.plugin.storage.exception.ApiBootObjectStorageException;
@@ -9,7 +9,12 @@ import org.minbox.framework.api.boot.plugin.storage.response.ApiBootObjectStorag
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * ApiBoot提供的Oss文件操作类
@@ -104,6 +109,89 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
         } catch (Exception e) {
             throw new ApiBootObjectStorageException(e.getMessage(), e);
         }
+    }
+
+    /**
+     * multi part upload file
+     * with local file
+     *
+     * @param objectName object name
+     * @param uploadFile upload file
+     * @param partSize   every part size
+     * @throws ApiBootObjectStorageException
+     */
+    public ApiBootObjectStorageResponse multipartUpload(String objectName, File uploadFile, long partSize) throws ApiBootObjectStorageException {
+        try {
+            OSSClient ossClient = getOssClient();
+
+            // init multi part upload request
+            InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest(bucketName, objectName);
+
+            // get upload id
+            InitiateMultipartUploadResult result = ossClient.initiateMultipartUpload(request);
+            String uploadId = result.getUploadId();
+            List<PartETag> partETags = new ArrayList();
+            // local file length
+            long fileLength = uploadFile.length();
+            // part count
+            int partCount = (int) (fileLength / partSize);
+
+            if (fileLength % partSize != 0) {
+                partCount++;
+            }
+
+            for (int i = 0; i < partCount; i++) {
+                // start position
+                long startPos = i * partSize;
+                // current part size
+                long curPartSize = (i + 1 == partCount) ? (fileLength - startPos) : partSize;
+
+                InputStream is = new FileInputStream(uploadFile);
+                is.skip(startPos);
+
+                UploadPartRequest uploadPartRequest = new UploadPartRequest();
+                uploadPartRequest.setBucketName(bucketName);
+                uploadPartRequest.setKey(objectName);
+                uploadPartRequest.setUploadId(uploadId);
+                uploadPartRequest.setInputStream(is);
+                // set part size
+                uploadPartRequest.setPartSize(curPartSize);
+                // set part number
+                uploadPartRequest.setPartNumber(i + 1);
+
+                // execute upload part
+                UploadPartResult uploadPartResult = ossClient.uploadPart(uploadPartRequest);
+                partETags.add(uploadPartResult.getPartETag());
+            }
+
+            // sort by part number
+            Collections.sort(partETags, Comparator.comparingInt(PartETag::getPartNumber));
+
+            // merge upload part file
+            CompleteMultipartUploadRequest completeMultipartUploadRequest = new CompleteMultipartUploadRequest(bucketName, objectName, uploadId, partETags);
+            ossClient.completeMultipartUpload(completeMultipartUploadRequest);
+            closeOssClient(ossClient);
+        } catch (Exception e) {
+            throw new ApiBootObjectStorageException(e.getMessage(), e);
+        }
+        return ApiBootObjectStorageResponse.builder().objectName(objectName).objectUrl(getObjectUrl(objectName)).build();
+    }
+
+    /**
+     * multi part upload file
+     * with local file string path
+     *
+     * @param objectName object name
+     * @param localFile  local file
+     * @param partSize   every part size
+     * @throws ApiBootObjectStorageException
+     * @see PartSize
+     */
+    public ApiBootObjectStorageResponse multipartUpload(String objectName, String localFile, long partSize) throws ApiBootObjectStorageException {
+        // load local file
+        File uploadFile = new File(localFile);
+        // execute multi part upload file
+        return multipartUpload(objectName, uploadFile, partSize);
     }
 
     /**
