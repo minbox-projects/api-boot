@@ -12,6 +12,7 @@ ApiBoot`提供的所有封装依赖对应第三方框架关系如下所示：
 | [api-boot-starter-alibaba-sms](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-sms) | 集成阿里云国际短信接口服务                   |
 | [api-boot-starter-quartz](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-quartz) | 集成分布式定时任务框架Quartz                 |
 | [api-boot-starter-datasource-switch](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-datasource-switch) | 集成支持多数据源自动切换、动态创建数据源     |
+| [api-boot-starter-resource-load](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-resource-load) | 资源与业务完全分离、自动化读取               |
 
 
 

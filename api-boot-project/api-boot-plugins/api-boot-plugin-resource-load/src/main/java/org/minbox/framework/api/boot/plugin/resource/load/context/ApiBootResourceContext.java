@@ -106,7 +106,7 @@ public class ApiBootResourceContext {
      */
     public static List<ResourceField> getResourceFieldFromCache(Method method) {
         String methodName = formatterMethodName(method);
-        logger.debug("Cache method [{}] resource field annotations from memory", methodName);
+        logger.debug("Cache method [{}] resource field annotation from memory", methodName);
         return ApiBootResourceContext.RESOURCE_FIELD_ANNOTATIONS.get(methodName);
     }
 
@@ -114,11 +114,11 @@ public class ApiBootResourceContext {
      * set method resource field to cache
      *
      * @param method         method instance
-     * @param resourceFields method resource field annotations
+     * @param resourceFields method resource field annotation
      */
     public static void setResourceFieldToCache(Method method, List<ResourceField> resourceFields) {
         String methodName = formatterMethodName(method);
-        logger.debug("Cache method [{}] resource field annotations to memory", methodName);
+        logger.debug("Cache method [{}] resource field annotation to memory", methodName);
         ApiBootResourceContext.RESOURCE_FIELD_ANNOTATIONS.put(methodName, resourceFields);
     }
 

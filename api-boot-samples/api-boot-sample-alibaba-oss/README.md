@@ -122,7 +122,27 @@ ApiBootObjectStorageResponse responseByte = apiBootOssService.upload("测试.png
 ApiBootObjectStorageResponse responseIs = apiBootOssService.upload("测试.png", multipartFile.getInputStream());
 ```
 
+### 分片上传
 
+`ApiBoot`集成了分片上传，只需要一个方法就可以把大文件进行分片上传，`ApiBoot`会自动根据`partSize`进行整理分片数量，如下所示：
+
+```java
+ApiBootObjectStorageResponse response = apiBootOssService
+                .multipartUpload(
+  "初识ApiBoot.mp4",
+  //路径方式："/Users/yuqiyu/Downloads/fa2a664e-f827-cfab-7323-3583b3ffd00c.mp4",
+  // 文件对象方式
+  new File("/Users/yuqiyu/Downloads/fa2a664e-f827-cfab-7323-3583b3ffd00c.mp4"),
+  PartSize.MB);
+System.out.println("文件名称：" + response.getObjectName());
+System.out.println("文件路径：" + response.getObjectUrl());
+```
+
+方法参数描述：
+
+1. 文件名称
+2. 本地文件路径
+3. 每一个`part`的大小，可以直接使用`ApiBoot`提供的`PartSize`接口常量来进行计算。
 
 ### 自定义扩展
 
@@ -183,10 +203,3 @@ ApiBootOssOverrideService apiBootOssOverrideService(ApiBootOssProperties apiBoot
 
 `ApiBootOssProperties`属性配置类，是`ApiBoot`内置的，可以在任意地方进行注入，这里目的只是为了拿到相关配置进行构造参数实例化使用。
 
-### v2.0.3.RELEASE规划
-
-1. 上传、下载进度条监听
-2. 追加上传
-3. 分片上传
-4. 上传、下载断点续传
-5. 列举文件

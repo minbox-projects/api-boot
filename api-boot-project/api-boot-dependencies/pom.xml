@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.4.RC1</version>
+        <version>2.0.4.RELEASE</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -54,7 +54,14 @@
                 <artifactId>api-boot-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <!--ApiBoot Converter-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-http-converter</artifactId>
+                <version>${project.version}</version>
+                <optional>true</optional>
+            </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-http-converter</artifactId>
@@ -238,6 +245,18 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-datasource-switch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--ApiBoot Resource Load-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-resource-load</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-resource-load</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
