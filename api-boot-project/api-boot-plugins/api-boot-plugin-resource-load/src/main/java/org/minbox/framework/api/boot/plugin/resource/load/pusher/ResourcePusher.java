@@ -24,6 +24,7 @@ import org.minbox.framework.api.boot.plugin.resource.load.context.ApiBootResourc
 import org.minbox.framework.api.boot.plugin.resource.load.loader.ResourceFieldLoader;
 import org.minbox.framework.api.boot.plugin.resource.load.model.ResourcePushField;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -156,12 +157,12 @@ public class ResourcePusher {
      * @return
      * @throws NoSuchFieldException
      */
-    private static Field getSourceField(Method method, Class objectClass, String sourceFieldName,String resourceFieldName) throws NoSuchFieldException {
+    private static Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) throws NoSuchFieldException {
         // cache from memory
         ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
         if (ObjectUtils.isEmpty(resourcePushField) || ObjectUtils.isEmpty(resourcePushField.getSourceField())) {
-            Field sourceField = objectClass.getDeclaredField(sourceFieldName);
+            Field sourceField = ReflectionUtils.findField(objectClass, sourceFieldName);
             if (!sourceField.isAccessible()) {
                 sourceField.setAccessible(true);
             }
@@ -189,7 +190,7 @@ public class ResourcePusher {
         ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
         if (ObjectUtils.isEmpty(resourcePushField) || ObjectUtils.isEmpty(resourcePushField.getResourceField())) {
-            Field resourceFieldInstance = objectClass.getDeclaredField(resourceFieldName);
+            Field resourceFieldInstance = ReflectionUtils.findField(objectClass, resourceFieldName);
             if (!resourceFieldInstance.isAccessible()) {
                 resourceFieldInstance.setAccessible(true);
             }
