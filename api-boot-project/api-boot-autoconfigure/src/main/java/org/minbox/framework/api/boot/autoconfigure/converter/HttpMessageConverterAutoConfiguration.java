@@ -65,6 +65,10 @@ public class HttpMessageConverterAutoConfiguration {
      * logger instance
      */
     static Logger logger = LoggerFactory.getLogger(HttpMessageConverterAutoConfiguration.class);
+    /**
+     * value filter package
+     */
+    private static final String[] VALUE_FILTER_PACKAGE = new String[]{"org.minbox.framework.api.boot.plugin.http.converter.filter"};
 
     /**
      * 注入bean工厂
@@ -93,8 +97,14 @@ public class HttpMessageConverterAutoConfiguration {
                 SerializerFeature.WriteDateUseDateFormat,
                 SerializerFeature.WriteNullBooleanAsFalse
         );
-        // 设置自定义的valueFilter
-        fastJsonConfig.setSerializeFilters(getDefineFilters());
+
+        // get customer define value filters
+        List<String> packages = AutoConfigurationPackages.get(beanFactory);
+        // get plugin define value filters
+        packages.addAll(Arrays.asList(VALUE_FILTER_PACKAGE));
+
+        fastJsonConfig.setSerializeFilters(getDefineFilters(packages));
+
         fastConverter.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters(fastConverter);
     }
@@ -105,10 +115,8 @@ public class HttpMessageConverterAutoConfiguration {
      *
      * @return ValueFilter数组
      */
-    ValueFilter[] getDefineFilters() {
+    ValueFilter[] getDefineFilters(List<String> packages) {
         Set<Class> filterClass = new HashSet<>();
-        // 获取项目的package列表
-        List<String> packages = AutoConfigurationPackages.get(beanFactory);
         if (ObjectUtils.isEmpty(packages)) {
             return new ValueFilter[]{};
         }
