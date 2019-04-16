@@ -59,7 +59,7 @@ public @interface ApiBootValueHide {
      *
      * @return
      */
-    ValueHidePositionEnum position();
+    ValueHidePositionEnum position() default ValueHidePositionEnum.MIDDLE;
 
     /**
      * placeholder

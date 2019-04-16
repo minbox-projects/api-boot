@@ -87,7 +87,7 @@ public class ValueHideFilter implements ValueFilter {
      */
     String startHide(ApiBootValueHide valueHide, char[] chars) {
         for (int i = 0; i < chars.length; i++) {
-            if (valueHide.start() < i && i < valueHide.start() + valueHide.length()) {
+            if (valueHide.start() - 1 <= i && i < valueHide.start() + valueHide.length() - 1) {
                 chars[i] = valueHide.placeholder().charAt(0);
             }
         }
