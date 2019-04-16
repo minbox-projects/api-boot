@@ -40,7 +40,7 @@ public interface ApiBootResourceStoreDelegate {
      * @param sourceFieldValue 资源所属业务字段的值
      * @param resourceType     资源类型
      * @return Resource urls
-     * @throws ApiBootException
+     * @throws ApiBootException ApiBoot Exception
      */
     List<String> loadResourceUrl(String sourceFieldValue, String resourceType) throws ApiBootException;
 }

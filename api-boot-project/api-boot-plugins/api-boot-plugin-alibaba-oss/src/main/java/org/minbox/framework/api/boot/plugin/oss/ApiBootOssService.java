@@ -132,7 +132,7 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
      * @param objectName object name
      * @param uploadFile upload file
      * @param partSize   every part size
-     * @throws ApiBootObjectStorageException
+     * @throws ApiBootObjectStorageException ApiBoot Oss Exception
      */
     public ApiBootObjectStorageResponse multipartUpload(String objectName, File uploadFile, long partSize) throws ApiBootObjectStorageException {
         try {
@@ -198,7 +198,8 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
      * @param objectName object name
      * @param localFile  local file
      * @param partSize   every part size
-     * @throws ApiBootObjectStorageException
+     * @return ApiBootObjectStorageResponse
+     * @throws ApiBootObjectStorageException ApiBoot Oss Exception
      * @see PartSize
      */
     public ApiBootObjectStorageResponse multipartUpload(String objectName, String localFile, long partSize) throws ApiBootObjectStorageException {
@@ -212,7 +213,7 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
      * 获取OssClient对象
      *
      * @return OssClient
-     * @throws ApiBootObjectStorageException 对象存储异常对象
+     * @throws ApiBootObjectStorageException ApiBoot Oss Exception
      */
     protected OSSClient getOssClient() throws ApiBootObjectStorageException {
         try {

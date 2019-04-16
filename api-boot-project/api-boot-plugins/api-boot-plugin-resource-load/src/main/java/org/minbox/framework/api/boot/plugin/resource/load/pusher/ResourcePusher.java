@@ -76,7 +76,7 @@ public class ResourcePusher {
      *
      * @param method            method
      * @param executeResultList method execute result list
-     * @throws Exception
+     * @throws Exception Exception
      */
     private static void pushToList(Method method, List<Object> executeResultList) {
         List<ResourceField> resourceFields = getResourceFields(method);
@@ -88,7 +88,7 @@ public class ResourcePusher {
      *
      * @param method           method
      * @param executeResultMap method execute result map
-     * @throws Exception
+     * @throws Exception Exception
      */
     private static void pushToMap(Method method, Map executeResultMap) {
         List<ResourceField> resourceFields = getResourceFields(method);
@@ -154,8 +154,8 @@ public class ResourcePusher {
      *
      * @param method          method instance
      * @param sourceFieldName source field name
-     * @return
-     * @throws NoSuchFieldException
+     * @return Field Instance
+     * @throws NoSuchFieldException No Such Field Exception
      */
     private static Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) throws NoSuchFieldException {
         // cache from memory

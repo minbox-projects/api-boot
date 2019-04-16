@@ -43,7 +43,7 @@ public class ResourceFieldLoader {
      * load method declared ResourceField Annotation List
      *
      * @param method declared method
-     * @return
+     * @return ResourceField Annotation List
      */
     public static List<ResourceField> getDeclaredResourceField(Method method) {
         List<ResourceField> resourceFieldList = new ArrayList();
