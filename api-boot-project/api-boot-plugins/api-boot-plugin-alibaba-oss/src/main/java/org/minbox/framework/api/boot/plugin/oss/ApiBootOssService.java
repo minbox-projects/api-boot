@@ -132,6 +132,7 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
      * @param objectName object name
      * @param uploadFile upload file
      * @param partSize   every part size
+     * @return ApiBootObjectStorageResponse
      * @throws ApiBootObjectStorageException ApiBoot Oss Exception
      */
     public ApiBootObjectStorageResponse multipartUpload(String objectName, File uploadFile, long partSize) throws ApiBootObjectStorageException {

@@ -20,7 +20,7 @@ package org.minbox.framework.api.boot.plugin.oss.progress;
 import org.minbox.framework.api.boot.plugin.storage.exception.ApiBootObjectStorageException;
 
 /**
- * ApiBoot Oss Upload & Download Progress
+ * ApiBoot Oss Upload and Download Progress
  *
  * @author：恒宇少年 - 于起宇
  *

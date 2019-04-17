@@ -41,14 +41,14 @@ public @interface ApiBootValueHide {
     /**
      * hide length
      *
-     * @return
+     * @return number
      */
     int length() default 0;
 
     /**
      * start hide position
      *
-     * @return
+     * @return start position
      */
     int start() default 0;
 
@@ -57,14 +57,14 @@ public @interface ApiBootValueHide {
      * 1、从前往后开始隐藏（排除excludeLength的值个字符）
      * 2、从后往前开始隐藏（排除excludeLength的值个字符）
      *
-     * @return
+     * @return ValueHidePositionEnum
      */
     ValueHidePositionEnum position() default ValueHidePositionEnum.MIDDLE;
 
     /**
      * placeholder
      *
-     * @return
+     * @return placeholder
      */
     String placeholder() default "*";
 }
