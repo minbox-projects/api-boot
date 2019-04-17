@@ -27,6 +27,8 @@
 | `api.boot.security.users`                         | 配置用户列表，具体使用查看[内存方式介绍](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-security-oauth-jwt#%E5%86%85%E5%AD%98%E6%96%B9%E5%BC%8F%E9%BB%98%E8%AE%A4%E6%96%B9%E5%BC%8F) | 无                                                           | memory      |
 | `api.boot.security.ignoring-urls`                 | `Spring Security`所排除的路径，默认排除Swagger、Actuator相关路径前缀 | /v2/api-docs<br />/swagger-ui.html<br />/swagger-resources/configuration/security<br />/META-INF/resources/webjars/**<br />/swagger-resources<br />/swagger-resources/configuration/ui<br />/actuator/** | memory/jdbc |
 | `api.boot.security.enable-default-store-delegate` | 仅在Jdbc方式生效                                             | true                                                         | jdbc        |
+| `api.boot.security.disable-http-basic`            | 禁用basic http                                               | true                                                         | memory/jdbc |
+| `api.boot.security.disable-csrf`                  | 禁用csrf                                                     | true                                                         | memory/jdbc |
 
 
 
@@ -37,6 +39,7 @@
 | `api.boot.oauth.away`          | Oauth存储Token、读取Client信息方式 | memory                | all         |
 | `api.boot.oauth.cleint-id`     | Oauth2 Client ID                   | ApiBoot               | memory      |
 | `api.boot.oauth.client-secret` | Oauth2 Client Secret               | ApiBootSecret         | memory      |
+| `api.boot.oauth.resource-id`   | Oauth2接口资源编号                 | api                   | memory      |
 | `api.boot.oauth.grant-types`   | 客户端授权方式                     | Srtring[]{"password"} | memory      |
 | `api.boot.oauth.scopes`        | 客户端作用域                       | String[]{"api"}       | memory      |
 | `api.boot.oauth.jwt.enable`    | 是否启用JWT格式化AccessToken       | false                 | memory/jdbc |

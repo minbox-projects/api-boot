@@ -33,7 +33,28 @@ spring:
 
 ```
 
+### 内置ValueFilter注解
 
+| 注解名称                  | ValueFilter实现类       | 作用                                             |
+| ------------------------- | ----------------------- | ------------------------------------------------ |
+| `@ApiBootValueHide`       | `ValueHideFilter`       | 用于格式化隐藏标注的字符串字段的值               |
+| `@ApiBootDecimalAccuracy` | `DecimalAccuracyFilter` | 用于格式化BigDecimal类型字段的精度、小数点位数等 |
+
+##### @ApiBootValueHide
+
+可配置参数：
+
+- `length`：隐藏的字节长度
+- `start`：开始隐藏的字节索引位置
+- `position`：位置类型，具体查看`ValueHidePositionEnum`枚举
+- `placeholder`：隐藏后被替换的字符，默认为：`*`
+
+##### @ApiBootDecimalAccuracy
+
+可配置参数：
+
+- `scale`：小数点位数，默认为`2`
+- `roundingMode`：小数点精度模式，默认为`BigDecimal.ROUND_DOWN`，具体查看`BigDecimal`的rounding mode
 
 ### 自定义ValueFilter
 
