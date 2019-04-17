@@ -15,8 +15,12 @@
     </modules>
     <groupId>org.minbox.framework</groupId>
     <artifactId>api-boot</artifactId>
-    <version>2.0.4.RELEASE</version>
+    <version>2.0.5.RC1</version>
     <name>api-boot</name>
+    <properties>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+        <jdk.version>1.8</jdk.version>
+    </properties>
     <description>
         ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，
         内部提供了第三方框架的封装集成，让接口开发者可以选着性完成开箱即用，
@@ -29,10 +33,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
         </plugins>

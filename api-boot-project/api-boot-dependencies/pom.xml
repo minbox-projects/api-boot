@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.4.RELEASE</version>
+        <version>2.0.5.RC1</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -30,6 +30,11 @@
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
         <quartz.version>2.3.0</quartz.version>
         <spring.tx.version>5.1.5.RELEASE</spring.tx.version>
+
+        <!--Plugin Versions-->
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -262,4 +267,22 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <!--plugin management-->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
