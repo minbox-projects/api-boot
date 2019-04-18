@@ -77,6 +77,10 @@ Demo列表：
 - [ApiBoot DataSource Switch](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-datasource-switch)
 - [ApiBoot Resource Load](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-resource-load)
 
+## 更新日志
+
+`ApiBoot`每一次发版都会有相应的更新日志，点击访问[更新日志wiki](<https://github.com/hengboy/api-boot/wiki/ApiBoot-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97>)
+
 ## 版本管理规范
 
 项目的版本号格式为 x.x.x 的形式，其中 x 的数值类型为数字，从 0 开始取值，且不限于 0~9 这个范围。
