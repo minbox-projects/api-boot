@@ -62,4 +62,16 @@ public class ApiBootJdbcResourcePusher extends ApiBootAbstractResourcePusher {
     public List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
         return apiBootResourceStoreDelegate.loadResourceUrl(sourceFieldValue, resourceType);
     }
+
+    /**
+     * delete resource urls
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     */
+    @Override
+    public void deleteResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
+        apiBootResourceStoreDelegate.deleteResource(sourceFieldValue, resourceType);
+    }
 }

@@ -141,10 +141,9 @@ public class ApiBootResourceContext {
      * @param resourceType     resource type
      * @return redis key
      */
-    public static String formatterRedisCacheKey(Method method, String sourceFieldValue, String resourceType) {
-        String methodName = formatterMethodName(method);
+    public static String formatterCacheKey(Method method, String sourceFieldValue, String resourceType) {
         String expression = "%s.%s.%s";
-        return String.format(expression, methodName, resourceType, sourceFieldValue);
+        return String.format(expression, method.getDeclaringClass().getName(), resourceType, sourceFieldValue);
     }
 }
 

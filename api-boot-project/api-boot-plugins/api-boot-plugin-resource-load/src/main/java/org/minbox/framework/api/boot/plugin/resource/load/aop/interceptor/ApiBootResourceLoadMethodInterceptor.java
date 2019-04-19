@@ -74,15 +74,41 @@ public class ApiBootResourceLoadMethodInterceptor implements MethodInterceptor {
         // declared method object instance
         Method declaredMethod = BridgeMethodResolver.findBridgedMethod(specificMethod);
 
+        // method param array
+        Object[] params = invocation.getArguments();
+
         // execute method logic
         Object result = invocation.proceed();
-
-        if (!ObjectUtils.isEmpty(result)) {
-            // get resource Load
-            ResourceLoad resourceLoad = declaredMethod.getDeclaredAnnotation(ResourceLoad.class);
-            if (!ObjectUtils.isEmpty(resourceLoad)) {
-                // resource push
-                apiBootResourcePusher.pushResource(declaredMethod, result);
+        // get resource Load
+        ResourceLoad resourceLoad = declaredMethod.getDeclaredAnnotation(ResourceLoad.class);
+        if (!ObjectUtils.isEmpty(resourceLoad)) {
+            switch (resourceLoad.event()) {
+                case SELECT:
+                    logger.debug("Execute select resource.");
+                    if (!ObjectUtils.isEmpty(result)) {
+                        // resource push
+                        apiBootResourcePusher.pushResource(declaredMethod, result);
+                    }
+                    break;
+                case INSERT:
+                    logger.debug("Execute insert resource.");
+                    // pull resource form param
+                    apiBootResourcePusher.pullResource(declaredMethod, params);
+                    break;
+                case DELETE:
+                    logger.debug("Execute delete resource.");
+                    apiBootResourcePusher.deleteResource(declaredMethod, params);
+                    break;
+                case UPDATE:
+                    logger.debug("Execute update resource.");
+                    apiBootResourcePusher.updateResource(declaredMethod, params);
+                    break;
+                case INSERT_OR_UPDATE:
+                    logger.debug("Execute insert or update resource.");
+                    apiBootResourcePusher.insertOrUpdateResource(declaredMethod, params);
+                    break;
+                default:
+                    break;
             }
         }
         return result;

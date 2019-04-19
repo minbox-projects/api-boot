@@ -32,10 +32,9 @@ import java.util.List;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-@FunctionalInterface
 public interface ApiBootResourceStoreDelegate {
     /**
-     * 加载资源路径
+     * Load Resource Urls
      *
      * @param sourceFieldValue 资源所属业务字段的值
      * @param resourceType     资源类型
@@ -43,4 +42,33 @@ public interface ApiBootResourceStoreDelegate {
      * @throws ApiBootException ApiBoot Exception
      */
     List<String> loadResourceUrl(String sourceFieldValue, String resourceType) throws ApiBootException;
+
+    /**
+     * Add Resource Urls
+     *
+     * @param sourceFieldValue source field value
+     * @param resourceType     resource type
+     * @param resourceUrls     resource urls
+     * @throws ApiBootException ApiBoot Exception
+     */
+    void addResource(String sourceFieldValue, String resourceType, List<String> resourceUrls) throws ApiBootException;
+
+    /**
+     * Delete resource urls
+     *
+     * @param sourceFieldValue source field value
+     * @param resourceType     resource type
+     * @throws ApiBootException ApiBoot Exception
+     */
+    void deleteResource(String sourceFieldValue, String resourceType) throws ApiBootException;
+
+    /**
+     * Update resource urls
+     *
+     * @param sourceFieldValue source field value
+     * @param resourceType     resource type
+     * @param resourceUrls     resource urls
+     * @throws ApiBootException ApiBoot Exception
+     */
+    void updateResource(String sourceFieldValue, String resourceType, List<String> resourceUrls) throws ApiBootException;
 }

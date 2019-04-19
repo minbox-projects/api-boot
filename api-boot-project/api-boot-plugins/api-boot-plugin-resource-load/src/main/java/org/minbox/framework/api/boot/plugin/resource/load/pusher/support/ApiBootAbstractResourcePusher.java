@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.plugin.resource.load.pusher.support;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
 import org.minbox.framework.api.boot.plugin.resource.load.context.ApiBootResourceContext;
+import org.minbox.framework.api.boot.plugin.resource.load.expression.ResourceSourceExpression;
 import org.minbox.framework.api.boot.plugin.resource.load.loader.ResourceFieldLoader;
 import org.minbox.framework.api.boot.plugin.resource.load.model.ResourcePushField;
 import org.minbox.framework.api.boot.plugin.resource.load.pusher.ApiBootResourcePusher;
@@ -41,6 +42,110 @@ import java.util.Map;
  * GitHub：https://github.com/hengboy
  */
 public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePusher {
+
+    /**
+     * load resource url
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @return resource list
+     */
+    public abstract List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType);
+
+    /**
+     * delete resource urls
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     */
+    public abstract void deleteResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType);
+
+    /**
+     * unified pull resource
+     *
+     * @param declaredMethod declared method
+     * @param param          method param array
+     * @throws ApiBootException
+     */
+    @Override
+    public void pullResource(Method declaredMethod, Object[] param) throws ApiBootException {
+
+    }
+
+    /**
+     * unified delete resource
+     *
+     * @param declaredMethod declared method
+     * @param param          method param array
+     * @throws ApiBootException ApiBoot Exception
+     */
+    @Override
+    public void deleteResource(Method declaredMethod, Object[] param) throws ApiBootException {
+        List<ResourceField> resourceFields = getResourceFields(declaredMethod);
+        resourceFields.stream().forEach(resourceField -> {
+            // source file name
+            String sourceFieldName = resourceField.source();
+
+            List<String> matchContents = ResourceSourceExpression.getMatchContent(sourceFieldName);
+
+            // don't match expression
+            // default parameters using index 0
+            if (ObjectUtils.isEmpty(matchContents)) {
+                Object paramObject = param[0];
+                // source field
+                Field field = getSourceField(declaredMethod, paramObject.getClass(), sourceFieldName, resourceField.name());
+                // source field value
+                Object sourceFieldValue = getFieldValue(field, paramObject);
+                this.deleteResourceUrl(declaredMethod, String.valueOf(sourceFieldValue), resourceField.type());
+            }
+            // match expression
+            else {
+                String sourceFieldValue = null;
+                // ognl expression
+                if (ResourceSourceExpression.getOgnlMatch(sourceFieldName).find()) {
+                    // param object
+                    Object paramObject = param[Integer.valueOf(matchContents.get(0))];
+                    // source field
+                    Field field = getSourceField(declaredMethod, paramObject.getClass(), matchContents.get(1), resourceField.name());
+                    // source field value
+                    sourceFieldValue = String.valueOf(getFieldValue(field, paramObject));
+                }
+                // basic expression
+                else if (ResourceSourceExpression.getBasicMatch(sourceFieldName).find()) {
+                    sourceFieldValue = String.valueOf(param[Integer.valueOf(matchContents.get(0))]);
+                }
+                if (!ObjectUtils.isEmpty(sourceFieldValue)) {
+                    this.deleteResourceUrl(declaredMethod, sourceFieldValue, resourceField.type());
+                }
+            }
+        });
+    }
+
+    /**
+     * unified update resource
+     *
+     * @param declaredMethod declared method
+     * @param param          method param array
+     * @throws ApiBootException
+     */
+    @Override
+    public void updateResource(Method declaredMethod, Object[] param) throws ApiBootException {
+
+    }
+
+    /**
+     * unified insert or update resource
+     *
+     * @param declaredMethod declared method
+     * @param param          method param array
+     * @throws ApiBootException
+     */
+    @Override
+    public void insertOrUpdateResource(Method declaredMethod, Object[] param) throws ApiBootException {
+
+    }
 
     /**
      * unified push resource
@@ -100,16 +205,6 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
     }
 
     /**
-     * load resource url
-     *
-     * @param declaredMethod   declared method
-     * @param sourceFieldValue sourceFieldValue
-     * @param resourceType     resourceType
-     * @return resource list
-     */
-    public abstract List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType);
-
-    /**
      * execute push
      *
      * @param resourceFields ResourceField Annotation List
@@ -152,6 +247,24 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
     }
 
     /**
+     * get Field value
+     *
+     * @param field  field instance
+     * @param object field subordinate object
+     * @return
+     */
+    protected Object getFieldValue(Field field, Object object) {
+        try {
+            if (!field.isAccessible()) {
+                field.setAccessible(true);
+            }
+            return field.get(object);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
      * get source field
      *
      * @param method          method instance
@@ -159,7 +272,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      * @return Field Instance
      * @throws NoSuchFieldException No Such Field Exception
      */
-    private Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) throws NoSuchFieldException {
+    protected Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) {
         // cache from memory
         ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
@@ -187,7 +300,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      * @param resourceFieldName resource field name
      * @return Field
      */
-    private Field getResourceField(Method method, Class objectClass, String resourceFieldName) throws NoSuchFieldException {
+    protected Field getResourceField(Method method, Class objectClass, String resourceFieldName) throws NoSuchFieldException {
         // cache from memory
         ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
@@ -228,7 +341,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      * @param method method
      * @return List ResourceField
      */
-    private List<ResourceField> getResourceFields(Method method) {
+    protected List<ResourceField> getResourceFields(Method method) {
         // get from cache
         List<ResourceField> resourceFields = ApiBootResourceContext.getResourceFieldFromCache(method);
 

@@ -66,9 +66,26 @@ public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
         if (ObjectUtils.isEmpty(resourceUrls)) {
             // get resource urls from jdbc
             resourceUrls = super.loadResourceUrl(declaredMethod, sourceFieldValue, resourceType);
-            // put resource urls
+            // put resource
             RESOURCE_URLS.put(resourceKey, resourceUrls);
         }
         return resourceUrls;
+    }
+
+    /**
+     * remove from memory
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     */
+    @Override
+    public void deleteResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
+        // remove from jdbc
+        super.deleteResourceUrl(declaredMethod, sourceFieldValue, resourceType);
+        // formatter key
+        String resourceKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
+        // remove memory resource urls
+        RESOURCE_URLS.remove(resourceKey);
     }
 }
