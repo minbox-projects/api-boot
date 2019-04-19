@@ -20,7 +20,7 @@ import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDe
 import org.minbox.framework.api.boot.plugin.resource.load.aop.advistor.ApiBootResourceLoadAdvisor;
 import org.minbox.framework.api.boot.plugin.resource.load.aop.interceptor.ApiBootResourceLoadMethodInterceptor;
 import org.minbox.framework.api.boot.plugin.resource.load.pusher.ApiBootResourcePusher;
-import org.minbox.framework.api.boot.plugin.resource.load.pusher.support.ApiBootJdbcResourcePusher;
+import org.minbox.framework.api.boot.plugin.resource.load.pusher.support.ApiBootMemoryResourcePusher;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -79,13 +79,14 @@ public class ApiBootResourceLoadAutoConfiguration {
 
     /**
      * ApiBoot Jdbc Resource Pusher
+     * extends from ApiBootJdbcResourcePusher
      *
      * @return ApiBootJdbcResourcePusher
      */
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnMissingClass("org.springframework.data.redis.core.RedisTemplate")
-    ApiBootJdbcResourcePusher apiBootJdbcResourcePusher() {
-        return new ApiBootJdbcResourcePusher(resourceStoreDelegate);
+    ApiBootMemoryResourcePusher apiBootMemoryResourcePusher() {
+        return new ApiBootMemoryResourcePusher(resourceStoreDelegate);
     }
 }

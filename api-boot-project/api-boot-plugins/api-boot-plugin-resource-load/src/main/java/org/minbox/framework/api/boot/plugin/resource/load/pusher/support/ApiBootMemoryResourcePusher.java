@@ -19,56 +19,56 @@ package org.minbox.framework.api.boot.plugin.resource.load.pusher.support;
 
 import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
 import org.minbox.framework.api.boot.plugin.resource.load.context.ApiBootResourceContext;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * ApiBoot Redis Resource Pusher
+ * ApiBoot Resource Memory Pusher
  *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-19 09:34
+ * DateTime：2019-04-19 11:16
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public class ApiBootRedisResourcePusher extends ApiBootJdbcResourcePusher {
+public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
     /**
-     * Redis Template
+     * memory resource urls
      */
-    private RedisTemplate redisTemplate;
+    private Map<String, List<String>> RESOURCE_URLS = new HashMap();
 
-    public ApiBootRedisResourcePusher(ApiBootResourceStoreDelegate apiBootResourceStoreDelegate, RedisTemplate redisTemplate) {
+    public ApiBootMemoryResourcePusher(ApiBootResourceStoreDelegate apiBootResourceStoreDelegate) {
         super(apiBootResourceStoreDelegate);
-        this.redisTemplate = redisTemplate;
     }
 
     /**
-     * Check whether the data is cached in redis
+     * Check whether the data is cached in memory
      * If not cached, query from the database
-     * If cached , query from the redis
+     * If cached , query from the memory
      *
      * @param declaredMethod   declared method
      * @param sourceFieldValue sourceFieldValue
      * @param resourceType     resourceType
-     * @return resource urls
+     * @return
      */
     @Override
     public List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
-        // formatter redis key
-        String resourceRedisKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
-        // get resource size
-        long resourceSize = redisTemplate.opsForList().size(resourceRedisKey);
-        if (resourceSize <= 0) {
-            // load resource url from jdbc
-            List<String> resourceUrls = super.loadResourceUrl(declaredMethod, sourceFieldValue, resourceType);
-            // push resource urls to redis
-            redisTemplate.opsForList().rightPushAll(resourceRedisKey, resourceUrls);
+        // formatter key
+        String resourceKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
+        // get resource urls
+        List<String> resourceUrls = RESOURCE_URLS.get(resourceKey);
+        if (ObjectUtils.isEmpty(resourceUrls)) {
+            // get resource urls from jdbc
+            resourceUrls = super.loadResourceUrl(declaredMethod, sourceFieldValue, resourceType);
+            // put resource urls
+            RESOURCE_URLS.put(resourceKey, resourceUrls);
         }
-        // pull all resource urls from redis
-        return redisTemplate.opsForList().range(resourceRedisKey, 0, -1);
+        return resourceUrls;
     }
 }
