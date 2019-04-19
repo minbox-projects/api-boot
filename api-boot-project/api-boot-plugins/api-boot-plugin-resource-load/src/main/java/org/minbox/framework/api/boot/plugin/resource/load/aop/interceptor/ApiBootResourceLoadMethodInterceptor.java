@@ -18,10 +18,8 @@ package org.minbox.framework.api.boot.plugin.resource.load.aop.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
-import org.minbox.framework.api.boot.plugin.resource.load.pusher.ResourcePusher;
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceLoad;
+import org.minbox.framework.api.boot.plugin.resource.load.pusher.ApiBootResourcePusher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
@@ -50,16 +48,13 @@ public class ApiBootResourceLoadMethodInterceptor implements MethodInterceptor {
     static Logger logger = LoggerFactory.getLogger(ApiBootResourceLoadMethodInterceptor.class);
 
     /**
-     * ApiBoot Resource Load Data Store
+     * ApiBoot Resource Pusher
      * Use to query resource url
      */
-    private ApiBootResourceStoreDelegate resourceStoreDelegate;
+    private ApiBootResourcePusher apiBootResourcePusher;
 
-    public ApiBootResourceLoadMethodInterceptor(ApiBootResourceStoreDelegate resourceStoreDelegate) {
-        this.resourceStoreDelegate = resourceStoreDelegate;
-        if (ObjectUtils.isEmpty(this.resourceStoreDelegate)) {
-            throw new ApiBootException("Unable to load [ApiBootResourceStoreDelegate] implementation class instance");
-        }
+    public ApiBootResourceLoadMethodInterceptor(ApiBootResourcePusher apiBootResourcePusher) {
+        this.apiBootResourcePusher = apiBootResourcePusher;
     }
 
     /**
@@ -87,7 +82,7 @@ public class ApiBootResourceLoadMethodInterceptor implements MethodInterceptor {
             ResourceLoad resourceLoad = declaredMethod.getDeclaredAnnotation(ResourceLoad.class);
             if (!ObjectUtils.isEmpty(resourceLoad)) {
                 // resource push
-                ResourcePusher.pushResource(resourceStoreDelegate, declaredMethod, result);
+                apiBootResourcePusher.pushResource(declaredMethod, result);
             }
         }
         return result;

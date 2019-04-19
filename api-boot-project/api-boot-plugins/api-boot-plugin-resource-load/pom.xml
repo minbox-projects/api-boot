@@ -22,9 +22,16 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-plugin</artifactId>
         </dependency>
+        <!--Spring Boot Aop-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--Spring Boot Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

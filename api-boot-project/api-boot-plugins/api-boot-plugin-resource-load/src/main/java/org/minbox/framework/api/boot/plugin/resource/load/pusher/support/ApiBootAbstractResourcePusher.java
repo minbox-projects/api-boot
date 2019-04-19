@@ -15,14 +15,14 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.resource.load.pusher;
+package org.minbox.framework.api.boot.plugin.resource.load.pusher.support;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
 import org.minbox.framework.api.boot.plugin.resource.load.context.ApiBootResourceContext;
 import org.minbox.framework.api.boot.plugin.resource.load.loader.ResourceFieldLoader;
 import org.minbox.framework.api.boot.plugin.resource.load.model.ResourcePushField;
+import org.minbox.framework.api.boot.plugin.resource.load.pusher.ApiBootResourcePusher;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -32,22 +32,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ApiBoot Resource Load Pusher
- *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-12 16:27
+ * DateTime：2019-04-19 09:40
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public class ResourcePusher {
-    /**
-     * ApiBoot Resource Load Data Store
-     * Use to query resource url
-     */
-    private static ApiBootResourceStoreDelegate resourceStoreDelegate;
+public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePusher {
 
     /**
      * unified push resource
@@ -55,19 +48,19 @@ public class ResourcePusher {
      * @param method method
      * @param result method execute result
      */
-    public static void pushResource(ApiBootResourceStoreDelegate resourceStoreDelegate, Method method, Object result) {
-        ResourcePusher.resourceStoreDelegate = resourceStoreDelegate;
+    @Override
+    public void pushResource(Method method, Object result) {
         // list
         if (result instanceof List) {
-            ResourcePusher.pushToList(method, (List<Object>) result);
+            pushToList(method, (List<Object>) result);
         }
         // map
         else if (result instanceof Map) {
-            ResourcePusher.pushToMap(method, (Map) result);
+            pushToMap(method, (Map) result);
         }
         // single
         else if (result instanceof Object) {
-            ResourcePusher.pushToObject(method, result);
+            pushToObject(method, result);
         }
     }
 
@@ -78,7 +71,7 @@ public class ResourcePusher {
      * @param executeResultList method execute result list
      * @throws Exception Exception
      */
-    private static void pushToList(Method method, List<Object> executeResultList) {
+    private void pushToList(Method method, List<Object> executeResultList) {
         List<ResourceField> resourceFields = getResourceFields(method);
         executeResultList.stream().forEach(o -> push(method, resourceFields, o));
     }
@@ -90,7 +83,7 @@ public class ResourcePusher {
      * @param executeResultMap method execute result map
      * @throws Exception Exception
      */
-    private static void pushToMap(Method method, Map executeResultMap) {
+    private void pushToMap(Method method, Map executeResultMap) {
         List<ResourceField> resourceFields = getResourceFields(method);
         executeResultMap.keySet().stream().forEach(o -> push(method, resourceFields, executeResultMap.get(o)));
     }
@@ -101,11 +94,20 @@ public class ResourcePusher {
      * @param method        method
      * @param executeResult method execute result object
      */
-    private static void pushToObject(Method method, Object executeResult) {
+    private void pushToObject(Method method, Object executeResult) {
         List<ResourceField> resourceFields = getResourceFields(method);
         push(method, resourceFields, executeResult);
     }
 
+    /**
+     * load resource url
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @return resource list
+     */
+    public abstract List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType);
 
     /**
      * execute push
@@ -113,7 +115,7 @@ public class ResourcePusher {
      * @param resourceFields ResourceField Annotation List
      * @param object         single object
      */
-    private static void push(Method method, List<ResourceField> resourceFields, Object object) {
+    private void push(Method method, List<ResourceField> resourceFields, Object object) {
         Class objectClass = object.getClass();
         resourceFields.stream().forEach(resourceField -> {
             try {
@@ -125,7 +127,7 @@ public class ResourcePusher {
                 // get source filed value
                 Object sourceFieldValue = sourceField.get(object);
                 // load resource urls
-                List<String> resourceUrls = resourceStoreDelegate.loadResourceUrl(String.valueOf(sourceFieldValue), resourceField.type());
+                List<String> resourceUrls = loadResourceUrl(method, String.valueOf(sourceFieldValue), resourceField.type());
 
                 if (!ObjectUtils.isEmpty(resourceUrls)) {
                     // resource field is array
@@ -157,7 +159,7 @@ public class ResourcePusher {
      * @return Field Instance
      * @throws NoSuchFieldException No Such Field Exception
      */
-    private static Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) throws NoSuchFieldException {
+    private Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) throws NoSuchFieldException {
         // cache from memory
         ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
@@ -185,7 +187,7 @@ public class ResourcePusher {
      * @param resourceFieldName resource field name
      * @return Field
      */
-    private static Field getResourceField(Method method, Class objectClass, String resourceFieldName) throws NoSuchFieldException {
+    private Field getResourceField(Method method, Class objectClass, String resourceFieldName) throws NoSuchFieldException {
         // cache from memory
         ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
         // if don't have source field from cache
@@ -212,7 +214,7 @@ public class ResourcePusher {
      * @param method method
      * @return ResourceField List
      */
-    private static List<ResourceField> loadMethodResourceFields(Method method) {
+    private List<ResourceField> loadMethodResourceFields(Method method) {
         // load method declared ResourceField Annotation List
         List<ResourceField> resourceFields = ResourceFieldLoader.getDeclaredResourceField(method);
         return resourceFields;
@@ -226,7 +228,7 @@ public class ResourcePusher {
      * @param method method
      * @return List ResourceField
      */
-    private static List<ResourceField> getResourceFields(Method method) {
+    private List<ResourceField> getResourceFields(Method method) {
         // get from cache
         List<ResourceField> resourceFields = ApiBootResourceContext.getResourceFieldFromCache(method);
 
