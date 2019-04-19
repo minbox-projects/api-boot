@@ -19,11 +19,15 @@ package org.minbox.framework.api.boot.autoconfigure.resource;
 import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
 import org.minbox.framework.api.boot.plugin.resource.load.aop.advistor.ApiBootResourceLoadAdvisor;
 import org.minbox.framework.api.boot.plugin.resource.load.aop.interceptor.ApiBootResourceLoadMethodInterceptor;
+import org.minbox.framework.api.boot.plugin.resource.load.pusher.ApiBootResourcePusher;
+import org.minbox.framework.api.boot.plugin.resource.load.pusher.support.ApiBootJdbcResourcePusher;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * ApiBoot Resource Load Auto Config
@@ -38,6 +42,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass(ApiBootResourceStoreDelegate.class)
+@Import(ApiBootResourceRedisLoadAutoConfiguration.class)
 public class ApiBootResourceLoadAutoConfiguration {
     /**
      * ApiBoot Resource Load Store Delegate
@@ -68,7 +73,19 @@ public class ApiBootResourceLoadAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootResourceLoadMethodInterceptor resourceLoadMethodInterceptor() {
-        return new ApiBootResourceLoadMethodInterceptor(resourceStoreDelegate);
+    ApiBootResourceLoadMethodInterceptor resourceLoadMethodInterceptor(ApiBootResourcePusher apiBootResourcePusher) {
+        return new ApiBootResourceLoadMethodInterceptor(apiBootResourcePusher);
+    }
+
+    /**
+     * ApiBoot Jdbc Resource Pusher
+     *
+     * @return ApiBootJdbcResourcePusher
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnMissingClass("org.springframework.data.redis.core.RedisTemplate")
+    ApiBootJdbcResourcePusher apiBootJdbcResourcePusher() {
+        return new ApiBootJdbcResourcePusher(resourceStoreDelegate);
     }
 }
