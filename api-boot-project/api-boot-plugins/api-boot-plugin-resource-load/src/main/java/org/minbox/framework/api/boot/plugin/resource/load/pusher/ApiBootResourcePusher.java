@@ -42,7 +42,7 @@ public interface ApiBootResourcePusher {
      * @param methodExecuteResult method execute result
      * @throws ApiBootException ApiBoot Exception
      */
-    void pushResource(Method declaredMethod, Object methodExecuteResult) throws ApiBootException;
+    void loadResource(Method declaredMethod, Object methodExecuteResult) throws ApiBootException;
 
     /**
      * Pull resource from param
@@ -70,13 +70,4 @@ public interface ApiBootResourcePusher {
      * @throws ApiBootException ApiBoot Exception
      */
     void updateResource(Method declaredMethod, Object[] param) throws ApiBootException;
-
-    /**
-     * Insert resource
-     *
-     * @param declaredMethod declared method
-     * @param param          method param array
-     * @throws ApiBootException ApiBoot Exception
-     */
-    void insertOrUpdateResource(Method declaredMethod, Object[] param) throws ApiBootException;
 }

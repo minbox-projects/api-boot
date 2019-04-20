@@ -19,9 +19,12 @@ package org.minbox.framework.api.boot.plugin.resource.load.pusher.support;
 
 import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
 import org.minbox.framework.api.boot.plugin.resource.load.context.ApiBootResourceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +41,10 @@ import java.util.Map;
  * GitHub：https://github.com/hengboy
  */
 public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootMemoryResourcePusher.class);
     /**
      * memory resource urls
      */
@@ -59,6 +66,10 @@ public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
      */
     @Override
     public List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, load resource urls with memory fail.");
+            return Collections.emptyList();
+        }
         // formatter key
         String resourceKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
         // get resource urls
@@ -81,6 +92,10 @@ public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
      */
     @Override
     public void deleteResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, delete resource urls with memory fail.");
+            return;
+        }
         // remove from jdbc
         super.deleteResourceUrl(declaredMethod, sourceFieldValue, resourceType);
         // formatter key
@@ -99,10 +114,37 @@ public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
      */
     @Override
     public void insertResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType) || ObjectUtils.isEmpty(resourceUrls)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, insert resource urls with memory fail.");
+            return;
+        }
         super.insertResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
         // formatter key
         String resourceKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
         // remove memory resource urls
         RESOURCE_URLS.put(resourceKey, resourceUrls);
+    }
+
+    /**
+     * update memory data
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @param resourceUrls     resource urls
+     */
+    @Override
+    public void updateResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType) || ObjectUtils.isEmpty(resourceUrls)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, update resource urls with memory fail.");
+            return;
+        }
+        super.updateResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
+
+        // execute delete resource urls
+        deleteResourceUrl(declaredMethod, sourceFieldValue, resourceType);
+
+        // execute insert resource urls
+        insertResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
     }
 }

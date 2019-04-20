@@ -87,7 +87,7 @@ public class ApiBootResourceLoadMethodInterceptor implements MethodInterceptor {
                     logger.debug("Execute select resource.");
                     if (!ObjectUtils.isEmpty(result)) {
                         // resource push
-                        apiBootResourcePusher.pushResource(declaredMethod, result);
+                        apiBootResourcePusher.loadResource(declaredMethod, result);
                     }
                     break;
                 case INSERT:
@@ -102,10 +102,6 @@ public class ApiBootResourceLoadMethodInterceptor implements MethodInterceptor {
                 case UPDATE:
                     logger.debug("Execute update resource.");
                     apiBootResourcePusher.updateResource(declaredMethod, params);
-                    break;
-                case INSERT_OR_UPDATE:
-                    logger.debug("Execute insert or update resource.");
-                    apiBootResourcePusher.insertOrUpdateResource(declaredMethod, params);
                     break;
                 default:
                     break;

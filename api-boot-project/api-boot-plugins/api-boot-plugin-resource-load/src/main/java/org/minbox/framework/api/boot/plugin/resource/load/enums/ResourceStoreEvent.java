@@ -30,9 +30,5 @@ public enum ResourceStoreEvent {
     /**
      * 删除资源
      */
-    DELETE,
-    /**
-     * 添加或更新资源
-     */
-    INSERT_OR_UPDATE
+    DELETE
 }

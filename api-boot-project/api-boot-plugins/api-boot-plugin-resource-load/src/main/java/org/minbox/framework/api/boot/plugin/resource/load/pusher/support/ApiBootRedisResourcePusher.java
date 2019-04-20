@@ -19,9 +19,13 @@ package org.minbox.framework.api.boot.plugin.resource.load.pusher.support;
 
 import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
 import org.minbox.framework.api.boot.plugin.resource.load.context.ApiBootResourceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,6 +40,11 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 public class ApiBootRedisResourcePusher extends ApiBootJdbcResourcePusher {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootRedisResourcePusher.class);
+
     /**
      * Redis Template
      */
@@ -58,6 +67,10 @@ public class ApiBootRedisResourcePusher extends ApiBootJdbcResourcePusher {
      */
     @Override
     public List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, load resource urls with redis fail.");
+            return Collections.emptyList();
+        }
         // formatter redis key
         String resourceRedisKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
         // get resource size
@@ -81,6 +94,10 @@ public class ApiBootRedisResourcePusher extends ApiBootJdbcResourcePusher {
      */
     @Override
     public void deleteResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, delete resource urls with redis fail.");
+            return;
+        }
         // formatter redis key
         String resourceRedisKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
 
@@ -101,10 +118,37 @@ public class ApiBootRedisResourcePusher extends ApiBootJdbcResourcePusher {
      */
     @Override
     public void insertResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType) || ObjectUtils.isEmpty(resourceUrls)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, insert resource urls with redis fail.");
+            return;
+        }
         super.insertResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
         // formatter redis key
         String resourceRedisKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
         // push resource urls to redis
         redisTemplate.opsForList().rightPushAll(resourceRedisKey, resourceUrls);
+    }
+
+    /**
+     * update redis resource data
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @param resourceUrls     resource urls
+     */
+    @Override
+    public void updateResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls) {
+        if (ObjectUtils.isEmpty(sourceFieldValue) || ObjectUtils.isEmpty(resourceType) || ObjectUtils.isEmpty(resourceUrls)) {
+            logger.warn("@ResourceField param [source]|[type]|[name] have empty value, update resource urls with redis fail.");
+            return;
+        }
+        super.updateResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
+
+        // execute delete redis data
+        deleteResourceUrl(declaredMethod, sourceFieldValue, resourceType);
+
+        // execute insert redis data
+        insertResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
     }
 }

@@ -144,24 +144,15 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
         resourceFields.stream().forEach(resourceField -> {
             // get expression match source filed value
             Object sourceFieldValue = ResourceFieldTools.getMatchSourceValue(resourceField.source(), param);
+            // get expression match resource field value
+            Object resourceFieldValue = ResourceFieldTools.getMatchResourceValue(resourceField.name(), param);
             // if have value
-            if (!ObjectUtils.isEmpty(sourceFieldValue)) {
+            if (!ObjectUtils.isEmpty(sourceFieldValue) && !ObjectUtils.isEmpty(resourceFieldValue)) {
+                List<String> resourceUrls = ListTools.convertToList(resourceFieldValue);
                 // call implementation class "insertResourceUrl" method
-                this.updateResourceUrl(declaredMethod, String.valueOf(sourceFieldValue), resourceField.type(), null);
+                this.updateResourceUrl(declaredMethod, String.valueOf(sourceFieldValue), resourceField.type(), resourceUrls);
             }
         });
-    }
-
-    /**
-     * unified insert or update resource
-     *
-     * @param declaredMethod declared method
-     * @param param          method param array
-     * @throws ApiBootException
-     */
-    @Override
-    public void insertOrUpdateResource(Method declaredMethod, Object[] param) throws ApiBootException {
-        // TODO
     }
 
     /**
@@ -171,7 +162,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      * @param result method execute result
      */
     @Override
-    public void pushResource(Method method, Object result) {
+    public void loadResource(Method method, Object result) {
         // list
         if (result instanceof List) {
             pushToList(method, (List<Object>) result);
@@ -262,6 +253,4 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
         });
 
     }
-
-
 }
