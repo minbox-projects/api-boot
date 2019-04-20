@@ -88,4 +88,21 @@ public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
         // remove memory resource urls
         RESOURCE_URLS.remove(resourceKey);
     }
+
+    /**
+     * insert to memory
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @param resourceUrls     resource urls
+     */
+    @Override
+    public void insertResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls) {
+        super.insertResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
+        // formatter key
+        String resourceKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
+        // remove memory resource urls
+        RESOURCE_URLS.put(resourceKey, resourceUrls);
+    }
 }

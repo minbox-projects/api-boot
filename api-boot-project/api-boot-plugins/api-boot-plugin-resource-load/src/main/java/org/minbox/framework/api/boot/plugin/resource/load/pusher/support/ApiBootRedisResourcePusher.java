@@ -90,4 +90,21 @@ public class ApiBootRedisResourcePusher extends ApiBootJdbcResourcePusher {
         // delete from jdbc
         super.deleteResourceUrl(declaredMethod, sourceFieldValue, resourceType);
     }
+
+    /**
+     * insert into redis
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @param resourceUrls     resource urls
+     */
+    @Override
+    public void insertResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls) {
+        super.insertResourceUrl(declaredMethod, sourceFieldValue, resourceType, resourceUrls);
+        // formatter redis key
+        String resourceRedisKey = ApiBootResourceContext.formatterCacheKey(declaredMethod, sourceFieldValue, resourceType);
+        // push resource urls to redis
+        redisTemplate.opsForList().rightPushAll(resourceRedisKey, resourceUrls);
+    }
 }

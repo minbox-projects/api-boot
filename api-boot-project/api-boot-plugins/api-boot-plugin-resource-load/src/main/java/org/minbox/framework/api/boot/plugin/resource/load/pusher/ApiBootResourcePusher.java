@@ -51,7 +51,7 @@ public interface ApiBootResourcePusher {
      * @param param          method param array
      * @throws ApiBootException ApiBoot Exception
      */
-    void pullResource(Method declaredMethod, Object[] param) throws ApiBootException;
+    void insertResource(Method declaredMethod, Object[] param) throws ApiBootException;
 
     /**
      * Delete resource

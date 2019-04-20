@@ -93,7 +93,7 @@ public class ApiBootResourceLoadMethodInterceptor implements MethodInterceptor {
                 case INSERT:
                     logger.debug("Execute insert resource.");
                     // pull resource form param
-                    apiBootResourcePusher.pullResource(declaredMethod, params);
+                    apiBootResourcePusher.insertResource(declaredMethod, params);
                     break;
                 case DELETE:
                     logger.debug("Execute delete resource.");

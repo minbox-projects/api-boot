@@ -29,10 +29,14 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * ApiBoot Resource Pusher Abstract Support
+ * Provide access to resource or source field
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
  * DateTime：2019-04-19 09:40
@@ -63,6 +67,26 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
     public abstract void deleteResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType);
 
     /**
+     * insert resource urls
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @param resourceUrls     resource urls
+     */
+    public abstract void insertResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls);
+
+    /**
+     * update resource urls
+     *
+     * @param declaredMethod   declared method
+     * @param sourceFieldValue sourceFieldValue
+     * @param resourceType     resourceType
+     * @param resourceUrls     resource urls
+     */
+    public abstract void updateResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType, List<String> resourceUrls);
+
+    /**
      * unified pull resource
      *
      * @param declaredMethod declared method
@@ -70,9 +94,24 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      * @throws ApiBootException
      */
     @Override
-    public void pullResource(Method declaredMethod, Object[] param) throws ApiBootException {
+    public void insertResource(Method declaredMethod, Object[] param) throws ApiBootException {
+        // get method declared ResourceField annotations
+        List<ResourceField> resourceFields = getResourceFields(declaredMethod);
+        resourceFields.stream().forEach(resourceField -> {
+            // get expression match source filed value
+            Object sourceFieldValue = getMatchSourceValue(resourceField.source(), declaredMethod, param);
+            // get expression match resource field value
+            Object resourceFieldValue = getMatchResourceValue(resourceField.name(), declaredMethod, param);
 
+            // if have value
+            if (!ObjectUtils.isEmpty(sourceFieldValue) && !ObjectUtils.isEmpty(resourceFieldValue)) {
+                List<String> resourceUrls = convertToList(resourceFieldValue);
+                // call implementation class "deleteResourceUrl" method
+                this.insertResourceUrl(declaredMethod, String.valueOf(sourceFieldValue), resourceField.type(), resourceUrls);
+            }
+        });
     }
+
 
     /**
      * unified delete resource
@@ -83,42 +122,15 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      */
     @Override
     public void deleteResource(Method declaredMethod, Object[] param) throws ApiBootException {
+        // get method declared ResourceField annotations
         List<ResourceField> resourceFields = getResourceFields(declaredMethod);
         resourceFields.stream().forEach(resourceField -> {
-            // source file name
-            String sourceFieldName = resourceField.source();
-
-            List<String> matchContents = ResourceSourceExpression.getMatchContent(sourceFieldName);
-
-            // don't match expression
-            // default parameters using index 0
-            if (ObjectUtils.isEmpty(matchContents)) {
-                Object paramObject = param[0];
-                // source field
-                Field field = getSourceField(declaredMethod, paramObject.getClass(), sourceFieldName, resourceField.name());
-                // source field value
-                Object sourceFieldValue = getFieldValue(field, paramObject);
+            // get expression match source filed value
+            Object sourceFieldValue = getMatchSourceValue(resourceField.source(), declaredMethod, param);
+            // if have value
+            if (!ObjectUtils.isEmpty(sourceFieldValue)) {
+                // call implementation class "deleteResourceUrl" method
                 this.deleteResourceUrl(declaredMethod, String.valueOf(sourceFieldValue), resourceField.type());
-            }
-            // match expression
-            else {
-                String sourceFieldValue = null;
-                // ognl expression
-                if (ResourceSourceExpression.getOgnlMatch(sourceFieldName).find()) {
-                    // param object
-                    Object paramObject = param[Integer.valueOf(matchContents.get(0))];
-                    // source field
-                    Field field = getSourceField(declaredMethod, paramObject.getClass(), matchContents.get(1), resourceField.name());
-                    // source field value
-                    sourceFieldValue = String.valueOf(getFieldValue(field, paramObject));
-                }
-                // basic expression
-                else if (ResourceSourceExpression.getBasicMatch(sourceFieldName).find()) {
-                    sourceFieldValue = String.valueOf(param[Integer.valueOf(matchContents.get(0))]);
-                }
-                if (!ObjectUtils.isEmpty(sourceFieldValue)) {
-                    this.deleteResourceUrl(declaredMethod, sourceFieldValue, resourceField.type());
-                }
             }
         });
     }
@@ -132,7 +144,17 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      */
     @Override
     public void updateResource(Method declaredMethod, Object[] param) throws ApiBootException {
-
+        // get method declared ResourceField annotations
+        List<ResourceField> resourceFields = getResourceFields(declaredMethod);
+        resourceFields.stream().forEach(resourceField -> {
+            // get expression match source filed value
+            Object sourceFieldValue = getMatchSourceValue(resourceField.source(), declaredMethod, param);
+            // if have value
+            if (!ObjectUtils.isEmpty(sourceFieldValue)) {
+                // call implementation class "insertResourceUrl" method
+                this.updateResourceUrl(declaredMethod, String.valueOf(sourceFieldValue), resourceField.type(), null);
+            }
+        });
     }
 
     /**
@@ -144,7 +166,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      */
     @Override
     public void insertOrUpdateResource(Method declaredMethod, Object[] param) throws ApiBootException {
-
+        // TODO
     }
 
     /**
@@ -215,7 +237,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
         resourceFields.stream().forEach(resourceField -> {
             try {
                 // source
-                Field sourceField = getSourceField(method, objectClass, resourceField.source(), resourceField.name());
+                Field sourceField = getSourceField(method, objectClass, resourceField.source());
                 // target
                 Field resourceFieldInstance = getResourceField(method, objectClass, resourceField.name());
 
@@ -247,6 +269,73 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
     }
 
     /**
+     * Get expression match value
+     *
+     * @param matchFieldName match field name
+     * @param declaredMethod declared method
+     * @param param          method param
+     * @return match value
+     */
+    protected Object getMatchValue(String matchFieldName, Method declaredMethod, Object[] param) {
+        // pattern expression match contents
+        List<String> matchContents = ResourceSourceExpression.getMatchContent(matchFieldName);
+
+        // source field value
+        Object sourceFieldValue = null;
+
+        // don't match expression
+        // default parameters using index 0
+        if (ObjectUtils.isEmpty(matchContents)) {
+            Object paramObject = param[0];
+            // source field
+            Field field = getSourceField(declaredMethod, paramObject.getClass(), matchFieldName);
+            // source field value
+            sourceFieldValue = getFieldValue(field, paramObject);
+        }
+        // match expression
+        else {
+            // ognl expression
+            if (ResourceSourceExpression.getOgnlMatch(matchFieldName).find()) {
+                // param object
+                Object paramObject = param[Integer.valueOf(matchContents.get(0))];
+                // source field
+                Field field = getSourceField(declaredMethod, paramObject.getClass(), matchContents.get(1));
+                // source field value
+                sourceFieldValue = getFieldValue(field, paramObject);
+            }
+            // basic expression
+            else if (ResourceSourceExpression.getBasicMatch(matchFieldName).find()) {
+                sourceFieldValue = param[Integer.valueOf(matchContents.get(0))];
+            }
+        }
+        return sourceFieldValue;
+    }
+
+    /**
+     * Get expression match resource field value
+     *
+     * @param resourceFieldName ResourceField Annotation name
+     * @param declaredMethod    declared method
+     * @param param             method param array
+     * @return resource field value
+     */
+    protected Object getMatchResourceValue(String resourceFieldName, Method declaredMethod, Object[] param) {
+        return getMatchValue(resourceFieldName, declaredMethod, param);
+    }
+
+    /**
+     * Get expression match source field value
+     *
+     * @param sourceFieldName ResourceField Annotation source
+     * @param declaredMethod  declared method
+     * @param param           method param array
+     * @return source field value
+     */
+    protected Object getMatchSourceValue(String sourceFieldName, Method declaredMethod, Object[] param) {
+        return getMatchValue(sourceFieldName, declaredMethod, param);
+    }
+
+    /**
      * get Field value
      *
      * @param field  field instance
@@ -272,9 +361,9 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      * @return Field Instance
      * @throws NoSuchFieldException No Such Field Exception
      */
-    protected Field getSourceField(Method method, Class objectClass, String sourceFieldName, String resourceFieldName) {
+    protected Field getSourceField(Method method, Class objectClass, String sourceFieldName) {
         // cache from memory
-        ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, resourceFieldName);
+        ResourcePushField resourcePushField = ApiBootResourceContext.getPushFieldFromCache(method, sourceFieldName);
         // if don't have source field from cache
         if (ObjectUtils.isEmpty(resourcePushField) || ObjectUtils.isEmpty(resourcePushField.getSourceField())) {
             Field sourceField = ReflectionUtils.findField(objectClass, sourceFieldName);
@@ -288,7 +377,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
             }
 
             // cache to memory
-            ApiBootResourceContext.setPushFieldToCache(method, resourceFieldName, resourcePushField);
+            ApiBootResourceContext.setPushFieldToCache(method, sourceFieldName, resourcePushField);
         }
         return resourcePushField.getSourceField();
     }
@@ -352,5 +441,15 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
             ApiBootResourceContext.setResourceFieldToCache(method, resourceFields);
         }
         return resourceFields;
+    }
+
+    protected List<String> convertToList(Object value) {
+        List<String> resourceUrls = new ArrayList<>();
+        if (value instanceof List) {
+            resourceUrls.addAll((List) value);
+        } else {
+            resourceUrls.add(String.valueOf(value));
+        }
+        return resourceUrls;
     }
 }
