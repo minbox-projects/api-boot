@@ -18,15 +18,12 @@
 package org.minbox.framework.api.boot.plugin.resource.load.context;
 
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
-import org.minbox.framework.api.boot.plugin.resource.load.model.ResourcePushField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.ObjectUtils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -54,48 +51,34 @@ public class ApiBootResourceContext {
     private static ConcurrentMap<String, List<ResourceField>> RESOURCE_FIELD_ANNOTATIONS = new ConcurrentHashMap();
     /**
      * key -> method name
-     * child map key -> resource field name
-     * child map value -> resource field instance
+     * value -> field instance
      */
-    private static ConcurrentMap<String, Map<String, ResourcePushField>> RESOURCE_FIELDS = new ConcurrentHashMap();
+    private static ConcurrentMap<String, Field> RESOURCE_FIELDS = new ConcurrentHashMap();
 
     /**
      * get push field from cache
      *
-     * @param method    method instance
-     * @param fieldName 字段名称
-     * @return ResourceField list
+     * @param declaredFieldClassName declared field class name
+     * @param fieldName              field name
+     * @return Field
      */
-    public static ResourcePushField getPushFieldFromCache(Method method, String fieldName) {
-        String methodName = formatterMethodName(method);
-        logger.debug("Cache method [{}] push field from memory", methodName);
-        Map<String, ResourcePushField> resourcePushFieldMap = ApiBootResourceContext.RESOURCE_FIELDS.get(methodName);
-        return ObjectUtils.isEmpty(resourcePushFieldMap) ? null : resourcePushFieldMap.get(fieldName);
+    public static Field getPushFieldFromCache(String declaredFieldClassName, String fieldName) {
+        String cacheKey = formatterCacheKey(declaredFieldClassName, fieldName);
+        logger.debug("Cache method [{}] push field from memory", cacheKey);
+        Field field = ApiBootResourceContext.RESOURCE_FIELDS.get(cacheKey);
+        return field;
     }
 
     /**
      * set push field to cache
      *
-     * @param method            method instance
-     * @param resourcePushField push fields
+     * @param declaredFieldClassName declared field class name
+     * @param field                  push field
      */
-    public static void setPushFieldToCache(Method method, String fieldName, ResourcePushField resourcePushField) {
-        String methodName = formatterMethodName(method);
-        logger.debug("Cache method [{}] push field to memory", methodName);
-        Map<String, ResourcePushField> resourcePushFieldMap = ApiBootResourceContext.RESOURCE_FIELDS.get(methodName);
-        // new map
-        if (ObjectUtils.isEmpty(resourcePushFieldMap)) {
-            resourcePushFieldMap = new HashMap(1) {
-                {
-                    put(fieldName, resourcePushField);
-                }
-            };
-        }
-        //already have map
-        else {
-            resourcePushFieldMap.put(fieldName, resourcePushField);
-        }
-        ApiBootResourceContext.RESOURCE_FIELDS.put(methodName, resourcePushFieldMap);
+    public static void setPushFieldToCache(String declaredFieldClassName, String fieldName, Field field) {
+        String cacheKey = formatterCacheKey(declaredFieldClassName, fieldName);
+        logger.debug("Cache method [{}] push field to memory", cacheKey);
+        ApiBootResourceContext.RESOURCE_FIELDS.put(cacheKey, field);
     }
 
     /**
@@ -120,6 +103,18 @@ public class ApiBootResourceContext {
         String methodName = formatterMethodName(method);
         logger.debug("Cache method [{}] resource field annotation to memory", methodName);
         ApiBootResourceContext.RESOURCE_FIELD_ANNOTATIONS.put(methodName, resourceFields);
+    }
+
+    /**
+     * formatter field cache key
+     *
+     * @param declaredFieldClassName declared file class name
+     * @param fieldName              field name
+     * @return
+     */
+    private static String formatterCacheKey(String declaredFieldClassName, String fieldName) {
+        String expression = "%s.%s";
+        return String.format(expression, declaredFieldClassName, fieldName);
     }
 
     /**
