@@ -164,6 +164,149 @@ public Map<String, SampleUserInfo> mapSample() {
 
 `Map`类型作为返回值时，其中注意`map -> value`必须是对象类型。
 
+### 内存方式缓存资源
+
+`ApiBoot Resource Load`提供了内存缓存的支持，相同类型、相同业务逻辑的资源数据只会从数据库内读取一次，除非执行资源的删除、更新，否则只能等到下次重启项目时进行更新。
+
+### Redis方式缓存资源
+
+`ApiBoot Resource Load`支持使用`redis`进行自动缓存资源数据，尽可能减轻数据库的读取压力。
+
+#### 添加redis集成
+
+使用`spring-boot-starter-data-redis`依赖来完成集成`redis`，在`pom.xml`添加依赖如下所示：
+
+```xml
+<!--Spring Boot Redis Starter-->
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+添加依赖后需要进行相应的配置，在`application.yml`配置文件内，如下所示：
+
+```yaml
+spring:
+  redis:
+    password: 123456
+```
+
+在上面仅仅配置了连接密码，`spring-boot-starter-data-redis`配置文件提供了大多数的默认配置，可自行修改。
 
 
->  如果你有想要的使用方式，你就可以提交issuse！！！
+
+> `ApiBoot Resource Load`自动通过`RedisTemplate`来完成资源缓存，无需额外配置
+
+### 表达式使用
+
+`@ResourceField`注解的`name`、`source`属性都支持表达式使用，如下示例：
+
+```java
+@ResourceLoad(event = ResourceStoreEvent.INSERT)
+@ResourceFields({
+  @ResourceField(name = "#p2", source = "#p1.userId", type = ResourceConstant.SHORT_IMAGE),
+  @ResourceField(name = "#p3", source = "#p0", type = ResourceConstant.HEAD_IMAGE)
+})
+public void insertResource(String userId, UserInfo userInfo, List<String> shortImage, String headImage) {
+	//...
+}
+```
+
+在上面代码中，`#p`是正则表达式所匹配的规则，`#p0`为第一个参数，`#p1`则为第二个参数，以此类推。
+
+如果参数是对象类型，可以通过`#p1.userId`来指定`source`对应业务编号的字段。
+
+`#p1.userId`则对应参数`userInfo`对象内的`userId`字段。
+
+### 自动添加资源
+
+配置资源的自动添加，是通过方法的参数值来进行实现，如下所示：
+
+```java
+@ResourceLoad(event = ResourceStoreEvent.INSERT)
+@ResourceFields({
+  @ResourceField(name = "#p1", source = "#p0.userId", type = ResourceConstant.SHORT_IMAGE),
+  @ResourceField(name = "#p2", source = "#p0.userId", type = ResourceConstant.HEAD_IMAGE)
+})
+public void insertUser(UserInfo userInfo, List<String> shortImage, String headImage) {
+  //..
+}
+```
+
+在上面添加资源示例中，要注意，`@ResourceLoad`的`event`属性需要修改为`ResourceStoreEvent.INSERT`。
+
+```java
+@ResourceField(name = "#p2", source = "#p1.userId", type = ResourceConstant.SHORT_IMAGE)
+```
+
+- `name`：配置使用第二个参数作为`SHORT_IMAGE`类型的资源列表。
+- `source`：注意`#p`索引是从`0`开始，所以这里`#p1`是第二个参数，`#p0.userId`配置使用第一个参数的`userId`作为业务逻辑编号字段。
+- `type`：常量，自定义
+
+>  解释：
+>
+> 当调用配置以上注解的方法时，会自动调用`ApiBootResourceStoreDelegate#addResource`方法完成资源的添加，在调用之前，需要从`#p0.userId`标注的参数对象中拿到`userId`的值作为资源编号，然后拿到`#p1`标注的参数值作为资源列表，最终拿到`type`的值一并传递给`ApiBootResourceStoreDelegate#addResource`方法，做自行保存处理。
+
+```java
+@ResourceField(name = "#p2", source = "#p0.userId", type = ResourceConstant.HEAD_IMAGE)
+```
+
+> 解释：
+>
+> 调用方法之前，需要拿到`#p0.userId`第一个参数作为业务逻辑编号，然后拿到`#p2`第三个参数作为资源列表，最后拿到`type`的值一并传递给`ApiBootResourceStoreDelegate#addResource`方法。
+
+
+
+注意：`insertResource`方法配置了两个`@ResourceField`所以在执行时，会调用两次`ApiBootResourceStoreDelegate#addResource`方法。
+
+### 自动更新资源
+
+配置资源的自动更新，同样是通过方法的参数值来进行实现，如下所示：
+
+```java
+@ResourceLoad(event = ResourceStoreEvent.UPDATE)
+@ResourceFields({
+  @ResourceField(name = "#p1", source = "#p0", type = ResourceConstant.SHORT_IMAGE)
+})
+public void updateUserImage(String userId, List<String> shortImage) {
+	//...
+}
+```
+
+在上面示例中，配置`@ResourceField`注解则会完成，类型为`SHORT_IMAGE`且业务逻辑编号为第一个参数值的资源更新，而更新的资源列表则是第二个参数，也就是List集合。
+
+
+
+具体解释与自动添加资源一致。
+
+### 自动删除资源
+
+配置资源的自动删除，同样是通过方法的参数值来进行实现，如下所示：
+
+```java
+@ResourceLoad(event = ResourceStoreEvent.DELETE)
+@ResourceFields({
+  @ResourceField(name = "shortImage", source = "#p0", type = ResourceConstant.SHORT_IMAGE),
+  @ResourceField(name = "headImage", source = "#p0", type = ResourceConstant.HEAD_IMAGE)
+})
+public void deleteUser(String userId) {
+	//删除用户逻辑
+}
+```
+
+在上面代码中，删除用户时，会自动删除`userId`业务编号下的`SHORT_IMAGE`、`HEAD_IMAGE`等资源列表。
+
+
+
+### 资源字段是List或者Array？
+
+如果查询资源时，返回值对象接收资源的字段为List或者Array，可以通过`@ResourceField`字段的属性来配置，如下所示：
+
+```java
+// isList
+@ResourceField(name = "shortImage", source = "userId", type = ResourceConstant.SHORT_IMAGE, isList = true)
+// isArray
+@ResourceField(name = "shortImage", source = "userId", type = ResourceConstant.SHORT_IMAGE, isArray = true)
+```
+
