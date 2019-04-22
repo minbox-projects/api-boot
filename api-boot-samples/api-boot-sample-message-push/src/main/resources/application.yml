@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-boot-sample-message-push
+# ApiBoot Config
+api:
+  boot:
+    push:
+      # 生产环境推送
+      production: true
+      # 推送默认配置
+      client:
+        # 秘钥
+        master-secret: xxx
+        # appKey
+        app-key: xxx
+      multiple:
+        # user app 推送配置
+        user:
+          master-secret: xxx
+          app-key: xxxx
+        # other app 推送配置
+        other:
+          master-secret: xxxxxx
+          app-key: xxxxxx
