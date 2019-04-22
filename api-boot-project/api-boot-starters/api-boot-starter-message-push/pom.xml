@@ -20,36 +20,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>api-boot-plugins</artifactId>
+        <artifactId>api-boot-starters</artifactId>
         <groupId>org.minbox.framework</groupId>
         <version>2.0.5.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <properties>
-        <main.basedir>${basedir}/../../..</main.basedir>
-    </properties>
-    <artifactId>api-boot-plugin-http-converter</artifactId>
-    <description>
-        ApiBoot Http Converter 插件
-        提供插件的扩展、集成方式
-    </description>
+
+    <artifactId>api-boot-starter-message-push</artifactId>
+
     <dependencies>
-        <!--ApiBoot Plugin-->
+        <!--ApiBoot Starter-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin</artifactId>
+            <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--fastJson-->
+        <!--ApiBoot Plugin Message Push-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--Spring Code-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <optional>true</optional>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-message-push</artifactId>
         </dependency>
     </dependencies>
 </project>

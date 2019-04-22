@@ -51,8 +51,8 @@ public class ApiBootMessagePushJiGuangServiceImpl extends ApiBootAbstractMessage
      */
     static Logger logger = LoggerFactory.getLogger(ApiBootMessagePushJiGuangServiceImpl.class);
 
-    public ApiBootMessagePushJiGuangServiceImpl(Map<String, PushClientConfig> pushClientConfigs) {
-        super(pushClientConfigs);
+    public ApiBootMessagePushJiGuangServiceImpl(Map<String, PushClientConfig> pushClientConfigs, boolean production) {
+        super(pushClientConfigs, production);
     }
 
     /**
@@ -105,7 +105,7 @@ public class ApiBootMessagePushJiGuangServiceImpl extends ApiBootAbstractMessage
             case IOS:
                 builder.setPlatform(Platform.ios());
                 // set is production
-                builder.setOptions(Options.newBuilder().setApnsProduction(messagePushBody.isProduction()).build());
+                builder.setOptions(Options.newBuilder().setApnsProduction(isProduction()).build());
                 break;
             case ANDROID:
                 builder.setPlatform(Platform.android());

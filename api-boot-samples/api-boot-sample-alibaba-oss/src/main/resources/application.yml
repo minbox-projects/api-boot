@@ -12,5 +12,5 @@ api:
       access-key-secret: xxxx
       # 存储空间名称
       bucket-name: xxx
-      # oss所绑定的域名
+      # oss所绑定的域名ApiBootDataSource
       #domain: http://xxx.xxx.xx

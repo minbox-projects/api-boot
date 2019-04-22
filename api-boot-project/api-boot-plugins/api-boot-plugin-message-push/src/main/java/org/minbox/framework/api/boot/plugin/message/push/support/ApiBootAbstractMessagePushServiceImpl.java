@@ -52,9 +52,14 @@ public abstract class ApiBootAbstractMessagePushServiceImpl implements ApiBootMe
      * config push clients
      */
     private Map<String, PushClientConfig> pushClientConfigs;
+    /**
+     * is production
+     */
+    private boolean production;
 
-    public ApiBootAbstractMessagePushServiceImpl(Map<String, PushClientConfig> pushClientConfigs) {
+    public ApiBootAbstractMessagePushServiceImpl(Map<String, PushClientConfig> pushClientConfigs, boolean production) {
         this.pushClientConfigs = pushClientConfigs;
+        this.production = production;
     }
 
     /**
@@ -82,5 +87,14 @@ public abstract class ApiBootAbstractMessagePushServiceImpl implements ApiBootMe
     public PushClientConfig getCurrentPushClient() throws ApiBootException {
         String currentClientName = getCurrentPushClientName();
         return pushClientConfigs.get(currentClientName);
+    }
+
+    /**
+     * is production
+     *
+     * @return true：production
+     */
+    public boolean isProduction() {
+        return production;
     }
 }

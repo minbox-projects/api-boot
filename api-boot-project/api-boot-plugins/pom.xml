@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.5.RC1</version>
+        <version>2.0.5.RELEASE</version>
         <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -27,5 +27,6 @@
         <module>api-boot-plugin-datasource-switch</module>
         <module>api-boot-plugin-resource-load</module>
         <module>api-boot-plugin-http-converter</module>
+        <module>api-boot-plugin-message-push</module>
     </modules>
 </project>

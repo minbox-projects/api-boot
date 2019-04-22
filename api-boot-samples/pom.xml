@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.5.RC1</version>
+        <version>2.0.5.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -20,6 +20,7 @@
         <module>api-boot-sample-quartz</module>
         <module>api-boot-sample-datasource-switch</module>
         <module>api-boot-sample-resource-load</module>
+        <module>api-boot-sample-message-push</module>
     </modules>
 
     <build>

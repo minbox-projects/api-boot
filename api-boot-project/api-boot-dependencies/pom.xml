@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.5.RC1</version>
+        <version>2.0.5.RELEASE</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -15,6 +15,7 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
+        <api.boot.version>2.0.5.RELEASE</api.boot.version>
         <mybatis.enhance.version>1.1.0.RELEASE</mybatis.enhance.version>
         <mybatis.pageable.version>1.0.6.RELEASE</mybatis.pageable.version>
         <druid.version>1.1.14</druid.version>
@@ -30,6 +31,7 @@
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
         <quartz.version>2.3.0</quartz.version>
         <spring.tx.version>5.1.5.RELEASE</spring.tx.version>
+        <jpush-client.version>3.3.11</jpush-client.version>
 
         <!--Plugin Versions-->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -51,33 +53,33 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <!--ApiBoot AutoConfigure-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-autoconfigure</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot Converter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-http-converter</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
                 <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-http-converter</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot Common-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-common</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <!--fastJson-->
             <dependency>
@@ -148,14 +150,14 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-swagger</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot Plugin-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot Security-->
@@ -172,17 +174,17 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-security</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-oauth</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot & Aliyun Oss-->
@@ -194,12 +196,12 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-oss</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-alibaba-oss</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot & Aliyun Sms-->
@@ -216,12 +218,12 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-sms</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-alibaba-sms</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot & Quartz-->
@@ -233,36 +235,53 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-quartz</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-quartz</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot DataSource Switch-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-datasource-switch</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-datasource-switch</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
 
             <!--ApiBoot Resource Load-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-resource-load</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-resource-load</artifactId>
-                <version>${project.version}</version>
+                <version>${api.boot.version}</version>
+            </dependency>
+
+            <!--ApiBoot Message Push-->
+            <dependency>
+                <groupId>cn.jpush.api</groupId>
+                <artifactId>jpush-client</artifactId>
+                <version>${jpush-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-message-push</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-message-push</artifactId>
+                <version>${api.boot.version}</version>
             </dependency>
 
         </dependencies>

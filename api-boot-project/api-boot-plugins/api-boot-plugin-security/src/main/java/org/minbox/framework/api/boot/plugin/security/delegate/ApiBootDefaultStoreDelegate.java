@@ -21,7 +21,6 @@ import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import org.minbox.framework.api.boot.plugin.security.userdetails.ApiBootDefaultUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.ObjectUtils;
@@ -50,12 +49,15 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     /**
      * 默认查询用户sql
      */
-    static String DEFAULT_SELECT_USER_SQL = "SELECT UI_ID, UI_USER_NAME, UI_NICK_NAME, UI_PASSWORD, UI_EMAIL, UI_AGE, UI_ADDRESS, UI_IS_LOCKED, UI_IS_ENABLED, UI_STATUS, UI_CREATE_TIME FROM API_BOOT_USER_INFO";
+    static String DEFAULT_SELECT_USER_SQL = "SELECT UI_ID, UI_USER_NAME, UI_NICK_NAME, UI_PASSWORD, UI_EMAIL, UI_AGE, UI_ADDRESS, UI_IS_LOCKED, UI_IS_ENABLED, UI_STATUS, UI_CREATE_TIME FROM API_BOOT_USER_INFO WHERE UI_USER_NAME = ?";
     /**
      * 注入dataSource数据源对象
      */
-    @Autowired
     private DataSource dataSource;
+
+    public ApiBootDefaultStoreDelegate(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     /**
      * 根据用户名查询用户信息
@@ -85,6 +87,7 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(DEFAULT_SELECT_USER_SQL);
+            ps.setString(1, username);
             // 执行查询
             resultSet = ps.executeQuery();
             // 返回转换后的实体对象

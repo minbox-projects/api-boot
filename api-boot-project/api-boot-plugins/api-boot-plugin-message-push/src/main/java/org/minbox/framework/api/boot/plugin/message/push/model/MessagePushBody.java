@@ -76,10 +76,6 @@ public class MessagePushBody {
      * message content
      */
     private String message;
-    /**
-     * if push production message
-     */
-    private boolean production = true;
 
     /**
      * get message push sound
