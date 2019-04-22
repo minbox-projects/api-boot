@@ -21,6 +21,7 @@ import lombok.Data;
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceFields;
 import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceLoad;
+import org.minbox.framework.api.boot.plugin.resource.load.enums.ResourceStoreEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,6 +40,52 @@ import java.util.Map;
  */
 @Service
 public class ResourceLoadSampleService {
+
+    /**
+     * 添加用户自动更新资源示例
+     *
+     * @param userInfo
+     * @param shortImage
+     * @param headImage
+     */
+    @ResourceLoad(event = ResourceStoreEvent.UPDATE)
+    @ResourceFields({
+            @ResourceField(name = "#p2", source = "#p0.userId", type = "HEAD_IMAGE"),
+            @ResourceField(name = "#p1", source = "#p0.userId", type = "SHORT_IMAGE")
+    })
+    public void updateUser(SampleUserInfo userInfo, List<String> shortImage, String headImage) {
+
+    }
+    /**
+     * 添加用户自动添加资源示例
+     *
+     * @param userInfo
+     * @param shortImage
+     * @param headImage
+     */
+    @ResourceLoad(event = ResourceStoreEvent.INSERT)
+    @ResourceFields({
+            @ResourceField(name = "#p2", source = "#p0.userId", type = "HEAD_IMAGE"),
+            @ResourceField(name = "#p1", source = "#p0.userId", type = "SHORT_IMAGE")
+    })
+    public void insertUser(SampleUserInfo userInfo, List<String> shortImage, String headImage) {
+
+    }
+
+    /**
+     * 自动删除资源示例
+     *
+     * @param userId 用户编号（资源业务逻辑编号）
+     */
+    @ResourceLoad(event = ResourceStoreEvent.DELETE)
+    @ResourceFields({
+            @ResourceField(name = "headImage", source = "#p0", type = "HEAD_IMAGE"),
+            @ResourceField(name = "shortImage", source = "#p0", type = "SHORT_IMAGE")
+    })
+    public void deleteUser(String userId) {
+        // 删除用户逻辑
+    }
+
     /**
      * 返回值为单个对象的示例
      *

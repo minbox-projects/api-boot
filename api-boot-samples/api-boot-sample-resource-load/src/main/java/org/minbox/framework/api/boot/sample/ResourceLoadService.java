@@ -50,4 +50,19 @@ public class ResourceLoadService implements ApiBootResourceStoreDelegate {
         logger.info("资源类型：{}", resourceType);
         return Arrays.asList(new String[]{"http://test.oss.com/111.png"});
     }
+
+    @Override
+    public void addResource(String sourceFieldValue, String resourceType, List<String> resourceUrls) throws ApiBootException {
+        logger.info("添加资源，业务逻辑编号：{}，资源类型：{}，资源路径集合：{}", sourceFieldValue, resourceType, resourceUrls);
+    }
+
+    @Override
+    public void deleteResource(String sourceFieldValue, String resourceType) throws ApiBootException {
+        logger.info("删除资源，业务逻辑编号：{}，资源类型：{}", sourceFieldValue, resourceType);
+    }
+
+    @Override
+    public void updateResource(String sourceFieldValue, String resourceType, List<String> resourceUrls) throws ApiBootException {
+        logger.info("更新资源，业务逻辑编号：{}，资源类型：{}，资源路径集合：{}", sourceFieldValue, resourceType, resourceUrls);
+    }
 }
