@@ -12,4 +12,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.minbox.framework.api.boot.autoconfigure.datasource.ApiBootDataSourceSwitchAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.resource.ApiBootResourceLoadAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.push.ApiBootMessagePushAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.pageable.ApiBootMybatisPageableAutoConfiguration
+  org.minbox.framework.api.boot.autoconfigure.pageable.ApiBootMybatisPageableAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.enhance.ApiBootMyBatisEnhanceAutoConfiguration
