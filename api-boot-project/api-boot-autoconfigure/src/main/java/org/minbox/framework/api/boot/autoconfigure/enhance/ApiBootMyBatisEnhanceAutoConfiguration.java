@@ -19,11 +19,13 @@ package org.minbox.framework.api.boot.autoconfigure.enhance;
 
 import com.gitee.hengboy.mybatis.enhance.EnhanceClassPathMapperScanner;
 import com.gitee.hengboy.mybatis.enhance.MapperFactoryBean;
+import com.gitee.hengboy.mybatis.enhance.dsl.factory.EnhanceDslFactory;
 import com.gitee.hengboy.mybatis.enhance.mapper.EnhanceMapper;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -168,6 +170,18 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
         } else {
             return new SqlSessionTemplate(sqlSessionFactory);
         }
+    }
+
+    /**
+     * EnhanceDslFactory Instance
+     * Use to create dsl
+     *
+     * @return EnhanceDslFactory
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public EnhanceDslFactory enhanceDslFactory(SqlSession sqlSession) {
+        return new EnhanceDslFactory(sqlSession);
     }
 
     /**
