@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: api-boot-sample-rate-limiter
+
+api:
+  boot:
+    # 配置限流的拦截路径
+    rate-limiter:
+      interceptor-url: /**
