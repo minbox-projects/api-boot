@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: api-boot-sample-mybatis-enhance
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+# 打印SQL
+logging:
+  level:
+    org.minbox.framework.api.boot.sample.mybatis.enhance: debug
+
+api:
+  boot:
+    # 配置Mybatis Enhance 读取自定义Mapper xml文件的位置
+    # 默认为：classpath:mappers/*.xml
+    enhance:
+      mapper-locations: classpath:mappers/*.xml
