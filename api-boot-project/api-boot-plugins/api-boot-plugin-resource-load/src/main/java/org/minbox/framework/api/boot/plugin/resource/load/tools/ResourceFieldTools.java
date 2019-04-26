@@ -109,7 +109,7 @@ public class ResourceFieldTools {
      *
      * @param field  field instance
      * @param object field subordinate object
-     * @return
+     * @return Field value
      */
     public static Object getFieldValue(Field field, Object object) {
         try {
@@ -128,7 +128,6 @@ public class ResourceFieldTools {
      * @param objectClass method result object class
      * @param fieldName   field name
      * @return Field Instance
-     * @throws NoSuchFieldException No Such Field Exception
      */
     public static Field getField(Class objectClass, String fieldName) {
         // cache from memory

@@ -21,14 +21,14 @@ public @interface ResourceField {
     /**
      * 资源加载后目标Field
      *
-     * @return
+     * @return name
      */
     String name();
 
     /**
      * 资源编号Field
      *
-     * @return
+     * @return source
      */
     String source();
 
@@ -37,7 +37,7 @@ public @interface ResourceField {
      * 如：头像、封面图等
      * 由使用者定义
      *
-     * @return
+     * @return type
      */
     String type();
 

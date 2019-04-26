@@ -74,6 +74,7 @@ public class ApiBootResourceContext {
      *
      * @param declaredFieldClassName declared field class name
      * @param field                  push field
+     * @param fieldName              field name
      */
     public static void setPushFieldToCache(String declaredFieldClassName, String fieldName, Field field) {
         String cacheKey = formatterCacheKey(declaredFieldClassName, fieldName);

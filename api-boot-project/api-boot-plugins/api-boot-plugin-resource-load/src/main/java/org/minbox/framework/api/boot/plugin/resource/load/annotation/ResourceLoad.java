@@ -23,7 +23,7 @@ public @interface ResourceLoad {
      * 资源存储事件
      * 默认查询资源
      *
-     * @return
+     * @return ResourceStoreEvent
      */
     ResourceStoreEvent event() default ResourceStoreEvent.SELECT;
 }

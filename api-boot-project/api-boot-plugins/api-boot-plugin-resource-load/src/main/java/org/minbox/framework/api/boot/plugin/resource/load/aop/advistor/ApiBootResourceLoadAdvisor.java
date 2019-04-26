@@ -45,9 +45,6 @@ public class ApiBootResourceLoadAdvisor extends AbstractPointcutAdvisor implemen
     private Pointcut pointcut;
     private BeanFactory beanFactory;
 
-    /**
-     * init config
-     */
     public ApiBootResourceLoadAdvisor(ApiBootResourceLoadMethodInterceptor apiBootResourceLoadMethodInterceptor) {
         // build pointcut instance
         this.pointcut = buildPointcut();

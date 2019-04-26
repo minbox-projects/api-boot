@@ -68,10 +68,10 @@ public class ResourceSourceExpression {
     }
 
     /**
-     * get match content list
+     * get match context list
      *
      * @param sourceFieldName ResourceField annotation source value
-     * @return match content list
+     * @return match context list
      */
     public static List<String> getMatchContent(String sourceFieldName) {
         List<String> matchContents = new ArrayList<>();

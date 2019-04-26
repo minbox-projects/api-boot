@@ -62,7 +62,7 @@ public class ApiBootMemoryResourcePusher extends ApiBootJdbcResourcePusher {
      * @param declaredMethod   declared method
      * @param sourceFieldValue sourceFieldValue
      * @param resourceType     resourceType
-     * @return
+     * @return resource urls
      */
     @Override
     public List<String> loadResourceUrl(Method declaredMethod, String sourceFieldValue, String resourceType) {

@@ -87,7 +87,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      *
      * @param declaredMethod declared method
      * @param param          method param array
-     * @throws ApiBootException
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public void insertResource(Method declaredMethod, Object[] param) throws ApiBootException {
@@ -135,7 +135,7 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
      *
      * @param declaredMethod declared method
      * @param param          method param array
-     * @throws ApiBootException
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public void updateResource(Method declaredMethod, Object[] param) throws ApiBootException {
