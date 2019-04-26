@@ -1,10 +1,25 @@
-
-# ApiBoot
-[![Maven Central](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.minbox.framework%22%20AND%20a:%22api-boot%22) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg)
+<p align="center">
+<img src="http://image.yuqiyu.com/ApiBoot-Logo.png" height="200"/>
+</p>
+<p align="center">
+    <a href="https://search.maven.org/search?q=g:org.minbox.framework">
+        <img src="https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central" alt="Maven Center">
+    </a>
+    <a href="https://github.com/weibocom/motan/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/License-Apache%202.0-green.svg" alt="Apache License">
+    </a>
+    <a href="#">
+        <img src="https://img.shields.io/badge/JDK-1.8+-green.svg" alt="JDK Version">
+    </a>
+      <a href="#">
+        <img src="https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg" alt="SpringBoot Version">
+    </a>
+</p>
 
 `ApiBoot`是一款基于`SpringBoot1.x`、`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
 
+- [小程序 - 恒宇少年的知识库](http://image.yuqiyu.com/%E6%81%92%E5%AE%87%E5%B0%91%E5%B9%B4%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93.jpg)
 - [我的博客 - 恒宇少年De成长之路](http://blog.yuqiyu.com)
 - [我的简书](https://www.jianshu.com/u/092df3f77bca)
 
@@ -50,7 +65,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.0.5.RELEASE</version>
+      <version>2.0.6.RC1</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -103,9 +118,12 @@ Demo列表：
 
 yuqiyu999
 
-#### 钉钉群
+#### ApiBoot 开源群组
 
-![](https://github.com/hengboy/api-boot/blob/master/dingding_group.JPG)
+<p align="left">
+  <img src="http://image.yuqiyu.com/ApiBoot-qq-group-1.png" height="240">
+  <img src="http://image.yuqiyu.com/dingding_group.JPG" height="240">
+</p>
 
 ### 项目结构
 
