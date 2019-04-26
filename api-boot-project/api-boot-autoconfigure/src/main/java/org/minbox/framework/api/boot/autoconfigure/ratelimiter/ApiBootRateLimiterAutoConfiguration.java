@@ -17,6 +17,15 @@
 
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 
+import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiterConfiguration;
+import org.minbox.framework.api.boot.plugin.rate.limiter.config.RateLimiterConfig;
+import org.minbox.framework.api.boot.plugin.rate.limiter.handler.ApiBootDefaultRateLimiterInterceptorHandler;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -31,5 +40,42 @@ import org.springframework.context.annotation.Configuration;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
+@ConditionalOnClass(ApiBootRateLimiterConfiguration.class)
+@EnableConfigurationProperties(ApiBootRateLimiterProperties.class)
+@AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class ApiBootRateLimiterAutoConfiguration {
+    /**
+     * ApiBoot Rate Limiter Properties
+     */
+    private ApiBootRateLimiterProperties apiBootRateLimiterProperties;
+
+    public ApiBootRateLimiterAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties) {
+        this.apiBootRateLimiterProperties = apiBootRateLimiterProperties;
+    }
+
+    /**
+     * ApiBoot Rate Limiter Interceptor
+     *
+     * @return ApiBootDefaultRateLimiterInterceptorHandler
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ApiBootDefaultRateLimiterInterceptorHandler apiBootDefaultRateLimiterInterceptorHandler() {
+        return new ApiBootDefaultRateLimiterInterceptorHandler();
+    }
+
+    /**
+     * ApiBoot Rate Limiter Configuration
+     *
+     * @return ApiBootRateLimiterConfiguration
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ApiBootRateLimiterConfiguration apiBootRateLimiterConfiguration() {
+        // rate limiter config
+        RateLimiterConfig rateLimiterConfig = new RateLimiterConfig();
+        rateLimiterConfig.setInterceptorUrl(apiBootRateLimiterProperties.getInterceptorUrl());
+
+        return new ApiBootRateLimiterConfiguration(rateLimiterConfig, apiBootDefaultRateLimiterInterceptorHandler());
+    }
 }
