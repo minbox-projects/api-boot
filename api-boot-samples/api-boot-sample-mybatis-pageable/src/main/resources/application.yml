@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: api-boot-sample-mybatis-pageable
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+
+api:
+  boot:
+    # 数据库方言设置，默认为mysql
+    pageable:
+      dialect: mysql
+
+logging:
+  level:
+    org.minbox.framework.api.boot.sample: debug
