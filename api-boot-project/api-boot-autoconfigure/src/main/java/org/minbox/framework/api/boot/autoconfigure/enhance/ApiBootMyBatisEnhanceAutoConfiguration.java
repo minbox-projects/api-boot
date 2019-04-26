@@ -59,6 +59,7 @@ import java.util.List;
 
 /**
  * ApiBoot Mybatis Enhance Auto Configuration
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
  * DateTime：2019-04-25 15:16
@@ -68,7 +69,7 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 @org.springframework.context.annotation.Configuration
-@ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
+@ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class, MapperFactoryBean.class})
 @ConditionalOnBean(DataSource.class)
 @EnableConfigurationProperties(ApiBootMyBatisEnhanceProperties.class)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
@@ -87,10 +88,10 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
     private final List<ConfigurationCustomizer> configurationCustomizers;
 
     public ApiBootMyBatisEnhanceAutoConfiguration(ApiBootMyBatisEnhanceProperties properties,
-                                           ObjectProvider<Interceptor[]> interceptorsProvider,
-                                           ResourceLoader resourceLoader,
-                                           ObjectProvider<DatabaseIdProvider> databaseIdProvider,
-                                           ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizersProvider) {
+                                                  ObjectProvider<Interceptor[]> interceptorsProvider,
+                                                  ResourceLoader resourceLoader,
+                                                  ObjectProvider<DatabaseIdProvider> databaseIdProvider,
+                                                  ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizersProvider) {
         this.properties = properties;
         this.interceptors = interceptorsProvider.getIfAvailable();
         this.resourceLoader = resourceLoader;

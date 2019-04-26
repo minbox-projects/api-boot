@@ -46,7 +46,7 @@ import java.util.List;
 @Configuration
 @ConditionalOnBean(SqlSessionFactory.class)
 @EnableConfigurationProperties(ApiBootMyBatisPageableProperties.class)
-@ConditionalOnClass(DataSourceAutoConfiguration.class)
+@ConditionalOnClass(MyBatisExecutePageableInterceptor.class)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class ApiBootMybatisPageableAutoConfiguration {
     /**
