@@ -31,11 +31,11 @@ import lombok.Data;
 @Data
 public class PushClientConfig {
     /**
-     * 极光推送秘钥
+     * secret
      */
     private String masterSecret;
     /**
-     * 极光推送App Key
+     * app key
      */
     private String appKey;
 }

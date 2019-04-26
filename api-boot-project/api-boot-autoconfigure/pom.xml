@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.0.6.RELEASE</version>
         <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -158,6 +158,27 @@
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-plugin-message-push</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--ApiBoot Mybatis Pageable-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-pageable-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--ApiBoot Mybatis Enhance-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--ApiBoot RateLimiter-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-rate-limiter</artifactId>
             <optional>true</optional>
         </dependency>
 

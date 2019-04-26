@@ -61,7 +61,7 @@ public class MessagePushBody {
      */
     private String sound;
     /**
-     * extras map content
+     * extras map context
      */
     private Map<String, String> extras;
     /**
@@ -73,7 +73,7 @@ public class MessagePushBody {
      */
     private String subTitle;
     /**
-     * message content
+     * message context
      */
     private String message;
 

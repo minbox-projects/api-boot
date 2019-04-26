@@ -44,10 +44,6 @@ public class ApiBootMessagePushClientSwitchAdvisor extends AbstractPointcutAdvis
     private Advice advice;
     private Pointcut pointcut;
     private BeanFactory beanFactory;
-
-    /**
-     * init config
-     */
     public ApiBootMessagePushClientSwitchAdvisor(ApiBootMessagePushSwitchAnnotationInterceptor apiBootMessagePushSwitchAnnotationInterceptor) {
         // build pointcut instance
         this.pointcut = buildPointcut();

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.0.6.RELEASE</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -15,9 +15,7 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
-        <api.boot.version>2.0.5.RELEASE</api.boot.version>
-        <mybatis.enhance.version>1.1.0.RELEASE</mybatis.enhance.version>
-        <mybatis.pageable.version>1.0.6.RELEASE</mybatis.pageable.version>
+        <api.boot.version>2.0.6.RELEASE</api.boot.version>
         <druid.version>1.1.14</druid.version>
         <druid.starter.version>1.1.14</druid.starter.version>
         <fastjson.version>1.2.56</fastjson.version>
@@ -32,6 +30,14 @@
         <quartz.version>2.3.0</quartz.version>
         <spring.tx.version>5.1.5.RELEASE</spring.tx.version>
         <jpush-client.version>3.3.11</jpush-client.version>
+        <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
+        <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
+        <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
+        <!--Builder Core Version-->
+        <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
+        <mybatis.pageable.core.version>1.0.6.RELEASE</mybatis.pageable.core.version>
+        <mybatis.enhance.core.version>1.1.0.RELEASE</mybatis.enhance.core.version>
+        <mybatis.enhance.dsl.version>1.0.7.RELEASE</mybatis.enhance.dsl.version>
 
         <!--Plugin Versions-->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -99,18 +105,6 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.starter.version}</version>
             </dependency>
-            <!--mybatis enhance-->
-            <dependency>
-                <groupId>com.gitee.hengboy</groupId>
-                <artifactId>spring-boot-starter-mybatis-enhance</artifactId>
-                <version>${mybatis.enhance.version}</version>
-            </dependency>
-            <!--mybatis pageable-->
-            <dependency>
-                <groupId>com.gitee.hengboy</groupId>
-                <artifactId>spring-boot-starter-mybatis-pageable</artifactId>
-                <version>${mybatis.pageable.version}</version>
-            </dependency>
 
             <!--reflections-->
             <dependency>
@@ -130,6 +124,19 @@
                 <artifactId>spring-tx</artifactId>
                 <version>${spring.tx.version}</version>
             </dependency>
+
+            <!--Maven Plugin-->
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>${maven-plugin-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${maven-plugin-annotations.version}</version>
+            </dependency>
+
 
             <!--ApiBoot Swagger-->
             <dependency>
@@ -284,6 +291,54 @@
                 <version>${api.boot.version}</version>
             </dependency>
 
+            <!--ApiBoot Code Builder-->
+            <dependency>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>code-builder-core</artifactId>
+                <version>${code.builder.core.version}</version>
+            </dependency>
+
+            <!--ApiBoot Mybatis Pageable-->
+            <dependency>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>mybatis-pageable-core</artifactId>
+                <version>${mybatis.pageable.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-mybatis-pageable</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+
+            <!--ApiBoot Mybatis Enhance-->
+            <dependency>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>mybatis-enhance-core</artifactId>
+                <version>${mybatis.enhance.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>mybatis-enhance-dsl</artifactId>
+                <version>${mybatis.enhance.dsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-mybatis-enhance</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+
+            <!--ApiBoot RateLimiter-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-rate-limiter</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-rate-limiter</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -300,6 +355,17 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+                <!--ApiBoot Code Builder-->
+                <plugin>
+                    <groupId>org.minbox.framework</groupId>
+                    <artifactId>api-boot-maven-plugin-code-builder</artifactId>
+                    <version>${api.boot.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>${maven-plugin-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
