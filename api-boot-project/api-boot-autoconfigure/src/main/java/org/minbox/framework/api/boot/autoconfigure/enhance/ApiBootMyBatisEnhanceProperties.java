@@ -57,7 +57,7 @@ public class ApiBootMyBatisEnhanceProperties {
     /**
      * Locations of MyBatis mapper files.
      */
-    private String[] mapperLocations;
+    private String[] mapperLocations = {"classpath:mappers/*.xml"};
 
     /**
      * Packages to search type aliases. (Package delimiters are ",; \t\n")
