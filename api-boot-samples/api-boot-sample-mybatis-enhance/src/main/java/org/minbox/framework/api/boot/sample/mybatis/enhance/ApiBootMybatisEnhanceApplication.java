@@ -49,6 +49,9 @@ public class ApiBootMybatisEnhanceApplication {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 查询全部用户
      *
@@ -68,5 +71,16 @@ public class ApiBootMybatisEnhanceApplication {
     @GetMapping(value = "/{userId}")
     public UserEntity one(@PathVariable String userId) {
         return userMapper.selectOne(userId);
+    }
+
+    /**
+     * 示例：动态查询用户详情
+     *
+     * @param userId 用户编号
+     * @return
+     */
+    @GetMapping(value = "/dynamic/{userId}")
+    public UserEntity dynamic(@PathVariable String userId) {
+        return userService.dynamicSelectOne(userId);
     }
 }
