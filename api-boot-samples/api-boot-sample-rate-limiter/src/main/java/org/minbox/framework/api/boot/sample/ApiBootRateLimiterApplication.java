@@ -17,32 +17,24 @@
 
 package org.minbox.framework.api.boot.sample;
 
-import org.minbox.framework.api.boot.plugin.rate.limiter.annotation.RateLimiter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * ApiBoot Rate Limiter Application
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-26 14:39
+ * DateTime：2019-04-26 16:09
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-@RestController
-@RequestMapping(value = "/test")
-public class RateLimiterSampleController {
-    /**
-     * QPS默认为1
-     * 每秒限制该接口访问10次
-     *
-     * @return
-     */
-    @GetMapping(value = "/")
-    @RateLimiter(QPS = 10)
-    public String getContent() {
-        return "访问资源";
+@SpringBootApplication
+public class ApiBootRateLimiterApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ApiBootRateLimiterApplication.class, args);
     }
 }
