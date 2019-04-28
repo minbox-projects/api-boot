@@ -20,7 +20,7 @@
 </dependency>
 <dependencyManagement>
   <dependencies>
-    <!--ApiBoot Dependencies-->
+    <!--ApiBoot 版本依赖-->
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>

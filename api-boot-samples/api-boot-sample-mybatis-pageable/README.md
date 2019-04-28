@@ -15,7 +15,7 @@
 </dependencies>
 <dependencyManagement>
   <dependencies>
-    <!--springboot dependencies-->
+    <!--ApiBoot 版本依赖-->
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
