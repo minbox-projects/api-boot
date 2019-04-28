@@ -57,6 +57,10 @@
 
 更多组件请参考[更多集成组件](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
 
+### Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/hengboy/api-boot.svg)](https://starchart.cc/hengboy/api-boot)
+
 ## 怎么使用？
 
 ### 添加版本依赖
