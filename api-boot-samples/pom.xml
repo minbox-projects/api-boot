@@ -21,6 +21,9 @@
         <module>api-boot-sample-datasource-switch</module>
         <module>api-boot-sample-resource-load</module>
         <module>api-boot-sample-message-push</module>
+        <module>api-boot-sample-rate-limiter</module>
+        <module>api-boot-sample-mybatis-pageable</module>
+        <module>api-boot-sample-mybatis-enhance</module>
     </modules>
 
     <build>

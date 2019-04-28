@@ -41,5 +41,5 @@ public @interface RateLimiter {
      *
      * @return qps value
      */
-    double qps() default 1;
+    double QPS() default 1;
 }

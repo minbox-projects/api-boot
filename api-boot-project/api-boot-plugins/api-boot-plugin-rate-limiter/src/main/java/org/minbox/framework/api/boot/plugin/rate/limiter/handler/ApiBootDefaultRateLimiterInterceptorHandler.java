@@ -59,7 +59,7 @@ public class ApiBootDefaultRateLimiterInterceptorHandler implements HandlerInter
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // get method declared RateLimiter
             RateLimiter rateLimiterAnnotation = handlerMethod.getMethodAnnotation(RateLimiter.class);
-            com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(request.getRequestURI(), rateLimiterAnnotation.qps());
+            com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(request.getRequestURI(), rateLimiterAnnotation.QPS());
             double acquire = rateLimiter.acquire();
             logger.debug("ApiBoot rate limiter acquire：{}", acquire);
         } catch (Exception e) {

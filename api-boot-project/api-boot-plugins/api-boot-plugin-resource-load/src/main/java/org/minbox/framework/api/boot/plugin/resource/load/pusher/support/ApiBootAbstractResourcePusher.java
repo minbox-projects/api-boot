@@ -171,6 +171,11 @@ public abstract class ApiBootAbstractResourcePusher implements ApiBootResourcePu
         else if (result instanceof Map) {
             pushToMap(method, (Map) result);
         }
+        // result is mybatis pageable
+        /*else if (result instanceof Page) {
+            Page page = (Page) result;
+            pushToList(method, page.getData());
+        }*/
         // single
         else if (result instanceof Object) {
             pushToObject(method, result);
