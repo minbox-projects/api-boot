@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: api-boot-sample-mybatis-enhance-codegen
+  datasource:
+    url: jdbc:mysql://localhost:3306/knowledge
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# 配置日志等级，输出sql
+logging:
+  level:
+    org.minbox.framework.api.boot.sample: debug
