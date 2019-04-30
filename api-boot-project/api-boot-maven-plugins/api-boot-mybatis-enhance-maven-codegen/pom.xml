@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright [2019] [恒宇少年 - 于起宇]
+  ~
+  ~      Licensed under the Apache License, Version 2.0 (the "License");
+  ~      you may not use this file except in compliance with the License.
+  ~      You may obtain a copy of the License at
+  ~
+  ~          http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~      Unless required by applicable law or agreed to in writing, software
+  ~      distributed under the License is distributed on an "AS IS" BASIS,
+  ~      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~      See the License for the specific language governing permissions and
+  ~      limitations under the License.
+  ~
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>api-boot-maven-plugins</artifactId>
+        <groupId>org.minbox.framework</groupId>
+        <version>2.0.7.RC1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>maven-plugin</packaging>
+    <properties>
+        <main.basedir>${basedir}/../../..</main.basedir>
+    </properties>
+    <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
+    <dependencies>
+        <!--Codegen-->
+        <dependency>
+            <groupId>com.mysema.codegen</groupId>
+            <artifactId>codegen</artifactId>
+        </dependency>
+        <!--Code Builder-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>code-builder-core</artifactId>
+        </dependency>
+        <!--Mybatis Enhance Core-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-core</artifactId>
+        </dependency>
+        <!--Mybatis Enhance Dsl-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-dsl</artifactId>
+        </dependency>
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
