@@ -17,10 +17,12 @@
 
 package org.minbox.framework.api.boot.plugin.rate.limiter.handler;
 
+import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.annotation.RateLimiter;
-import org.minbox.framework.api.boot.plugin.rate.limiter.context.ApiBootRateLimiterContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -43,6 +45,16 @@ public class ApiBootDefaultRateLimiterInterceptorHandler implements HandlerInter
      * logger instance
      */
     static Logger logger = LoggerFactory.getLogger(ApiBootDefaultRateLimiterInterceptorHandler.class);
+    /**
+     * ApiBoot RateLimiter
+     */
+    private ApiBootRateLimiter apiBootRateLimiter;
+
+    public ApiBootDefaultRateLimiterInterceptorHandler(ApiBootRateLimiter apiBootRateLimiter) {
+        this.apiBootRateLimiter = apiBootRateLimiter;
+        Assert.notNull(apiBootRateLimiter, "No ApiBootRateLimiter implementation class instance.");
+        logger.info("ApiBootDefaultRateLimiterInterceptorHandler load complete.");
+    }
 
     /**
      * Executing traffic restrictions
@@ -59,12 +71,14 @@ public class ApiBootDefaultRateLimiterInterceptorHandler implements HandlerInter
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // get method declared RateLimiter
             RateLimiter rateLimiterAnnotation = handlerMethod.getMethodAnnotation(RateLimiter.class);
-            com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(request.getRequestURI(), rateLimiterAnnotation.QPS());
-            double acquire = rateLimiter.acquire();
-            logger.debug("ApiBoot rate limiter acquire：{}", acquire);
+            // if dont't set RateLimiter
+            if (ObjectUtils.isEmpty(rateLimiterAnnotation)) {
+                return true;
+            }
+            return apiBootRateLimiter.tryAcquire(rateLimiterAnnotation.QPS(), request.getRequestURI());
         } catch (Exception e) {
+            logger.error("Current Limiting Request Encountered Exception.", e);
             return false;
         }
-        return true;
     }
 }

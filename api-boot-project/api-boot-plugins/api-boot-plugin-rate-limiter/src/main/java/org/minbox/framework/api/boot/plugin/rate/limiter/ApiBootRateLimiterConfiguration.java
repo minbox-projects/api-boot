@@ -54,7 +54,7 @@ public class ApiBootRateLimiterConfiguration implements WebMvcConfigurer {
         this.rateLimiterConfig = rateLimiterConfig;
         this.handlerInterceptor = handlerInterceptor;
         Assert.notNull(rateLimiterConfig, "RateLimiterConfig can not be null.");
-        Assert.notNull(rateLimiterConfig, "HandlerInterceptor can not be null.");
+        Assert.notNull(handlerInterceptor, "HandlerInterceptor can not be null.");
     }
 
     @Override
