@@ -25,6 +25,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,6 +69,10 @@ public class ApiBootDefaultRateLimiterInterceptorHandler implements HandlerInter
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
+            // Do not intercept resource requests
+            if (handler instanceof ResourceHttpRequestHandler) {
+                return true;
+            }
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // get method declared RateLimiter
             RateLimiter rateLimiterAnnotation = handlerMethod.getMethodAnnotation(RateLimiter.class);
