@@ -17,16 +17,20 @@
 
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 
+import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiterConfiguration;
 import org.minbox.framework.api.boot.plugin.rate.limiter.config.RateLimiterConfig;
 import org.minbox.framework.api.boot.plugin.rate.limiter.handler.ApiBootDefaultRateLimiterInterceptorHandler;
+import org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * ApiBoot RateLimiter Auto Configuration
@@ -43,6 +47,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass(ApiBootRateLimiterConfiguration.class)
 @EnableConfigurationProperties(ApiBootRateLimiterProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
+@Import(ApiBootRateLimiterRedisAutoConfiguration.class)
 public class ApiBootRateLimiterAutoConfiguration {
     /**
      * ApiBoot Rate Limiter Properties
@@ -60,8 +65,20 @@ public class ApiBootRateLimiterAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootDefaultRateLimiterInterceptorHandler apiBootDefaultRateLimiterInterceptorHandler() {
-        return new ApiBootDefaultRateLimiterInterceptorHandler();
+    public ApiBootDefaultRateLimiterInterceptorHandler apiBootDefaultRateLimiterInterceptorHandler(ApiBootRateLimiter apiBootRateLimiter) {
+        return new ApiBootDefaultRateLimiterInterceptorHandler(apiBootRateLimiter);
+    }
+
+    /**
+     * google guava rate limiter
+     *
+     * @return ApiBootRateLimiter
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnMissingClass("org.springframework.data.redis.core.RedisTemplate")
+    public ApiBootRateLimiter googleGuavaRateLimiter() {
+        return new GoogleGuavaRateLimiter();
     }
 
     /**
@@ -71,11 +88,11 @@ public class ApiBootRateLimiterAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootRateLimiterConfiguration apiBootRateLimiterConfiguration() {
+    public ApiBootRateLimiterConfiguration apiBootRateLimiterConfiguration(ApiBootDefaultRateLimiterInterceptorHandler apiBootDefaultRateLimiterInterceptorHandler) {
         // rate limiter config
         RateLimiterConfig rateLimiterConfig = new RateLimiterConfig();
         rateLimiterConfig.setInterceptorUrl(apiBootRateLimiterProperties.getInterceptorUrl());
 
-        return new ApiBootRateLimiterConfiguration(rateLimiterConfig, apiBootDefaultRateLimiterInterceptorHandler());
+        return new ApiBootRateLimiterConfiguration(rateLimiterConfig, apiBootDefaultRateLimiterInterceptorHandler);
     }
 }
