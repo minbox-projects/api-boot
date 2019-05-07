@@ -18,14 +18,15 @@
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
+import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.support.RedisLuaRateLimiter;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
@@ -40,9 +41,18 @@ import org.springframework.data.redis.core.RedisTemplate;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
+@EnableConfigurationProperties(ApiBootRateLimiterProperties.class)
 @ConditionalOnClass(RedisTemplate.class)
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class ApiBootRateLimiterRedisAutoConfiguration {
+    /**
+     * ApiBoot Rate Limiter Properties
+     */
+    private ApiBootRateLimiterProperties apiBootRateLimiterProperties;
+
+    public ApiBootRateLimiterRedisAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties) {
+        this.apiBootRateLimiterProperties = apiBootRateLimiterProperties;
+    }
 
     /**
      * redis lua rate limiter
@@ -52,7 +62,7 @@ public class ApiBootRateLimiterRedisAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootRateLimiter redisLuaRateLimiter(RedisTemplate redisTemplate) {
-        return new RedisLuaRateLimiter(redisTemplate);
+    public ApiBootRateLimiter redisLuaRateLimiter(RedisTemplate redisTemplate, RateLimiterConfigCentre rateLimiterConfigCentre) {
+        return new RedisLuaRateLimiter(apiBootRateLimiterProperties.getGlobalQps(), rateLimiterConfigCentre, redisTemplate);
     }
 }
