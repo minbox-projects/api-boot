@@ -15,26 +15,30 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.rate.limiter;
+package org.minbox.framework.api.boot.plugin.rate.limiter.centre.support;
+
+import org.minbox.framework.api.boot.common.exception.ApiBootException;
 
 /**
- * ApiBoot RateLimiter
+ * Apollo Config Support
  *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-05-05 17:12
+ * DateTime：2019-05-06 21:52
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface ApiBootRateLimiter {
-    /**
-     * Attempt to obtain a request current limit token
-     *
-     * @param QPS        queries per second
-     * @param requestUri request uri
-     * @return true : allow access to
-     */
-    boolean tryAcquire(Double QPS, String requestUri);
+public class ApolloRateLimiterConfigCentre extends AbstractRateLimiterConfigCentre {
+
+    @Override
+    public Long getQps(String configKey) throws ApiBootException {
+        return 0L;
+    }
+
+    @Override
+    public void setQps(String configKey, Long QPS) throws ApiBootException {
+
+    }
 }

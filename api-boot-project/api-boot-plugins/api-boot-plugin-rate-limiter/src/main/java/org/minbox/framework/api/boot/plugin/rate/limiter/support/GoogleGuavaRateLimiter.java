@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.plugin.rate.limiter.support;
 
+import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.context.ApiBootRateLimiterContext;
 
 /**
@@ -31,15 +32,20 @@ import org.minbox.framework.api.boot.plugin.rate.limiter.context.ApiBootRateLimi
  * GitHub：https://github.com/hengboy
  */
 public class GoogleGuavaRateLimiter extends AbstractRateLimiter {
+    public GoogleGuavaRateLimiter(Long globalQPS, RateLimiterConfigCentre rateLimiterConfigCentre) {
+        super(globalQPS, rateLimiterConfigCentre);
+    }
+
     /**
      * google guava away
      *
-     * @param QPS        queries per second
-     * @param requestUri request uri
+     * @param annotationQPS @RateLimiter QPS value
+     * @param requestUri    request uri
      * @return true : allow access to
      */
     @Override
-    public boolean tryAcquire(Double QPS, String requestUri) {
+    public boolean tryAcquire(Double annotationQPS, String requestUri) {
+        Long QPS = getPriorityQPS(requestUri, annotationQPS);
         com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(requestUri, QPS);
         return rateLimiter.tryAcquire();
     }

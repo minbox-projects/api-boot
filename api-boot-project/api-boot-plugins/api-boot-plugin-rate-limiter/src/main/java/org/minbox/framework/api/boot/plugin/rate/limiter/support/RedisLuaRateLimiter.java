@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.plugin.rate.limiter.support;
 
+import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -62,7 +63,8 @@ public class RedisLuaRateLimiter extends AbstractRateLimiter {
      */
     private RedisScript<List<Long>> redisScript;
 
-    public RedisLuaRateLimiter(RedisTemplate redisTemplate) {
+    public RedisLuaRateLimiter(Long globalQPS, RateLimiterConfigCentre rateLimiterConfigCentre, RedisTemplate redisTemplate) {
+        super(globalQPS, rateLimiterConfigCentre);
         this.redisTemplate = redisTemplate;
         this.redisScript = getRedisScript();
 
@@ -75,13 +77,15 @@ public class RedisLuaRateLimiter extends AbstractRateLimiter {
      * Processing traffic restrictions using LUA scripts
      * Processing with Spring Cloud Gateway official script
      *
-     * @param QPS        queries per second
-     * @param requestUri request uri
+     * @param annotationQPS @RateLimiter QPS value
+     * @param requestUri    request uri
      * @return true : allow access to
      */
     @Override
-    public boolean tryAcquire(Double QPS, String requestUri) {
+    public boolean tryAcquire(Double annotationQPS, String requestUri) {
         try {
+            Long QPS = getPriorityQPS(requestUri, annotationQPS);
+
             // get keys
             List<String> keys = getKeys(requestUri);
 
@@ -89,7 +93,7 @@ public class RedisLuaRateLimiter extends AbstractRateLimiter {
             RedisSerializer<String> serializer = new StringRedisSerializer();
 
             // execute lua script
-            List<Long> tokenResult = (List<Long>) this.redisTemplate.execute(this.redisScript, serializer, serializer, keys, String.valueOf(QPS.intValue()), String.valueOf(QPS.intValue()), Instant.now().getEpochSecond() + "", "1");
+            List<Long> tokenResult = (List<Long>) this.redisTemplate.execute(this.redisScript, serializer, serializer, keys, String.valueOf(QPS), String.valueOf(QPS), Instant.now().getEpochSecond() + "", "1");
 
             // Index 1 value is the number of remaining requestable tokens
             Long newTokens = tokenResult.get(1);
