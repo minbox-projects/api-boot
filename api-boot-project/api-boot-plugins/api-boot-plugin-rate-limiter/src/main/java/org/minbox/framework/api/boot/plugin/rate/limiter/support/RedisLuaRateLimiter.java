@@ -77,7 +77,7 @@ public class RedisLuaRateLimiter extends AbstractRateLimiter {
      * Processing traffic restrictions using LUA scripts
      * Processing with Spring Cloud Gateway official script
      *
-     * @param annotationQPS @RateLimiter QPS value
+     * @param annotationQPS RateLimiter QPS value
      * @param requestUri    request uri
      * @return true : allow access to
      */

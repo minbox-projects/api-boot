@@ -39,7 +39,7 @@ public class GoogleGuavaRateLimiter extends AbstractRateLimiter {
     /**
      * google guava away
      *
-     * @param annotationQPS @RateLimiter QPS value
+     * @param annotationQPS RateLimiter QPS value
      * @param requestUri    request uri
      * @return true : allow access to
      */

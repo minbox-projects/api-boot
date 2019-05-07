@@ -63,6 +63,7 @@ public class ApiBootRateLimiterAutoConfiguration {
     /**
      * ApiBoot Rate Limiter Interceptor
      *
+     * @param apiBootRateLimiter ApiBoot RateLimiter
      * @return ApiBootDefaultRateLimiterInterceptorHandler
      */
     @Bean
@@ -74,6 +75,7 @@ public class ApiBootRateLimiterAutoConfiguration {
     /**
      * google guava rate limiter
      *
+     * @param rateLimiterConfigCentre RateLimiter Config Centre
      * @return ApiBootRateLimiter
      */
     @Bean
@@ -98,6 +100,7 @@ public class ApiBootRateLimiterAutoConfiguration {
     /**
      * ApiBoot Rate Limiter Configuration
      *
+     * @param apiBootDefaultRateLimiterInterceptorHandler ApiBoot RateLimiter Interceptor
      * @return ApiBootRateLimiterConfiguration
      */
     @Bean

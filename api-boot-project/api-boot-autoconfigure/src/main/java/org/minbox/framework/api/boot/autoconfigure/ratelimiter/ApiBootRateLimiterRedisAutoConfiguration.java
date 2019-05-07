@@ -57,7 +57,8 @@ public class ApiBootRateLimiterRedisAutoConfiguration {
     /**
      * redis lua rate limiter
      *
-     * @param redisTemplate redis template
+     * @param redisTemplate           redis template
+     * @param rateLimiterConfigCentre RateLimiter Config Centre
      * @return ApiBootRateLimiter
      */
     @Bean

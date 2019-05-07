@@ -76,6 +76,7 @@ public class ApiBootRateLimiterNacosConfigConfiguration {
     /**
      * Initialize Nacos Configuration Center
      *
+     * @param configService Nacos Config Service
      * @return RateLimiterConfigCentre
      * @see NacosRateLimiterConfigCentre
      */

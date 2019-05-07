@@ -75,12 +75,12 @@ public class NacosRateLimiterConfigCentre extends AbstractRateLimiterConfigCentr
     /**
      * get QPS config from nacos
      * for example properties:
-     * 1. /user/list -> .user.list: 5
-     * 2. /user/detail -> .user.detail: 10
+     * 1. /user/list = .user.list: 5
+     * 2. /user/detail = .user.detail: 10
      *
      * @param configKey config key
      * @return qps
-     * @throws ApiBootException
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public Long getQps(String configKey) throws ApiBootException {
@@ -101,7 +101,7 @@ public class NacosRateLimiterConfigCentre extends AbstractRateLimiterConfigCentr
      *
      * @param configKey config key
      * @param QPS       QPS value
-     * @throws ApiBootException
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public void setQps(String configKey, Long QPS) throws ApiBootException {

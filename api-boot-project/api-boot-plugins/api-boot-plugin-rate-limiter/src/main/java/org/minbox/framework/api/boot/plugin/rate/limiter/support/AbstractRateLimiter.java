@@ -57,7 +57,7 @@ public abstract class AbstractRateLimiter implements ApiBootRateLimiter {
      * third：GlobalQPS from application.yml（api.boot.rate-limiter.global-qps）
      *
      * @param configKey     config key
-     * @param annotationQPS @RateLimiter(QPS=xx)
+     * @param annotationQPS RateLimiter(QPS=xx)
      * @return QPS value
      */
     protected Long getPriorityQPS(String configKey, Double annotationQPS) {
