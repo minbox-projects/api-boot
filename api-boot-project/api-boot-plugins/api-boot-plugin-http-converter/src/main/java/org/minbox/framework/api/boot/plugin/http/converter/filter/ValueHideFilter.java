@@ -64,7 +64,7 @@ public class ValueHideFilter implements ValueFilter {
                     if (valueHide.start() > 0) {
                         return startHide(valueHide, chars);
                     }
-                    // hide with position model
+                    // hide with position wrapper
                     else {
                         return positionHide(valueHide, chars);
                     }
@@ -95,7 +95,7 @@ public class ValueHideFilter implements ValueFilter {
     }
 
     /**
-     * hide with position model
+     * hide with position wrapper
      *
      * @param valueHide ApiBootValueHide annotation
      * @param chars     field value char array

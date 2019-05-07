@@ -51,7 +51,7 @@ import static com.alibaba.nacos.api.PropertyKeyConst.*;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(NacosConfigProperties.class)
+@ConditionalOnClass(name = "com.alibaba.boot.nacos.config.properties.NacosConfigProperties")
 @EnableConfigurationProperties({NacosConfigProperties.class})
 @AutoConfigureAfter(NacosConfigAutoConfiguration.class)
 public class ApiBootRateLimiterNacosConfigConfiguration {

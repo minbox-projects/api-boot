@@ -85,7 +85,9 @@ public class RedisLuaRateLimiter extends AbstractRateLimiter {
     public boolean tryAcquire(Double annotationQPS, String requestUri) {
         try {
             Long QPS = getPriorityQPS(requestUri, annotationQPS);
-
+            if (QPS <= 0) {
+                return true;
+            }
             // get keys
             List<String> keys = getKeys(requestUri);
 

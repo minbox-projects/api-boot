@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-plugins</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.6.RELEASE</version>
+        <version>2.0.7.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>ApiBoot Plugin 阿里云 对象存储oss</description>

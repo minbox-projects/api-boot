@@ -139,10 +139,10 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
 
         tableNames.stream().forEach(tableName -> {
 
-            getLog().info("Execution table: 【" + tableName + "】 entity creation.");
-
             // get table
             Table table = dataBase.getTable(tableName);
+
+            getLog().info("Execution table: 【" + tableName + "】 - " + table.getRemark() + " entity creation.");
 
             // execute the builders created
             // ClassBuilder implementation classes can be added
@@ -192,10 +192,9 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
         // package dir
         String packageDir = String.format("%s%s%s", baseDir, File.separator, packageName.replace(".", File.separator));
         // create dirs
-        File file = new File(packageDir);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
+        File dir = new File(packageDir);
+        dir.mkdirs();
+
         return packageDir;
     }
 
@@ -207,5 +206,27 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     private String getNewClassPath(String entityClassName) {
         return String.format("%s%s%s%s", getGeneratorDir(), File.separator, entityClassName, FILE_SUFFIX);
+    }
+
+    /**
+     * 递归删除目录下的所有文件及子目录下所有文件
+     *
+     * @param dir 将要删除的文件目录
+     * @return boolean Returns "true" if all deletions were successful.
+     * If a deletion fails, the method stops attempting to
+     * delete and returns "false".
+     */
+    private static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        // 目录此时为空，可以删除
+        return dir.delete();
     }
 }

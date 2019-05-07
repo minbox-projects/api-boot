@@ -46,6 +46,9 @@ public class GoogleGuavaRateLimiter extends AbstractRateLimiter {
     @Override
     public boolean tryAcquire(Double annotationQPS, String requestUri) {
         Long QPS = getPriorityQPS(requestUri, annotationQPS);
+        if (QPS <= 0) {
+            return true;
+        }
         com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(requestUri, QPS);
         return rateLimiter.tryAcquire();
     }

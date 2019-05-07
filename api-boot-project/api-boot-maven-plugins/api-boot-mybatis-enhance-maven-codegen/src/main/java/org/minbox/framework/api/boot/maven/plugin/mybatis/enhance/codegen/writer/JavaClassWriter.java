@@ -42,7 +42,7 @@ public class JavaClassWriter {
      */
     public static void writeToJavaFile(String javaFilePath, String content) {
         try {
-            FileWriter fw = new FileWriter(javaFilePath, true);
+            FileWriter fw = new FileWriter(javaFilePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.append(content);
             bw.close();

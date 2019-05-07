@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.6.RELEASE</version>
+        <version>2.0.7.RELEASE</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -15,7 +15,7 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
-        <api.boot.version>2.0.6.RELEASE</api.boot.version>
+        <api.boot.version>2.0.7.RELEASE</api.boot.version>
         <druid.version>1.1.14</druid.version>
         <druid.starter.version>1.1.14</druid.starter.version>
         <fastjson.version>1.2.56</fastjson.version>
@@ -38,6 +38,10 @@
         <mybatis.pageable.core.version>1.0.6.RELEASE</mybatis.pageable.core.version>
         <mybatis.enhance.core.version>1.1.0.RELEASE</mybatis.enhance.core.version>
         <mybatis.enhance.dsl.version>1.0.7.RELEASE</mybatis.enhance.dsl.version>
+        <mysema.codegen.version>0.6.8</mysema.codegen.version>
+
+        <!--Nacos Config-->
+        <nacos.config.version>0.2.1</nacos.config.version>
 
         <!--Plugin Versions-->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -339,6 +343,20 @@
                 <version>${api.boot.version}</version>
             </dependency>
 
+            <!--Codegen-->
+            <dependency>
+                <groupId>com.mysema.codegen</groupId>
+                <artifactId>codegen</artifactId>
+                <version>${mysema.codegen.version}</version>
+            </dependency>
+
+            <!--Nacos Config-->
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>nacos-config-spring-boot-starter</artifactId>
+                <version>${nacos.config.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -366,6 +384,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
                     <version>${maven-plugin-plugin.version}</version>
+                </plugin>
+                <!--ApiBoot Mybatis Enhance Codegen-->
+                <plugin>
+                    <groupId>org.minbox.framework</groupId>
+                    <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
+                    <version>${api.boot.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

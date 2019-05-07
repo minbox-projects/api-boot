@@ -22,7 +22,7 @@
     <parent>
         <artifactId>api-boot-samples</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.6.RELEASE</version>
+        <version>2.0.7.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -42,6 +42,10 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-rate-limiter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
 
     <!--ApiBoot版本依赖-->
@@ -50,7 +54,7 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-dependencies</artifactId>
-                <version>2.0.6.RELEASE</version>
+                <version>2.0.7.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

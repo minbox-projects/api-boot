@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiterConfiguration;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
+import org.minbox.framework.api.boot.plugin.rate.limiter.centre.support.DefaultRateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.config.RateLimiterConfig;
 import org.minbox.framework.api.boot.plugin.rate.limiter.handler.ApiBootDefaultRateLimiterInterceptorHandler;
 import org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter;
@@ -79,7 +80,19 @@ public class ApiBootRateLimiterAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnMissingClass("org.springframework.data.redis.core.RedisTemplate")
     public ApiBootRateLimiter googleGuavaRateLimiter(RateLimiterConfigCentre rateLimiterConfigCentre) {
-        return new GoogleGuavaRateLimiter(apiBootRateLimiterProperties.getGlobalQps(), rateLimiterConfigCentre);
+        return new GoogleGuavaRateLimiter(apiBootRateLimiterProperties.isEnableGlobalQps() ? apiBootRateLimiterProperties.getGlobalQps() : 0L, rateLimiterConfigCentre);
+    }
+
+    /**
+     * default config centre
+     *
+     * @return RateLimiterConfigCentre
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnMissingClass({"com.alibaba.boot.nacos.config.properties.NacosConfigProperties"})
+    public RateLimiterConfigCentre defaultRateLimiterConfigCentre() {
+        return new DefaultRateLimiterConfigCentre();
     }
 
     /**

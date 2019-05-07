@@ -42,7 +42,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 @Configuration
 @EnableConfigurationProperties(ApiBootRateLimiterProperties.class)
-@ConditionalOnClass(RedisTemplate.class)
+@ConditionalOnClass(name = "org.springframework.data.redis.core.RedisTemplate")
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class ApiBootRateLimiterRedisAutoConfiguration {
     /**
@@ -63,6 +63,6 @@ public class ApiBootRateLimiterRedisAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public ApiBootRateLimiter redisLuaRateLimiter(RedisTemplate redisTemplate, RateLimiterConfigCentre rateLimiterConfigCentre) {
-        return new RedisLuaRateLimiter(apiBootRateLimiterProperties.getGlobalQps(), rateLimiterConfigCentre, redisTemplate);
+        return new RedisLuaRateLimiter(apiBootRateLimiterProperties.isEnableGlobalQps() ? apiBootRateLimiterProperties.getGlobalQps() : 0L, rateLimiterConfigCentre, redisTemplate);
     }
 }
