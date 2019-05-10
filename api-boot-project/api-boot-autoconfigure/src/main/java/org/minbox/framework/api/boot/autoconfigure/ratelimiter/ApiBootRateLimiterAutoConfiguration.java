@@ -18,11 +18,10 @@
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
-import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiterConfiguration;
+import org.minbox.framework.api.boot.plugin.rate.limiter.aop.advisor.ApiBootRateLimiterAdvisor;
+import org.minbox.framework.api.boot.plugin.rate.limiter.aop.interceptor.ApiBootRateLimiterMethodInterceptor;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.support.DefaultRateLimiterConfigCentre;
-import org.minbox.framework.api.boot.plugin.rate.limiter.config.RateLimiterConfig;
-import org.minbox.framework.api.boot.plugin.rate.limiter.handler.ApiBootDefaultRateLimiterInterceptorHandler;
 import org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -46,7 +45,7 @@ import org.springframework.context.annotation.Import;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(ApiBootRateLimiterConfiguration.class)
+@ConditionalOnClass(ApiBootRateLimiter.class)
 @EnableConfigurationProperties(ApiBootRateLimiterProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @Import({ApiBootRateLimiterRedisAutoConfiguration.class, ApiBootRateLimiterNacosConfigConfiguration.class})
@@ -58,18 +57,6 @@ public class ApiBootRateLimiterAutoConfiguration {
 
     public ApiBootRateLimiterAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties) {
         this.apiBootRateLimiterProperties = apiBootRateLimiterProperties;
-    }
-
-    /**
-     * ApiBoot Rate Limiter Interceptor
-     *
-     * @param apiBootRateLimiter ApiBoot RateLimiter
-     * @return ApiBootDefaultRateLimiterInterceptorHandler
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public ApiBootDefaultRateLimiterInterceptorHandler apiBootDefaultRateLimiterInterceptorHandler(ApiBootRateLimiter apiBootRateLimiter) {
-        return new ApiBootDefaultRateLimiterInterceptorHandler(apiBootRateLimiter);
     }
 
     /**
@@ -98,18 +85,27 @@ public class ApiBootRateLimiterAutoConfiguration {
     }
 
     /**
-     * ApiBoot Rate Limiter Configuration
+     * ApiBoot RateLimiter Pointcut Advisor
      *
-     * @param apiBootDefaultRateLimiterInterceptorHandler ApiBoot RateLimiter Interceptor
-     * @return ApiBootRateLimiterConfiguration
+     * @param apiBootRateLimiterMethodInterceptor ResourceLoad Annotation Method Interceptor
+     * @return ApiBootRateLimiterAdvisor
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootRateLimiterConfiguration apiBootRateLimiterConfiguration(ApiBootDefaultRateLimiterInterceptorHandler apiBootDefaultRateLimiterInterceptorHandler) {
-        // rate limiter config
-        RateLimiterConfig rateLimiterConfig = new RateLimiterConfig();
-        rateLimiterConfig.setInterceptorUrl(apiBootRateLimiterProperties.getInterceptorUrl());
+    ApiBootRateLimiterAdvisor rateLimiterAdvisor(ApiBootRateLimiterMethodInterceptor apiBootRateLimiterMethodInterceptor) {
+        return new ApiBootRateLimiterAdvisor(apiBootRateLimiterMethodInterceptor);
+    }
 
-        return new ApiBootRateLimiterConfiguration(rateLimiterConfig, apiBootDefaultRateLimiterInterceptorHandler);
+    /**
+     * ResourceLoad Annotation Method Interceptor
+     * Implementing major business logic
+     *
+     * @param apiBootRateLimiter apiBootRateLimiter
+     * @return ApiBootRateLimiterMethodInterceptor
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    ApiBootRateLimiterMethodInterceptor rateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter) {
+        return new ApiBootRateLimiterMethodInterceptor(apiBootRateLimiter);
     }
 }

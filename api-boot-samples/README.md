@@ -13,5 +13,5 @@ Demo列表：
 - [ApiBoot Message Push](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-message-push)
 - [ApiBoot RateLimiter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-rate-limiter)
 - [ApiBoot Mybatis Enhance](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance)
+- [ApiBoot Mybatis Enhance Codegen](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance-codegen)
 - [ApiBoot Mybatis Pageable](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-pageable)
-

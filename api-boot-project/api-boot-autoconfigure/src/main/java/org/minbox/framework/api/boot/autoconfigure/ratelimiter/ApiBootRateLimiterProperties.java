@@ -45,14 +45,17 @@ public class ApiBootRateLimiterProperties {
     /**
      * 限流请求地址前缀
      */
+    @Deprecated
     private String[] interceptorUrl = {"/**"};
     /**
      * 全局QPS配置
      * 默认每秒限流10次请求
      */
+    @Deprecated
     private Long globalQps = 10L;
     /**
      * 开启全局QPS配置
      */
+    @Deprecated
     private boolean enableGlobalQps = false;
 }

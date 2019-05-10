@@ -49,6 +49,7 @@
 - **[Quartz](http://www.quartz-scheduler.org)**：分布式定时任务调度框架
 - **[Swagger2](https://swagger.io/)**：Swagger是一款API文档生成工具，自动扫描代码进行生成可运行测试的文档。
 - **[Mybatis Enhance](https://github.com/hengboy/mybatis-enhance)**：`Enhance`是对于原生的`MyBatis`的增强编写，不影响任何原生的使用，使用后完全替代`mybatis-core`、`mybatis-spring`以及`mybatis-spring-boot-starter`，可以使用`SpringBoot`配置文件的形式进行配置相关的内容，尽可能强大的方便快速的集成`MyBatis`。
+- **[Mybatis Enhance Codegen](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance-codegen)**：为`Mybatis Enhance`搭配研发的代码自动生成`Maven Plugin`，自定生成对应数据库表结构的数据实体、动态查询实体等，通过`like`语法可以过滤指定表的生成。
 - **[DataSource Switch](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-plugins/api-boot-plugin-datasource-switch)**：一款多数据源自动切换框架，可配置多种数据库类型数据源集成、主从数据源配置。
 - **[Mybatis Pageable](https://github.com/hengboy/mybatis-pageable)**：`MyBatis-Pageable`是一款自动化分页的插件，基于`MyBatis`内部的插件`Interceptor`拦截器编写完成，拦截`Executor.query`的两个重载方法计算出分页的信息以及根据配置的数据库`Dialect`自动执行不同的查询语句完成总数量的统计。
 - **[Code Builder](https://github.com/hengboy/code-builder)**：`code-builder`是一款代码生成`maven mojo`插件，通过简单的配置就可以完成数据库内`Table`转换`Entity`或者其他实体类，想怎么生成完全根据你的个人业务逻辑，`code-builder`尽可能的完善的提供数据库内的一些定义的信息，让你更方便更灵活的来生成`Java`文件。
@@ -73,7 +74,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.0.7.RELEASE</version>
+      <version>2.0.8.RC1</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -102,6 +103,7 @@ Demo列表：
 - [ApiBoot Message Push](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-message-push)
 - [ApiBoot RateLimiter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-rate-limiter)
 - [ApiBoot Mybatis Enhance](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance)
+- [ApiBoot Mybatis Enhance Codegen](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance-codegen)
 - [ApiBoot Mybatis Pageable](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-pageable)
 
 ## 更新日志
@@ -127,7 +129,7 @@ Demo列表：
 
 #### 恒宇少年微信
 
-yuqiyu999
+**yuqiyu999**
 
 #### ApiBoot 开源群组
 
@@ -155,6 +157,7 @@ yuqiyu999
 │   ├── api-boot-sample-resource-load
 │   ├── api-boot-sample-rate-limiter
 │   ├── api-boot-sample-mybatis-enhance
+│   ├── api-boot-sample-mybatis-enhance-codegen
 │   ├── api-boot-sample-mybatis-pageable
 │   ├── api-boot-sample-quartz    
 │   └── api-boot-sample-swagger
