@@ -78,18 +78,18 @@ public class RedisLuaRateLimiter extends AbstractRateLimiter {
      * Processing with Spring Cloud Gateway official script
      *
      * @param annotationQPS RateLimiter QPS value
-     * @param requestUri    request uri
+     * @param requestKey    request key
      * @return true : allow access to
      */
     @Override
-    public boolean tryAcquire(Double annotationQPS, String requestUri) {
+    public boolean tryAcquire(Double annotationQPS, String requestKey) {
         try {
-            Long QPS = getPriorityQPS(requestUri, annotationQPS);
+            Long QPS = getPriorityQPS(requestKey, annotationQPS);
             if (QPS <= 0) {
                 return true;
             }
             // get keys
-            List<String> keys = getKeys(requestUri);
+            List<String> keys = getKeys(requestKey);
 
             // Parameters and serialization of return values
             RedisSerializer<String> serializer = new StringRedisSerializer();

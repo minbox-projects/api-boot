@@ -33,8 +33,8 @@ public interface ApiBootRateLimiter {
      * Attempt to obtain a request current limit token
      *
      * @param QPS        queries per second
-     * @param requestUri request uri
+     * @param requestKey request key
      * @return true : allow access to
      */
-    boolean tryAcquire(Double QPS, String requestUri);
+    boolean tryAcquire(Double QPS, String requestKey);
 }

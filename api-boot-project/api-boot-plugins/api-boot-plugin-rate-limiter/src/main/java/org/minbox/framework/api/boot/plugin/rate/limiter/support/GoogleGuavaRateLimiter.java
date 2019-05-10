@@ -40,16 +40,16 @@ public class GoogleGuavaRateLimiter extends AbstractRateLimiter {
      * google guava away
      *
      * @param annotationQPS RateLimiter QPS value
-     * @param requestUri    request uri
+     * @param requestKey    request key
      * @return true : allow access to
      */
     @Override
-    public boolean tryAcquire(Double annotationQPS, String requestUri) {
-        Long QPS = getPriorityQPS(requestUri, annotationQPS);
+    public boolean tryAcquire(Double annotationQPS, String requestKey) {
+        Long QPS = getPriorityQPS(requestKey, annotationQPS);
         if (QPS <= 0) {
             return true;
         }
-        com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(requestUri, QPS);
+        com.google.common.util.concurrent.RateLimiter rateLimiter = ApiBootRateLimiterContext.cacheRateLimiter(requestKey, QPS);
         return rateLimiter.tryAcquire();
     }
 }
