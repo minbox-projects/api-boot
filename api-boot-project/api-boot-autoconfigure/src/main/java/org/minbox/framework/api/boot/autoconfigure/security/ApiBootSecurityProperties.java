@@ -53,6 +53,7 @@ public class ApiBootSecurityProperties {
             "/swagger-ui.html",
             "/swagger-resources/configuration/security",
             "/META-INF/resources/webjars/**",
+            "/webjars/**",
             "/swagger-resources",
             "/swagger-resources/configuration/ui",
             "/actuator/**"
