@@ -25,6 +25,7 @@
         <module>api-boot-sample-mybatis-pageable</module>
         <module>api-boot-sample-mybatis-enhance</module>
         <module>api-boot-sample-mybatis-enhance-codegen</module>
+        <module>api-boot-sample-integration</module>
     </modules>
 
     <build>
