@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: xx.xxx.xxx
+    username: usernamexxx
+    password: passwordxxx
+
+# 调整日志等级，输出sql
+logging:
+  level:
+    org.minbox.framework.knowledge.library.service: debug

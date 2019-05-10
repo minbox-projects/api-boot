@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: knowledge-library-service
+  profiles:
+    active: dev
+# ApiBoot 相关配置
+api:
+  boot:
+    security:
+      # 使用jdbc方式读取用户信息
+      away: jdbc
+      # 禁用默认的Spring Security 用户读取
+      enable-default-store-delegate: false
+      # 资源保护的路径
+      auth-prefix: /api/v1/**
+      # 排除不被保护的路径
+      ignoring-urls: /api/v1/user/register,/api/v1/user/is-register,/api/v1/sm/**
+    oauth:
+      # 启用jwt
+      jwt:
+        enable: true
+        sign-key: 恒宇少年的知识库v1.0
+      away: jdbc
+    # swagger 相关配置
+    swagger:
+      base-package: org.minbox.framework.knowledge.library.service
+      title: 恒宇少年的知识库
+      version: v1.0
+      description: 提供恒宇少年知识库小程序的所有接口
+# Mybatis Enhance & Mybatis Pageable
+hengboy:
+  # mapper.xml配置文件
+  enhance:
+    mapper-locations: classpath:mappers/*.xml
+  # 数据库方言配置
+  pageable:
+    dialect: mysql
+
+# 小程序相关配置
+knowledge:
+  library:
+    small:
+      program:
+        app-id: xxx
+        app-secret: xxxx
+        # JsCode 兑换 Session 路径
+        codeToSessionUrl: https://api.weixin.qq.com/sns/jscode2session?appid=${knowledge.library.small.program.app-id}&secret=${knowledge.library.small.program.app-secret}&js_code=%s&grant_type=authorization_code
