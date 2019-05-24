@@ -22,7 +22,9 @@ import org.minbox.framework.api.boot.plugin.rate.limiter.aop.advisor.ApiBootRate
 import org.minbox.framework.api.boot.plugin.rate.limiter.aop.interceptor.ApiBootRateLimiterMethodInterceptor;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.support.DefaultRateLimiterConfigCentre;
+import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowRequest;
 import org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -54,9 +56,14 @@ public class ApiBootRateLimiterAutoConfiguration {
      * ApiBoot Rate Limiter Properties
      */
     private ApiBootRateLimiterProperties apiBootRateLimiterProperties;
+    /**
+     * RateLimiter OverFlow Request
+     */
+    private RateLimiterOverFlowRequest rateLimiterOverFlowRequest;
 
-    public ApiBootRateLimiterAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties) {
+    public ApiBootRateLimiterAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties, ObjectProvider<RateLimiterOverFlowRequest> rateLimiterOverFlowRequestObjectProvider) {
         this.apiBootRateLimiterProperties = apiBootRateLimiterProperties;
+        this.rateLimiterOverFlowRequest = rateLimiterOverFlowRequestObjectProvider.getIfAvailable();
     }
 
     /**
@@ -106,6 +113,6 @@ public class ApiBootRateLimiterAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     ApiBootRateLimiterMethodInterceptor rateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter) {
-        return new ApiBootRateLimiterMethodInterceptor(apiBootRateLimiter);
+        return new ApiBootRateLimiterMethodInterceptor(apiBootRateLimiter, rateLimiterOverFlowRequest);
     }
 }
