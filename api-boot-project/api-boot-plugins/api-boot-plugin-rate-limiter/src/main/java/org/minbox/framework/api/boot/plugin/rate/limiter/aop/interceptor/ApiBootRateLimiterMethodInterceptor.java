@@ -21,11 +21,13 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.annotation.RateLimiter;
+import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowRequest;
 import org.minbox.framework.api.boot.plugin.tools.AopTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Method;
 
@@ -50,9 +52,14 @@ public class ApiBootRateLimiterMethodInterceptor implements MethodInterceptor {
      * ApiBoot RateLimiter
      */
     private ApiBootRateLimiter apiBootRateLimiter;
+    /**
+     * Response results after flow exceeding
+     */
+    private RateLimiterOverFlowRequest overFlowRequest;
 
-    public ApiBootRateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter) {
+    public ApiBootRateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter, RateLimiterOverFlowRequest overFlowRequest) {
         this.apiBootRateLimiter = apiBootRateLimiter;
+        this.overFlowRequest = overFlowRequest;
         Assert.notNull(apiBootRateLimiter, "No ApiBootRateLimiter implementation class instance.");
         logger.info("ApiBootDefaultRateLimiterInterceptorHandler load complete.");
     }
@@ -81,6 +88,10 @@ public class ApiBootRateLimiterMethodInterceptor implements MethodInterceptor {
             }
         } catch (Exception e) {
             logger.error("Current Limiting Request Encountered Exception.", e);
+        }
+        // If an instance is created
+        if (!ObjectUtils.isEmpty(overFlowRequest)) {
+            return overFlowRequest.overflow(invocation.getArguments());
         }
         return null;
     }
