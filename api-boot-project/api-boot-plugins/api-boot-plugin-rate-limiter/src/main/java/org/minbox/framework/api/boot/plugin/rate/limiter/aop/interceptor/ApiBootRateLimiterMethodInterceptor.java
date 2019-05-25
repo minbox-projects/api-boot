@@ -21,7 +21,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.annotation.RateLimiter;
-import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowRequest;
+import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowResponse;
 import org.minbox.framework.api.boot.plugin.tools.AopTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,9 +55,9 @@ public class ApiBootRateLimiterMethodInterceptor implements MethodInterceptor {
     /**
      * Response results after flow exceeding
      */
-    private RateLimiterOverFlowRequest overFlowRequest;
+    private RateLimiterOverFlowResponse overFlowRequest;
 
-    public ApiBootRateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter, RateLimiterOverFlowRequest overFlowRequest) {
+    public ApiBootRateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter, RateLimiterOverFlowResponse overFlowRequest) {
         this.apiBootRateLimiter = apiBootRateLimiter;
         this.overFlowRequest = overFlowRequest;
         Assert.notNull(apiBootRateLimiter, "No ApiBootRateLimiter implementation class instance.");

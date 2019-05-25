@@ -29,7 +29,7 @@ package org.minbox.framework.api.boot.plugin.rate.limiter.result;
  * GitHub：https://github.com/hengboy
  */
 @FunctionalInterface
-public interface RateLimiterOverFlowRequest {
+public interface RateLimiterOverFlowResponse {
     /**
      * Response results after flow exceeding
      *

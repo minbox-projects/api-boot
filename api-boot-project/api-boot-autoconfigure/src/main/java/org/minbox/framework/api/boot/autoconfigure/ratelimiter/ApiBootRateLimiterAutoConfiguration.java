@@ -22,7 +22,7 @@ import org.minbox.framework.api.boot.plugin.rate.limiter.aop.advisor.ApiBootRate
 import org.minbox.framework.api.boot.plugin.rate.limiter.aop.interceptor.ApiBootRateLimiterMethodInterceptor;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.support.DefaultRateLimiterConfigCentre;
-import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowRequest;
+import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowResponse;
 import org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -59,11 +59,11 @@ public class ApiBootRateLimiterAutoConfiguration {
     /**
      * RateLimiter OverFlow Request
      */
-    private RateLimiterOverFlowRequest rateLimiterOverFlowRequest;
+    private RateLimiterOverFlowResponse rateLimiterOverFlowResponse;
 
-    public ApiBootRateLimiterAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties, ObjectProvider<RateLimiterOverFlowRequest> rateLimiterOverFlowRequestObjectProvider) {
+    public ApiBootRateLimiterAutoConfiguration(ApiBootRateLimiterProperties apiBootRateLimiterProperties, ObjectProvider<RateLimiterOverFlowResponse> rateLimiterOverFlowRequestObjectProvider) {
         this.apiBootRateLimiterProperties = apiBootRateLimiterProperties;
-        this.rateLimiterOverFlowRequest = rateLimiterOverFlowRequestObjectProvider.getIfAvailable();
+        this.rateLimiterOverFlowResponse = rateLimiterOverFlowRequestObjectProvider.getIfAvailable();
     }
 
     /**
@@ -113,6 +113,6 @@ public class ApiBootRateLimiterAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     ApiBootRateLimiterMethodInterceptor rateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter) {
-        return new ApiBootRateLimiterMethodInterceptor(apiBootRateLimiter, rateLimiterOverFlowRequest);
+        return new ApiBootRateLimiterMethodInterceptor(apiBootRateLimiter, rateLimiterOverFlowResponse);
     }
 }
