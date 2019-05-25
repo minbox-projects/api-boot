@@ -25,7 +25,9 @@ import com.mysema.codegen.CodeWriter;
 import com.mysema.codegen.JavaWriter;
 import com.mysema.codegen.model.SimpleType;
 import lombok.Data;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.EnhanceCodegenConstant;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -77,7 +79,7 @@ public class EntityClassBuilder extends AbstractClassBuilder {
             writer.line(String.format(TABLE_ANNOTATION, table.getTableName()));
 
             // public class
-            writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EMPTY_STRING, getWrapper().getTableCamelName()));
+            writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()));
 
             for (com.gitee.hengboy.builder.core.database.model.Column column : table.getColumns()) {
                 // comment
@@ -88,7 +90,12 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                 // @Column
                 writer.line(String.format(COLUMN_ANNOTATION, column.getColumnName()));
                 // private field
-                writer.line(String.format(FIELD, column.getJavaType(), column.getJavaProperty()));
+                String defaultValue = EnhanceCodegenConstant.EMPTY_STRING;
+                if (!StringUtils.isEmpty(column.getDefaultValue())) {
+                    defaultValue = String.format(" = %s", column.getDefaultValue());
+                }
+
+                writer.line(String.format(FIELD, column.getJavaType(), formatterJavaPropertyName(column.getColumnName()), defaultValue));
             }
 
             // end class
@@ -122,5 +129,10 @@ public class EntityClassBuilder extends AbstractClassBuilder {
         if (table.isHasTimeStamp()) {
             writer.imports(Timestamp.class);
         }
+    }
+
+    @Override
+    public String getPrefixDir() {
+        return EnhanceCodegenConstant.EMPTY_STRING;
     }
 }

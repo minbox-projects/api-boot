@@ -15,39 +15,26 @@
  *
  */
 
-package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder;
+package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen;
 
 /**
- * Entity Class Builder
+ * mybatis enhance codegen constant
  *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-29 17:10
+ * DateTime：2019-05-25 13:50
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface ClassBuilder {
+public interface EnhanceCodegenConstant {
     /**
-     * get class content
-     * use by generator class file
-     *
-     * @return class content
+     * point
      */
-    String getClassContent();
-
+    String POINT = ".";
     /**
-     * get class file default prefix
-     *
-     * @return
+     * empty string
      */
-    String getDefaultPrefix();
-
-    /**
-     * get prefix dir
-     *
-     * @return
-     */
-    String getPrefixDir();
+    String EMPTY_STRING = "";
 }

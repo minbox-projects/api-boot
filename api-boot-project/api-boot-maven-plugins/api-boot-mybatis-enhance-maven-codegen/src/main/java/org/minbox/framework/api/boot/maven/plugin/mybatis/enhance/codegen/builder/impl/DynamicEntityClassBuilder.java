@@ -26,6 +26,7 @@ import com.mysema.codegen.JavaWriter;
 import com.mysema.codegen.model.Parameter;
 import com.mysema.codegen.model.SimpleType;
 import com.mysema.codegen.model.Types;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.EnhanceCodegenConstant;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
 
 import java.io.StringWriter;
@@ -46,6 +47,10 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
      * dynamic class prefix
      */
     private static final String DYNAMIC_CLASS_PREFIX = "D";
+    /**
+     * dynamic prefix dir
+     */
+    private static final String DYNAMIC_PREFIX_DIR = "dsl";
     /**
      * constructor parameter name
      */
@@ -91,8 +96,8 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
             // java doc
             writer.javadoc(table.getRemark(), AUTHOR);
             // begin class
-            writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EMPTY_STRING, getWrapper().getTableCamelName()),
-                    new SimpleType(superClassName, EMPTY_STRING, superClassName));
+            writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()),
+                    new SimpleType(superClassName, EnhanceCodegenConstant.EMPTY_STRING, superClassName));
 
             // constructor
             writer.beginConstructor(new Parameter(CONSTRUCTOR_PARAMETER_NAME, Types.STRING));
@@ -100,7 +105,7 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
             writer.end();
 
             // dsl method
-            writer.beginStaticMethod(new SimpleType(getWrapper().getTableCamelName(), EMPTY_STRING, getWrapper().getTableCamelName()), DYNAMIC_METHOD_NAME);
+            writer.beginStaticMethod(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()), DYNAMIC_METHOD_NAME);
             writer.line(String.format(DYNAMIC_INSTANCE, getWrapper().getTableCamelName(), table.getTableName()));
             writer.end();
 
@@ -111,14 +116,14 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
                 Column column = table.getColumns().get(i);
                 // column java doc
                 writer.javadoc(column.getRemark());
-                writer.line(String.format(COLUMN_EXPRESSION, column.getJavaProperty(), column.getColumnName()));
-                columns.append(column.getJavaProperty());
-                columns.append(i == table.getColumns().size() - 1 ? EMPTY_STRING : ", ");
+                writer.line(String.format(COLUMN_EXPRESSION, formatterJavaPropertyName(column.getColumnName()), column.getColumnName()));
+                columns.append(formatterJavaPropertyName(column.getColumnName()));
+                columns.append(i == table.getColumns().size() - 1 ? EnhanceCodegenConstant.EMPTY_STRING : ", ");
             }
 
             // getColumns method
             writer.annotation(Override.class);
-            writer.beginPublicMethod(new SimpleType(COLUMN_EXPRESSION_ARRAY, EMPTY_STRING, COLUMN_EXPRESSION_ARRAY), GET_COLUMN_METHOD_NAME);
+            writer.beginPublicMethod(new SimpleType(COLUMN_EXPRESSION_ARRAY, EnhanceCodegenConstant.EMPTY_STRING, COLUMN_EXPRESSION_ARRAY), GET_COLUMN_METHOD_NAME);
             writer.line(String.format(COLUMN_EXPRESSION_ARRAY_INSTANCE, columns.toString()));
             writer.end();
 
@@ -138,11 +143,21 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
      * @return entity name
      */
     public String getEntityName(String camelName) {
-        return camelName.replaceFirst(DYNAMIC_CLASS_PREFIX, EMPTY_STRING);
+        return camelName.replaceFirst(DYNAMIC_CLASS_PREFIX, EnhanceCodegenConstant.EMPTY_STRING);
     }
 
     @Override
     public String getDefaultPrefix() {
         return DYNAMIC_CLASS_PREFIX;
+    }
+
+    /**
+     * get dynamic prefix dir
+     *
+     * @return
+     */
+    @Override
+    public String getPrefixDir() {
+        return DYNAMIC_PREFIX_DIR;
     }
 }

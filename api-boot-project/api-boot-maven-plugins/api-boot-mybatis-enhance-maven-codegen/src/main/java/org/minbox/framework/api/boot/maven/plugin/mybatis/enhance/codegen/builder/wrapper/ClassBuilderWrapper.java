@@ -49,4 +49,8 @@ public class ClassBuilderWrapper {
      * current table
      */
     private Table table;
+    /**
+     * ignore column prefix
+     */
+    private boolean ignoreColumnPrefix;
 }

@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl;
 
+import com.gitee.hengboy.builder.common.util.StringUtil;
 import lombok.Getter;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.ClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
@@ -35,9 +36,9 @@ import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builde
 @Getter
 public abstract class AbstractClassBuilder implements ClassBuilder {
     /**
-     * empty string
+     * Underline
      */
-    public static final String EMPTY_STRING = "";
+    public static final String UNDERLINE = "_";
     /**
      * author
      */
@@ -45,7 +46,7 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
     /**
      * field placeholder
      */
-    public static final String FIELD = "private %s %s;";
+    public static final String FIELD = "private %s %s%s;";
     /**
      * Column Annotation
      */
@@ -100,5 +101,25 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
     @Override
     public String getDefaultPrefix() {
         return "";
+    }
+
+    /**
+     * Name of field corresponding to formatted column
+     *
+     * @param columnName column name
+     * @return
+     */
+    protected String formatterJavaPropertyName(String columnName) {
+        try {
+            if (getWrapper().isIgnoreColumnPrefix()) {
+                columnName = columnName.substring(columnName.indexOf(UNDERLINE) + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            columnName = StringUtil.getCamelCaseString(columnName, false);
+        }
+
+        return columnName;
     }
 }

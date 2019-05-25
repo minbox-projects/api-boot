@@ -37,6 +37,7 @@ import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builde
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.tools.CamelTools;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.writer.JavaClassWriter;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.util.Arrays;
@@ -122,6 +123,16 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     @Parameter(required = true)
     private String packageName;
+    /**
+     * ignore table name prefix
+     */
+    @Parameter
+    private String ignoreTablePrefix;
+    /**
+     * ignore column prefix
+     */
+    @Parameter
+    private boolean ignoreColumnPrefix = false;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -151,8 +162,15 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
                     DynamicEntityClassBuilder.class
             };
 
+            // ignore table prefix
+            if (!StringUtils.isEmpty(ignoreTablePrefix)) {
+                tableName = tableName.replace(ignoreTablePrefix, EnhanceCodegenConstant.EMPTY_STRING);
+            }
+            // formatter class name
+            String className = CamelTools.upper(tableName);
+
             // Encapsulated objects needed to perform generation
-            ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName).tableCamelName(CamelTools.upper(tableName)).table(table).build();
+            ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName).tableCamelName(className).table(table).ignoreColumnPrefix(ignoreColumnPrefix).build();
 
             // execute generator
             Arrays.stream(builders).forEach(builderClass -> {
@@ -160,8 +178,13 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
                 if (!ObjectUtils.isEmpty(builder)) {
                     // setting class prefix
                     wrapper.setTableCamelName(builder.getDefaultPrefix() + wrapper.getTableCamelName());
+
+                    // setting prefix dir
+                    if (!StringUtils.isEmpty(builder.getPrefixDir())) {
+                        wrapper.setPackageName(wrapper.getPackageName() + EnhanceCodegenConstant.POINT + builder.getPrefixDir());
+                    }
                     // class file path
-                    String classPath = getNewClassPath(wrapper.getTableCamelName());
+                    String classPath = getNewClassPath(wrapper.getTableCamelName(), builder.getPrefixDir());
                     // class content
                     String classContent = builder.getClassContent();
                     // invoke content write
@@ -184,13 +207,14 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
     /**
      * get generator dir
      *
+     * @param prefixDir prefix dir
      * @return generator dir
      */
-    private String getGeneratorDir() {
+    private String getGeneratorDir(String prefixDir) {
         // java file base dir
-        String baseDir = String.format("%s%s%s", projectBaseDir, File.separator, targetDir.replace(".", File.separator));
+        String baseDir = String.format("%s%s%s", projectBaseDir, File.separator, targetDir.replace(EnhanceCodegenConstant.POINT, File.separator));
         // package dir
-        String packageDir = String.format("%s%s%s", baseDir, File.separator, packageName.replace(".", File.separator));
+        String packageDir = String.format("%s%s%s%s", baseDir, File.separator, packageName.replace(EnhanceCodegenConstant.POINT, File.separator), File.separator + prefixDir);
         // create dirs
         File dir = new File(packageDir);
         dir.mkdirs();
@@ -202,10 +226,11 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      * get generator class path
      *
      * @param entityClassName entity class name
+     * @param prefixDir       prefix dir
      * @return class path
      */
-    private String getNewClassPath(String entityClassName) {
-        return String.format("%s%s%s%s", getGeneratorDir(), File.separator, entityClassName, FILE_SUFFIX);
+    private String getNewClassPath(String entityClassName, String prefixDir) {
+        return String.format("%s%s%s%s", getGeneratorDir(prefixDir), File.separator, entityClassName, FILE_SUFFIX);
     }
 
     /**
