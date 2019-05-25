@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl;
 
+import com.gitee.hengboy.builder.common.enums.JavaTypeEnum;
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Column;
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Id;
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Table;
@@ -88,14 +89,9 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                     writer.line(column.isAutoincrement() ? ID_AUTO_ANNOTATION : ID_UUID_ANNOTATION);
                 }
                 // @Column
-                writer.line(String.format(COLUMN_ANNOTATION, column.getColumnName()));
+                writer.line(getColumnAnnotation(column));
                 // private field
-                String defaultValue = EnhanceCodegenConstant.EMPTY_STRING;
-                if (!StringUtils.isEmpty(column.getDefaultValue())) {
-                    defaultValue = String.format(" = %s", column.getDefaultValue());
-                }
-
-                writer.line(String.format(FIELD, column.getJavaType(), formatterJavaPropertyName(column.getColumnName()), defaultValue));
+                writer.line(String.format(FIELD, column.getJavaType(), formatterJavaPropertyName(column.getColumnName()), getColumnDefaultValue(column)));
             }
 
             // end class
@@ -134,5 +130,52 @@ public class EntityClassBuilder extends AbstractClassBuilder {
     @Override
     public String getPrefixDir() {
         return EnhanceCodegenConstant.EMPTY_STRING;
+    }
+
+    /**
+     * get column annotation definition
+     *
+     * @param column column
+     * @return
+     */
+    private String getColumnAnnotation(com.gitee.hengboy.builder.core.database.model.Column column) {
+        // append content to @column(name=xxx after
+        String columnAnnotation = String.format(COLUMN_ANNOTATION, column.getColumnName());
+        // is java.sql.Timestamp && default value is current_timestamp
+        if (JavaTypeEnum.TYPE_TIMESTAMP.getShortName().equals(column.getJavaType()) && EnhanceCodegenConstant.CURRENT_TIMESTAMP.equals(column.getDefaultValue())) {
+            columnAnnotation = String.format(COLUMN_INSERTABLE_ANNOTATION, column.getColumnName());
+        }
+        return columnAnnotation;
+    }
+
+    /**
+     * get column default value
+     * string default value
+     * int default value
+     *
+     * @param column column
+     * @return
+     */
+    private String getColumnDefaultValue(com.gitee.hengboy.builder.core.database.model.Column column) {
+        String pattern = " = %s";
+        String defaultValue = EnhanceCodegenConstant.EMPTY_STRING;
+        // don't have default value
+        if (StringUtils.isEmpty(column.getDefaultValue())) {
+            return defaultValue;
+        }
+
+        // java.lang.Integer
+        if (JavaTypeEnum.TYPE_INTEGER.getShortName().equals(column.getJavaType())) {
+            defaultValue = column.getDefaultValue();
+        }
+        // java.lang.String
+        else if (JavaTypeEnum.TYPE_STRING.getShortName().equals(column.getJavaType())) {
+            defaultValue = String.format("%s%s%s", "\"", column.getDefaultValue(), "\"");
+        }
+        // other is ignore
+        else {
+
+        }
+        return !StringUtils.isEmpty(defaultValue) ? String.format(pattern, defaultValue) : defaultValue;
     }
 }

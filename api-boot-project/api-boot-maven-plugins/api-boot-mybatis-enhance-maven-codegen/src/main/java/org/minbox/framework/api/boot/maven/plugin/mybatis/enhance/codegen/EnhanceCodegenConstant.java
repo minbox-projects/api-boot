@@ -37,4 +37,8 @@ public interface EnhanceCodegenConstant {
      * empty string
      */
     String EMPTY_STRING = "";
+    /**
+     * timestamp default value
+     */
+    String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
 }

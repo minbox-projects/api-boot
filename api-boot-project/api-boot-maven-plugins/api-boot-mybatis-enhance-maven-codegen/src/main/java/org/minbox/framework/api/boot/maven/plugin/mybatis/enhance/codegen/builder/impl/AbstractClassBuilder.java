@@ -52,6 +52,10 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
      */
     public static final String COLUMN_ANNOTATION = "@Column(name = \"%s\")";
     /**
+     * Column Insertable Annotation
+     */
+    public static final String COLUMN_INSERTABLE_ANNOTATION = "@Column(name = \"%s\",insertable = true)";
+    /**
      * Id auto Annotation
      */
     public static final String ID_AUTO_ANNOTATION = "@Id(generatorType = KeyGeneratorTypeEnum.AUTO)";
