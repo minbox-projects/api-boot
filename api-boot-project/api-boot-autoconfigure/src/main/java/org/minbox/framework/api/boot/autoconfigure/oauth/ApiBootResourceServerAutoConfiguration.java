@@ -17,6 +17,7 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties;
+import org.minbox.framework.api.boot.plugin.security.SecurityUser;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +38,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(ResourceServerConfigurerAdapter.class)
+@ConditionalOnClass({ResourceServerConfigurerAdapter.class, SecurityUser.class})
 @EnableConfigurationProperties({ApiBootSecurityProperties.class, ApiBootOauthProperties.class})
 @EnableResourceServer
 public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
