@@ -14,7 +14,7 @@
     <artifactId>api-boot-dependencies</artifactId>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
+        <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
         <api.boot.version>2.0.8.RC1</api.boot.version>
         <druid.version>1.1.14</druid.version>
         <druid.starter.version>1.1.14</druid.starter.version>
