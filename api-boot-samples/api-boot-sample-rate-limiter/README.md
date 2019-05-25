@@ -115,6 +115,37 @@ qps_rate_limiter.{/test/}.tokens
 
 **当然单服务实例也可以使用`Redis`方式**
 
+### 自定义流量溢出响应
+
+流量被限制后可以自定义响应的实体来告知请求发起端，方便做一些业务性质的处理，如下所示：
+
+```java
+import org.minbox.framework.api.boot.common.model.ApiBootResult;
+import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowResponse;
+import org.springframework.stereotype.Component;
+
+/**
+ * 自定义流量溢出后响应的实体格式
+ *
+ * @author：恒宇少年 - 于起宇
+ * <p>
+ * DateTime：2019-05-25 16:21
+ * Blog：http://blog.yuqiyu.com
+ * WebSite：http://www.jianshu.com/u/092df3f77bca
+ * Gitee：https://gitee.com/hengboy
+ * GitHub：https://github.com/hengboy
+ */
+@Component
+public class CustomerResponse implements RateLimiterOverFlowResponse {
+    @Override
+    public Object overflow(Object[] methodArgs) {
+        return ApiBootResult.builder().errorCode("REQUEST_OVER_FLOW").errorMessage("流量被限制.").build();
+    }
+}
+```
+
+> `overflow`方法可返回任意类型对象。
+
 ### 配置中心支持
 
 为了保证有前瞻性突发流量的处理，`ApiBoot RateLimiter`支持了外部配置中心，在配置中心修改接口限流`QPS`后会实时更新到应用程序内。
