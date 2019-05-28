@@ -17,6 +17,8 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
+import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -31,6 +33,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
+
+import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
@@ -52,11 +56,11 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @ConditionalOnClass(ApiBootAuthorizationServerConfiguration.class)
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "jdbc")
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
-public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration{
+public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
     private DataSource dataSource;
 
-    public ApiBootAuthorizationServerJdbcAutoConfiguration(ApiBootOauthProperties apiBootOauthProperties, DataSource dataSource) {
-        super(apiBootOauthProperties);
+    public ApiBootAuthorizationServerJdbcAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, DataSource dataSource) {
+        super(objectProvider, apiBootOauthProperties);
         this.dataSource = dataSource;
     }
 

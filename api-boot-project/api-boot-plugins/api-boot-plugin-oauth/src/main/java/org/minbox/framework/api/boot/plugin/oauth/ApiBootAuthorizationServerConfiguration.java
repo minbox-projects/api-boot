@@ -1,16 +1,32 @@
 package org.minbox.framework.api.boot.plugin.oauth;
 
+import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.*;
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenGranter;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter;
+import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.implicit.ImplicitTokenGranter;
+import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
+import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
+import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.token.*;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.util.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ApiBoot 集成Oauth2 相关配置实现
@@ -25,24 +41,36 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  */
 public class ApiBootAuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
     /**
-     * 认证管理
-     * 整合SpringSecurity
+     * authentication manager
      */
     @Autowired
     private AuthenticationManager authenticationManager;
     /**
-     * 令牌存储
+     * Token Store
      */
     @Autowired
     private TokenStore tokenStore;
     /**
-     * 令牌转换
+     * Access Token Converter
      */
     @Autowired
     private AccessTokenConverter accessTokenConverter;
+    /**
+     * Oauth Client Detail Service
+     */
+    @Autowired
+    private ClientDetailsService clientDetailsService;
+    /**
+     * Instance of custom authorization provided by ApiBoot
+     */
+    private List<ApiBootOauthTokenGranter> apiBootOauthTokenGranters;
+
+    public ApiBootAuthorizationServerConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider) {
+        this.apiBootOauthTokenGranters = objectProvider.getIfAvailable();
+    }
 
     /**
-     * 配置secret的加密方式与ApiBoot Security一致
+     * Configure secret encryption in the same way as ApiBoot Security
      *
      * @param security AuthorizationServerSecurityConfigurer
      * @throws Exception 异常信息
@@ -51,15 +79,15 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 .passwordEncoder(passwordEncoder())
-                // 配置开放/oauth/token_key访问地址
+                // Configure open/oauth/token_key access address
                 .tokenKeyAccess("permitAll()")
-                // 配置开放/oauth/check_token访问地址
-                // 必须登录有权限后才可以访问
+                // Configure Open /oauth/check_token Access Address
+                // Access must be accessible after login privileges
                 .checkTokenAccess("isAuthenticated()");
     }
 
     /**
-     * 配置整合SpringSecurity完成用户有效性认证
+     * Configuration and Integration of Spring Security to Complete User Validity Authentication
      *
      * @param endpoints AuthorizationServerEndpointsConfigurer
      * @throws Exception 异常信息
@@ -69,11 +97,13 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
         endpoints
                 .authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
+                // ApiBoot custom token granter
+                .tokenGranter(tokenGranter())
                 .accessTokenConverter(accessTokenConverter);
     }
 
     /**
-     * 用户登录或者获取Token时的密码加密方式
+     * Password Encryption for Users Logging in or Obtaining Token
      *
      * @return BCryptPasswordEncoder
      */
@@ -81,5 +111,87 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
     @ConditionalOnMissingBean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * token granter
+     *
+     * @return TokenGranter
+     */
+    private TokenGranter tokenGranter() {
+        TokenGranter tokenGranter = new TokenGranter() {
+            private CompositeTokenGranter delegate;
+
+            @Override
+            public OAuth2AccessToken grant(String grantType, TokenRequest tokenRequest) {
+                if (delegate == null) {
+                    delegate = new CompositeTokenGranter(getDefaultTokenGranters());
+                }
+                return delegate.grant(grantType, tokenRequest);
+            }
+        };
+        return tokenGranter;
+    }
+
+    /**
+     * token enhancer
+     *
+     * @return TokenEnhancer
+     */
+    private TokenEnhancer tokenEnhancer() {
+        if (accessTokenConverter instanceof JwtAccessTokenConverter) {
+            return (TokenEnhancer) accessTokenConverter;
+        }
+        return null;
+    }
+
+    private DefaultTokenServices tokenServices() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(tokenStore);
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setReuseRefreshToken(true);
+        tokenServices.setClientDetailsService(clientDetailsService);
+        tokenServices.setTokenEnhancer(tokenEnhancer());
+        return tokenServices;
+    }
+
+    private AuthorizationCodeServices authorizationCodeServices() {
+        return new InMemoryAuthorizationCodeServices();
+    }
+
+    private OAuth2RequestFactory requestFactory() {
+        return new DefaultOAuth2RequestFactory(clientDetailsService);
+    }
+
+    /**
+     * Return all granters within oauth2
+     * Contains custom
+     *
+     * @return TokenGranter
+     */
+    private List<TokenGranter> getDefaultTokenGranters() {
+        ClientDetailsService clientDetails = clientDetailsService;
+        AuthorizationServerTokenServices tokenServices = tokenServices();
+        AuthorizationCodeServices authorizationCodeServices = authorizationCodeServices();
+        OAuth2RequestFactory requestFactory = requestFactory();
+
+        List<TokenGranter> tokenGranters = new ArrayList<TokenGranter>();
+        tokenGranters.add(new AuthorizationCodeTokenGranter(tokenServices, authorizationCodeServices, clientDetails,
+                requestFactory));
+        tokenGranters.add(new RefreshTokenGranter(tokenServices, clientDetails, requestFactory));
+        ImplicitTokenGranter implicit = new ImplicitTokenGranter(tokenServices, clientDetails, requestFactory);
+        tokenGranters.add(implicit);
+        tokenGranters.add(new ClientCredentialsTokenGranter(tokenServices, clientDetails, requestFactory));
+        if (authenticationManager != null) {
+            tokenGranters.add(new ResourceOwnerPasswordTokenGranter(authenticationManager, tokenServices,
+                    clientDetails, requestFactory));
+        }
+
+        // have custom token granter
+        if (!ObjectUtils.isEmpty(apiBootOauthTokenGranters)) {
+            apiBootOauthTokenGranters.stream().forEach(apiBootOauthTokenGranter -> tokenGranters.add(new DefaultApiBootOauthTokenGranter(tokenServices, clientDetailsService, requestFactory, apiBootOauthTokenGranter)));
+        }
+
+        return tokenGranters;
     }
 }

@@ -17,6 +17,8 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
+import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -26,6 +28,8 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+
+import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
@@ -47,8 +51,8 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @EnableAuthorizationServer
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "memory", matchIfMissing = true)
 public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
-    public ApiBootAuthorizationMemoryServerAutoConfiguration(ApiBootOauthProperties apiBootOauthProperties) {
-        super(apiBootOauthProperties);
+    public ApiBootAuthorizationMemoryServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
+        super(objectProvider, apiBootOauthProperties);
     }
 
     @Override

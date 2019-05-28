@@ -136,7 +136,7 @@ public class EntityClassBuilder extends AbstractClassBuilder {
      * get column annotation definition
      *
      * @param column column
-     * @return
+     * @return column annotation
      */
     private String getColumnAnnotation(com.gitee.hengboy.builder.core.database.model.Column column) {
         // append content to @column(name=xxx after
@@ -154,7 +154,7 @@ public class EntityClassBuilder extends AbstractClassBuilder {
      * int default value
      *
      * @param column column
-     * @return
+     * @return column default value
      */
     private String getColumnDefaultValue(com.gitee.hengboy.builder.core.database.model.Column column) {
         String pattern = " = %s";
