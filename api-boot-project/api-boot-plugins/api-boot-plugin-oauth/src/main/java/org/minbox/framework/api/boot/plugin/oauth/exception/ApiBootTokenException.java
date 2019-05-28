@@ -15,39 +15,29 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.oauth.grant;
+package org.minbox.framework.api.boot.plugin.oauth.exception;
 
-import org.minbox.framework.api.boot.plugin.oauth.exception.ApiBootTokenException;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Map;
+import lombok.Getter;
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * ApiBoot Integrates Oauth2 to Realize Custom Authorization to Acquire Token
+ * ApiBoot Token Exception
  *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-05-28 09:57
+ * DateTime：2019-05-28 11:00
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface ApiBootOauthTokenGranter {
-    /**
-     * oauth2 grant type for ApiBoot
-     *
-     * @return grant type
-     */
-    String grantType();
+@Getter
+public class ApiBootTokenException extends AuthenticationException {
+    public ApiBootTokenException(String msg) {
+        super(msg);
+    }
 
-    /**
-     * load userDetails by parameter
-     *
-     * @param parameters parameter map
-     * @return UserDetails
-     * @throws ApiBootTokenException
-     * @see UserDetails
-     */
-    UserDetails loadByParameter(Map<String, String> parameters) throws ApiBootTokenException;
+    public ApiBootTokenException(String msg, Throwable t) {
+        super(msg, t);
+    }
 }

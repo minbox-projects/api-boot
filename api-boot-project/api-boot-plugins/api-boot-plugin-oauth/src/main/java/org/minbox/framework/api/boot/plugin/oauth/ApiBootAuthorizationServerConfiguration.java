@@ -1,6 +1,7 @@
 package org.minbox.framework.api.boot.plugin.oauth;
 
 import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.plugin.oauth.grant.DefaultApiBootOauthTokenGranter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

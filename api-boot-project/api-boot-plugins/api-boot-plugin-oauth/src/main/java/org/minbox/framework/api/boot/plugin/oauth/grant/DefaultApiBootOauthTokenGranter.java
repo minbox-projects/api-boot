@@ -15,14 +15,13 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.oauth;
+package org.minbox.framework.api.boot.plugin.oauth.grant;
 
-import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
-import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
-import org.springframework.security.oauth2.provider.TokenRequest;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.token.AbstractTokenGranter;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 
@@ -60,25 +59,22 @@ public class DefaultApiBootOauthTokenGranter extends AbstractTokenGranter {
     }
 
     /**
-     * grant access token
+     * get oauth2 authentication
      *
-     * @param grantType    grant type
-     * @param tokenRequest create token parameter
-     * @return
+     * @param client       client detail
+     * @param tokenRequest token request
+     * @return oauth2 authentication
      */
     @Override
-    public OAuth2AccessToken grant(String grantType, TokenRequest tokenRequest) {
-        // create token request parameters
-        Map<String, String> parameters = new LinkedHashMap(tokenRequest.getRequestParameters());
+    protected OAuth2Authentication getOAuth2Authentication(ClientDetails client, TokenRequest tokenRequest) {
+        Map<String, String> parameters = new LinkedHashMap<String, String>(tokenRequest.getRequestParameters());
 
-        // valid
-        apiBootOauthTokenGranter.valid(parameters);
+        UserDetails userDetails = apiBootOauthTokenGranter.loadByParameter(parameters);
 
-        // create token
-        OAuth2AccessToken token = super.grant(grantType, tokenRequest);
-        if (token != null) {
-            token = new DefaultOAuth2AccessToken(token);
-        }
-        return token;
+        Authentication userAuth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        ((AbstractAuthenticationToken) userAuth).setDetails(parameters);
+
+        OAuth2Request storedOAuth2Request = getRequestFactory().createOAuth2Request(client, tokenRequest);
+        return new OAuth2Authentication(storedOAuth2Request, userAuth);
     }
 }
