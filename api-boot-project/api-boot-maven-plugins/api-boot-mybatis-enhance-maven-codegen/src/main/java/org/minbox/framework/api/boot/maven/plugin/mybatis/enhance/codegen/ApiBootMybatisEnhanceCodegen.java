@@ -108,6 +108,16 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
     @Parameter(defaultValue = "%")
     private String tableNamePattern;
     /**
+     * Specify the list of generated tables
+     * for example：
+     * <tables>
+     * <table>sys_menu_info</table>
+     * <table>sys_role_info</table>
+     * </tables>
+     */
+    @Parameter
+    private List<String> tables;
+    /**
      * project base dir
      */
     @Parameter(defaultValue = "${basedir}")
@@ -146,7 +156,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
         // get database instance by DbTypeEnum
         DataBase dataBase = DataBaseFactory.newInstance(codeBuilderProperties);
 
-        List<String> tableNames = getTableNames(dataBase);
+        List<String> tableNames = ObjectUtils.isEmpty(tables) ? getTableNames(dataBase) : tables;
 
         tableNames.stream().forEach(tableName -> {
 
