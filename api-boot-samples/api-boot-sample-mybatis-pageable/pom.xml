@@ -22,7 +22,7 @@
     <parent>
         <artifactId>api-boot-samples</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.0.8.RELEASE</version>
+        <version>2.0.9-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -62,7 +62,7 @@
                 <artifactId>api-boot-dependencies</artifactId>
                 <scope>import</scope>
                 <type>pom</type>
-                <version>2.0.8.RELEASE</version>
+                <version>2.0.9-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
