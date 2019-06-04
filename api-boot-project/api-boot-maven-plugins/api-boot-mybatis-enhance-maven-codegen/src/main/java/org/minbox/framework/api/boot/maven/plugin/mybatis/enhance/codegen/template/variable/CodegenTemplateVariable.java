@@ -15,42 +15,46 @@
  *
  */
 
-package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen;
+package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.variable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * mybatis enhance codegen constant
+ * codegen template variable
  *
- * @author：恒宇少年 - 于起宇
+ * @author 恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-05-25 13:50
+ * DateTime：2019-06-03 16:19
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface EnhanceCodegenConstant {
+public class CodegenTemplateVariable {
     /**
-     * point
+     * #now variable
      */
-    String POINT = ".";
+    public static String NOW = "#now";
     /**
-     * empty string
+     * #desc variable
      */
-    String EMPTY_STRING = "";
+    public static String DESC = "#desc";
     /**
-     * timestamp default value
+     * #entity.name variable
      */
-    String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
+    public static String ENTITY_NAME = "#entity.name";
     /**
-     * classes path
+     * #entity.position variable
      */
-    String CLASSES_PATH = ".target.classes.";
+    public static String ENTITY_POSITION = "#entity.position";
     /**
-     * codegen.setting.json
+     * #entity.idType variable
      */
-    String SETTING_JSON = "codegen.setting.json";
+    public static String ENTITY_ID_TYPE = "#entity.idType";
+
     /**
-     * java file suffix
+     * codegen template variable map
      */
-    String JAVA_SUFFIX = ".java";
+    public static final Map<String, String> VARIABLES = new HashMap();
 }

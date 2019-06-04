@@ -15,42 +15,35 @@
  *
  */
 
-package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen;
+package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.tools;
+
+import java.text.SimpleDateFormat;
 
 /**
- * mybatis enhance codegen constant
+ * 时间格式化工具类
  *
- * @author：恒宇少年 - 于起宇
+ * @author 恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-05-25 13:50
+ * DateTime：2019-06-03 16:31
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface EnhanceCodegenConstant {
+public class DateFormatTools {
     /**
-     * point
+     * yyyy-MM-dd HH:mm:ss
      */
-    String POINT = ".";
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
     /**
-     * empty string
+     * format time
+     *
+     * @param time      millisecond
+     * @param formatter format
+     * @return time
      */
-    String EMPTY_STRING = "";
-    /**
-     * timestamp default value
-     */
-    String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
-    /**
-     * classes path
-     */
-    String CLASSES_PATH = ".target.classes.";
-    /**
-     * codegen.setting.json
-     */
-    String SETTING_JSON = "codegen.setting.json";
-    /**
-     * java file suffix
-     */
-    String JAVA_SUFFIX = ".java";
+    public static String formatTime(Long time, String formatter) {
+        return new SimpleDateFormat(formatter).format(time);
+    }
 }

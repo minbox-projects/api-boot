@@ -178,4 +178,5 @@ public class EntityClassBuilder extends AbstractClassBuilder {
         }
         return !StringUtils.isEmpty(defaultValue) ? String.format(pattern, defaultValue) : defaultValue;
     }
+
 }

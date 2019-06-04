@@ -15,42 +15,18 @@
  *
  */
 
-package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen;
+package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.model;
 
 /**
- * mybatis enhance codegen constant
+ * extend entity
  *
- * @author：恒宇少年 - 于起宇
+ * @author 恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-05-25 13:50
+ * DateTime：2019-06-03 15:01
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface EnhanceCodegenConstant {
-    /**
-     * point
-     */
-    String POINT = ".";
-    /**
-     * empty string
-     */
-    String EMPTY_STRING = "";
-    /**
-     * timestamp default value
-     */
-    String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
-    /**
-     * classes path
-     */
-    String CLASSES_PATH = ".target.classes.";
-    /**
-     * codegen.setting.json
-     */
-    String SETTING_JSON = "codegen.setting.json";
-    /**
-     * java file suffix
-     */
-    String JAVA_SUFFIX = ".java";
+public class Extend extends NameImport {
 }

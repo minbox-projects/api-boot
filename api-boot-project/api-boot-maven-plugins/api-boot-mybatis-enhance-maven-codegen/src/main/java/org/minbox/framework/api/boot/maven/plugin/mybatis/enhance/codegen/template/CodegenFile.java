@@ -15,42 +15,33 @@
  *
  */
 
-package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen;
+package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template;
+
+import lombok.Data;
 
 /**
- * mybatis enhance codegen constant
+ * codegen file
  *
- * @author：恒宇少年 - 于起宇
+ * @author 恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-05-25 13:50
+ * DateTime：2019-06-03 15:36
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface EnhanceCodegenConstant {
+@Data
+public class CodegenFile {
     /**
-     * point
+     * file path
      */
-    String POINT = ".";
+    private String packageName;
     /**
-     * empty string
+     * file name
      */
-    String EMPTY_STRING = "";
+    private String fileName;
     /**
-     * timestamp default value
+     * file content
      */
-    String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
-    /**
-     * classes path
-     */
-    String CLASSES_PATH = ".target.classes.";
-    /**
-     * codegen.setting.json
-     */
-    String SETTING_JSON = "codegen.setting.json";
-    /**
-     * java file suffix
-     */
-    String JAVA_SUFFIX = ".java";
+    private String javaContent;
 }

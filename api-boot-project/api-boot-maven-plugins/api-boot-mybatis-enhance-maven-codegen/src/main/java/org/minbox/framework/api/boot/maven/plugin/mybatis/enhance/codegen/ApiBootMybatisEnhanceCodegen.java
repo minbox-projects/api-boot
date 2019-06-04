@@ -29,11 +29,14 @@ import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.plexus.util.FileUtils;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.ClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.ClassBuilderFactory;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl.DynamicEntityClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl.EntityClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.CodegenFile;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.CodegenTemplate;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.tools.CamelTools;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.writer.JavaClassWriter;
 import org.springframework.util.ObjectUtils;
@@ -60,10 +63,6 @@ import java.util.List;
 @Mojo(name = "generator", defaultPhase = LifecyclePhase.COMPILE)
 @Execute(phase = LifecyclePhase.COMPILE)
 public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
-    /**
-     * file suffix
-     */
-    private static final String FILE_SUFFIX = ".java";
     /**
      * Whether to execute automatically
      * Default not to execute
@@ -150,11 +149,15 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             getLog().warn("Automatic code generation is not turned on. If you need to generate entity classes, configure 【execute=true】");
             return;
         }
+
         // code builder properties
         CodeBuilderProperties codeBuilderProperties = CodeBuilderProperties.builder().dbType(dbType).dbName(dbName).dbUrl(dbUrl).dbUserName(dbUserName).dbPassword(dbPassword).dbDriverClassName(dbDriverClassName).build();
 
         // get database instance by DbTypeEnum
         DataBase dataBase = DataBaseFactory.newInstance(codeBuilderProperties);
+
+        // load codegen.setting.json
+        String codegenSetting = loadCodegenSetting();
 
         List<String> tableNames = ObjectUtils.isEmpty(tables) ? getTableNames(dataBase) : tables;
 
@@ -201,7 +204,53 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
                     JavaClassWriter.writeToJavaFile(classPath, classContent);
                 }
             });
+
+            // generator java file with codegen.setting.json
+            if (!ObjectUtils.isEmpty(codegenSetting)) {
+                // cover old data
+                wrapper.setTableCamelName(className);
+                wrapper.setPackageName(packageName);
+
+                CodegenTemplate codegenTemplate = new CodegenTemplate(wrapper, codegenSetting);
+
+                // formatter all template java file
+                List<CodegenFile> files = codegenTemplate.formatJavaFiles();
+
+                if (!ObjectUtils.isEmpty(files)) {
+                    files.stream().forEach(file -> {
+                        getLog().info("generation file -> " + file.getFileName());
+                        // generator package dir & return full file path
+                        String fullFilePath = getNewClassPath(file.getFileName(), file.getPackageName());
+                        if (!StringUtils.isEmpty(file.getJavaContent()) && !StringUtils.isEmpty(fullFilePath)) {
+                            // invoke content write
+                            JavaClassWriter.writeToJavaFile(fullFilePath, file.getJavaContent());
+                        }
+                    });
+                }
+            }
         });
+    }
+
+    /**
+     * load codegen.setting.json parse to CodegenSetting entity
+     */
+    private String loadCodegenSetting() {
+        try {
+            // formatter codegen.setting.json path
+            String settingJsonPath = String.format("%s%s", EnhanceCodegenConstant.CLASSES_PATH.replace(EnhanceCodegenConstant.POINT, File.separator), EnhanceCodegenConstant.SETTING_JSON);
+
+            // read codegen.setting.json content
+            File file = new File(projectBaseDir + settingJsonPath);
+            String content = FileUtils.fileRead(file);
+
+            getLog().info("codegen.setting.json：");
+            getLog().info(content);
+
+            return content;
+        } catch (Exception e) {
+            getLog().error(e);
+        }
+        return null;
     }
 
     /**
@@ -240,28 +289,6 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      * @return class path
      */
     private String getNewClassPath(String entityClassName, String prefixDir) {
-        return String.format("%s%s%s%s", getGeneratorDir(prefixDir), File.separator, entityClassName, FILE_SUFFIX);
-    }
-
-    /**
-     * 递归删除目录下的所有文件及子目录下所有文件
-     *
-     * @param dir 将要删除的文件目录
-     * @return boolean Returns "true" if all deletions were successful.
-     * If a deletion fails, the method stops attempting to
-     * delete and returns "false".
-     */
-    private static boolean deleteDir(File dir) {
-        if (dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-        }
-        // 目录此时为空，可以删除
-        return dir.delete();
+        return String.format("%s%s%s%s", getGeneratorDir(prefixDir), File.separator, entityClassName, EnhanceCodegenConstant.JAVA_SUFFIX);
     }
 }
