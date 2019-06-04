@@ -31,6 +31,7 @@ import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builde
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -79,8 +80,11 @@ public class EntityClassBuilder extends AbstractClassBuilder {
             // @table
             writer.line(String.format(TABLE_ANNOTATION, table.getTableName()));
 
+            // serializable
+            SimpleType serializableInterface = new SimpleType(Serializable.class.getName(), EnhanceCodegenConstant.EMPTY_STRING, Serializable.class.getName());
+
             // public class
-            writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()));
+            writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()), null, serializableInterface);
 
             for (com.gitee.hengboy.builder.core.database.model.Column column : table.getColumns()) {
                 // comment
@@ -111,7 +115,7 @@ public class EntityClassBuilder extends AbstractClassBuilder {
      */
     void chooseImport(com.gitee.hengboy.builder.core.database.model.Table table, CodeWriter writer) throws IOException {
         // basic imports
-        writer.imports(Column.class, Id.class, Table.class, KeyGeneratorTypeEnum.class, Data.class);
+        writer.imports(Column.class, Id.class, Table.class, KeyGeneratorTypeEnum.class, Data.class, Serializable.class);
 
         // import bigDecimal
         if (table.isHasBigDecimal()) {

@@ -218,7 +218,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
 
                 if (!ObjectUtils.isEmpty(files)) {
                     files.stream().forEach(file -> {
-                        getLog().info("generation file -> " + file.getFileName());
+                        getLog().info("generator 【" + file.getFileName() + "】 by codegen template.");
                         // generator package dir & return full file path
                         String fullFilePath = getNewClassPath(file.getFileName(), file.getPackageName());
                         if (!StringUtils.isEmpty(file.getJavaContent()) && !StringUtils.isEmpty(fullFilePath)) {
@@ -241,12 +241,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
 
             // read codegen.setting.json content
             File file = new File(projectBaseDir + settingJsonPath);
-            String content = FileUtils.fileRead(file);
-
-            getLog().info("codegen.setting.json：");
-            getLog().info(content);
-
-            return content;
+            return FileUtils.fileRead(file);
         } catch (Exception e) {
             getLog().error(e);
         }
