@@ -21,6 +21,16 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
         </dependency>
+        <!--Hikari-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <!--MySQL-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
     </dependencies>
     <!--ApiBoot版本依赖-->
     <dependencyManagement>
@@ -34,4 +44,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.5.RELEASE</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
