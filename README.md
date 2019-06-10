@@ -2,6 +2,9 @@
 <img src="http://image.yuqiyu.com/ApiBoot-Logo.png" height="200"/>
 </p>
 <p align="center">
+    <a href="http://apiboot.yuqiyu.com">
+        <img src="https://img.shields.io/badge/link-查看ApiBoot官方文档-blue.svg?style=flat-square" alt="ApiBoot官网">
+    </a>
     <a href="https://search.maven.org/search?q=g:org.minbox.framework">
         <img src="https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central" alt="Maven Center">
     </a>
@@ -15,8 +18,6 @@
         <img src="https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg" alt="SpringBoot Version">
     </a>
 </p>
-
-[详细使用文档 - ApiBoot官网](http://apiboot.yuqiyu.com)
 
 `ApiBoot`是一款基于`SpringBoot1.x`、`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
@@ -76,7 +77,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.0.9-SNAPSHOT</version>
+      <version>2.0.9.RELEASE</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
