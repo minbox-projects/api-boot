@@ -17,9 +17,7 @@
 
 package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.writer;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Java Class File Writer
@@ -33,6 +31,10 @@ import java.io.IOException;
  * GitHub：https://github.com/hengboy
  */
 public class JavaClassWriter {
+    /**
+     * java file default charset
+     */
+    private static final String DEFAULT_CHARSET_NAME = "UTF-8";
 
     /**
      * Write code to entity classes
@@ -42,11 +44,11 @@ public class JavaClassWriter {
      */
     public static void writeToJavaFile(String javaFilePath, String content) {
         try {
-            FileWriter fw = new FileWriter(javaFilePath, false);
-            BufferedWriter bw = new BufferedWriter(fw);
+            OutputStreamWriter writerStream = new OutputStreamWriter(new FileOutputStream(javaFilePath), DEFAULT_CHARSET_NAME);
+            BufferedWriter bw = new BufferedWriter(writerStream);
             bw.append(content);
             bw.close();
-            fw.close();
+            writerStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
