@@ -177,12 +177,21 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
         OAuth2RequestFactory requestFactory = requestFactory();
 
         List<TokenGranter> tokenGranters = new ArrayList<TokenGranter>();
+        // code
         tokenGranters.add(new AuthorizationCodeTokenGranter(tokenServices, authorizationCodeServices, clientDetails,
                 requestFactory));
+
+        // refresh token
         tokenGranters.add(new RefreshTokenGranter(tokenServices, clientDetails, requestFactory));
+
+        // implicit
         ImplicitTokenGranter implicit = new ImplicitTokenGranter(tokenServices, clientDetails, requestFactory);
         tokenGranters.add(implicit);
+
+        // client
         tokenGranters.add(new ClientCredentialsTokenGranter(tokenServices, clientDetails, requestFactory));
+
+        // password
         if (authenticationManager != null) {
             tokenGranters.add(new ResourceOwnerPasswordTokenGranter(authenticationManager, tokenServices,
                     clientDetails, requestFactory));

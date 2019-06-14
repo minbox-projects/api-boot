@@ -19,6 +19,8 @@ package org.minbox.framework.api.boot.plugin.security.delegate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.io.Serializable;
+
 /**
  * ApiBoot的数据存储委托接口
  *
@@ -30,7 +32,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface ApiBootStoreDelegate {
+public interface ApiBootStoreDelegate extends Serializable {
     /**
      * 根据用户名查询用户信息
      *

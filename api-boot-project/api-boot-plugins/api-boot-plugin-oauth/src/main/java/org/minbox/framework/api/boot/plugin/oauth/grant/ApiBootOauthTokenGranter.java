@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.plugin.oauth.grant;
 import org.minbox.framework.api.boot.plugin.oauth.exception.ApiBootTokenException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ import java.util.Map;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface ApiBootOauthTokenGranter {
+public interface ApiBootOauthTokenGranter extends Serializable {
     /**
      * oauth2 grant type for ApiBoot
      *
