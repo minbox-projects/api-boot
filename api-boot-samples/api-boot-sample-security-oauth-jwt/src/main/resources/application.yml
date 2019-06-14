@@ -22,3 +22,4 @@ api:
         enable: true
         # 转换Jwt时所需加密key，默认为ApiBoot
         sign-key: 恒宇少年 - 于起宇
+      away: jdbc

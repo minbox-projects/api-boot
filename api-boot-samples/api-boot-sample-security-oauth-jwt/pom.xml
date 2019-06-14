@@ -31,6 +31,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!--ApiBoot Mybatis Enhance-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-mybatis-enhance</artifactId>
+        </dependency>
     </dependencies>
     <!--ApiBoot版本依赖-->
     <dependencyManagement>
