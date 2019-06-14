@@ -16,6 +16,8 @@ api:
           password: 123456
         - username: apiboot
           password: abc321
+      away: jdbc
+      enable-default-store-delegate: false
     oauth:
       jwt:
         # 开启Jwt转换AccessToken

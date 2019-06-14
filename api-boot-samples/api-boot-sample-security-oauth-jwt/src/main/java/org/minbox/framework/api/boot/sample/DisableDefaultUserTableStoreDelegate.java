@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,9 +28,6 @@ import java.util.List;
  */
 @Component
 public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegate {
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     /**
      * 用户列表示例
@@ -83,7 +79,7 @@ public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegat
          */
         @Override
         public String getPassword() {
-            return passwordEncoder.encode("123456");
+            return new BCryptPasswordEncoder().encode("123456");
         }
 
         @Override
