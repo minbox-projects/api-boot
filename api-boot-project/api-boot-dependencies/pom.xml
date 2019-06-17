@@ -35,7 +35,7 @@
         <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
         <!--Builder Core Version-->
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
-        <mybatis.pageable.core.version>1.0.6.RELEASE</mybatis.pageable.core.version>
+        <mybatis.pageable.core.version>1.0.7.RELEASE</mybatis.pageable.core.version>
         <mybatis.enhance.core.version>1.1.1.RELEASE</mybatis.enhance.core.version>
         <mybatis.enhance.dsl.version>1.1.1.RELEASE</mybatis.enhance.dsl.version>
         <mysema.codegen.version>0.6.8</mysema.codegen.version>
