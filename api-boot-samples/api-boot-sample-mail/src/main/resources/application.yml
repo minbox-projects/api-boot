@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: api-boot-sample-mail
+
+# ApiBoot Mail
+api:
+  boot:
+    mail:
+      # 对应修改自己的配置参数
+      access-key: xxx
+      access-secret: xx
+      account-name: xxx
+      region: hangzhou

@@ -28,6 +28,7 @@
         <module>api-boot-starter-mybatis-pageable</module>
         <module>api-boot-starter-mybatis-enhance</module>
         <module>api-boot-starter-rate-limiter</module>
+        <module>api-boot-starter-mail</module>
     </modules>
 
 

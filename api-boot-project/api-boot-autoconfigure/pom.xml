@@ -194,5 +194,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--ApiBoot Mail-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-mail</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 </project>

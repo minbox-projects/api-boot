@@ -14,7 +14,7 @@
     <artifactId>api-boot-dependencies</artifactId>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
+        <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
         <api.boot.version>2.1.0-SNAPSHOT</api.boot.version>
         <druid.version>1.1.14</druid.version>
         <druid.starter.version>1.1.14</druid.starter.version>
@@ -47,6 +47,7 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 
+        <aliyun-java-sdk-dm.version>3.3.1</aliyun-java-sdk-dm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -355,6 +356,23 @@
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>nacos-config-spring-boot-starter</artifactId>
                 <version>${nacos.config.version}</version>
+            </dependency>
+
+            <!--ApiBoot Mail-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-mail</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-mail</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dm</artifactId>
+                <version>${aliyun-java-sdk-dm.version}</version>
             </dependency>
 
         </dependencies>

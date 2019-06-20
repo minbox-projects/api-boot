@@ -26,6 +26,7 @@
         <module>api-boot-sample-mybatis-enhance</module>
         <module>api-boot-sample-mybatis-enhance-codegen</module>
         <module>api-boot-sample-integration</module>
+        <module>api-boot-sample-mail</module>
     </modules>
 
     <build>
