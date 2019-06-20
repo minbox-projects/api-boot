@@ -71,8 +71,8 @@ public class PhoneCodeOauthTokenGranter implements ApiBootOauthTokenGranter {
      * code=196523
      *
      * @param parameters parameter map
-     * @return
-     * @throws ApiBootTokenException
+     * @return UserDetails
+     * @throws ApiBootTokenException ApiBoot Exception
      */
     @Override
     public UserDetails loadByParameter(Map<String, String> parameters) throws ApiBootTokenException {

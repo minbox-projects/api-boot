@@ -54,10 +54,12 @@ public class MailTest {
                 .contentType(ContentType.HTML)
                 .content("<a href='http://blog.yuqiyu.com'>点击访问博客</a>")
                 .toAddress(Arrays.asList("yuqiyu@vip.qq.com"))
-                .subject("恒宇少年")
+                .subject("ApiBoot 新版本发布啦！")
                 .build();
         ApiBootMailResponse response = apiBootMailService.sendMail(request);
-        System.out.println(response.isSuccess());
+        if (response.isSuccess()) {
+            System.out.println("邮件发送成功.");
+        }
     }
 
     /**
@@ -68,9 +70,11 @@ public class MailTest {
         ApiBootMailRequest request = ApiBootMailRequest.builder()
                 .content("ApiBoot Mail 发版啦~~")
                 .toAddress(Arrays.asList("yuqiyu@vip.qq.com"))
-                .subject("恒宇少年")
+                .subject("ApiBoot 新版本发布啦！")
                 .build();
         ApiBootMailResponse response = apiBootMailService.sendMail(request);
-        System.out.println(response.isSuccess());
+        if (response.isSuccess()) {
+            System.out.println("邮件发送成功.");
+        }
     }
 }
