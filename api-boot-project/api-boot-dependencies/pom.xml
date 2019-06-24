@@ -16,19 +16,19 @@
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
         <api.boot.version>2.1.0-SNAPSHOT</api.boot.version>
-        <druid.version>1.1.14</druid.version>
-        <druid.starter.version>1.1.14</druid.starter.version>
-        <fastjson.version>1.2.56</fastjson.version>
+        <druid.version>1.1.17</druid.version>
+        <druid.starter.version>1.1.17</druid.starter.version>
+        <fastjson.version>1.2.58</fastjson.version>
         <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
         <spring.security.jwt.version>1.0.10.RELEASE</spring.security.jwt.version>
-        <reflections.version>0.9.11</reflections.version>
+        <reflections.version>0.9.12</reflections.version>
         <guava.version>20.0</guava.version>
         <swagger.version>2.9.2</swagger.version>
         <alibaba.oss.version>2.8.3</alibaba.oss.version>
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
-        <quartz.version>2.3.0</quartz.version>
-        <spring.tx.version>5.1.5.RELEASE</spring.tx.version>
+        <quartz.version>2.3.1</quartz.version>
+        <spring.tx.version>5.1.8.RELEASE</spring.tx.version>
         <jpush-client.version>3.3.11</jpush-client.version>
         <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
