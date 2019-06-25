@@ -46,8 +46,8 @@ public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegat
      * 根据用户名查询用户信息
      *
      * @param username 用户名
-     * @return
-     * @throws UsernameNotFoundException
+     * @return UserDetails
+     * @throws UsernameNotFoundException 用户不存在
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

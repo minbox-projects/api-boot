@@ -66,7 +66,6 @@ public class PhoneCodeOauthTokenGranter implements ApiBootOauthTokenGranter {
 
     /**
      * 该方法参数集合是获取Token时携带的参数
-     * 获取Token路径：/oauth/token?grant_type=phone_code&phone=171xxxxx&code=196523
      * phone=171xxxxx
      * code=196523
      *
@@ -76,6 +75,7 @@ public class PhoneCodeOauthTokenGranter implements ApiBootOauthTokenGranter {
      */
     @Override
     public UserDetails loadByParameter(Map<String, String> parameters) throws ApiBootTokenException {
+        // 获取Token路径：/oauth/token?grant_type=phone_code&phone=171xxxxx&code=196523
         String phone = parameters.get(PARAM_PHONE);
         String code = parameters.get(PARAM_CODE);
 
