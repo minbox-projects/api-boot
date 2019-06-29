@@ -1,5 +1,5 @@
 <p align="center">
-<img src="http://image.yuqiyu.com/ApiBoot-Logo.png" height="200"/>
+<img src="http://image.yuqiyu.com/apiboot-colorful.png" height="200"/>
 </p>
 <p align="center">
     <a href="http://apiboot.yuqiyu.com">
