@@ -15,31 +15,19 @@
  *
  */
 
-package org.minbox.framework.api.boot.sample.mybatis.enhance;
+package org.minbox.framework.api.boot.sample.mybatis.enhance.mapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import com.gitee.hengboy.mybatis.enhance.mapper.EnhanceMapper;
+import org.minbox.framework.api.boot.sample.mybatis.enhance.entity.SystemUserRole;
 
 /**
- * ApiBoot Mybatis Enhance
- *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-26 17:02
+ * DateTime：2019-07-09 22:15
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-@SpringBootApplication
-public class ApiBootMybatisEnhanceApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ApiBootMybatisEnhanceApplication.class, args);
-    }
+public interface SystemUserRoleMapper extends EnhanceMapper<SystemUserRole, Integer> {
 }

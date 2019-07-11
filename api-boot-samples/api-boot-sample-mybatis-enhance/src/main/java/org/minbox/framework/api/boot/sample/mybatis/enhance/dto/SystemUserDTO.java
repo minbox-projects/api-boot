@@ -15,36 +15,39 @@
  *
  */
 
-package org.minbox.framework.api.boot.sample.mybatis.enhance;
+package org.minbox.framework.api.boot.sample.mybatis.enhance.dto;
 
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Column;
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Id;
-import com.gitee.hengboy.mybatis.enhance.common.annotation.Table;
 import com.gitee.hengboy.mybatis.enhance.common.enums.KeyGeneratorTypeEnum;
 import lombok.Data;
 
 /**
+ * 自定义系统用户数据转换实体
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-26 16:14
+ * DateTime：2019-07-10 09:08
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
 @Data
-@Table(name = "local_user_info")
-public class UserEntity {
-    @Column(name = "ui_id")
-    @Id(generatorType = KeyGeneratorTypeEnum.UUID)
-    private String uiId;
-
-    @Column(name = "ui_phone")
-    private String uiPhone;
-
-    @Column(name = "ui_password")
-    private String uiPassword;
-
-    @Column(name = "ui_status")
-    private String uiStatus;
+public class SystemUserDTO {
+    /**
+     * 主键
+     */
+    @Column(name = "SU_ID")
+    private String id;
+    /**
+     * 用户名
+     */
+    @Column(name = "SU_USER_NAME")
+    private String userName;
+    /**
+     * 用户昵称
+     */
+    @Column(name = "SU_NICK_NAME")
+    private String nickName;
 }
