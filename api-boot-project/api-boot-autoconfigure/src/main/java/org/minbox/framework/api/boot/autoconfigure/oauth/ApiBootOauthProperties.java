@@ -48,9 +48,9 @@ public class ApiBootOauthProperties {
     /**
      * Oauth2认证存储方式，默认内存方式
      *
-     * @see SecurityAway
+     * @see OAuthAway
      */
-    private SecurityAway away = SecurityAway.memory;
+    private OAuthAway away = OAuthAway.memory;
 
     /**
      * Oauth2 clientId
