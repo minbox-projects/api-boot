@@ -47,11 +47,6 @@ public class ApiBootUserDetailsService implements UserDetailsService {
      */
     @Autowired
     private ApplicationContext applicationContext;
-    /**
-     * ApiBoot数据委托类
-     */
-    @Autowired
-    private ApiBootStoreDelegate apiBootStoreDelegate;
 
     /**
      * 根据用户名读取用户基本信息
@@ -65,6 +60,10 @@ public class ApiBootUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.info("Login user：[{}]", username);
+
+        // find ApiBootStoreDelegate support instance
+        // default is org.minbox.framework.api.boot.plugin.security.delegate.ApiBootDefaultStoreDelegate
+        ApiBootStoreDelegate apiBootStoreDelegate = applicationContext.getBean(ApiBootStoreDelegate.class);
         UserDetails userDetails = apiBootStoreDelegate.loadUserByUsername(username);
 
         // publish loadUserEvent

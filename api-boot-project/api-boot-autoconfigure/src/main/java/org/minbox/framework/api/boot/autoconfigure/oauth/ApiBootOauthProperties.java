@@ -21,6 +21,9 @@ import org.minbox.framework.api.boot.autoconfigure.security.SecurityAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
@@ -48,30 +51,84 @@ public class ApiBootOauthProperties {
      * @see SecurityAway
      */
     private SecurityAway away = SecurityAway.memory;
+
     /**
      * Oauth2 clientId
+     * 2.1.1. After the RELEASE version, the attribute is discarded and replaced by clients.
      */
+    @Deprecated
     private String clientId = "ApiBoot";
     /**
      * Oauth2 clientSecret
+     * 2.1.1. After the RELEASE version, the attribute is discarded and replaced by clients.
      */
+    @Deprecated
     private String clientSecret = "ApiBootSecret";
     /**
      * 客户端授权类型集合
+     * 2.1.1. After the RELEASE version, the attribute is discarded and replaced by clients.
      */
+    @Deprecated
     private String[] grantTypes = new String[]{"password", "refresh_token"};
     /**
      * 客户端作用域集合
+     * 2.1.1. After the RELEASE version, the attribute is discarded and replaced by clients.
      */
+    @Deprecated
     private String[] scopes = new String[]{"api"};
     /**
      * 资源编号
+     * 2.1.1. After the RELEASE version, the attribute is discarded and replaced by clients.
      */
+    @Deprecated
     private String resourceId = "api";
+
     /**
      * 配置JWT格式化Oauth2返回的token
      */
     private Jwt jwt = new Jwt();
+    /**
+     * configure multiple clients
+     */
+    private List<Client> clients = new ArrayList() {{
+        add(new Client());
+    }};
+
+    /**
+     * Oauth2 Client
+     * Used to configure multiple clients
+     */
+    @Data
+    public static class Client {
+        /**
+         * oauth2 client id
+         */
+        private String clientId = "ApiBoot";
+        /**
+         * oauth2 client secret
+         */
+        private String clientSecret = "ApiBootSecret";
+        /**
+         * oauth2 client grant types
+         * default value is "password,refresh_token"
+         */
+        private String[] grantTypes = new String[]{"password", "refresh_token"};
+        /**
+         * oauth2 client scope
+         * default value is "api"
+         */
+        private String[] scopes = new String[]{"api"};
+        /**
+         * oauth2 application resource id
+         * default value is "api"
+         */
+        private String[] resourceId = new String[]{"api"};
+        /**
+         * oauth2 access token validity seconds
+         * default value is 7200 second
+         */
+        private int accessTokenValiditySeconds = 7200;
+    }
 
     /**
      * 自定义Jwt相关的配置

@@ -38,5 +38,9 @@ public enum SecurityAway {
     /**
      * jdbc方式
      */
-    jdbc
+    jdbc,
+    /**
+     * redis方式
+     */
+    redis
 }
