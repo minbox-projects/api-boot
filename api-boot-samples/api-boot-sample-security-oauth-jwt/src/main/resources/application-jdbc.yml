@@ -1,0 +1,9 @@
+api:
+  boot:
+    security:
+      away: jdbc
+      enable-default-store-delegate: false
+    oauth:
+      away: jdbc
+      jwt:
+        enable: true

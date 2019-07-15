@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,18 +31,8 @@ import java.util.List;
 @Component
 public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegate {
 
-    /**
-     * 用户列表示例
-     * 从该集合内读取用户信息
-     * 可以使用集合内的用户获取access_token
-     */
-    static List<String> users = new ArrayList() {
-        {
-            add("api-boot");
-            add("hengboy");
-            add("yuqiyu");
-        }
-    };
+    @Autowired
+    private SystemUserMapper systemUserMapper;
 
     /**
      * 根据用户名查询用户信息
@@ -51,60 +43,10 @@ public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegat
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (!users.contains(username)) {
+        SystemUser user = systemUserMapper.findByUserName(username);
+        if (ObjectUtils.isEmpty(user)) {
             throw new UsernameNotFoundException("用户：" + username + "不存在");
         }
-        return new DisableDefaultUserDetails(username);
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    class DisableDefaultUserDetails implements UserDetails {
-        private String username;
-
-        @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-            return new ArrayList() {
-                {
-                    add((GrantedAuthority) () -> "ROLE_USER");
-                }
-            };
-        }
-
-        /**
-         * 示例密码使用123456
-         *
-         * @return
-         */
-        @Override
-        public String getPassword() {
-            return new BCryptPasswordEncoder().encode("123456");
-        }
-
-        @Override
-        public String getUsername() {
-            return username;
-        }
-
-        @Override
-        public boolean isAccountNonExpired() {
-            return true;
-        }
-
-        @Override
-        public boolean isAccountNonLocked() {
-            return true;
-        }
-
-        @Override
-        public boolean isCredentialsNonExpired() {
-            return true;
-        }
-
-        @Override
-        public boolean isEnabled() {
-            return true;
-        }
+        return new DisableDefaultUserDetails(user.getUserName(), user.getPassword());
     }
 }

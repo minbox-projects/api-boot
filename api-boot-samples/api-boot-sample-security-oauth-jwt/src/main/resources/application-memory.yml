@@ -1,0 +1,19 @@
+api:
+  boot:
+    security:
+      away: memory
+      users:
+        - username: hengboy
+          password: 123456
+    oauth:
+      away: memory
+      jwt:
+        enable: true
+      # 配置多客户端
+      clients:
+        # 客户端test基本配置
+        - client-id: test
+          client-secret: 123456
+        # 客户端admin基本配置
+        - client-id: admin
+          client-secret: 123456

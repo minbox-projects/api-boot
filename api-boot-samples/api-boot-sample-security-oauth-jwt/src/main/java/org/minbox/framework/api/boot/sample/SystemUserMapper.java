@@ -15,18 +15,20 @@
  *
  */
 
-package org.minbox.framework.api.boot.sample.mybatis.enhance;
+package org.minbox.framework.api.boot.sample;
 
 import com.gitee.hengboy.mybatis.enhance.mapper.EnhanceMapper;
 
 /**
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-04-26 16:16
+ * DateTime：2019-07-12 16:14
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface UserMapper extends EnhanceMapper<UserEntity, String> {
+public interface SystemUserMapper extends EnhanceMapper<SystemUser, String> {
+
+    SystemUser findByUserName(String userName);
 }
