@@ -38,6 +38,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -109,7 +110,14 @@ public class ApiBootLoggingInterceptor implements HandlerInterceptor {
             log.setRequestHeaders(HttpRequestTools.getRequestHeaders(request));
             log.setHttpStatus(response.getStatus());
             log.setStartTime(System.currentTimeMillis());
+
+            // service id
             log.setServiceId(environment.getProperty("spring.application.name"));
+            // service port
+            log.setServicePort(environment.getProperty("local.server.port"));
+            // service ip
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            log.setServiceIp(inetAddress.getHostAddress());
 
             // traceId
             String traceId = getOrCreateTraceId(request);

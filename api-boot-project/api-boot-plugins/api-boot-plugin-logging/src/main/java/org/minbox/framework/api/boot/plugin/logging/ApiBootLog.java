@@ -63,6 +63,14 @@ public class ApiBootLog {
      */
     private String requestIp;
     /**
+     * service ip address
+     */
+    private String serviceIp;
+    /**
+     * service port
+     */
+    private String servicePort;
+    /**
      * start time
      */
     private Long startTime;
