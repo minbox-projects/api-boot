@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: api-boot-sample-logging
+
+logging:
+  level:
+    org.minbox.framework.api.boot.plugin.logging: debug

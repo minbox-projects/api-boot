@@ -25,7 +25,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class CommonResourceService extends BaseService {
     /**
-     * 根据目标编号 & 资源类型
+     * 根据目标编号 资源类型
      * 查询资源列表
      *
      * @param targetId 目标编号
