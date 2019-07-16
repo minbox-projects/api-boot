@@ -45,7 +45,7 @@
 更多功能请参考 [更多功能列表](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
 
 ## 组件
-
+- **[ApiBoot Logging](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging)**：零侵入式、链路式请求日志分析框架，无缝整合SpringCloud Openfeign
 - **[Spring Security](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/)**：Spring提供的安全框架，Spring家族式的设计，无缝整合SpringBoot
 - **[OAuth2](https://oauth.net/2/)**：OAuth是一个网络授权的标准。
 - **[JWT](https://jwt.io/)**：JSON Web Token是目前流行的跨域认证解决方案，用于格式化OAuth2生成的Token。
@@ -77,7 +77,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.1.1-SNAPSHOT</version>
+      <version>2.1.1.RELEASE</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -109,6 +109,7 @@ Demo列表：
 - [ApiBoot Mybatis Enhance Codegen](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance-codegen)
 - [ApiBoot Mybatis Pageable](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-pageable)
 - [ApiBoot Mail](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mail)
+- [ApiBoot Logging](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging)
 
 ## 更新日志
 
