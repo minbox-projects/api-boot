@@ -201,5 +201,19 @@
             <optional>true</optional>
         </dependency>
 
+        <!--ApiBoot Logging-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-logging</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <!--SpringCloud Openfeign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 </project>
