@@ -19,3 +19,5 @@ api:
       clients:
         - client-id: admin
           client-secret: admin_secret
+        - client-id: platform
+          client-secret: platform_secret
