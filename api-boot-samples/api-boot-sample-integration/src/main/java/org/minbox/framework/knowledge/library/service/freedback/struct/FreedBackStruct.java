@@ -25,7 +25,7 @@ public interface FreedBackStruct {
      *
      * @param kfUserId  用户编号
      * @param kfContent 意见反馈内容
-     * @return
+     * @return FeedbackEntity
      */
     FeedbackEntity from(String kfUserId, String kfContent);
 }

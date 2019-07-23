@@ -108,7 +108,6 @@ public class ArticleInfoService extends BaseService {
      * 检查文章有效性
      *
      * @param articleId 文章编号
-     * @return
      * @throws KnowledgeException
      */
     @ResourceLoad
@@ -143,7 +142,6 @@ public class ArticleInfoService extends BaseService {
      *
      * @param articleId     文章编号
      * @param effectiveness 有效性，true：检查文章有效性，false：不检查
-     * @return
      * @throws KnowledgeException
      */
     public ArticleInfoDTO detail(String articleId, boolean effectiveness) throws KnowledgeException {
@@ -169,7 +167,6 @@ public class ArticleInfoService extends BaseService {
     /**
      * 同文推荐列表
      *
-     * @return
      */
     @ResourceLoad
     @ResourceField(name = "convertImage", source = "aiId", type = ResourceType.ARTICLE_COVERT_IMAGE)
@@ -199,7 +196,6 @@ public class ArticleInfoService extends BaseService {
      * 查询专题下的文章列表
      *
      * @param topicId 专题编号
-     * @return
      * @throws KnowledgeException
      */
     @ResourceLoad
@@ -216,7 +212,6 @@ public class ArticleInfoService extends BaseService {
      *
      * @param pageIndex 分页参数：当前页码
      * @param pageSize  分页参数：每页条数
-     * @return
      * @throws KnowledgeException
      */
     public List<ArticleInfoDTO> pageableOfRecommendArticleList(int pageIndex, int pageSize) throws KnowledgeException {
@@ -240,7 +235,6 @@ public class ArticleInfoService extends BaseService {
      *
      * @param pageIndex 分页参数：当前页码
      * @param pageSize  分页参数：每页条数
-     * @return
      * @throws KnowledgeException
      */
     public List<ArticleInfoDTO> pageableOfTopicArticleList(int pageIndex, int pageSize, String topicId) throws KnowledgeException {
@@ -252,7 +246,6 @@ public class ArticleInfoService extends BaseService {
      *
      * @param pageIndex 分页参数：当前页码
      * @param pageSize  分页参数：每页条数
-     * @return
      * @throws KnowledgeException
      */
     public List<ArticleInfoDTO> pageableOfNewArticleList(int pageIndex, int pageSize) throws KnowledgeException {
@@ -264,7 +257,6 @@ public class ArticleInfoService extends BaseService {
      *
      * @param pageIndex 分页参数：当前页码
      * @param pageSize  分页参数：每页条数
-     * @return
      * @throws KnowledgeException
      */
     public List<ArticleInfoDTO> pageableOfKeyWordArticleList(String keyword, int pageIndex, int pageSize) throws KnowledgeException {
@@ -275,7 +267,6 @@ public class ArticleInfoService extends BaseService {
      * 查询文章列表
      *
      * @param param 查询参数
-     * @return
      * @throws KnowledgeException
      */
     @ResourceLoad

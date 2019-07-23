@@ -25,7 +25,7 @@ public class SecurityUserTools {
     /**
      * 获取登录的当前对象信息
      *
-     * @return
+     * @return KnowledgeLibraryUserDetails
      */
     public static KnowledgeLibraryUserDetails getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -15,11 +15,13 @@
     </modules>
     <groupId>org.minbox.framework</groupId>
     <artifactId>api-boot</artifactId>
-    <version>2.1.1.RELEASE</version>
+    <version>2.1.2.RELEASE</version>
     <name>api-boot</name>
     <properties>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     </properties>
     <description>
         ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，

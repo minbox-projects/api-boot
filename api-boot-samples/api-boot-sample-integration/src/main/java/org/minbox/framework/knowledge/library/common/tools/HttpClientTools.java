@@ -43,35 +43,16 @@ public class HttpClientTools {
         }
     }
 
-    /**
-     * 通过连接池获取HttpClient
-     *
-     * @return
-     */
     private static CloseableHttpClient getHttpClient() {
         init();
         return HttpClients.custom().setConnectionManager(cm).build();
     }
 
-    /**
-     * 发送get请求
-     *
-     * @param url
-     * @return
-     */
     public static String get(String url) {
         HttpGet httpGet = new HttpGet(url);
         return getResult(httpGet);
     }
 
-    /**
-     * 发送get请求
-     *
-     * @param url
-     * @param params
-     * @return
-     * @throws URISyntaxException
-     */
     public static String get(String url, Map<String, Object> params) throws URISyntaxException {
         URIBuilder ub = new URIBuilder();
         ub.setPath(url);
@@ -83,15 +64,6 @@ public class HttpClientTools {
         return getResult(httpGet);
     }
 
-    /**
-     * 发送get请求
-     *
-     * @param url
-     * @param headers
-     * @param params
-     * @return
-     * @throws URISyntaxException
-     */
     public static String get(String url, Map<String, Object> headers, Map<String, Object> params)
             throws URISyntaxException {
         URIBuilder ub = new URIBuilder();
@@ -107,25 +79,11 @@ public class HttpClientTools {
         return getResult(httpGet);
     }
 
-    /**
-     * 发送post请求
-     *
-     * @param url
-     * @return
-     */
     public static String post(String url) {
         HttpPost httpPost = new HttpPost(url);
         return getResult(httpPost);
     }
 
-    /**
-     * 发送post 请求
-     *
-     * @param url
-     * @param params
-     * @return
-     * @throws UnsupportedEncodingException
-     */
     public static String post(String url, Map<String, Object> params) throws UnsupportedEncodingException {
         HttpPost httpPost = new HttpPost(url);
         ArrayList<NameValuePair> pairs = covertParams2NVPS(params);
@@ -143,12 +101,6 @@ public class HttpClientTools {
         return pairs;
     }
 
-    /**
-     * 处理Http请求
-     *
-     * @param request
-     * @return
-     */
     private static String getResult(HttpRequestBase request) {
         CloseableHttpClient httpClient = getHttpClient();
         try {

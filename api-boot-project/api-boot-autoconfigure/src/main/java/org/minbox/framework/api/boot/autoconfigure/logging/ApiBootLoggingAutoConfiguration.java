@@ -47,7 +47,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -164,8 +163,8 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnBean(LoggingAdminDiscovery.class)
-    public ApiBootLoggingAdminStorageNotice apiBootLoggingAdminStorageNotice(LoggingCache loggingCache) {
-        return new ApiBootLoggingAdminStorageNotice(loggingCache);
+    public ApiBootLoggingAdminStorageNotice apiBootLoggingAdminStorageNotice(LoggingCache loggingCache, LoggingAdminReport loggingAdminReport) {
+        return new ApiBootLoggingAdminStorageNotice(loggingCache, apiBootLoggingProperties.getReportAway(), loggingAdminReport);
     }
 
     /**
@@ -191,7 +190,7 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     @Bean
     @ConditionalOnMissingBean
     public LoggingAdminReport loggingAdminReportSupport(LoggingAdminDiscovery loggingAdminDiscovery, RestTemplate restTemplate, LoggingCache loggingCache, ConfigurableEnvironment environment) {
-        return new LoggingAdminReportSupport(loggingAdminDiscovery, restTemplate, loggingCache, apiBootLoggingProperties.getNumberOfRequestLog(), environment);
+        return new LoggingAdminReportSupport(loggingAdminDiscovery, restTemplate, loggingCache, apiBootLoggingProperties.getReportNumberOfRequestLog(), environment);
     }
 
     /**
@@ -201,6 +200,7 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      * @return LoggingReportScheduled
      */
     @Bean
+    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "report-away", havingValue = "timing")
     @ConditionalOnMissingBean
     public LoggingReportScheduled loggingReportScheduled(LoggingAdminReport loggingAdminReport) {
         return new LoggingReportScheduled(loggingAdminReport, apiBootLoggingProperties.getReportInitialDelaySecond(), apiBootLoggingProperties.getReportIntervalSecond());

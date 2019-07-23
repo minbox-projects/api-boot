@@ -19,6 +19,8 @@
     </a>
 </p>
 
+ApiBoot 官网：http://apiboot.minbox.io
+
 `ApiBoot`是一款基于`SpringBoot1.x`、`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
 通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
 
@@ -45,6 +47,7 @@
 更多功能请参考 [更多功能列表](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
 
 ## 组件
+- **[ApiBoot Logging Admin](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging-admin)**：接收ApiBoot Logging组件的请求日志上报，进行存储、分析、通知等。
 - **[ApiBoot Logging](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging)**：零侵入式、链路式请求日志分析框架，无缝整合SpringCloud Openfeign
 - **[Spring Security](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/)**：Spring提供的安全框架，Spring家族式的设计，无缝整合SpringBoot
 - **[OAuth2](https://oauth.net/2/)**：OAuth是一个网络授权的标准。
@@ -77,7 +80,7 @@
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.1.1.RELEASE</version>
+      <version>2.1.2.RELEASE</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -110,6 +113,7 @@ Demo列表：
 - [ApiBoot Mybatis Pageable](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-pageable)
 - [ApiBoot Mail](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mail)
 - [ApiBoot Logging](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging)
+- [ApiBoot Logging Admin](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging-admin)
 
 ## 更新日志
 
@@ -140,34 +144,7 @@ Demo列表：
 
 <p align="left">
   <img src="http://image.yuqiyu.com/ApiBoot-qq-group-1.png" height="240">
-  <img src="http://image.yuqiyu.com/dingding_group.JPG" height="240">
 </p>
-
-### 项目结构
-
-```
-. api-boot
-├── api-boot-projects
-│   ├── api-boot-autoconfigure
-│   ├── api-boot-common
-│   ├── api-boot-dependencies
-│   ├── api-boot-parent
-│   └── api-boot-starters
-├── api-boot-samples
-│   ├── api-boot-sample-alibaba-oss
-│   ├── api-boot-sample-alibaba-sms
-│   ├── api-boot-sample-http-converter
-│   ├── api-boot-sample-datasource-switch
-│   ├── api-boot-sample-security-oauth-jwt
-│   ├── api-boot-sample-resource-load
-│   ├── api-boot-sample-rate-limiter
-│   ├── api-boot-sample-mybatis-enhance
-│   ├── api-boot-sample-mybatis-enhance-codegen
-│   ├── api-boot-sample-mybatis-pageable
-│   ├── api-boot-sample-quartz    
-│   └── api-boot-sample-swagger
-└── tools
-```
 
 ### 开源许可
 

@@ -18,7 +18,7 @@ public class KnowledgeException extends RuntimeException {
     /**
      * 消息内容构造函数
      *
-     * @param message
+     * @param message 错误消息
      */
     public KnowledgeException(String message) {
         super(message);

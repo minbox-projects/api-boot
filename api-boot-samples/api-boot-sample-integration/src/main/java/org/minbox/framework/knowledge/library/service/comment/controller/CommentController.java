@@ -38,7 +38,7 @@ public class CommentController {
      * @param articleId 文章编号
      * @param pageIndex 当前页码
      * @param pageSize  每页条数
-     * @return
+     * @return ApiBootResult
      */
     @ApiOperation(value = "文章留言列表", response = CommentInfoDTO.class)
     @ApiImplicitParams({

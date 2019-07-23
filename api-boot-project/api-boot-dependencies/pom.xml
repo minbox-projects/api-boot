@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.1.1.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
         <relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -16,7 +16,7 @@
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
         <spring.cloud.version>Greenwich.RELEASE</spring.cloud.version>
-        <api.boot.version>2.1.1.RELEASE</api.boot.version>
+        <api.boot.version>2.1.2.RELEASE</api.boot.version>
         <druid.version>1.1.17</druid.version>
         <druid.starter.version>1.1.17</druid.starter.version>
         <fastjson.version>1.2.58</fastjson.version>
@@ -392,6 +392,17 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-logging</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+            <!--ApiBoot Logging Admin-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-logging-admin</artifactId>
+                <version>${api.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-logging-admin</artifactId>
                 <version>${api.boot.version}</version>
             </dependency>
 

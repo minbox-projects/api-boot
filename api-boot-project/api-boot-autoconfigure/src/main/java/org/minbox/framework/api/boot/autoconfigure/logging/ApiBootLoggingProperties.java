@@ -19,6 +19,7 @@ package org.minbox.framework.api.boot.autoconfigure.logging;
 
 import lombok.Data;
 import lombok.Getter;
+import org.minbox.framework.api.boot.plugin.logging.ReportAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -60,9 +61,13 @@ public class ApiBootLoggingProperties {
      */
     private boolean formatConsoleLogJson = false;
     /**
+     * Report Request Log To Admin Away
+     */
+    private ReportAway reportAway = ReportAway.just;
+    /**
      * Number of request logs reported once
      */
-    private int numberOfRequestLog = 10;
+    private int reportNumberOfRequestLog = 10;
     /**
      * report to admin initial delay second
      */

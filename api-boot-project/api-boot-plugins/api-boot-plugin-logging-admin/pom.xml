@@ -25,46 +25,26 @@
         <version>2.1.2.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>api-boot-plugin-rate-limiter</artifactId>
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
     <description>
-        ApiBoot RateLimiter Plugin
-        Improving Service Availability by Acting on Interface Traffic Limitation
-
+        ApiBoot Logging Admin
+        1. Receiving reported log information
+        2. Storing log information
+        3. Analysis log information
     </description>
+    <artifactId>api-boot-plugin-logging-admin</artifactId>
     <dependencies>
         <!--ApiBoot Plugin-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-plugin</artifactId>
         </dependency>
-        <!--Google Guava-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
         <!--SpringBoot Web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--SpringBoot Aop-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!--SpringBoot Data Redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--Nacos Config-->
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

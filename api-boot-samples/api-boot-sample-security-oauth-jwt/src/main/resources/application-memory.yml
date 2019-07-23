@@ -14,6 +14,8 @@ api:
         # 客户端test基本配置
         - client-id: test
           client-secret: 123456
+          # 自定义客户端获取token的有效期
+          access-token-validity-seconds: 1000
         # 客户端admin基本配置
         - client-id: admin
           client-secret: 123456

@@ -20,53 +20,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>api-boot-plugins</artifactId>
+        <artifactId>api-boot-starters</artifactId>
         <groupId>org.minbox.framework</groupId>
         <version>2.1.2.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>api-boot-plugin-rate-limiter</artifactId>
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
-    <description>
-        ApiBoot RateLimiter Plugin
-        Improving Service Availability by Acting on Interface Traffic Limitation
+    <artifactId>api-boot-starter-logging-admin</artifactId>
 
-    </description>
     <dependencies>
-        <!--ApiBoot Plugin-->
+        <!--ApiBoot Starter-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin</artifactId>
+            <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--Google Guava-->
+        <!--ApiBoot Logging Admin Plugin-->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <!--SpringBoot Web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--SpringBoot Aop-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!--SpringBoot Data Redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--Nacos Config-->
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-starter</artifactId>
-            <optional>true</optional>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-logging-admin</artifactId>
         </dependency>
     </dependencies>
-
 </project>

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.1.1.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
         <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -205,6 +205,13 @@
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-plugin-logging</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--ApiBoot Logging Admin-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-logging-admin</artifactId>
             <optional>true</optional>
         </dependency>
         
