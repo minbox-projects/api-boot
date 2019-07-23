@@ -34,11 +34,22 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LocalNoticeSample implements ApiBootLogNotice {
+    /**
+     * order 值越小执行越靠前
+     *
+     * @return
+     */
     @Override
     public int getOrder() {
         return 0;
     }
 
+    /**
+     * 请求日志通知执行方法
+     * ApiBootLog为一次请求日志对象基本信息
+     *
+     * @param apiBootLog ApiBoot Log
+     */
     @Override
     public void notice(ApiBootLog apiBootLog) {
         System.out.println(apiBootLog);

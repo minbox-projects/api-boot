@@ -1,0 +1,19 @@
+api:
+  boot:
+    logging:
+      format-console-log-json: true
+      number-of-request-log: 2
+      discovery:
+        service-id: iot-server-admin
+        username: admin
+        password: iot_adminv3
+      ignore-paths:
+        - /actuator/health
+
+# Eureka Config
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service:nodev2@192.168.10.72:10001/eureka/
+  instance:
+    prefer-ip-address: true

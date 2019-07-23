@@ -1,0 +1,7 @@
+api:
+  boot:
+    logging:
+      admin:
+        server-address: user:123456@127.0.0.1:9090
+      format-console-log-json: true
+      number-of-request-log: 2

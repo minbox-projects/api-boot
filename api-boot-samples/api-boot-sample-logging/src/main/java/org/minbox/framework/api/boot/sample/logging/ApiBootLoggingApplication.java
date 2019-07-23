@@ -34,7 +34,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * GitHub：https://github.com/hengboy
  */
 @SpringBootApplication
-public class ApiBootLoggingApplication {
+public class ApiBootLoggingApplication{
     /**
      * logger instance
      */

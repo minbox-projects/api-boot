@@ -1,7 +1,10 @@
 spring:
   application:
     name: api-boot-sample-logging
-
+  profiles:
+    active: appoint
 logging:
   level:
     org.minbox.framework.api.boot.plugin.logging: debug
+server:
+  port: 8080
