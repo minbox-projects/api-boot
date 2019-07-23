@@ -44,6 +44,10 @@ public class ApiBootLoggingProperties {
      */
     public static final String API_BOOT_LOGGING_PREFIX = "api.boot.logging";
     /**
+     * ApiBoot Logging Admin Default Url
+     */
+    public static final String DEFAULT_URL = "http://localhost:8532";
+    /**
      * Interception log path prefix
      */
     private String[] loggingPathPrefix = new String[]{"/**"};
@@ -51,4 +55,67 @@ public class ApiBootLoggingProperties {
      * Ignore path array
      */
     private String[] ignorePaths;
+    /**
+     * Format console log JSON
+     */
+    private boolean formatConsoleLogJson = false;
+    /**
+     * Number of request logs reported once
+     */
+    private int numberOfRequestLog = 10;
+    /**
+     * report to admin initial delay second
+     */
+    private int reportInitialDelaySecond = 5;
+    /**
+     * report to admin interval second
+     */
+    private int reportIntervalSecond = 5;
+    /**
+     * logging cache away
+     */
+    private LoggingCacheAway loggingCacheAway = LoggingCacheAway.memory;
+    /**
+     * ApiBoot Logging Admin Instance
+     */
+    private AdminInstance admin = new AdminInstance();
+    /**
+     * ApiBoot Logging Discovery Instance
+     * support eureka
+     */
+    private DiscoveryInstance discovery;
+
+    /**
+     * Config ApiBoot Logging Admin Server
+     * report every request log to api-boot-logging-admin
+     */
+    @Data
+    public static class AdminInstance {
+        /**
+         * ApiBoot Logging Admin Server Address
+         */
+        private String serverAddress = DEFAULT_URL;
+
+    }
+
+    /**
+     * Config ApiBoot Logging Discovery Instance
+     * Draw the list of ApiBoot Logging Admin addresses from the registry
+     * and report the request log through load balancing
+     */
+    @Data
+    public static class DiscoveryInstance {
+        /**
+         * ApiBoot Logging Admin Spring Security Username
+         */
+        private String username;
+        /**
+         * ApiBoot Logging Admin Spring Security User Password
+         */
+        private String password;
+        /**
+         * ApiBoot Logging Admin Service ID
+         */
+        private String serviceId;
+    }
 }

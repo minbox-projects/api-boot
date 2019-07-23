@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(RequestInterceptor.class)
+@ConditionalOnClass({RequestInterceptor.class, ApiBootLogOpenFeignInterceptor.class})
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 public class ApiBootLoggingOpenfeignAutoConfiguration {
 

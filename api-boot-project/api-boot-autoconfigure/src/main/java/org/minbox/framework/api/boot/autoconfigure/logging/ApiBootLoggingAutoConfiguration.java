@@ -18,11 +18,20 @@
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
+import org.minbox.framework.api.boot.plugin.logging.admin.discovery.LoggingAdminDiscovery;
+import org.minbox.framework.api.boot.plugin.logging.admin.discovery.support.LoggingAppointAdminDiscovery;
+import org.minbox.framework.api.boot.plugin.logging.admin.discovery.support.LoggingRegistryCenterAdminDiscovery;
+import org.minbox.framework.api.boot.plugin.logging.admin.report.LoggingAdminReport;
+import org.minbox.framework.api.boot.plugin.logging.admin.report.LoggingReportScheduled;
+import org.minbox.framework.api.boot.plugin.logging.admin.report.support.LoggingAdminReportSupport;
+import org.minbox.framework.api.boot.plugin.logging.cache.LoggingCache;
+import org.minbox.framework.api.boot.plugin.logging.cache.support.LoggingMemoryCache;
 import org.minbox.framework.api.boot.plugin.logging.filter.ApiBootLoggingBodyFilter;
 import org.minbox.framework.api.boot.plugin.logging.interceptor.ApiBootLoggingInterceptor;
 import org.minbox.framework.api.boot.plugin.logging.notice.away.ApiBootLogStorageNotice;
 import org.minbox.framework.api.boot.plugin.logging.notice.ApiBootLoggingNoticeListener;
 import org.minbox.framework.api.boot.plugin.logging.notice.ApiBootLogNotice;
+import org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingAdminStorageNotice;
 import org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingLocalStorageNotice;
 import org.minbox.framework.api.boot.plugin.logging.span.ApiBootLoggingSpan;
 import org.minbox.framework.api.boot.plugin.logging.span.support.ApiBootLoggingDefaultSpan;
@@ -30,16 +39,19 @@ import org.minbox.framework.api.boot.plugin.logging.tracer.ApiBootLoggingTracer;
 import org.minbox.framework.api.boot.plugin.logging.tracer.support.ApiBootLoggingDefaultTracer;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingProperties.API_BOOT_LOGGING_PREFIX;
 
 import java.util.List;
 
@@ -55,9 +67,10 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass({ApiBootLog.class, HandlerInterceptor.class})
+@ConditionalOnClass(ApiBootLoggingInterceptor.class)
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
+@ConditionalOnWebApplication
 public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     /**
      * ApiBoot Logging Properties
@@ -118,30 +131,80 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * ApiBoot Logging Local Notice
-     *
-     * @return ApiBootLoggingLocalStorageNotice
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public ApiBootLoggingLocalStorageNotice apiBootLoggingLocalNotice(ObjectProvider<List<ApiBootLogNotice>> localNoticeObjectProvider) {
-        return new ApiBootLoggingLocalStorageNotice(localNoticeObjectProvider.getIfAvailable());
-    }
-
-    /**
      * ApiBoot Logging Console Notice Listener
      *
      * @param apiBootLogStorageNotice ApiBoot Logging Notice Support Instance
      * @return ApiBootLoggingNoticeListener
      * @see ApiBootLoggingLocalStorageNotice
-     * @see org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingRestStorageNotice
-     * @see org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingMqStorageNotice
+     * @see org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingAdminStorageNotice
+     * @see org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingLocalStorageNotice
      */
     @Bean
     public ApiBootLoggingNoticeListener apiBootLoggingNoticeListener(ApiBootLogStorageNotice apiBootLogStorageNotice) {
-        return new ApiBootLoggingNoticeListener(apiBootLogStorageNotice);
+        return new ApiBootLoggingNoticeListener(apiBootLogStorageNotice, apiBootLoggingProperties.isFormatConsoleLogJson());
     }
 
+
+    /**
+     * ApiBoot Logging Local Notice
+     *
+     * @return ApiBootLoggingLocalStorageNotice
+     */
+    @Bean
+    @ConditionalOnMissingBean(LoggingAdminDiscovery.class)
+    public ApiBootLoggingLocalStorageNotice apiBootLoggingLocalNotice(ObjectProvider<List<ApiBootLogNotice>> localNoticeObjectProvider) {
+        return new ApiBootLoggingLocalStorageNotice(localNoticeObjectProvider.getIfAvailable());
+    }
+
+    /**
+     * ApiBoot Logging Admin Notice
+     *
+     * @return ApiBootLoggingAdminStorageNotice
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnBean(LoggingAdminDiscovery.class)
+    public ApiBootLoggingAdminStorageNotice apiBootLoggingAdminStorageNotice(LoggingCache loggingCache) {
+        return new ApiBootLoggingAdminStorageNotice(loggingCache);
+    }
+
+    /**
+     * Logging Memory Cache
+     *
+     * @return LoggingMemoryCache
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "logging-cache-away", havingValue = "memory", matchIfMissing = true)
+    @ConditionalOnMissingBean
+    public LoggingCache loggingMemoryCache() {
+        return new LoggingMemoryCache();
+    }
+
+    /**
+     * Logging Admin Report
+     *
+     * @param loggingAdminDiscovery Logging Admin Discovery
+     * @param restTemplate          RestTemplate
+     * @param loggingCache          Logging Cache
+     * @return LoggingAdminReportSupport
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public LoggingAdminReport loggingAdminReportSupport(LoggingAdminDiscovery loggingAdminDiscovery, RestTemplate restTemplate, LoggingCache loggingCache, ConfigurableEnvironment environment) {
+        return new LoggingAdminReportSupport(loggingAdminDiscovery, restTemplate, loggingCache, apiBootLoggingProperties.getNumberOfRequestLog(), environment);
+    }
+
+    /**
+     * Logging Report Scheduled Task Job
+     *
+     * @param loggingAdminReport Logging Admin Report
+     * @return LoggingReportScheduled
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public LoggingReportScheduled loggingReportScheduled(LoggingAdminReport loggingAdminReport) {
+        return new LoggingReportScheduled(loggingAdminReport, apiBootLoggingProperties.getReportInitialDelaySecond(), apiBootLoggingProperties.getReportIntervalSecond());
+    }
 
     /**
      * registry logging interceptor
@@ -151,5 +214,76 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(apiBootLoggingInterceptor()).addPathPatterns(apiBootLoggingProperties.getLoggingPathPrefix());
+    }
+
+    /**
+     * Rest Template Instance
+     *
+     * @return RestTemplate
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    /**
+     * ApiBoot Logging Admin Appoint Away
+     */
+    @Configuration
+    @EnableConfigurationProperties(ApiBootLoggingProperties.class)
+    @ConditionalOnMissingBean(LoggingRegistryCenterAdminDiscovery.class)
+    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "admin.server-address", matchIfMissing = true)
+    public static class ApiBootLoggingAdminAppointAutoConfiguration {
+        /**
+         * ApiBoot Logging Properties
+         */
+        private ApiBootLoggingProperties apiBootLoggingProperties;
+
+        public ApiBootLoggingAdminAppointAutoConfiguration(ApiBootLoggingProperties apiBootLoggingProperties) {
+            this.apiBootLoggingProperties = apiBootLoggingProperties;
+        }
+
+        /**
+         * ApiBoot Logging Admin Config Discovery
+         * Multiple Use "," Separation
+         *
+         * @return LoggingAdminDiscovery
+         */
+        @Bean
+        @ConditionalOnMissingBean
+        public LoggingAppointAdminDiscovery loggingConfigAdminDiscovery() {
+            String[] serverAddressArray = apiBootLoggingProperties.getAdmin().getServerAddress().split(",");
+            return new LoggingAppointAdminDiscovery(serverAddressArray);
+        }
+    }
+
+    /**
+     * ApiBoot Logging Admin Discovery Away
+     */
+    @Configuration
+    @ConditionalOnClass(LoadBalancerClient.class)
+    @EnableConfigurationProperties(ApiBootLoggingProperties.class)
+    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "discovery.service-id")
+    public static class ApiBootLoggingAdminDiscoveryAutoConfiguration {
+        /**
+         * ApiBoot Logging Properties
+         */
+        private ApiBootLoggingProperties apiBootLoggingProperties;
+
+        public ApiBootLoggingAdminDiscoveryAutoConfiguration(ApiBootLoggingProperties apiBootLoggingProperties) {
+            this.apiBootLoggingProperties = apiBootLoggingProperties;
+        }
+
+        /**
+         * ApiBoot Logging Admin Registry Center Discovery
+         *
+         * @return LoggingRegistryCenterAdminDiscovery
+         */
+        @Bean
+        @ConditionalOnMissingBean
+        public LoggingRegistryCenterAdminDiscovery loggingRegistryCenterAdminDiscovery(LoadBalancerClient loadBalancerClient) {
+            return new LoggingRegistryCenterAdminDiscovery(apiBootLoggingProperties.getDiscovery().getServiceId(), apiBootLoggingProperties.getDiscovery().getUsername(), apiBootLoggingProperties.getDiscovery().getPassword(), loadBalancerClient);
+        }
     }
 }
