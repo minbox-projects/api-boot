@@ -19,6 +19,7 @@ package org.minbox.framework.api.boot.plugin.logging;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ import java.util.Map;
  * GitHub：https://github.com/hengboy
  */
 @Data
-public class ApiBootLog {
+public class ApiBootLog implements Serializable {
     /**
      * trace id
      */
