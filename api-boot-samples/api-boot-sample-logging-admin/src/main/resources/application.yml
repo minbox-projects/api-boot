@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: api-boot-sample-logging-admin
+  security:
+    user:
+      name: user
+      password: 123456
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test
+logging:
+  level:
+    org.minbox.framework.api.boot.plugin.logging: debug
+
+server:
+  port: 9090
+
+
+api:
+  boot:
+    logging:
+      admin:
+        # 显示上报日志
+        show-console-report-log: true
+        # 格式化上报日志
+        format-console-log-json: true
