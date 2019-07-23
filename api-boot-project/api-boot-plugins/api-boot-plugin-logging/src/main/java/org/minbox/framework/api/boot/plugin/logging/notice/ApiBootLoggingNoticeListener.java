@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.plugin.logging.notice;
 import com.alibaba.fastjson.JSON;
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
 import org.minbox.framework.api.boot.plugin.logging.notice.away.ApiBootLogStorageNotice;
+import org.minbox.framework.api.boot.plugin.tools.JsonTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEvent;
@@ -41,11 +42,18 @@ public class ApiBootLoggingNoticeListener implements SmartApplicationListener {
      * logger instance
      */
     static Logger logger = LoggerFactory.getLogger(ApiBootLoggingNoticeListener.class);
-
+    /**
+     * ApiBoot Log Storage Notice
+     */
     private ApiBootLogStorageNotice apiBootLogStorageNotice;
+    /**
+     * format console log json
+     */
+    private boolean formatConsoleLogJson;
 
-    public ApiBootLoggingNoticeListener(ApiBootLogStorageNotice apiBootLogStorageNotice) {
+    public ApiBootLoggingNoticeListener(ApiBootLogStorageNotice apiBootLogStorageNotice, boolean formatConsoleLogJson) {
         this.apiBootLogStorageNotice = apiBootLogStorageNotice;
+        this.formatConsoleLogJson = formatConsoleLogJson;
     }
 
     @Override
@@ -57,12 +65,13 @@ public class ApiBootLoggingNoticeListener implements SmartApplicationListener {
     public void onApplicationEvent(ApplicationEvent event) {
         ApiBootLoggingNoticeEvent apiBootLoggingNoticeEvent = (ApiBootLoggingNoticeEvent) event;
         ApiBootLog apiBootLog = apiBootLoggingNoticeEvent.getLog();
-        logger.debug("Request Uri：{}， Logging：{}", apiBootLog.getRequestUri(), JSON.toJSONString(apiBootLog));
+
+        logger.debug("Request Uri：{}， Logging：\n{}", apiBootLog.getRequestUri(), formatConsoleLogJson ? JsonTools.beautifyJson(apiBootLog) : JSON.toJSONString(apiBootLog));
 
         // notice logging object instance
         apiBootLogStorageNotice.notice(apiBootLog);
     }
-    
+
     @Override
     public int getOrder() {
         return Integer.MIN_VALUE;

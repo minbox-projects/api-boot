@@ -15,23 +15,45 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.logging.notice.away.support;
+package org.minbox.framework.api.boot.plugin.logging;
 
-import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
-import org.minbox.framework.api.boot.plugin.logging.notice.away.ApiBootLogStorageNotice;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * ApiBoot Logging Client Notice Object
+ *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：2019-07-16 15:17
+ * DateTime：2019-07-19 15:05
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public class ApiBootLoggingRestStorageNotice implements ApiBootLogStorageNotice {
-    @Override
-    public void notice(ApiBootLog apiBootLog) {
-
-    }
+@Data
+public class ApiBootLogClientNotice implements Serializable {
+    /**
+     * Client Service Id
+     */
+    private String clientServiceId;
+    /**
+     * Client Service Ip Address
+     */
+    private String clientServiceIp;
+    /**
+     * Client Service Port
+     */
+    private Integer clientServicePort;
+    /**
+     * Report Time Millis
+     */
+    private Long reportTimeMillis = System.currentTimeMillis();
+    /**
+     * ApiBoot Logging Request Log
+     */
+    private List<ApiBootLog> loggers = new ArrayList<>();
 }
