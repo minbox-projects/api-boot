@@ -19,6 +19,7 @@ package org.minbox.framework.api.boot.autoconfigure.security;
 import org.minbox.framework.api.boot.plugin.security.ApiBootWebSecurityConfiguration;
 import org.minbox.framework.api.boot.plugin.security.point.ApiBootDefaultAuthenticationEntryPoint;
 import org.minbox.framework.api.boot.plugin.security.handler.ApiBootDefaultAccessDeniedHandler;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.util.ObjectUtils;
