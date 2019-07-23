@@ -18,7 +18,10 @@
 package org.minbox.framework.api.boot.plugin.logging.admin.report;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
+import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
 import org.springframework.beans.factory.InitializingBean;
+
+import java.util.List;
 
 /**
  * Batch Report Request Logs To Admin
@@ -34,8 +37,17 @@ import org.springframework.beans.factory.InitializingBean;
 public interface LoggingAdminReport extends InitializingBean {
     /**
      * Report Request Logs To Admin
+     * Loading a specified number of logs from the cache
      *
      * @throws ApiBootException ApiBoot Exception
      */
     void report() throws ApiBootException;
+
+    /**
+     * Report Specified Request Logs
+     *
+     * @param logs Request Logs
+     * @throws ApiBootException ApiBoot Exception
+     */
+    void report(List<ApiBootLog> logs) throws ApiBootException;
 }

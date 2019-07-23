@@ -114,11 +114,19 @@ public class LoggingAdminReportSupport implements LoggingAdminReport, Disposable
      */
     @Override
     public void report() throws ApiBootException {
+        List<ApiBootLog> logs = null;
         try {
-            List<ApiBootLog> logs = loggingCache.getLogs(numberOfRequestLog);
-            reportToAdmin(logs);
-        } catch (Exception e) {
+            // get log from cache
+            logs = loggingCache.getLogs(numberOfRequestLog);
+            // execute report
+            report(logs);
+        }
+        // Recycle the request log when an exception is encountered
+        catch (Exception e) {
             logger.error(e.getMessage(), e);
+            if (!ObjectUtils.isEmpty(logs)) {
+                logs.stream().forEach(log -> loggingCache.cache(log));
+            }
         }
     }
 
@@ -129,9 +137,11 @@ public class LoggingAdminReportSupport implements LoggingAdminReport, Disposable
      * report request logs ro admin service
      * if admin use spring security, set restTemplate header basic auth info
      *
-     * @param logs
+     * @param logs Request Logs
+     * @throws ApiBootException ApiBoot Exception
      */
-    private void reportToAdmin(List<ApiBootLog> logs) {
+    @Override
+    public void report(List<ApiBootLog> logs) throws ApiBootException {
         if (ObjectUtils.isEmpty(logs)) {
             return;
         }
@@ -190,6 +200,6 @@ public class LoggingAdminReportSupport implements LoggingAdminReport, Disposable
         // get all cache logs
         List<ApiBootLog> logs = loggingCache.getAll();
         // report to admin
-        reportToAdmin(logs);
+        report(logs);
     }
 }

@@ -18,10 +18,14 @@
 package org.minbox.framework.api.boot.plugin.logging.notice.away.support;
 
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
+import org.minbox.framework.api.boot.plugin.logging.ReportAway;
+import org.minbox.framework.api.boot.plugin.logging.admin.report.LoggingAdminReport;
 import org.minbox.framework.api.boot.plugin.logging.cache.LoggingCache;
 import org.minbox.framework.api.boot.plugin.logging.notice.away.ApiBootLogStorageNotice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
 
 /**
  * ApiBoot Logging Admin Notice
@@ -44,9 +48,20 @@ public class ApiBootLoggingAdminStorageNotice implements ApiBootLogStorageNotice
      * Logging Cache
      */
     private LoggingCache loggingCache;
+    /**
+     * Report Away
+     */
+    private ReportAway reportAway;
+    /**
+     * Logging Admin Report
+     * report request logs to admin
+     */
+    private LoggingAdminReport loggingAdminReport;
 
-    public ApiBootLoggingAdminStorageNotice(LoggingCache loggingCache) {
+    public ApiBootLoggingAdminStorageNotice(LoggingCache loggingCache, ReportAway reportAway, LoggingAdminReport loggingAdminReport) {
         this.loggingCache = loggingCache;
+        this.reportAway = reportAway;
+        this.loggingAdminReport = loggingAdminReport;
     }
 
     /**
@@ -58,5 +73,11 @@ public class ApiBootLoggingAdminStorageNotice implements ApiBootLogStorageNotice
     public void notice(ApiBootLog apiBootLog) {
         loggingCache.cache(apiBootLog);
         logger.debug("Cache Request Logging Complete.");
+        // if just report away，execute report logs to admin
+        switch (reportAway) {
+            case just:
+                loggingAdminReport.report(Arrays.asList(apiBootLog));
+                break;
+        }
     }
 }
