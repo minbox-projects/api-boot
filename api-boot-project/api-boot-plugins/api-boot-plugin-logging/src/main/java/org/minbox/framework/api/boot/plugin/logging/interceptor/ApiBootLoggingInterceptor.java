@@ -150,23 +150,27 @@ public class ApiBootLoggingInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        // Get Current Thread ApiBoot Log Instance
-        ApiBootLog log = ApiBootLogThreadLocal.get();
-        if (!ObjectUtils.isEmpty(log)) {
-            // set exception stack
-            if (!ObjectUtils.isEmpty(ex)) {
-                logger.debug("Request Have Exception，Execute Update HttpStatus.");
-                log.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-                log.setExceptionStack(StackTraceTools.getStackTrace(ex));
+        try {
+            // Get Current Thread ApiBoot Log Instance
+            ApiBootLog log = ApiBootLogThreadLocal.get();
+            if (!ObjectUtils.isEmpty(log)) {
+                // set exception stack
+                if (!ObjectUtils.isEmpty(ex)) {
+                    logger.debug("Request Have Exception，Execute Update HttpStatus.");
+                    log.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                    log.setExceptionStack(StackTraceTools.getStackTrace(ex));
+                }
+                log.setHttpStatus(response.getStatus());
+                log.setEndTime(System.currentTimeMillis());
+                log.setTimeConsuming(log.getEndTime() - log.getStartTime());
+                log.setResponseHeaders(HttpRequestTools.getResponseHeaders(response));
+                log.setResponseBody(HttpRequestTools.getResponseBody(response));
+                // publish logging event
+                applicationContext.publishEvent(new ApiBootLoggingNoticeEvent(this, log));
             }
-            log.setEndTime(System.currentTimeMillis());
-            log.setTimeConsuming(log.getEndTime() - log.getStartTime());
-            log.setResponseHeaders(HttpRequestTools.getResponseHeaders(response));
-            log.setResponseBody(HttpRequestTools.getResponseBody(response));
-
-            // publish logging event
-            applicationContext.publishEvent(new ApiBootLoggingNoticeEvent(this, log));
-
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        } finally {
             // Remove ApiBoot Log
             ApiBootLogThreadLocal.remove();
         }
@@ -184,7 +188,7 @@ public class ApiBootLoggingInterceptor implements HandlerInterceptor {
         // if request header don't have traceId
         // create new traceId
         if (ObjectUtils.isEmpty(traceId)) {
-            logger.debug("Request Header Dont't Have TraceId，Create New TraceId Now.");
+            logger.debug("Request Header Don't Have TraceId，Create New TraceId Now.");
             traceId = apiBootLoggingTracer.createTraceId();
         }
         logger.debug("Request TraceId：{}", traceId);
