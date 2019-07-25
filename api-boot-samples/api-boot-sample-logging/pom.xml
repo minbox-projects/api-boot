@@ -42,10 +42,10 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-logging</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>

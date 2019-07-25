@@ -4,9 +4,9 @@ api:
       format-console-log-json: true
       number-of-request-log: 2
       discovery:
-        service-id: iot-server-service-logging-admin
-        username: admin
-        password: logging_adminv3
+        service-id: sample-logging-admin
+        username: user
+        password: 123456
       ignore-paths:
         - /actuator/health
 

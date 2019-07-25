@@ -8,3 +8,8 @@ logging:
     org.minbox.framework.api.boot.plugin.logging: debug
 server:
   port: 8080
+
+api:
+  boot:
+    logging:
+      format-console-log-json: true
