@@ -188,6 +188,7 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      * @return LoggingAdminReportSupport
      */
     @Bean
+    @ConditionalOnBean(LoggingAdminDiscovery.class)
     @ConditionalOnMissingBean
     public LoggingAdminReport loggingAdminReportSupport(LoggingAdminDiscovery loggingAdminDiscovery, RestTemplate restTemplate, LoggingCache loggingCache, ConfigurableEnvironment environment) {
         return new LoggingAdminReportSupport(loggingAdminDiscovery, restTemplate, loggingCache, apiBootLoggingProperties.getReportNumberOfRequestLog(), environment);
@@ -233,7 +234,7 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     @Configuration
     @EnableConfigurationProperties(ApiBootLoggingProperties.class)
     @ConditionalOnMissingBean(LoggingRegistryCenterAdminDiscovery.class)
-    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "admin.server-address", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "admin.server-address")
     public static class ApiBootLoggingAdminAppointAutoConfiguration {
         /**
          * ApiBoot Logging Properties

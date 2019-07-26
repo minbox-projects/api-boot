@@ -45,10 +45,6 @@ public class ApiBootLoggingProperties {
      */
     public static final String API_BOOT_LOGGING_PREFIX = "api.boot.logging";
     /**
-     * ApiBoot Logging Admin Default Url
-     */
-    public static final String DEFAULT_URL = "http://localhost:8532";
-    /**
      * Interception log path prefix
      */
     private String[] loggingPathPrefix = new String[]{"/**"};
@@ -99,7 +95,7 @@ public class ApiBootLoggingProperties {
         /**
          * ApiBoot Logging Admin Server Address
          */
-        private String serverAddress = DEFAULT_URL;
+        private String serverAddress;
 
     }
 
