@@ -46,10 +46,8 @@ public class ApiBootLogOpenFeignInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         ApiBootLog log = ApiBootLogThreadLocal.get();
-        logger.debug("Setting Openfeign ApiBoot Log TraceId：{}", log.getTraceId());
         requestTemplate.header(ApiBootLogConstant.HEADER_NAME_TRACE_ID, log.getTraceId());
-
-        logger.debug("Setting Openfeign ApiBoot Log SpanId：{}", log.getSpanId());
         requestTemplate.header(ApiBootLogConstant.HEADER_NAME_PARENT_SPAN_ID, log.getSpanId());
+        logger.debug("Setting ApiBoot Logging TraceId：{}，SpanId：{} With Openfeign.", log.getTraceId(), log.getSpanId());
     }
 }
