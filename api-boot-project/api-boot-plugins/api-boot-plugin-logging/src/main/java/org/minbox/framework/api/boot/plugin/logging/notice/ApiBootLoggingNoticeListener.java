@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.SmartApplicationListener;
+import org.springframework.scheduling.annotation.Async;
 
 /**
  * ApiBoot Logging Console Notice Listener
@@ -62,6 +63,7 @@ public class ApiBootLoggingNoticeListener implements SmartApplicationListener {
     }
 
     @Override
+    @Async
     public void onApplicationEvent(ApplicationEvent event) {
         ApiBootLoggingNoticeEvent apiBootLoggingNoticeEvent = (ApiBootLoggingNoticeEvent) event;
         ApiBootLog apiBootLog = apiBootLoggingNoticeEvent.getLog();
