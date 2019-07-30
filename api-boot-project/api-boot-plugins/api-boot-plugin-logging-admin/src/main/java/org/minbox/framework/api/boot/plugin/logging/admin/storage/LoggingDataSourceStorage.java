@@ -18,14 +18,12 @@
 package org.minbox.framework.api.boot.plugin.logging.admin.storage;
 
 import com.alibaba.fastjson.JSON;
-import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -60,7 +58,7 @@ public class LoggingDataSourceStorage implements LoggingStorage {
     private static final String SQL_INSERT_LOG = "insert into logging_request_logs (lrl_id, lrl_service_detail_id, lrl_trace_id, lrl_parent_span_id, lrl_span_id,\n" +
             "                                  lrl_start_time, lrl_end_time, lrl_http_status, lrl_request_body, lrl_request_headers,\n" +
             "                                  lrl_request_ip, lrl_request_method, lrl_request_uri, lrl_response_body,\n" +
-            "                                  lrl_response_headers, lrl_time_consuming) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            "                                  lrl_response_headers, lrl_time_consuming,lrl_request_params,lrl_exception_stack) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
     private DataSource dataSource;
 
@@ -95,6 +93,8 @@ public class LoggingDataSourceStorage implements LoggingStorage {
         ps.setString(14, log.getResponseBody());
         ps.setString(15, JSON.toJSONString(log.getResponseHeaders()));
         ps.setLong(16, log.getTimeConsuming());
+        ps.setString(17, log.getRequestParam());
+        ps.setString(18, log.getExceptionStack());
         ps.executeUpdate();
         ps.close();
         closeConnection(connection);
