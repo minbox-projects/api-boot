@@ -45,10 +45,19 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!--ApiBoot Logging Admin-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-plugin-logging-admin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

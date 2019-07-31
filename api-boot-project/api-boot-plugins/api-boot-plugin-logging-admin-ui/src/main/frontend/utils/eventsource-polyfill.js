@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    '@vue/app'
-  ]
+export default async () => {
+  if (typeof window.EventSource === 'undefined') {
+    return import(/* webpackChunkName: "event-source-polyfill" */ 'event-source-polyfill');
+  }
+  return Promise.resolve();
 };

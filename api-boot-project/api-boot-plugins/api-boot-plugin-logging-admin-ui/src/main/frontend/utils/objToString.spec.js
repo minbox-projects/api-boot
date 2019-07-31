@@ -14,8 +14,50 @@
  * limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    '@vue/app'
-  ]
-};
+import objToString from './objToString'
+
+describe('objToString should', () => {
+
+  it('return the input string for normal text', () => {
+    const obj = {
+      a: 'start',
+      b: 1,
+      c: true,
+      d: [1, 2, [3, 4]],
+      e: {
+        f: '',
+        g: 1,
+        h: null,
+        i: undefined,
+        j: {},
+        k: [1],
+        l: [{a:1, b:'foo'}, {b:2}]
+      }
+    };
+    const str = `a: start
+b: 1
+c: true
+d:
+  - 1
+  - 2
+  -
+    - 3
+    - 4
+e:
+  f: 
+  g: 1
+  h: null
+  i: 
+  j: {}
+  k:
+    - 1
+  l:
+    -
+      a: 1
+      b: foo
+    -
+      b: 2`;
+    expect(objToString(obj)).toBe(str);
+  });
+
+});

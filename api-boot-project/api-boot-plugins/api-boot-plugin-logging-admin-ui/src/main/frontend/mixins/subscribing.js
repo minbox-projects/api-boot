@@ -14,8 +14,27 @@
  * limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    '@vue/app'
-  ]
-};
+export default {
+  created() {
+    this.subscribe();
+  },
+  beforeDestroy() {
+    this.unsubscribe();
+  },
+  methods: {
+    async subscribe() {
+      if (!this.subscription) {
+        this.subscription = await this.createSubscription();
+      }
+    },
+    unsubscribe() {
+      if (this.subscription) {
+        try {
+          !this.subscription.closed && this.subscription.unsubscribe();
+        } finally {
+          this.subscription = null;
+        }
+      }
+    }
+  }
+}

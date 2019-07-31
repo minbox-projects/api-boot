@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    '@vue/app'
-  ]
-};
+import uri from './uri';
+
+describe('uri', () => {
+
+  it('should escape uris properly', () => {
+    expect(uri`http://app/${'foo/bar'}?q=${'???'}`).toBe('http://app/foo%2Fbar?q=%3F%3F%3F');
+    expect(uri`http://app/${'foo/bar'}?q=1`).toBe('http://app/foo%2Fbar?q=1');
+    expect(uri`http://app/${'foo/bar'}`).toBe('http://app/foo%2Fbar');
+    expect(uri`http://app/foo`).toBe('http://app/foo');
+    expect(uri``).toBe('');
+  });
+
+
+});
