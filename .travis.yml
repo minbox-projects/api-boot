@@ -3,4 +3,4 @@ jdk: openjdk8
 cache:
   directories:
     - $HOME/.m2
-install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true
+install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true
