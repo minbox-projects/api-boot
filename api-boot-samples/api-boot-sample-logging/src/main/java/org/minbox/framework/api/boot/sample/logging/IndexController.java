@@ -17,10 +17,15 @@
 
 package org.minbox.framework.api.boot.sample.logging;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author：恒宇少年 - 于起宇
@@ -34,8 +39,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @PostMapping(value = "/index")
     public String index(@RequestBody User user) throws Exception {
+        HttpEntity<String> httpEntity = new HttpEntity(JSON.toJSONString(user));
+        ResponseEntity<String> result = restTemplate.postForEntity("http://localhost:8080/index", httpEntity, String.class);
+        System.out.println(result.getBody());
         //user.setName("恒宇少年");
         //throw new Exception("学习下");
         return user.getName();
