@@ -1,6 +1,8 @@
 language: java
 jdk: openjdk8
+node_js: "10"
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.npm
 install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true
