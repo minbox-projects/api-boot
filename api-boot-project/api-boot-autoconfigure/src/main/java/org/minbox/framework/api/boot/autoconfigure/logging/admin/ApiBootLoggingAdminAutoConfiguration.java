@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
+import org.minbox.framework.api.boot.autoconfigure.logging.admin.ui.ApiBootLoggingAdminUiAutoConfiguration;
 import org.minbox.framework.api.boot.plugin.logging.admin.endpoint.LoggingEndpoint;
 import org.minbox.framework.api.boot.plugin.logging.admin.endpoint.LoggingRequestMappingHandlerMapping;
 import org.minbox.framework.api.boot.plugin.logging.admin.listener.ReportLogJsonFormatListener;
