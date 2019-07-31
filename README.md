@@ -2,6 +2,7 @@
 <img src="http://image.yuqiyu.com/apiboot-colorful.png" height="200"/>
 </p>
 <p align="center">
+    <img src="https://www.travis-ci.org/hengboy/api-boot.svg?branch=master" alt="build">
     <a href="http://apiboot.yuqiyu.com">
         <img src="https://img.shields.io/badge/link-查看ApiBoot官方文档-blue.svg?style=flat-square" alt="ApiBoot官网">
     </a>
