@@ -17,12 +17,10 @@
 
 package org.minbox.framework.api.boot.plugin.logging.interceptor;
 
-import com.alibaba.fastjson.JSON;
 import org.minbox.framework.api.boot.common.tools.StackTraceTools;
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLogConstant;
 import org.minbox.framework.api.boot.plugin.logging.ApiBootLogThreadLocal;
-import org.minbox.framework.api.boot.plugin.logging.filter.ResponseWrapper;
 import org.minbox.framework.api.boot.plugin.logging.notice.ApiBootLoggingNoticeEvent;
 import org.minbox.framework.api.boot.plugin.logging.span.ApiBootLoggingSpan;
 import org.minbox.framework.api.boot.plugin.logging.tools.HttpRequestTools;
@@ -33,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -96,7 +95,7 @@ public class ApiBootLoggingInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // ignore url
+        // check is matcher ignore url
         if (checkIgnore(HttpRequestTools.getUri(request))) {
             return true;
         }
@@ -218,9 +217,14 @@ public class ApiBootLoggingInterceptor implements HandlerInterceptor {
         if (!ObjectUtils.isEmpty(ignorePaths)) {
             DEFAULT_IGNORE_URIS.addAll(Arrays.asList(ignorePaths));
         }
-        if (DEFAULT_IGNORE_URIS.contains(uri)) {
-            logger.debug("Request Uri：{}，is ignore.", uri);
-            return true;
+        // check is matcher ant path
+        for (String ignoreUri : DEFAULT_IGNORE_URIS) {
+            AntPathMatcher matcher = new AntPathMatcher();
+            boolean isMatcher = matcher.match(ignoreUri, uri);
+            if (isMatcher) {
+                logger.debug("Request Uri：{}，is ignore.", uri);
+                return true;
+            }
         }
         return false;
     }
