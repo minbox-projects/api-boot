@@ -13,6 +13,7 @@
     "core-js": "^2.6.5",
     "html-loader": "^0.5.5",
     "vue": "^2.6.10",
+    "vue-router": "^3.0.7",
     "webpack": "latest",
     "webpack-bundle-analyzer": "latest"
   },

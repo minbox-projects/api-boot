@@ -17,22 +17,19 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
-import org.minbox.framework.api.boot.plugin.logging.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.api.boot.plugin.logging.admin.endpoint.LoggingEndpoint;
 import org.minbox.framework.api.boot.plugin.logging.admin.endpoint.LoggingRequestMappingHandlerMapping;
 import org.minbox.framework.api.boot.plugin.logging.admin.listener.ReportLogJsonFormatListener;
-import org.minbox.framework.api.boot.plugin.logging.admin.listener.ReportLogStorageListener;
-import org.minbox.framework.api.boot.plugin.logging.admin.storage.LoggingDataSourceStorage;
-import org.minbox.framework.api.boot.plugin.logging.admin.storage.LoggingStorage;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.HandlerMapping;
-
-import javax.sql.DataSource;
 
 /**
  * ApiBoot Logging Admin Configuration
@@ -50,6 +47,7 @@ import javax.sql.DataSource;
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(ApiBootLoggingAdminProperties.class)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
+@Import({ApiBootLoggingAdminUiAutoConfiguration.class, ApiBootLoggingStorageAutoConfiguration.class})
 public class ApiBootLoggingAdminAutoConfiguration {
     /**
      * ApiBoot Logging Admin Properties
@@ -79,7 +77,9 @@ public class ApiBootLoggingAdminAutoConfiguration {
      */
     @Bean
     public HandlerMapping loggingRequestMappingHandlerMapping() {
-        return new LoggingRequestMappingHandlerMapping(loggingEndpoint());
+        LoggingRequestMappingHandlerMapping mapping = new LoggingRequestMappingHandlerMapping();
+        mapping.setOrder(0);
+        return mapping;
     }
 
     /**
@@ -91,34 +91,5 @@ public class ApiBootLoggingAdminAutoConfiguration {
     @ConditionalOnMissingBean
     public ReportLogJsonFormatListener reportLogJsonFormatListener() {
         return new ReportLogJsonFormatListener(apiBootLoggingAdminProperties.isShowConsoleReportLog(), apiBootLoggingAdminProperties.isFormatConsoleLogJson());
-    }
-
-    /**
-     * Storage Request Log Configuration
-     */
-    @Configuration
-    @ConditionalOnBean(DataSource.class)
-    public static class StorageLogAutoConfiguration {
-        /**
-         * Logging DataSource Storage
-         *
-         * @return LoggingDataSourceStorage
-         */
-        @Bean
-        @ConditionalOnMissingBean
-        public LoggingStorage loggingStorage(DataSource dataSource) {
-            return new LoggingDataSourceStorage(dataSource);
-        }
-
-        /**
-         * Report Log Storage Listener
-         *
-         * @return ReportLogStorageListener
-         */
-        @Bean
-        @ConditionalOnMissingBean
-        public ReportLogStorageListener reportLogStorageListener(LoggingStorage loggingStorage) {
-            return new ReportLogStorageListener(loggingStorage);
-        }
     }
 }
