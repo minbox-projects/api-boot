@@ -54,31 +54,39 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend-maven-plugin.version}</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
                 <executions>
-                    <!-- Install all project dependencies -->
                     <execution>
-                        <id>npm install</id>
+                        <id>npm-install</id>
+                        <phase>validate</phase>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>exec</goal>
                         </goals>
-                        <!-- optional: default phase is "generate-resources" -->
-                        <phase>generate-resources</phase>
-                        <!-- Optional configuration which provides for running any npm command -->
                         <configuration>
-                            <arguments>install</arguments>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>ci</argument>
+                            </arguments>
                         </configuration>
                     </execution>
-                    <!-- Build and minify static files -->
                     <execution>
-                        <id>npm run build</id>
+                        <id>npm-build</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <skip>${skipNpmBuild}</skip>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                            <environmentVariables>
+                                <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+                            </environmentVariables>
                         </configuration>
                     </execution>
                 </executions>

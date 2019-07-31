@@ -8,4 +8,4 @@ cache:
     - $HOME/.m2
     - $HOME/.npm
     - node_modules
-install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true
+install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true
