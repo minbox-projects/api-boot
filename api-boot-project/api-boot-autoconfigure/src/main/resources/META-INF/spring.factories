@@ -18,5 +18,4 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.minbox.framework.api.boot.autoconfigure.ratelimiter.ApiBootRateLimiterAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.mail.ApiBootMailAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingOpenfeignAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootLoggingAdminAutoConfiguration
