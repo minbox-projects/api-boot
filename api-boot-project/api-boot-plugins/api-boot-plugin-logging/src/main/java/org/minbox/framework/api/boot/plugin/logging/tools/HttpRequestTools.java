@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.plugin.logging.tools;
 
+import com.alibaba.fastjson.JSON;
 import org.minbox.framework.api.boot.plugin.logging.filter.RequestWrapper;
 import org.minbox.framework.api.boot.plugin.logging.filter.ResponseWrapper;
 import org.springframework.util.Assert;
@@ -25,7 +26,6 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -172,7 +172,19 @@ public class HttpRequestTools {
      */
     public static String getPathParams(HttpServletRequest request) {
         Assert.notNull(request, "request instance is null.");
-        return request.getQueryString();
+        Map map = new HashMap();
+        Enumeration paramNames = request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String paramName = (String) paramNames.nextElement();
+            String[] paramValues = request.getParameterValues(paramName);
+            if (paramValues.length == 1) {
+                String paramValue = paramValues[0];
+                if (paramValue.length() != 0) {
+                    map.put(paramName, paramValue);
+                }
+            }
+        }
+        return JSON.toJSONString(map);
     }
 
     /**
