@@ -30,8 +30,5 @@
         <module>api-boot-plugin-message-push</module>
         <module>api-boot-plugin-rate-limiter</module>
         <module>api-boot-plugin-mail</module>
-        <module>api-boot-plugin-logging</module>
-        <module>api-boot-plugin-logging-admin</module>
-        <module>api-boot-plugin-logging-admin-ui</module>
     </modules>
 </project>

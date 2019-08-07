@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
-import org.minbox.framework.api.boot.plugin.logging.admin.discovery.support.LoggingAppointAdminDiscovery;
-import org.minbox.framework.api.boot.plugin.logging.admin.discovery.support.LoggingRegistryCenterAdminDiscovery;
+import org.minbox.framework.logging.client.admin.discovery.support.LoggingAppointAdminDiscovery;
+import org.minbox.framework.logging.client.admin.discovery.support.LoggingRegistryCenterAdminDiscovery;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

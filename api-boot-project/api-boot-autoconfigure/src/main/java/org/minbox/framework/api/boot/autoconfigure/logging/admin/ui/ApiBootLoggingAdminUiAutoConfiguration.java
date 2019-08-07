@@ -17,8 +17,9 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging.admin.ui;
 
-import org.minbox.framework.api.boot.plugin.logging.admin.ui.HomepageForwardingFilter;
-import org.minbox.framework.api.boot.plugin.logging.admin.ui.LoggingAdminUiEndpoint;
+import org.minbox.framework.logging.admin.storage.LoggingStorage;
+import org.minbox.framework.logging.admin.ui.HomepageForwardingFilter;
+import org.minbox.framework.logging.admin.ui.LoggingAdminUiEndpoint;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -65,7 +66,7 @@ public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer 
     private static final List<String> DEFAULT_UI_ROUTES = asList(
             "/about/**",
             "/applications/**",
-            "/journal/**",
+            "/logs/**",
             "/wallboard/**"
     );
     /**
@@ -128,17 +129,19 @@ public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer 
      * Logging Admin Ui Endpoint
      * The ability to provide logging admin data to the public
      *
+     * @param loggingStorage Logging Storage
      * @return LoggingAdminUiEndpoint
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingAdminUiEndpoint loggingAdminUiEndpoint() {
+    public LoggingAdminUiEndpoint loggingAdminUiEndpoint(LoggingStorage loggingStorage) {
         return new LoggingAdminUiEndpoint(
                 LoggingAdminUiEndpoint.Settings.builder()
                         .brand(adminUiProperties.getBrand())
                         .title(adminUiProperties.getTitle())
                         .routes(DEFAULT_UI_ROUTES)
-                        .build()
+                        .build(),
+                loggingStorage
         );
     }
 }

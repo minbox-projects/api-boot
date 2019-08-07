@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.sample.logging;
 
-import org.minbox.framework.api.boot.plugin.logging.ApiBootLog;
-import org.minbox.framework.api.boot.plugin.logging.notice.ApiBootLogNotice;
+import org.minbox.framework.logging.client.notice.LoggingNotice;
+import org.minbox.framework.logging.core.MinBoxLog;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  * GitHub：https://github.com/hengboy
  */
 @Component
-public class LocalNoticeSample implements ApiBootLogNotice {
+public class LocalNoticeSample implements LoggingNotice {
     /**
      * order 值越小执行越靠前
      *
@@ -48,10 +48,10 @@ public class LocalNoticeSample implements ApiBootLogNotice {
      * 请求日志通知执行方法
      * ApiBootLog为一次请求日志对象基本信息
      *
-     * @param apiBootLog ApiBoot Log
+     * @param minBoxLog ApiBoot Log
      */
     @Override
-    public void notice(ApiBootLog apiBootLog) {
-        System.out.println(apiBootLog);
+    public void notice(MinBoxLog minBoxLog) {
+        System.out.println(minBoxLog);
     }
 }

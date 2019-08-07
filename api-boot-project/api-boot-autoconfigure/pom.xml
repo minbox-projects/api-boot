@@ -201,23 +201,20 @@
             <optional>true</optional>
         </dependency>
 
-        <!--ApiBoot Logging-->
+        <!--MinBox Logging-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-logging</artifactId>
+            <artifactId>minbox-logging-client</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--ApiBoot Logging Admin-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-logging-admin</artifactId>
+            <artifactId>minbox-logging-admin</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--ApiBoot Logging Admin UI-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-logging-admin-ui</artifactId>
+            <artifactId>minbox-logging-admin-ui</artifactId>
             <optional>true</optional>
         </dependency>
 

@@ -17,9 +17,9 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
-import org.minbox.framework.api.boot.plugin.logging.admin.listener.ReportLogStorageListener;
-import org.minbox.framework.api.boot.plugin.logging.admin.storage.LoggingDataSourceStorage;
-import org.minbox.framework.api.boot.plugin.logging.admin.storage.LoggingStorage;
+import org.minbox.framework.logging.admin.listener.ReportLogStorageListener;
+import org.minbox.framework.logging.admin.storage.LoggingDataSourceStorage;
+import org.minbox.framework.logging.admin.storage.LoggingStorage;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

@@ -24,3 +24,4 @@ api:
         show-console-report-log: true
         # 格式化上报日志
         format-console-log-json: true
+        cache-templates: false

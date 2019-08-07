@@ -17,7 +17,7 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
-import org.minbox.framework.api.boot.plugin.logging.http.rest.ApiBootLoggingRestTemplateInterceptor;
+import org.minbox.framework.logging.client.http.rest.LoggingRestTemplateInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +49,6 @@ public class ApiBootLoggingRestTemplateAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public ClientHttpRequestInterceptor apiBootLoggingRestTemplateInterceptor() {
-        return new ApiBootLoggingRestTemplateInterceptor();
+        return new LoggingRestTemplateInterceptor();
     }
 }

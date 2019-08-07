@@ -18,7 +18,7 @@
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
 import feign.RequestInterceptor;
-import org.minbox.framework.api.boot.plugin.logging.http.openfeign.ApiBootLogOpenFeignInterceptor;
+import org.minbox.framework.logging.client.http.openfeign.LoggingOpenFeignInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass({RequestInterceptor.class, ApiBootLogOpenFeignInterceptor.class})
+@ConditionalOnClass({RequestInterceptor.class, LoggingOpenFeignInterceptor.class})
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 public class ApiBootLoggingOpenfeignAutoConfiguration {
 
@@ -48,7 +48,7 @@ public class ApiBootLoggingOpenfeignAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootLogOpenFeignInterceptor apiBootLogOpenFeignInterceptor() {
-        return new ApiBootLogOpenFeignInterceptor();
+    public LoggingOpenFeignInterceptor apiBootLogOpenFeignInterceptor() {
+        return new LoggingOpenFeignInterceptor();
     }
 }

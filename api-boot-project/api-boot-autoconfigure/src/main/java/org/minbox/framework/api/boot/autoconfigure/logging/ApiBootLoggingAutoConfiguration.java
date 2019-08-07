@@ -17,23 +17,23 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
-import org.minbox.framework.api.boot.plugin.logging.admin.discovery.LoggingAdminDiscovery;
-import org.minbox.framework.api.boot.plugin.logging.admin.report.LoggingAdminReport;
-import org.minbox.framework.api.boot.plugin.logging.admin.report.LoggingReportScheduled;
-import org.minbox.framework.api.boot.plugin.logging.admin.report.support.LoggingAdminReportSupport;
-import org.minbox.framework.api.boot.plugin.logging.cache.LoggingCache;
-import org.minbox.framework.api.boot.plugin.logging.cache.support.LoggingMemoryCache;
-import org.minbox.framework.api.boot.plugin.logging.filter.ApiBootLoggingBodyFilter;
-import org.minbox.framework.api.boot.plugin.logging.interceptor.ApiBootLoggingInterceptor;
-import org.minbox.framework.api.boot.plugin.logging.notice.ApiBootLogNotice;
-import org.minbox.framework.api.boot.plugin.logging.notice.ApiBootLoggingNoticeListener;
-import org.minbox.framework.api.boot.plugin.logging.notice.away.ApiBootLogStorageNotice;
-import org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingAdminStorageNotice;
-import org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingLocalStorageNotice;
-import org.minbox.framework.api.boot.plugin.logging.span.ApiBootLoggingSpan;
-import org.minbox.framework.api.boot.plugin.logging.span.support.ApiBootLoggingDefaultSpan;
-import org.minbox.framework.api.boot.plugin.logging.tracer.ApiBootLoggingTracer;
-import org.minbox.framework.api.boot.plugin.logging.tracer.support.ApiBootLoggingDefaultTracer;
+import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
+import org.minbox.framework.logging.client.admin.report.LoggingAdminReport;
+import org.minbox.framework.logging.client.admin.report.LoggingReportScheduled;
+import org.minbox.framework.logging.client.admin.report.support.LoggingAdminReportSupport;
+import org.minbox.framework.logging.client.cache.LoggingCache;
+import org.minbox.framework.logging.client.cache.support.LoggingMemoryCache;
+import org.minbox.framework.logging.client.filter.LoggingBodyFilter;
+import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
+import org.minbox.framework.logging.client.notice.LoggingNotice;
+import org.minbox.framework.logging.client.notice.LoggingNoticeListener;
+import org.minbox.framework.logging.client.notice.away.LoggingStorageNotice;
+import org.minbox.framework.logging.client.notice.away.support.LoggingAdminStorageNotice;
+import org.minbox.framework.logging.client.notice.away.support.LoggingLocalStorageNotice;
+import org.minbox.framework.logging.client.span.LoggingSpan;
+import org.minbox.framework.logging.client.span.support.LoggingDefaultSpan;
+import org.minbox.framework.logging.client.tracer.LoggingTracer;
+import org.minbox.framework.logging.client.tracer.support.LoggingDefaultTracer;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -66,7 +66,7 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(ApiBootLoggingInterceptor.class)
+@ConditionalOnClass(LoggingInterceptor.class)
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @ConditionalOnWebApplication
@@ -99,8 +99,8 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootLoggingTracer apiBootLoggingTracer() {
-        return new ApiBootLoggingDefaultTracer();
+    public LoggingTracer apiBootLoggingTracer() {
+        return new LoggingDefaultTracer();
     }
 
     /**
@@ -110,8 +110,8 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootLoggingSpan apiBootLoggingSpan() {
-        return new ApiBootLoggingDefaultSpan();
+    public LoggingSpan apiBootLoggingSpan() {
+        return new LoggingDefaultSpan();
     }
 
     /**
@@ -121,8 +121,8 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootLoggingInterceptor apiBootLoggingInterceptor() {
-        return new ApiBootLoggingInterceptor(environment, apiBootLoggingTracer(), apiBootLoggingSpan(), apiBootLoggingProperties.getIgnorePaths());
+    public LoggingInterceptor apiBootLoggingInterceptor() {
+        return new LoggingInterceptor(environment, apiBootLoggingTracer(), apiBootLoggingSpan(), apiBootLoggingProperties.getIgnorePaths());
     }
 
     /**
@@ -132,22 +132,21 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootLoggingBodyFilter apiBootLoggingFilter() {
-        return new ApiBootLoggingBodyFilter();
+    public LoggingBodyFilter apiBootLoggingFilter() {
+        return new LoggingBodyFilter();
     }
 
     /**
      * ApiBoot Logging Console Notice Listener
      *
-     * @param apiBootLogStorageNotice ApiBoot Logging Notice Support Instance
+     * @param loggingStorageNotice ApiBoot Logging Notice Support Instance
      * @return ApiBootLoggingNoticeListener
-     * @see ApiBootLoggingLocalStorageNotice
-     * @see org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingAdminStorageNotice
-     * @see org.minbox.framework.api.boot.plugin.logging.notice.away.support.ApiBootLoggingLocalStorageNotice
+     * @see org.minbox.framework.logging.client.notice.away.support.LoggingLocalStorageNotice
+     * @see org.minbox.framework.logging.client.notice.away.support.LoggingAdminStorageNotice
      */
     @Bean
-    public ApiBootLoggingNoticeListener apiBootLoggingNoticeListener(ApiBootLogStorageNotice apiBootLogStorageNotice) {
-        return new ApiBootLoggingNoticeListener(apiBootLogStorageNotice, apiBootLoggingProperties.isFormatConsoleLogJson());
+    public LoggingNoticeListener apiBootLoggingNoticeListener(LoggingStorageNotice loggingStorageNotice) {
+        return new LoggingNoticeListener(loggingStorageNotice, apiBootLoggingProperties.isFormatConsoleLogJson());
     }
 
 
@@ -158,8 +157,8 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     @ConditionalOnMissingBean(LoggingAdminDiscovery.class)
-    public ApiBootLoggingLocalStorageNotice apiBootLoggingLocalNotice(ObjectProvider<List<ApiBootLogNotice>> localNoticeObjectProvider) {
-        return new ApiBootLoggingLocalStorageNotice(localNoticeObjectProvider.getIfAvailable());
+    public LoggingLocalStorageNotice apiBootLoggingLocalNotice(ObjectProvider<List<LoggingNotice>> localNoticeObjectProvider) {
+        return new LoggingLocalStorageNotice(localNoticeObjectProvider.getIfAvailable());
     }
 
     /**
@@ -170,8 +169,8 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnBean(LoggingAdminDiscovery.class)
-    public ApiBootLoggingAdminStorageNotice apiBootLoggingAdminStorageNotice(LoggingCache loggingCache, LoggingAdminReport loggingAdminReport) {
-        return new ApiBootLoggingAdminStorageNotice(loggingCache, apiBootLoggingProperties.getReportAway(), loggingAdminReport);
+    public LoggingAdminStorageNotice apiBootLoggingAdminStorageNotice(LoggingCache loggingCache, LoggingAdminReport loggingAdminReport) {
+        return new LoggingAdminStorageNotice(loggingCache, apiBootLoggingProperties.getReportAway(), loggingAdminReport);
     }
 
     /**

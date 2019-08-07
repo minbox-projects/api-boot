@@ -36,15 +36,15 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot Logging Admin Plugin-->
+        <!--MinBox Logging Admin-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-logging-admin</artifactId>
+            <artifactId>minbox-logging-admin</artifactId>
         </dependency>
-        <!--ApiBoot Logging Admin UI Plugin-->
+        <!--MinBox Logging Admin Ui-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-logging-admin-ui</artifactId>
+            <artifactId>minbox-logging-admin-ui</artifactId>
         </dependency>
     </dependencies>
 </project>

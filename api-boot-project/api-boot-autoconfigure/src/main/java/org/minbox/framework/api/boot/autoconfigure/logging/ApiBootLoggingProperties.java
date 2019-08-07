@@ -18,8 +18,7 @@
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
 import lombok.Data;
-import lombok.Getter;
-import org.minbox.framework.api.boot.plugin.logging.ReportAway;
+import org.minbox.framework.logging.core.ReportAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
