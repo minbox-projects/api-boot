@@ -56,6 +56,10 @@ public class ApiBootLoggingProperties {
      */
     private boolean formatConsoleLogJson = false;
     /**
+     * show console log
+     */
+    private boolean showConsoleLog = false;
+    /**
      * Report Request Log To Admin Away
      */
     private ReportAway reportAway = ReportAway.just;

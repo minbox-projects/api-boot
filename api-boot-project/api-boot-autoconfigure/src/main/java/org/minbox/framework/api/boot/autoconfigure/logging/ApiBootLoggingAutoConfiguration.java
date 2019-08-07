@@ -146,7 +146,7 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public LoggingNoticeListener apiBootLoggingNoticeListener(LoggingStorageNotice loggingStorageNotice) {
-        return new LoggingNoticeListener(loggingStorageNotice, apiBootLoggingProperties.isFormatConsoleLogJson());
+        return new LoggingNoticeListener(loggingStorageNotice, apiBootLoggingProperties.isFormatConsoleLogJson(), apiBootLoggingProperties.isShowConsoleLog());
     }
 
 
