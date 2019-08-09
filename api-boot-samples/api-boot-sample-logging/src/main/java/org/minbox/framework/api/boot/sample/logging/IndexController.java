@@ -47,6 +47,14 @@ public class IndexController {
         return user;
     }
 
+    @PostMapping(value = "/wen/test")
+    public User index(@RequestBody User user) throws Exception {
+        /*HttpEntity<String> httpEntity = new HttpEntity(JSON.toJSONString(user));
+        ResponseEntity<String> result = restTemplate.postForEntity("http://localhost:8080/index", httpEntity, String.class);
+        System.out.println(result.getBody());*/
+        return user;
+    }
+
     @Data
     public static class User {
         private String name;
