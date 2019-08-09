@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ResponseBody
 public class ExceptionAdvice {
     @ExceptionHandler(Exception.class)
-    public String exception(Exception exception) {
-        return "请求异常";
+    public void exception(Exception exception) {
+        exception.printStackTrace();
     }
 }
