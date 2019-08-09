@@ -25,7 +25,7 @@ public class SampleController {
      * 简单swagger文档示例
      *
      * @param userName 用户名
-     * @return
+     * @return @{link ApiBootResult} ApiBootResult
      */
     @GetMapping(value = "/echo")
     @ApiOperation(value = "输出用户名", response = ApiBootResult.class)
