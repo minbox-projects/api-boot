@@ -45,6 +45,7 @@ public class PhoneCodeOauthTokenGranter implements ApiBootOauthTokenGranter {
      * logger instance
      */
     static Logger logger = LoggerFactory.getLogger(PhoneCodeOauthTokenGranter.class);
+
     /**
      * 获取Token时使用grant_type=phone_code授权方式
      */
