@@ -17,23 +17,14 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
+import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
-import org.minbox.framework.logging.client.admin.report.LoggingAdminReport;
 import org.minbox.framework.logging.client.admin.report.LoggingReportScheduled;
-import org.minbox.framework.logging.client.admin.report.support.LoggingAdminReportSupport;
-import org.minbox.framework.logging.client.cache.LoggingCache;
-import org.minbox.framework.logging.client.cache.support.LoggingMemoryCache;
 import org.minbox.framework.logging.client.filter.LoggingBodyFilter;
 import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
-import org.minbox.framework.logging.client.notice.LoggingNotice;
 import org.minbox.framework.logging.client.notice.LoggingNoticeListener;
-import org.minbox.framework.logging.client.notice.away.LoggingStorageNotice;
-import org.minbox.framework.logging.client.notice.away.support.LoggingAdminStorageNotice;
-import org.minbox.framework.logging.client.notice.away.support.LoggingLocalStorageNotice;
-import org.minbox.framework.logging.client.span.LoggingSpan;
-import org.minbox.framework.logging.client.span.support.LoggingDefaultSpan;
-import org.minbox.framework.logging.client.tracer.LoggingTracer;
-import org.minbox.framework.logging.client.tracer.support.LoggingDefaultTracer;
+import org.minbox.framework.logging.client.notice.support.LoggingAdminNotice;
+import org.minbox.framework.logging.client.notice.support.LoggingLocalNotice;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.*;
@@ -42,15 +33,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingProperties.API_BOOT_LOGGING_PREFIX;
 
@@ -75,58 +58,53 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
         ApiBootLoggingAdminDiscoveryAutoConfiguration.class,
         ApiBootLoggingAdminAppointAutoConfiguration.class,
         ApiBootLoggingOpenfeignAutoConfiguration.class,
-        ApiBootLoggingRestTemplateAutoConfiguration.class
+        ApiBootLoggingWebAutoConfiguration.class
 })
-public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
+public class ApiBootLoggingAutoConfiguration {
     /**
      * ApiBoot Logging Properties
      */
     private ApiBootLoggingProperties apiBootLoggingProperties;
-    /**
-     * Configurable Environment
-     */
-    private ConfigurableEnvironment environment;
 
-    public ApiBootLoggingAutoConfiguration(ApiBootLoggingProperties apiBootLoggingProperties, ConfigurableEnvironment environment) {
+    public ApiBootLoggingAutoConfiguration(ApiBootLoggingProperties apiBootLoggingProperties) {
         this.apiBootLoggingProperties = apiBootLoggingProperties;
-        this.environment = environment;
     }
 
     /**
-     * ApiBoot Logging Tracer
+     * logging factory bean
+     * {@link LoggingFactoryBean}
      *
-     * @return ApiBootLoggingTracer
+     * @return LoggingFactoryBean
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingTracer apiBootLoggingTracer() {
-        return new LoggingDefaultTracer();
+    public LoggingFactoryBean loggingFactoryBean(ObjectProvider<LoggingAdminDiscovery> loggingAdminDiscoveryObjectProvider) {
+        LoggingFactoryBean factoryBean = new LoggingFactoryBean();
+        factoryBean.setIgnorePaths(apiBootLoggingProperties.getIgnorePaths());
+        factoryBean.setReportAway(apiBootLoggingProperties.getReportAway());
+        factoryBean.setNumberOfRequestLog(apiBootLoggingProperties.getReportNumberOfRequestLog());
+        factoryBean.setReportInitialDelaySecond(apiBootLoggingProperties.getReportInitialDelaySecond());
+        factoryBean.setReportIntervalSecond(apiBootLoggingProperties.getReportIntervalSecond());
+        factoryBean.setLoggingAdminDiscovery(loggingAdminDiscoveryObjectProvider.getIfAvailable());
+        return factoryBean;
     }
 
     /**
-     * ApiBoot Logging Span
+     * logging request interceptor
+     * {@link LoggingInterceptor}
      *
-     * @return ApiBootLoggingSpan
+     * @param factoryBean logging factory bean
+     * @return LoggingInterceptor
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingSpan apiBootLoggingSpan() {
-        return new LoggingDefaultSpan();
-    }
-
-    /**
-     * ApiBoot Logging Interceptor
-     *
-     * @return ApiBootLoggingInterceptor
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public LoggingInterceptor apiBootLoggingInterceptor() {
-        return new LoggingInterceptor(environment, apiBootLoggingTracer(), apiBootLoggingSpan(), apiBootLoggingProperties.getIgnorePaths());
+    public LoggingInterceptor loggingInterceptor(LoggingFactoryBean factoryBean) {
+        return new LoggingInterceptor(factoryBean);
     }
 
     /**
      * Instance Transmit Request Body Filter
+     * {@link LoggingBodyFilter}
      *
      * @return ApiBootLoggingBodyFilter
      */
@@ -137,103 +115,61 @@ public class ApiBootLoggingAutoConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * ApiBoot Logging Console Notice Listener
+     * logging notice listener
+     * {@link LoggingNoticeListener}
      *
-     * @param loggingStorageNotice ApiBoot Logging Notice Support Instance
-     * @return ApiBootLoggingNoticeListener
-     * @see org.minbox.framework.logging.client.notice.away.support.LoggingLocalStorageNotice
-     * @see org.minbox.framework.logging.client.notice.away.support.LoggingAdminStorageNotice
-     */
-    @Bean
-    public LoggingNoticeListener apiBootLoggingNoticeListener(LoggingStorageNotice loggingStorageNotice) {
-        return new LoggingNoticeListener(loggingStorageNotice, apiBootLoggingProperties.isFormatConsoleLogJson(), apiBootLoggingProperties.isShowConsoleLog());
-    }
-
-
-    /**
-     * ApiBoot Logging Local Notice
-     *
-     * @return ApiBootLoggingLocalStorageNotice
-     */
-    @Bean
-    @ConditionalOnMissingBean(LoggingAdminDiscovery.class)
-    public LoggingLocalStorageNotice apiBootLoggingLocalNotice(ObjectProvider<List<LoggingNotice>> localNoticeObjectProvider) {
-        return new LoggingLocalStorageNotice(localNoticeObjectProvider.getIfAvailable());
-    }
-
-    /**
-     * ApiBoot Logging Admin Notice
-     *
-     * @return ApiBootLoggingAdminStorageNotice
+     * @return LoggingNoticeListener
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnBean(LoggingAdminDiscovery.class)
-    public LoggingAdminStorageNotice apiBootLoggingAdminStorageNotice(LoggingCache loggingCache, LoggingAdminReport loggingAdminReport) {
-        return new LoggingAdminStorageNotice(loggingCache, apiBootLoggingProperties.getReportAway(), loggingAdminReport);
+    public LoggingNoticeListener loggingNoticeListener() {
+        return new LoggingNoticeListener();
     }
 
     /**
-     * Logging Memory Cache
+     * logging local notice
+     * {@link LoggingLocalNotice}
      *
-     * @return LoggingMemoryCache
+     * @return LoggingLocalNotice
      */
     @Bean
-    @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "logging-cache-away", havingValue = "memory", matchIfMissing = true)
     @ConditionalOnMissingBean
-    public LoggingCache loggingMemoryCache() {
-        return new LoggingMemoryCache();
+    public LoggingLocalNotice loggingLocalNotice() {
+        LoggingLocalNotice localNotice = new LoggingLocalNotice();
+        localNotice.setShowConsoleLog(apiBootLoggingProperties.isShowConsoleLog());
+        localNotice.setFormatConsoleLogJson(apiBootLoggingProperties.isFormatConsoleLogJson());
+        return localNotice;
     }
 
     /**
-     * Logging Admin Report
+     * logging admin notice
+     * report request logging to admins
+     * {@link LoggingAdminNotice}
+     * {@link LoggingAdminDiscovery}
      *
-     * @param loggingAdminDiscovery Logging Admin Discovery
-     * @param restTemplate          RestTemplate
-     * @param loggingCache          Logging Cache
-     * @return LoggingAdminReportSupport
+     * @param factoryBean logging factory bean
+     * @return LoggingAdminNotice
      */
     @Bean
     @ConditionalOnBean(LoggingAdminDiscovery.class)
-    @ConditionalOnMissingBean
-    public LoggingAdminReport loggingAdminReportSupport(LoggingAdminDiscovery loggingAdminDiscovery, RestTemplate restTemplate, LoggingCache loggingCache, ConfigurableEnvironment environment) {
-        return new LoggingAdminReportSupport(loggingAdminDiscovery, restTemplate, loggingCache, apiBootLoggingProperties.getReportNumberOfRequestLog(), environment);
+    public LoggingAdminNotice loggingAdminNotice(LoggingFactoryBean factoryBean) {
+        return new LoggingAdminNotice(factoryBean);
     }
 
     /**
      * Logging Report Scheduled Task Job
+     * When the configuration parameter "api.boot.logging.report-away=timing" is configured,
+     * the creation timing task is performed to report log information to admin node
+     * {@link ApiBootLoggingProperties#getReportAway()}
+     * {@link LoggingReportScheduled}
      *
-     * @param loggingAdminReport Logging Admin Report
+     * @param factoryBean logging factory bean
      * @return LoggingReportScheduled
      */
     @Bean
     @ConditionalOnProperty(prefix = API_BOOT_LOGGING_PREFIX, name = "report-away", havingValue = "timing")
     @ConditionalOnMissingBean
-    public LoggingReportScheduled loggingReportScheduled(LoggingAdminReport loggingAdminReport) {
-        return new LoggingReportScheduled(loggingAdminReport, apiBootLoggingProperties.getReportInitialDelaySecond(), apiBootLoggingProperties.getReportIntervalSecond());
-    }
-
-    /**
-     * registry logging interceptor
-     *
-     * @param registry registry interceptor
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(apiBootLoggingInterceptor()).addPathPatterns(apiBootLoggingProperties.getLoggingPathPrefix());
-    }
-
-    /**
-     * Rest Template Instance
-     *
-     * @return RestTemplate
-     */
-    @Bean
-    @Primary
-    @ConditionalOnMissingBean
-    public RestTemplate restTemplate(ObjectProvider<List<ClientHttpRequestInterceptor>> interceptorObjectProvider) {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setInterceptors(interceptorObjectProvider.getIfAvailable());
-        return restTemplate;
+    public LoggingReportScheduled loggingReportScheduled(LoggingFactoryBean factoryBean) {
+        return new LoggingReportScheduled(factoryBean);
     }
 }
