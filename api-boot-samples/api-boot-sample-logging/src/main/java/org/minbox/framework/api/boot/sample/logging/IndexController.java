@@ -18,11 +18,9 @@
 package org.minbox.framework.api.boot.sample.logging;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author：恒宇少年 - 于起宇
@@ -35,9 +33,6 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 public class IndexController {
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @PostMapping(value = "/index")
     public User index(@RequestBody User user) throws Exception {

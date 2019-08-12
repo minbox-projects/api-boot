@@ -2,7 +2,7 @@ spring:
   application:
     name: api-boot-sample-logging
   #profiles:
-  #  active: appoint
+   # active: appoint
 server:
   port: 8080
 
@@ -11,3 +11,6 @@ api:
     logging:
       format-console-log-json: true
       show-console-log: true
+logging:
+  level:
+    org.minbox.framework.logging: debug
