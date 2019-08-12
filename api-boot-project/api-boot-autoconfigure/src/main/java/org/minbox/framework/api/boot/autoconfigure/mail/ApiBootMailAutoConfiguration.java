@@ -60,6 +60,7 @@ public class ApiBootMailAutoConfiguration {
     /**
      * ApiBoot Mail Service AliYun Support
      *
+     * @param acsClient AcsClient
      * @return ApiBootMailService Support Instance
      */
     @Bean

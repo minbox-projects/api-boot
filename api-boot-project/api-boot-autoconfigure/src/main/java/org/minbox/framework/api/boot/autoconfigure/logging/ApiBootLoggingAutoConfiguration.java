@@ -74,6 +74,7 @@ public class ApiBootLoggingAutoConfiguration {
      * logging factory bean
      * {@link LoggingFactoryBean}
      *
+     * @param loggingAdminDiscoveryObjectProvider Logging Admin Discovery Instance Provider
      * @return LoggingFactoryBean
      */
     @Bean
@@ -160,7 +161,7 @@ public class ApiBootLoggingAutoConfiguration {
      * Logging Report Scheduled Task Job
      * When the configuration parameter "api.boot.logging.report-away=timing" is configured,
      * the creation timing task is performed to report log information to admin node
-     * {@link ApiBootLoggingProperties#getReportAway()}
+     * {@link ApiBootLoggingProperties#getReportAway}
      * {@link LoggingReportScheduled}
      *
      * @param factoryBean logging factory bean

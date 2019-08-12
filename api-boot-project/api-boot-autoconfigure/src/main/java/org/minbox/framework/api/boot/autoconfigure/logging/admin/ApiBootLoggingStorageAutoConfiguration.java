@@ -45,6 +45,7 @@ public class ApiBootLoggingStorageAutoConfiguration {
     /**
      * Logging DataSource Storage
      *
+     * @param dataSource DataSource
      * @return LoggingDataSourceStorage
      */
     @Bean
@@ -56,6 +57,7 @@ public class ApiBootLoggingStorageAutoConfiguration {
     /**
      * Report Log Storage Listener
      *
+     * @param loggingStorage Logging Storage
      * @return ReportLogStorageListener
      */
     @Bean

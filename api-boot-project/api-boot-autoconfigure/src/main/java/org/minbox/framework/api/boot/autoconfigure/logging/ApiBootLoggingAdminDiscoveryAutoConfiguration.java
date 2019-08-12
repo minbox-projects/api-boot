@@ -56,6 +56,7 @@ public class ApiBootLoggingAdminDiscoveryAutoConfiguration {
     /**
      * ApiBoot Logging Admin Registry Center Discovery
      *
+     * @param loadBalancerClient LoadBalance Client
      * @return LoggingRegistryCenterAdminDiscovery
      */
     @Bean

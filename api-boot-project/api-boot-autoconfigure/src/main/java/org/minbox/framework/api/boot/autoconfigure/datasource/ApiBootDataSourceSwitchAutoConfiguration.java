@@ -63,9 +63,10 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
     /**
      * ApiBoot Routing DataSource
      * switch use datasource
+     * {@link DataSource}
      *
      * @param apiBootDataSourceFactoryBean ApiBoot DataSource FactoryBean
-     * @return
+     * @return DataSource
      */
     @Bean
     @ConditionalOnMissingBean
@@ -108,6 +109,7 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
      * ApiBoot DataSource Switch Advisor
      * Used to get @DataSourceSwitch annotation define
      *
+     * @param apiBootDataSourceSwitchAnnotationInterceptor ApiBoot DataSource Annotation Interceptor
      * @return ApiBootDataSourceSwitchAdvisor
      */
     @Bean

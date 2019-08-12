@@ -92,6 +92,7 @@ public class ApiBootMyBatisEnhanceProperties {
     private Configuration configuration;
 
     /**
+     * @return config location
      * @since 1.1.0
      */
     public String getConfigLocation() {
@@ -99,6 +100,7 @@ public class ApiBootMyBatisEnhanceProperties {
     }
 
     /**
+     * @param configLocation config location
      * @since 1.1.0
      */
     public void setConfigLocation(String configLocation) {
@@ -156,6 +158,7 @@ public class ApiBootMyBatisEnhanceProperties {
     }
 
     /**
+     * @return properties
      * @since 1.2.0
      */
     public Properties getConfigurationProperties() {
@@ -163,6 +166,7 @@ public class ApiBootMyBatisEnhanceProperties {
     }
 
     /**
+     * @param configurationProperties properties
      * @since 1.2.0
      */
     public void setConfigurationProperties(Properties configurationProperties) {

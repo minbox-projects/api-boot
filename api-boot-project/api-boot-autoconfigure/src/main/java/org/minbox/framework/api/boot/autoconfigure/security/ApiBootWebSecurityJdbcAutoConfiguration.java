@@ -73,6 +73,7 @@ public class ApiBootWebSecurityJdbcAutoConfiguration extends ApiBootWebSecurityA
     /**
      * 开启使用ApiBoot默认自带的用户信息表
      *
+     * @param dataSource DataSource
      * @return ApiBootStoreDelegate
      */
     @Bean

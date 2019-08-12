@@ -114,8 +114,8 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
      * 实例化SqlSessionFactory对象
      *
      * @param dataSource 数据源
-     * @return
-     * @throws Exception
+     * @return SqlSessionFactory
+     * @throws Exception Exception
      */
     @Bean
     @ConditionalOnMissingBean
@@ -175,7 +175,7 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
     /**
      * EnhanceDslFactory Instance
      * Use to create dsl
-     *
+     * @param sqlSession SqlSession
      * @return EnhanceDslFactory
      */
     @Bean
