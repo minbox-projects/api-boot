@@ -36,6 +36,7 @@ public class DSystemUser extends TableExpression<SystemUser> {
         return new DSystemUser("iot_system_user");
     }
 
+
     /**
      * 主键
      */
