@@ -64,12 +64,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--SpringCloud Dependencies-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!--MinBox Dependencies-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>minbox-dependencies</artifactId>
+                <version>${minbox.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
 
             <!--ApiBoot Starter-->
@@ -414,7 +423,16 @@
                 <artifactId>api-boot-starter-logging-admin</artifactId>
                 <version>${api.boot.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>minbox-web</artifactId>
+                <version>${minbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>minbox-core</artifactId>
+                <version>${minbox.version}</version>
+            </dependency>
             <!--MinBox Logging-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
