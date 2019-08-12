@@ -34,6 +34,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingProperties.API_BOOT_LOGGING_PREFIX;
 
@@ -79,7 +82,8 @@ public class ApiBootLoggingAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingFactoryBean loggingFactoryBean(ObjectProvider<LoggingAdminDiscovery> loggingAdminDiscoveryObjectProvider) {
+    public LoggingFactoryBean loggingFactoryBean(ObjectProvider<LoggingAdminDiscovery> loggingAdminDiscoveryObjectProvider,
+                                                 ObjectProvider<List<LoggingFactoryBeanCustomizer>> customizerObjectProvider) {
         LoggingFactoryBean factoryBean = new LoggingFactoryBean();
         factoryBean.setIgnorePaths(apiBootLoggingProperties.getIgnorePaths());
         factoryBean.setReportAway(apiBootLoggingProperties.getReportAway());
@@ -87,6 +91,11 @@ public class ApiBootLoggingAutoConfiguration {
         factoryBean.setReportInitialDelaySecond(apiBootLoggingProperties.getReportInitialDelaySecond());
         factoryBean.setReportIntervalSecond(apiBootLoggingProperties.getReportIntervalSecond());
         factoryBean.setLoggingAdminDiscovery(loggingAdminDiscoveryObjectProvider.getIfAvailable());
+
+        List<LoggingFactoryBeanCustomizer> customizers = customizerObjectProvider.getIfAvailable();
+        if (!ObjectUtils.isEmpty(customizers)) {
+            customizers.stream().forEach(customizer -> customizer.customize(factoryBean));
+        }
         return factoryBean;
     }
 
@@ -161,7 +170,7 @@ public class ApiBootLoggingAutoConfiguration {
      * Logging Report Scheduled Task Job
      * When the configuration parameter "api.boot.logging.report-away=timing" is configured,
      * the creation timing task is performed to report log information to admin node
-     * {@link ApiBootLoggingProperties#getReportAway}
+     * {@link ApiBootLoggingProperties}
      * {@link LoggingReportScheduled}
      *
      * @param factoryBean logging factory bean
