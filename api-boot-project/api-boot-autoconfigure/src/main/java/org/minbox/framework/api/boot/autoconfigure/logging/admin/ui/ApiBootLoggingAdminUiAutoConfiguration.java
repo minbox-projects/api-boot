@@ -65,7 +65,7 @@ public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer 
      */
     private static final List<String> DEFAULT_UI_ROUTES = asList(
             "/about/**",
-            "/applications/**",
+            "/services/**",
             "/logs/**",
             "/wallboard/**"
     );
