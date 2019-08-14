@@ -22,7 +22,7 @@
     <parent>
         <artifactId>api-boot-parent</artifactId>
         <groupId>org.minbox.framework</groupId>
-        <version>2.1.3-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../api-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
