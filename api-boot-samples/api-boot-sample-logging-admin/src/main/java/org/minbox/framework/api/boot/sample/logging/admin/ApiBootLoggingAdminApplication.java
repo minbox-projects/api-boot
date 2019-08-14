@@ -21,10 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
  * @author：恒宇少年 - 于起宇
@@ -45,24 +41,5 @@ public class ApiBootLoggingAdminApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApiBootLoggingAdminApplication.class, args);
         logger.info("{}服务启动成功.", "");
-    }
-
-    @Configuration
-    public static class SecurityPermitAllConfig extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-            successHandler.setTargetUrlParameter("redirectTo");
-            http.authorizeRequests()
-                    .antMatchers("/assets/**").permitAll()
-                    .antMatchers("/login").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                    .formLogin().loginPage("/login").successHandler(successHandler).and()
-                    .logout().and()
-                    .httpBasic().and()
-                    .csrf().disable();
-        }
     }
 }
