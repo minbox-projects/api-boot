@@ -49,7 +49,11 @@ import org.springframework.web.servlet.HandlerMapping;
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(ApiBootLoggingAdminProperties.class)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
-@Import({ApiBootLoggingAdminUiAutoConfiguration.class, ApiBootLoggingStorageAutoConfiguration.class})
+@Import({
+        ApiBootLoggingAdminUiAutoConfiguration.class,
+        ApiBootLoggingStorageAutoConfiguration.class,
+        ApiBootLoggingAdminSecurityAutoConfiguration.class
+})
 @EnableAsync
 public class ApiBootLoggingAdminAutoConfiguration {
     /**
