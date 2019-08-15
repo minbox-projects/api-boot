@@ -1,28 +1,24 @@
-### 2.1.3.RELEASE (2019-8-15日发布)
+## 2.1.3.RELEASE (2019-8-15日发布)
 
-- ApiBoot Logging
-    - 修复 #IZQCY
-	- 添加RestTemplate支持透传链路信息
-	- 修改OpenFeign透传链路信息方式
-	- 修改日志异步上传到Admin，提高接口访问响应效率
-	- 分离Logging到"minbox-projects"开源组织"minbox-logging"项目内
+- 修复 #IZQCY
+- `logging-client`支持`restTemplate`方式透传链路信息
+- 修改`logging-client`使用`openfeign`透传链路信息设置方式
+- 修改`logging-client`异步上传请求日志到`logging-admin`
+- 分离`api-boot-plugin-logging`到`minbox-projects`开源组织内作为独立的`minbox-logging`项目进行维护
+- `logging-admin`支持控制台打印上报的日志信息
+- `logging-admin`支持美化控制台上报的日志json
+- 修改`logging-admin`接收上报日志为Event/Listener方式
+- 修改`logging-admin`持久化日志信息的表结构部分字段
+- 初次发布`logging-admin-ui`日志管理界面依赖
+- `logging-admin-ui`支持整合`spring-security`来完成安全认证登录
+- `logging-admin-ui`可查看上报日志的服务列表
+- `logging-admin-ui`可查看最新上报的500条链路日志信息
+- 支持自定义`logging-admin-ui`界面的logo
+- 支持自定义`logging-admin-ui`界面的title
+- `logging-admin-ui`可查看每条链路日志的详情
 
-- ApiBoot Logging Admin
-	- 分离Logging Admin到 "minbox-projects"开源组织"minbox-logging"项目内
-	- 添加控制台输出上报的日志配置属性
-	- 添加输出上报日志美化Json配置属性
-	- 修改接收上报日志方式为Event/Listener
-	- 调整 "logging_request_logs" 日志表结构
+## 2.1.2.RELEASE（2019-7-24日发布）
 
-- ApiBoot Logging Admin UI
-	- 项目初始化使用Vue构建
-	- 支持SpringSecurity Starter配置用户登录
-	- 可查看上报日志的服务列表
-	- 可查看最新500条的请求链路日志信息（可查看扩展详情）
-	- 可自定义配置页面Logo
-	- 可自定义配置页面标题显示内容
-	
-### 2.1.2.RELEASE（2019-7-24日发布）
 - ApiBoot Logging
   - 可配置指定路径前缀下的请求采集上报日志
   - 可排除指定路径不进行采集日志
