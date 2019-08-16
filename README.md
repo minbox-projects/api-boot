@@ -3,6 +3,9 @@
 </p>
 <p align="center">
     <img src="https://www.travis-ci.org/hengboy/api-boot.svg?branch=master" alt="build">
+    <a href="https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
+        <img src="https://badges.gitter.im/api-boot/community.svg" alt="Gitter"/>
+    </a>
     <a href="http://apiboot.yuqiyu.com">
         <img src="https://img.shields.io/badge/link-查看ApiBoot官方文档-blue.svg?style=flat-square" alt="ApiBoot官网">
     </a>
