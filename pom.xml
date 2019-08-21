@@ -29,7 +29,7 @@
         内部提供了第三方框架的封装集成，让接口开发者可以选择性完成开箱即用，
         不再为搭建接口框架而犯愁，从而极大的提高开发效率。
     </description>
-    <url>https://github.com/hengboy/api-boot</url>
+    <url>https://gitee.com/minbox-projects/api-boot</url>
     <build>
         <plugins>
             <!--jdk version-->

@@ -17,9 +17,11 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
@@ -30,7 +32,8 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(WebSecurityConfigurerAdapter.class)
+@ConditionalOnClass(WebSecurityConfiguration.class)
+@AutoConfigureAfter(ApiBootLoggingAdminAutoConfiguration.class)
 public class ApiBootLoggingAdminSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * Logging Admin Login Page
@@ -41,18 +44,27 @@ public class ApiBootLoggingAdminSecurityAutoConfiguration extends WebSecurityCon
      */
     private static final String ASSETS_RESOURCE_PREFIX = "/assets/**";
 
+    /**
+     * Configure logging admin security authentication related information
+     * Open Resource Path Access {@link ApiBootLoggingAdminSecurityAutoConfiguration#ASSETS_RESOURCE_PREFIX}
+     * Open Login Page Path Access {@link ApiBootLoggingAdminSecurityAutoConfiguration#LOGIN_PAGE}
+     * Enable Http Basic Auth {@link HttpSecurity#httpBasic()}
+     * Disable Csrf {@link HttpSecurity#csrf()}
+     *
+     * @param http HttpSecurity Instance
+     * @throws Exception Config Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
         successHandler.setTargetUrlParameter("redirectTo");
         http.authorizeRequests()
-                .antMatchers(ASSETS_RESOURCE_PREFIX).permitAll()
-                .antMatchers(LOGIN_PAGE).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage(LOGIN_PAGE).successHandler(successHandler).and()
-                .logout().and()
-                .httpBasic().and()
-                .csrf().disable();
+            .antMatchers(ASSETS_RESOURCE_PREFIX).permitAll()
+            .antMatchers(LOGIN_PAGE).permitAll()
+            .anyRequest().authenticated().and()
+            .formLogin().loginPage(LOGIN_PAGE).successHandler(successHandler).and()
+            .logout().and()
+            .httpBasic().and()
+            .csrf().disable();
     }
 }
