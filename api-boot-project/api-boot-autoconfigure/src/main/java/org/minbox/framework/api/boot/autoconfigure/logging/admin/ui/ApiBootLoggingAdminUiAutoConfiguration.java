@@ -19,7 +19,8 @@ package org.minbox.framework.api.boot.autoconfigure.logging.admin.ui;
 
 import org.minbox.framework.logging.admin.storage.LoggingStorage;
 import org.minbox.framework.logging.admin.ui.HomepageForwardingFilter;
-import org.minbox.framework.logging.admin.ui.LoggingAdminUiEndpoint;
+import org.minbox.framework.logging.admin.ui.LoggingAdminUiFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -49,6 +50,7 @@ import static java.util.Arrays.asList;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
+@ConditionalOnBean(LoggingStorage.class)
 @EnableConfigurationProperties(ApiBootLoggingAdminUiProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer {
@@ -64,10 +66,10 @@ public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer 
      * Default Ui Router List
      */
     private static final List<String> DEFAULT_UI_ROUTES = asList(
-            "/about/**",
-            "/services/**",
-            "/logs/**",
-            "/wallboard/**"
+        "/about/**",
+        "/services/**",
+        "/logs/**",
+        "/wallboard/**"
     );
     /**
      * Application Context
@@ -126,22 +128,17 @@ public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer 
     }
 
     /**
-     * Logging Admin Ui Endpoint
-     * The ability to provide logging admin data to the public
+     * Logging Admin Ui FactoryBean {@link org.minbox.framework.logging.admin.LoggingAdminFactoryBean}
      *
-     * @param loggingStorage Logging Storage
-     * @return LoggingAdminUiEndpoint
+     * @return LoggingAdminUiFactoryBean
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingAdminUiEndpoint loggingAdminUiEndpoint(LoggingStorage loggingStorage) {
-        return new LoggingAdminUiEndpoint(
-                LoggingAdminUiEndpoint.Settings.builder()
-                        .brand(adminUiProperties.getBrand())
-                        .title(adminUiProperties.getTitle())
-                        .routes(DEFAULT_UI_ROUTES)
-                        .build(),
-                loggingStorage
-        );
+    public LoggingAdminUiFactoryBean loggingAdminUiFactoryBean() {
+        LoggingAdminUiFactoryBean factoryBean = new LoggingAdminUiFactoryBean();
+        factoryBean.setBrand(adminUiProperties.getBrand());
+        factoryBean.setTitle(adminUiProperties.getTitle());
+        factoryBean.setRoutes(DEFAULT_UI_ROUTES);
+        return factoryBean;
     }
 }
