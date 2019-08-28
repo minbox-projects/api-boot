@@ -41,6 +41,11 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-logging-admin</artifactId>
         </dependency>
+        <!--MinBox Logging Spring Context-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-spring-context</artifactId>
+        </dependency>
         <!--MinBox Logging Admin Ui-->
         <dependency>
             <groupId>org.minbox.framework</groupId>

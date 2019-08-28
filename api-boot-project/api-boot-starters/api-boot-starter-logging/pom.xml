@@ -43,6 +43,11 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-logging-client</artifactId>
         </dependency>
+        <!--MinBox Logging Spring Context-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-spring-context</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-web</artifactId>
