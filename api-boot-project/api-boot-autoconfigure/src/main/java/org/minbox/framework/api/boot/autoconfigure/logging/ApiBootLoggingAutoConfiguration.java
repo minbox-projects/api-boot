@@ -91,6 +91,8 @@ public class ApiBootLoggingAutoConfiguration {
         factoryBean.setReportInitialDelaySecond(apiBootLoggingProperties.getReportInitialDelaySecond());
         factoryBean.setReportIntervalSecond(apiBootLoggingProperties.getReportIntervalSecond());
         factoryBean.setLoggingAdminDiscovery(loggingAdminDiscoveryObjectProvider.getIfAvailable());
+        factoryBean.setShowConsoleLog(apiBootLoggingProperties.isShowConsoleLog());
+        factoryBean.setFormatConsoleLog(apiBootLoggingProperties.isFormatConsoleLogJson());
 
         List<LoggingFactoryBeanCustomizer> customizers = customizerObjectProvider.getIfAvailable();
         if (!ObjectUtils.isEmpty(customizers)) {
