@@ -217,6 +217,11 @@
             <artifactId>minbox-logging-admin-ui</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-spring-context</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <!--SpringCloud Openfeign-->
         <dependency>
