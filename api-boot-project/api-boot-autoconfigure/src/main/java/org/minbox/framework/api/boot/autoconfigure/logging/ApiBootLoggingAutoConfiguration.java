@@ -20,14 +20,13 @@ package org.minbox.framework.api.boot.autoconfigure.logging;
 import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.logging.client.admin.report.LoggingReportScheduled;
-import org.minbox.framework.logging.client.filter.LoggingBodyFilter;
 import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
-import org.minbox.framework.logging.client.notice.LoggingNoticeListener;
-import org.minbox.framework.logging.client.notice.support.LoggingAdminNotice;
-import org.minbox.framework.logging.client.notice.support.LoggingLocalNotice;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -58,11 +57,11 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
 @ConditionalOnWebApplication
 @EnableAsync
 @Import({
-        ApiBootLoggingAdminDiscoveryAutoConfiguration.class,
-        ApiBootLoggingAdminAppointAutoConfiguration.class,
-        ApiBootLoggingOpenfeignAutoConfiguration.class,
-        ApiBootLoggingRestTemplateAutoConfiguration.class,
-        ApiBootLoggingWebAutoConfiguration.class
+    ApiBootLoggingAdminDiscoveryAutoConfiguration.class,
+    ApiBootLoggingAdminAppointAutoConfiguration.class,
+    ApiBootLoggingOpenfeignAutoConfiguration.class,
+    ApiBootLoggingRestTemplateAutoConfiguration.class,
+    ApiBootLoggingWebAutoConfiguration.class
 })
 public class ApiBootLoggingAutoConfiguration {
     /**
@@ -98,73 +97,6 @@ public class ApiBootLoggingAutoConfiguration {
             customizers.stream().forEach(customizer -> customizer.customize(factoryBean));
         }
         return factoryBean;
-    }
-
-    /**
-     * logging request interceptor
-     * {@link LoggingInterceptor}
-     *
-     * @param factoryBean logging factory bean
-     * @return LoggingInterceptor
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public LoggingInterceptor loggingInterceptor(LoggingFactoryBean factoryBean) {
-        return new LoggingInterceptor(factoryBean);
-    }
-
-    /**
-     * Instance Transmit Request Body Filter
-     * {@link LoggingBodyFilter}
-     *
-     * @return ApiBootLoggingBodyFilter
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public LoggingBodyFilter apiBootLoggingFilter() {
-        return new LoggingBodyFilter();
-    }
-
-    /**
-     * logging notice listener
-     * {@link LoggingNoticeListener}
-     *
-     * @return LoggingNoticeListener
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public LoggingNoticeListener loggingNoticeListener() {
-        return new LoggingNoticeListener();
-    }
-
-    /**
-     * logging local notice
-     * {@link LoggingLocalNotice}
-     *
-     * @return LoggingLocalNotice
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public LoggingLocalNotice loggingLocalNotice() {
-        LoggingLocalNotice localNotice = new LoggingLocalNotice();
-        localNotice.setShowConsoleLog(apiBootLoggingProperties.isShowConsoleLog());
-        localNotice.setFormatConsoleLogJson(apiBootLoggingProperties.isFormatConsoleLogJson());
-        return localNotice;
-    }
-
-    /**
-     * logging admin notice
-     * report request logging to admins
-     * {@link LoggingAdminNotice}
-     * {@link LoggingAdminDiscovery}
-     *
-     * @param factoryBean logging factory bean
-     * @return LoggingAdminNotice
-     */
-    @Bean
-    @ConditionalOnBean(LoggingAdminDiscovery.class)
-    public LoggingAdminNotice loggingAdminNotice(LoggingFactoryBean factoryBean) {
-        return new LoggingAdminNotice(factoryBean);
     }
 
     /**
