@@ -17,6 +17,9 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
+import org.minbox.framework.logging.client.admin.discovery.lb.LoadBalanceStrategy;
+import org.minbox.framework.logging.client.admin.discovery.lb.support.RandomWeightedStrategy;
+import org.minbox.framework.logging.client.admin.discovery.lb.support.SmoothWeightedRoundRobinStrategy;
 import org.minbox.framework.logging.client.admin.discovery.support.LoggingAppointAdminDiscovery;
 import org.minbox.framework.logging.client.admin.discovery.support.LoggingRegistryCenterAdminDiscovery;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -62,6 +65,30 @@ public class ApiBootLoggingAdminAppointAutoConfiguration {
     @ConditionalOnMissingBean
     public LoggingAppointAdminDiscovery loggingConfigAdminDiscovery() {
         String[] serverAddressArray = apiBootLoggingProperties.getAdmin().getServerAddress().split(",");
-        return new LoggingAppointAdminDiscovery(serverAddressArray);
+        LoggingAppointAdminDiscovery appointAdminDiscovery = new LoggingAppointAdminDiscovery(serverAddressArray);
+        LoadBalanceStrategy loadBalanceStrategy = instantiationLoadBalanceStrategy();
+        appointAdminDiscovery.setLoadBalanceStrategy(loadBalanceStrategy);
+        return appointAdminDiscovery;
+    }
+
+    /**
+     * Create {@link LoadBalanceStrategy} by {@link LoadBalanceStrategyAway}
+     * default is use {@link RandomWeightedStrategy}
+     *
+     * @return {@link LoadBalanceStrategy} support class instance
+     */
+    private LoadBalanceStrategy instantiationLoadBalanceStrategy() {
+        LoadBalanceStrategyAway strategyAway = apiBootLoggingProperties.getLoadBalanceStrategy();
+        LoadBalanceStrategy strategy;
+        switch (strategyAway) {
+            case POLL_WEIGHT:
+                strategy = new SmoothWeightedRoundRobinStrategy();
+                break;
+            case RANDOM_WEIGHT:
+            default:
+                strategy = new RandomWeightedStrategy();
+                break;
+        }
+        return strategy;
     }
 }
