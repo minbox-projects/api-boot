@@ -88,6 +88,14 @@ public class ApiBootLoggingProperties {
      * support eureka
      */
     private DiscoveryInstance discovery;
+    /**
+     * Choose load balancing strategy for admin report log
+     * {@link org.minbox.framework.logging.client.admin.discovery.lb.LoadBalanceStrategy}
+     *
+     * @see org.minbox.framework.logging.client.admin.discovery.lb.support.RandomWeightedStrategy
+     * @see org.minbox.framework.logging.client.admin.discovery.lb.support.SmoothWeightedRoundRobinStrategy
+     */
+    private LoadBalanceStrategyAway loadBalanceStrategy = LoadBalanceStrategyAway.RANDOM_WEIGHT;
 
     /**
      * Config ApiBoot Logging Admin Server
