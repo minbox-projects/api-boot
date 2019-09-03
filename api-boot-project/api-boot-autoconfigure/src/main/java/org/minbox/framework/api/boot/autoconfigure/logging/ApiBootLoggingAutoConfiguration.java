@@ -21,6 +21,8 @@ import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.logging.client.admin.report.LoggingReportScheduled;
 import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -65,6 +67,10 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
 })
 public class ApiBootLoggingAutoConfiguration {
     /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootLoggingAutoConfiguration.class);
+    /**
      * ApiBoot Logging Properties
      */
     private ApiBootLoggingProperties apiBootLoggingProperties;
@@ -98,6 +104,7 @@ public class ApiBootLoggingAutoConfiguration {
         if (!ObjectUtils.isEmpty(customizers)) {
             customizers.stream().forEach(customizer -> customizer.customize(factoryBean));
         }
+        logger.info("【LoggingFactoryBean】init successfully.");
         return factoryBean;
     }
 
