@@ -20,6 +20,8 @@ package org.minbox.framework.api.boot.autoconfigure.logging;
 import lombok.Getter;
 
 /**
+ * logging strategy load balance away {@link LoadBalanceStrategyAway}
+ *
  * @author 恒宇少年
  */
 @Getter
