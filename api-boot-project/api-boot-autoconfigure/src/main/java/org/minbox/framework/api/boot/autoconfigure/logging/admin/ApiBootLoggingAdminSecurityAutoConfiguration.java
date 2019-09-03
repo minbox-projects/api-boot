@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
+import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +33,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(WebSecurityConfiguration.class)
+@ConditionalOnClass({WebSecurityConfiguration.class, LoggingAdminFactoryBean.class})
 @AutoConfigureAfter(ApiBootLoggingAdminAutoConfiguration.class)
 public class ApiBootLoggingAdminSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
     /**
