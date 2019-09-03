@@ -20,7 +20,10 @@ package org.minbox.framework.api.boot.autoconfigure.logging.admin.ui;
 import org.minbox.framework.logging.admin.storage.LoggingStorage;
 import org.minbox.framework.logging.admin.ui.HomepageForwardingFilter;
 import org.minbox.framework.logging.admin.ui.LoggingAdminUiFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -51,9 +54,14 @@ import static java.util.Arrays.asList;
  */
 @Configuration
 @ConditionalOnBean(LoggingStorage.class)
+@ConditionalOnClass(LoggingAdminUiFactoryBean.class)
 @EnableConfigurationProperties(ApiBootLoggingAdminUiProperties.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootLoggingAdminUiAutoConfiguration.class);
     /**
      * ApiBoot Logging Admin Ui Resource Handler Prefix
      */
@@ -139,6 +147,7 @@ public class ApiBootLoggingAdminUiAutoConfiguration implements WebMvcConfigurer 
         factoryBean.setBrand(adminUiProperties.getBrand());
         factoryBean.setTitle(adminUiProperties.getTitle());
         factoryBean.setRoutes(DEFAULT_UI_ROUTES);
+        logger.info("【LoggingAdminUiFactoryBean】init successfully.");
         return factoryBean;
     }
 }
