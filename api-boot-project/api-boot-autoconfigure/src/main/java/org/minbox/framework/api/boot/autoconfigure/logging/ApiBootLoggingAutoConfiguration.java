@@ -20,7 +20,6 @@ package org.minbox.framework.api.boot.autoconfigure.logging;
 import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.logging.client.admin.report.LoggingReportScheduled;
-import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -53,7 +52,7 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(LoggingInterceptor.class)
+@ConditionalOnClass(LoggingFactoryBean.class)
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @ConditionalOnWebApplication

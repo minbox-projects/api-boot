@@ -34,7 +34,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass({LoggingFactoryBean.class, LoggingInterceptor.class})
+@ConditionalOnClass(LoggingFactoryBean.class)
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(ApiBootLoggingAutoConfiguration.class)
 public class ApiBootLoggingWebAutoConfiguration implements WebMvcConfigurer {
