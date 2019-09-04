@@ -17,8 +17,10 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
+import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -32,6 +34,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author 恒宇少年
  */
 @Configuration
+@ConditionalOnClass({LoggingFactoryBean.class, LoggingInterceptor.class})
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(ApiBootLoggingAutoConfiguration.class)
 public class ApiBootLoggingWebAutoConfiguration implements WebMvcConfigurer {
