@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
+import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.logging.client.admin.discovery.lb.LoadBalanceStrategy;
 import org.minbox.framework.logging.client.admin.discovery.lb.support.RandomWeightedStrategy;
 import org.minbox.framework.logging.client.admin.discovery.lb.support.SmoothWeightedRoundRobinStrategy;
@@ -63,7 +64,7 @@ public class ApiBootLoggingAdminAppointAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingAppointAdminDiscovery loggingConfigAdminDiscovery() {
+    public LoggingAdminDiscovery loggingConfigAdminDiscovery() {
         String[] serverAddressArray = apiBootLoggingProperties.getAdmin().getServerAddress().split(",");
         LoggingAppointAdminDiscovery appointAdminDiscovery = new LoggingAppointAdminDiscovery(serverAddressArray);
         LoadBalanceStrategy loadBalanceStrategy = instantiationLoadBalanceStrategy();

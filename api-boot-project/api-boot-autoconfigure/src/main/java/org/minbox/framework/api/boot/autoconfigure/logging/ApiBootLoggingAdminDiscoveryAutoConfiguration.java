@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
+import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.logging.client.admin.discovery.support.LoggingRegistryCenterAdminDiscovery;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -64,7 +65,7 @@ public class ApiBootLoggingAdminDiscoveryAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingRegistryCenterAdminDiscovery loggingRegistryCenterAdminDiscovery(LoadBalancerClient loadBalancerClient) {
+    public LoggingAdminDiscovery loggingRegistryCenterAdminDiscovery(LoadBalancerClient loadBalancerClient) {
         LoggingRegistryCenterAdminDiscovery registryCenterAdminDiscovery =
             new LoggingRegistryCenterAdminDiscovery(apiBootLoggingProperties.getDiscovery().getServiceId(), loadBalancerClient);
         String basicAuthUserName = apiBootLoggingProperties.getDiscovery().getUsername();
