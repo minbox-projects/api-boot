@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.sample.logging.admin;
 
+import org.minbox.framework.logging.spring.context.annotation.admin.EnableLoggingAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -32,6 +33,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * GitHub：https://github.com/hengboy
  */
 @SpringBootApplication
+@EnableLoggingAdmin
 public class ApiBootLoggingAdminApplication {
     /**
      * logger instance
@@ -40,6 +42,6 @@ public class ApiBootLoggingAdminApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiBootLoggingAdminApplication.class, args);
-        logger.info("{}服务启动成功.", "");
+        logger.info("{}服务启动成功.", "Logging Admin");
     }
 }

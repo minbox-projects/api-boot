@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.sample.logging;
 
+import org.minbox.framework.logging.spring.context.annotation.client.EnableLoggingClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -37,6 +38,7 @@ import org.springframework.web.client.RestTemplate;
  * GitHub：https://github.com/hengboy
  */
 @SpringBootApplication
+@EnableLoggingClient
 public class ApiBootLoggingApplication {
     /**
      * logger instance

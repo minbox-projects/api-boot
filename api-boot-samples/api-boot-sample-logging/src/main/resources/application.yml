@@ -1,8 +1,8 @@
 spring:
   application:
     name: api-boot-sample-logging
-  #profiles:
-   # active: appoint
+  profiles:
+    active: appoint
 server:
   port: 8080
 
