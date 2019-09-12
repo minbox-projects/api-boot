@@ -88,6 +88,7 @@ public class ApiBootRateLimiterMethodInterceptor implements MethodInterceptor {
             }
         } catch (Exception e) {
             logger.error("Current Limiting Request Encountered Exception.", e);
+            throw e;
         }
         // If an instance is created
         if (!ObjectUtils.isEmpty(overFlowRequest)) {
