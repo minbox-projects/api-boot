@@ -69,7 +69,7 @@ public class ApiBootLoggingAdminDiscoveryAutoConfiguration {
         LoggingRegistryCenterAdminDiscovery registryCenterAdminDiscovery =
             new LoggingRegistryCenterAdminDiscovery(apiBootLoggingProperties.getDiscovery().getServiceId(), loadBalancerClient);
         String basicAuthUserName = apiBootLoggingProperties.getDiscovery().getUsername();
-        if (ObjectUtils.isEmpty(basicAuthUserName)) {
+        if (!ObjectUtils.isEmpty(basicAuthUserName)) {
             registryCenterAdminDiscovery.setUsername(basicAuthUserName);
         }
         String basicAuthPassword = apiBootLoggingProperties.getDiscovery().getPassword();
