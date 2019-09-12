@@ -16,10 +16,9 @@
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
         <spring.cloud.version>Greenwich.SR2</spring.cloud.version>
-        <api.boot.version>2.1.4-SNAPSHOT</api.boot.version>
 
-        <minbox.version>1.0.0.RELEASE</minbox.version>
-        <minbox-logging.version>1.0.0.RELEASE</minbox-logging.version>
+        <minbox.version>1.0.1-SNAPSHOT</minbox.version>
+        <minbox-logging.version>1.0.1-SNAPSHOT</minbox-logging.version>
 
         <druid.version>1.1.17</druid.version>
         <druid.starter.version>1.1.17</druid.starter.version>
@@ -33,7 +32,7 @@
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
         <quartz.version>2.3.1</quartz.version>
-        <spring.tx.version>5.1.8.RELEASE</spring.tx.version>
+        <spring.tx.version>5.1.9.RELEASE</spring.tx.version>
         <jpush-client.version>3.3.11</jpush-client.version>
         <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
@@ -85,33 +84,33 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!--ApiBoot AutoConfigure-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-autoconfigure</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Converter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-http-converter</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
                 <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-http-converter</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Common-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-common</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!--fastJson-->
             <dependency>
@@ -183,14 +182,14 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-swagger</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Plugin-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Security-->
@@ -207,17 +206,17 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-security</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-oauth</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot & Aliyun Oss-->
@@ -229,12 +228,12 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-oss</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-alibaba-oss</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot & Aliyun Sms-->
@@ -251,12 +250,12 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-alibaba-sms</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-alibaba-sms</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot & Quartz-->
@@ -268,36 +267,36 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-quartz</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-quartz</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot DataSource Switch-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-datasource-switch</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-datasource-switch</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Resource Load-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-resource-load</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-resource-load</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Message Push-->
@@ -309,12 +308,12 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-message-push</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-message-push</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Code Builder-->
@@ -333,7 +332,7 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-mybatis-pageable</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot Mybatis Enhance-->
@@ -350,19 +349,19 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-mybatis-enhance</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--ApiBoot RateLimiter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-rate-limiter</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-rate-limiter</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!--Codegen-->
@@ -383,12 +382,12 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-mail</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-mail</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.aliyun</groupId>
@@ -400,28 +399,28 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-logging</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-logging</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!--ApiBoot Logging Admin-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-logging-admin</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-logging-admin-ui</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-logging-admin</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
@@ -449,6 +448,11 @@
                 <artifactId>minbox-logging-client</artifactId>
                 <version>${minbox-logging.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>minbox-logging-spring-context</artifactId>
+                <version>${minbox-logging.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -471,7 +475,7 @@
                 <plugin>
                     <groupId>org.minbox.framework</groupId>
                     <artifactId>api-boot-maven-plugin-code-builder</artifactId>
-                    <version>${api.boot.version}</version>
+                    <version>${project.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -482,7 +486,7 @@
                 <plugin>
                     <groupId>org.minbox.framework</groupId>
                     <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
-                    <version>${api.boot.version}</version>
+                    <version>${project.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
