@@ -17,8 +17,8 @@
         <spring.boot.version>2.1.8.RELEASE</spring.boot.version>
         <spring.cloud.version>Greenwich.SR3</spring.cloud.version>
 
-        <minbox.version>1.0.1-SNAPSHOT</minbox.version>
-        <minbox-logging.version>1.0.1-SNAPSHOT</minbox-logging.version>
+        <minbox.version>1.0.1.RELEASE</minbox.version>
+        <minbox-logging.version>1.0.1.RELEASE</minbox-logging.version>
 
         <druid.version>1.1.20</druid.version>
         <druid.starter.version>1.1.20</druid.starter.version>
