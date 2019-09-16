@@ -18,7 +18,7 @@
     <version>${revision}</version>
     <name>api-boot</name>
     <properties>
-        <revision>2.1.4-SNAPSHOT</revision>
+        <revision>2.1.4.RELEASE</revision>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -71,20 +71,11 @@
     </build>
     <repositories>
         <repository>
-            <id>apiboot</id>
-            <name>Snapshots</name>
+            <id>snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>central</id>
-            <name>Maven Repository Switchboard</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
         </repository>
     </repositories>
 </project>
