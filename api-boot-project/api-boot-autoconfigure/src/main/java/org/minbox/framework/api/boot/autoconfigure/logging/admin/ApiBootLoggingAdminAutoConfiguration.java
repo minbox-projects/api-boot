@@ -19,6 +19,7 @@ package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
 import org.minbox.framework.api.boot.autoconfigure.logging.admin.ui.ApiBootLoggingAdminUiAutoConfiguration;
 import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
+import org.minbox.framework.logging.admin.storage.LoggingDataSourceStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanCreationException;
@@ -71,15 +72,28 @@ public class ApiBootLoggingAdminAutoConfiguration {
     }
 
     /**
+     * {@link org.minbox.framework.logging.admin.storage.LoggingStorage} database
+     * @param dataSource {@link DataSource}
+     * @return {@link LoggingDataSourceStorage}
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public LoggingDataSourceStorage loggingDataSourceStorage(DataSource dataSource) {
+        LoggingDataSourceStorage storage = new LoggingDataSourceStorage(dataSource);
+        return storage;
+    }
+
+    /**
      * instantiation {@link LoggingAdminFactoryBean}
      *
-     * @param dataSource {@link DataSource}
+     * @param loggingDataSourceStorage {@link LoggingDataSourceStorage}
      * @return LoggingAdminFactoryBean
      */
     @Bean
-    public LoggingAdminFactoryBean loggingAdminFactoryBean(DataSource dataSource) {
+    @ConditionalOnMissingBean
+    public LoggingAdminFactoryBean loggingAdminFactoryBean(LoggingDataSourceStorage loggingDataSourceStorage) {
         LoggingAdminFactoryBean factoryBean = new LoggingAdminFactoryBean();
-        factoryBean.setDataSource(dataSource);
+        factoryBean.setLoggingStorage(loggingDataSourceStorage);
         factoryBean.setShowConsoleReportLog(apiBootLoggingAdminProperties.isShowConsoleReportLog());
         factoryBean.setFormatConsoleLogJson(apiBootLoggingAdminProperties.isFormatConsoleLogJson());
         logger.info("【LoggingAdminFactoryBean】init successfully.");
