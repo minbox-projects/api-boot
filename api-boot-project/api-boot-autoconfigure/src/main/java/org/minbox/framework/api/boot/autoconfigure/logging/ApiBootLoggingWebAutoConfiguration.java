@@ -19,6 +19,7 @@ package org.minbox.framework.api.boot.autoconfigure.logging;
 
 import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.interceptor.LoggingInterceptor;
+import org.minbox.framework.logging.client.interceptor.web.LoggingWebInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -40,16 +41,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(ApiBootLoggingAutoConfiguration.class)
 public class ApiBootLoggingWebAutoConfiguration implements WebMvcConfigurer {
-    private LoggingInterceptor loggingInterceptor;
+    private LoggingWebInterceptor loggingWebInterceptor;
     private ApiBootLoggingProperties loggingProperties;
 
-    public ApiBootLoggingWebAutoConfiguration(LoggingInterceptor loggingInterceptor, ApiBootLoggingProperties loggingProperties) {
-        this.loggingInterceptor = loggingInterceptor;
+    public ApiBootLoggingWebAutoConfiguration(LoggingWebInterceptor loggingWebInterceptor, ApiBootLoggingProperties loggingProperties) {
+        this.loggingWebInterceptor = loggingWebInterceptor;
         this.loggingProperties = loggingProperties;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loggingInterceptor).addPathPatterns(loggingProperties.getLoggingPathPrefix());
+        registry.addInterceptor(loggingWebInterceptor).addPathPatterns(loggingProperties.getLoggingPathPrefix());
     }
 }
