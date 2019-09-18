@@ -1,3 +1,37 @@
+## 2.1.4.RELEASE(2019-9-17日发布)
+
+- Logging 废除`LoggingStorageAutoConfiguration`配置类
+
+- Logging 集成`LoggingAdminFactoryBean`完成参数配置
+
+- Logging 集成`LoggingFactoryBean`完成参数配置
+
+- Logging实现`logging-admin`负载均衡节点发现
+
+- Logging修改`spring-security`自动化配置条件过滤方式
+
+- Logging修改`logging-admin`自动化配置条件过滤方式
+
+- Logging修改服务注册中心发现`logging-admin`节点信息
+
+- RateLimiter修改方法执行遇到异常时，进行抛出处理
+
+- Logging限制`spring-web`应用程序使用`logging-client`拦截器
+
+- Logging修改集成`logging-admin`提供的数据源存储日志信息方式
+
+- 升级`SpringBoot`为`2.1.8.RELEASE`
+
+- 升级`SpringCloud`为`Greenwich.SR3`
+
+- 升级`fastjson`为`1.2.60`
+
+- 升级`druid`版本为`1.1.20`
+
+- 升级`minbox-logging`版本为`1.0.1.RELEASE`
+
+  
+
 ## 2.1.3.RELEASE (2019-8-15日发布)
 
 - 修复 #IZQCY
