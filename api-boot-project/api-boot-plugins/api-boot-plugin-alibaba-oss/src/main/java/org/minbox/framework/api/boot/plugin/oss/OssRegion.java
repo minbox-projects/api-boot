@@ -46,7 +46,7 @@ public enum OssRegion {
     /**
      * 西南（成都）
      */
-    chengdu("oss-cn-chengdu.aliyuncs.com"),
+    chengdu("http://oss-cn-chengdu.aliyuncs.com"),
     /**
      * 香港
      */
