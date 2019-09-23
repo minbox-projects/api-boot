@@ -44,6 +44,10 @@ public enum OssRegion {
      */
     shenzhen("http://oss-cn-shenzhen.aliyuncs.com"),
     /**
+     * 西南（成都）
+     */
+    chengdu("http://oss-cn-chengdu.aliyuncs.com"),
+    /**
      * 香港
      */
     hongkong("http://oss-cn-hongkong.aliyuncs.com"),
