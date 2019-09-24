@@ -48,7 +48,7 @@ public class ApiBootLoggingOpenfeignAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public RequestInterceptor apiBootLogOpenFeignInterceptor() {
+    public LoggingOpenFeignInterceptor apiBootLogOpenFeignInterceptor() {
         return new LoggingOpenFeignInterceptor();
     }
 }
