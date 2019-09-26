@@ -6,8 +6,8 @@
     <a href="https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
         <img src="https://badges.gitter.im/api-boot/community.svg" alt="Gitter"/>
     </a>
-    <a href="http://apiboot.yuqiyu.com">
-        <img src="https://img.shields.io/badge/link-查看ApiBoot官方文档-blue.svg?style=flat-square" alt="ApiBoot官网">
+    <a href="http://apiboot.minbox.io">
+        <img src="https://img.shields.io/badge/link-官方文档-green.svg?style=flat-square" alt="ApiBoot官网">
     </a>
     <a href="https://search.maven.org/search?q=g:org.minbox.framework">
         <img src="https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central" alt="Maven Center">
@@ -19,137 +19,165 @@
         <img src="https://img.shields.io/badge/JDK-1.8+-green.svg" alt="JDK Version">
     </a>
       <a href="#">
-        <img src="https://img.shields.io/badge/SpringBoot-1.5+_2.0+-green.svg" alt="SpringBoot Version">
+        <img src="https://img.shields.io/badge/SpringBoot-2.0+-green.svg" alt="SpringBoot Version">
     </a>
 </p>
 
-ApiBoot 官网：http://apiboot.minbox.io
+ApiBoot是接口服务的落地解决方案，提供了一系列开箱即用的组件，通过封装来简化主流第三方框架的集成，从而提高开发者开发效率、学习成本、降低入门门槛，真正的实现开箱即用！！！
 
-`ApiBoot`是一款基于`SpringBoot1.x`、`SpringBoot2.x`的接口服务集成基础框架，内部提供了框架的封装集成，让接口开发者完成开箱即用，不再为搭建接口框架而犯愁，从而极大的提高开发效率。
-通过在我的`SpringBoot`系列教程中得到的学习者的反馈，才决定来封装一套对应我文章的基础框架，`ApiBoot`内的每一个框架的具体讲解都在文章内进行了详细说明，如果有不明白的可以通过如下途径访问我的文章：
+对SpringBoot简单了解的开发者就可以编写安全稳定的接口服务，可为移动端、网页端等多个端点提供丰富的安全接口。
 
-- <a href="http://image.yuqiyu.com/%E6%81%92%E5%AE%87%E5%B0%91%E5%B9%B4%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93.jpg" target="_blank">小程序 - 恒宇少年的知识库</a>
-- <a href="http://blog.yuqiyu.com" target="_blank">我的博客 - 恒宇少年De成长之路</a>
-- <a href="https://www.jianshu.com/u/092df3f77bca" target="_blank">我的简书</a>
+ApiBoot依赖于SpringBoot，可以使用ApiBoot构建独立的Java应用程序。
 
-## 主要功能
+愿景：
 
-- **服务资源安全** ：通过整合`SpringSecurity` + `Oauth2`来完成接口服务的安全性，安全拦截路径内的请求必须携带`请求令牌`才可以访问到资源内容，资源内容可配置指定身份、权限访问。
-- **服务授权认证中心**：服务授权以及认证是由`Oauth2`来担任，通过`password`授权模式获取`请求令牌`后访问资源服务，一个配置即可开启`Jwt`格式化`AccessToken`
-- **文档自动生成**：通过集成`Swagger2`来完成文档的侵入式生成，侵入式文档后期会被替代，`ApiBoot Security Oauth`已默认排除`swagger2`相关的资源路径。
-- **返回JSON格式化**：使用阿里巴巴的`FastJson`来完成返回`Json`字符串的格式化，自动扫描装载自定义的`ValueFilter`实现类，用于自定义返回格式化。
-- **数据库ORM框架**：`mybatis-enhance`是一款由我开源的数据库持久化框架，基于`mybatis`进行封装编写，可以完成动态查询数据，语法与`SQL`语法几乎一致，内置常用方法提供直接调用，支持方法命名规则查询，一个接口方法就可以自动完成查询，不再编写`SQL`语句。
-- **动态数据源**：完成项目的多数据源配置、内部集成`druid`、`HikariCP`数据源实现方式，配置主从数据源、多数据库类型数据源、多种数据源实现方式集成。
-- **自动分页插件**：`mybatis-pageable`是一款由我开源的自动化分页插件，直接摆脱编写`分页代码`，仅仅需要传递的分页参数就可以自动进行查询，目前支持主流的**12**种数据库。
-- **资源业务自动分离**：`resource-load`用于业务与资源信息的分页，比如：用户头像、封面图等，只需要关心业务，让`resource-load`自动去维护资源信息。
-- **接口限流**：`rate-limiter`用于接口服务的请求流量限制，可以根据QPS配置每秒允许访问的次数。
-- **代码生成插件**：`code-builder`是一款由我开源的代码生成插件，直接摆脱实体类的生成，支持自定义`freemarker`模板来完成自定义生成类文件，比如：`Service`、`Controller`、`Mapper`等。
-- **七牛云资源处理**：集成七牛云提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
-- **阿里云OSS资源处理**：集成阿里云OSS提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
-- **阿里云短信**：集成阿里云提供的SMS服务，简单配置即可完成短信发送，覆盖全球的短信服务，友好、高效、智能的互联化通讯能力，帮助企业迅速搭建客户触达通道。
+- 为Java开发者提供低门槛第三方框架集成解决方案，让复杂的框架集成使用的门槛更低。
+- 开箱即用，内部封装了主流框架，只需添加依赖、简单配置即可使用。
+- 各个组件可独立使用，不再冗余你的应用程序。
+- 可简单快速的构建安全的restful资源接口服务。
+- 可用于构建SpringCloud微服务服务实例。
+- 为🇨🇳开源做贡献，希望开源框架可以帮助更多的开发者。
 
-更多功能请参考 [更多功能列表](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
+## 安装 & 入门
 
-## 组件
-- **[ApiBoot Logging Admin](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging-admin)**：接收ApiBoot Logging组件的请求日志上报，进行存储、分析、通知等。
-- **[ApiBoot Logging](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging)**：零侵入式、链路式请求日志分析框架，无缝整合SpringCloud Openfeign
-- **[Spring Security](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/)**：Spring提供的安全框架，Spring家族式的设计，无缝整合SpringBoot
-- **[OAuth2](https://oauth.net/2/)**：OAuth是一个网络授权的标准。
-- **[JWT](https://jwt.io/)**：JSON Web Token是目前流行的跨域认证解决方案，用于格式化OAuth2生成的Token。
-- **[Quartz](http://www.quartz-scheduler.org)**：分布式定时任务调度框架
-- **[Swagger2](https://swagger.io/)**：Swagger是一款API文档生成工具，自动扫描代码进行生成可运行测试的文档。
-- **[Mybatis Enhance](https://github.com/hengboy/mybatis-enhance)**：`Enhance`是对于原生的`MyBatis`的增强编写，不影响任何原生的使用，使用后完全替代`mybatis-core`、`mybatis-spring`以及`mybatis-spring-boot-starter`，可以使用`SpringBoot`配置文件的形式进行配置相关的内容，尽可能强大的方便快速的集成`MyBatis`。
-- **[Mybatis Enhance Codegen](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance-codegen)**：为`Mybatis Enhance`搭配研发的代码自动生成`Maven Plugin`，自定生成对应数据库表结构的数据实体、动态查询实体等，通过`like`语法可以过滤指定表的生成。
-- **[DataSource Switch](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-plugins/api-boot-plugin-datasource-switch)**：一款多数据源自动切换框架，可配置多种数据库类型数据源集成、主从数据源配置。
-- **[Mybatis Pageable](https://github.com/hengboy/mybatis-pageable)**：`MyBatis-Pageable`是一款自动化分页的插件，基于`MyBatis`内部的插件`Interceptor`拦截器编写完成，拦截`Executor.query`的两个重载方法计算出分页的信息以及根据配置的数据库`Dialect`自动执行不同的查询语句完成总数量的统计。
-- **[Code Builder](https://github.com/hengboy/code-builder)**：`code-builder`是一款代码生成`maven mojo`插件，通过简单的配置就可以完成数据库内`Table`转换`Entity`或者其他实体类，想怎么生成完全根据你的个人业务逻辑，`code-builder`尽可能的完善的提供数据库内的一些定义的信息，让你更方便更灵活的来生成`Java`文件。
-- **[Resource Load](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-resource-load)**：通过AOP实现的资源自动加载、更新、删除、添加，内部还提供了内存、Redis缓存方式，极大的减轻数据库资源查询的压力。
-- **[Rate Limiter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-rate-limiter)**：通过拦截器实现的服务接口流量限制，可以配置某一个接口每秒内的访问次数(QPS)，通过集成`Google`的令牌桶限流方式完成。
+组件的使用请查看<a href="http://apiboot.minbox.io" target="_blank">官方参考文档</a>，开始使用请访问<a href="http://apiboot.minbox.io/zh-cn/docs/quick-start.html" target="_blank">第一个ApiBoot应用程序</a>
 
-更多组件请参考[更多集成组件](https://github.com/hengboy/api-boot/tree/master/api-boot-project/api-boot-starters)
-
-### Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/hengboy/api-boot.svg)](https://starchart.cc/hengboy/api-boot)
-
-## 怎么使用？
-
-### 添加版本依赖
-
-在使用`ApiBoot`时需要再`pom.xml`文件内的`dependencyManagement`标签内添加如下配置：
+如果你是使用Maven来构建项目，你需要添加ApiBoot的版本依赖到你的pom.xml文件内，如下所示：
 
 ```xml
 <dependencyManagement>
   <dependencies>
+    <!--ApiBoot版本依赖-->
     <dependency>
       <groupId>org.minbox.framework</groupId>
       <artifactId>api-boot-dependencies</artifactId>
-      <version>2.1.4-SNAPSHOT</version>
-      <type>pom</type>
+      <version>${lastVersion}</version>
       <scope>import</scope>
+      <type>pom</type>
     </dependency>
   </dependencies>
 </dependencyManagement>
 ```
 
-由于`ApiBoot`内后期规划集成的内容比较多，所以根据了`SpringBoot`的版本规划来进行了管理维护，这样在添加使用`ApiBoot`的依赖时就不再需要添加`版本号`，统一交由`api-boot-dependencies`进行管理。
+> 注意：**lastVersion**需要替换为最新的ApiBoot版本，请访问<a href="http://apiboot.minbox.io/zh-cn/docs/version-rely.html" target="_blank">版本依赖 - 2.获取最新的ApiBoot依赖</a>查看。
 
-> 注意：该版本默认添加了`spring-boot-dependencies`依赖。
+版本依赖添加完成后，我们接下来就可以进行添加项目内所需要的ApiBoot组件，下面是使用分布式链路组件minbox-logging示例：
 
-## 使用Demo
+```xml
+<dependencies>
+  <!--ApiBoot MinBox Logging-->
+  <dependency>
+    <groupId>org.minbox.framework</groupId>
+    <artifactId>api-boot-starter-logging</artifactId>
+  </dependency>
+</dependencies>
+```
 
-`ApiBoot`会为每一个依赖提供一个演示代码集成子项目，都在`api-boot-samples`项目下，为了更好地解释`ApiBoot`的每一个依赖功能，恒宇少年会在每一个`sample`下添加当前项目的`readme`进行详细介绍。
+添加完组件我们就可以根据<a href="http://apiboot.minbox.io" target="_blank">官方参考文档</a>找到对应组件的文档进行配置使用了。
 
-Demo列表：
+## 获取帮助
 
-- [ApiBoot Security Oauth](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-security-oauth-jwt)
-- [ApiBoot Swagger](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-swagger)
-- [ApiBoot Http Converter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-http-converter)
-- [ApiBoot Alibaba OSS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-oss)
-- [ApiBoot Alibaba SMS](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-alibaba-sms)
-- [ApiBoot Quartz](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-quartz)
-- [ApiBoot DataSource Switch](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-datasource-switch)
-- [ApiBoot Resource Load](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-resource-load)
-- [ApiBoot Message Push](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-message-push)
-- [ApiBoot RateLimiter](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-rate-limiter)
-- [ApiBoot Mybatis Enhance](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance)
-- [ApiBoot Mybatis Enhance Codegen](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-enhance-codegen)
-- [ApiBoot Mybatis Pageable](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mybatis-pageable)
-- [ApiBoot Mail](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-mail)
-- [ApiBoot Logging](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging)
-- [ApiBoot Logging Admin](https://github.com/hengboy/api-boot/tree/master/api-boot-samples/api-boot-sample-logging-admin)
+如果在使用ApiBoot的过程中遇到了问题，你可以通过以下途径获取帮助！
 
-## 更新日志
+- 查看<a href="http://apiboot.minbox.io" target="_blank">官方参考文档</a>，使用的每一个细节都会在文档中进行体现。
+- 在<a href="https://gitee.com/minbox-projects/api-boot/issues" target="_blank">https://gitee.com/minbox-projects/api-boot/issues</a>提交你遇到的使用问题。
 
-`ApiBoot`每一次发版都会有相应的更新日志，点击访问[更新日志wiki](<https://github.com/hengboy/api-boot/wiki/ApiBoot-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97>)
+## 提交问题建议
 
-## 版本管理规范
+每个人可能提出的问题不同，不过也会有一些相同的问题，如果您要提出问题，请遵循以下建议：
 
-项目的版本号格式为 x.x.x 的形式，其中 x 的数值类型为数字，从 0 开始取值，且不限于 0~9 这个范围。
+- 在提交问题之前，请搜索issues内是否已经有人提出过该问题。
+- 如果您即将要提出的问题不存在，请<a href="https://gitee.com/minbox-projects/api-boot/issues" target="_blank">创建issue</a>。
+- 请在提出您的问题时提供尽可能有关ApiBoot可能多的信息，比如：ApiBoot的版本、JDK、使用组件等
+- 如果提问题时需要粘贴代码，请尽量使用markdown语法```转义符。
 
-- SpringBoot1.x版本对应ApiBoot版本1.x.x
-- SpringBoot2.x版本对应ApiBoot版本2.x.x
+## 源码方式构建
 
-集成新的第三方框架为小版本更新，对应修改第三位版本数值，如：2.0.1 -> 2.0.2
+ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新版本的ApiBoot（版本并未发布），可以直接通过源码的方式进行构建安装到本地使用，前提条件如下所示：
 
-## 开源交流
+- 本地需要配置Maven环境变量，建议<a href="https://maven.apache.org/download.cgi" target="_blank">使用最新版</a>
+- 本地需要配置JDK环境变量，<a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">JDK1.8下载地址</a>
+- 本地需要配置Git环境变量，<a href="https://git-scm.com/downloads" target="_blank">Git下载地址</a>
 
-### 社区交流
+```sh
+# 下载master分支源码到本地
+➜ git clone https://gitee.com/minbox-projects/api-boot.git
+# 进入api-boot源码根目录
+➜ cd api-boot
+# 执行安装
+➜ mvn clean install
+```
 
-#### 恒宇少年邮件
+## 组件
 
-[jnyuqy@gmail.com](mailto:jnyuqy@gmail.com)
+ApiBoot内部提供了多个组件，下面简单的介绍组件的用途：
 
-#### 恒宇少年微信
+### 链路日志组件
 
-**yuqiyu999**
+内部通过集成整合<a href="https://gitee.com/minbox-projects/minbox-logging" target="_blank">minbox-logging</a>开源框架，提供零侵入式分布式链路日志分析框架的使用，可应用到SpringCloud微服务应用内，提供Admin端点进行采集日志、分析日志、日志告警通知、服务性能分析等。通过Admin Ui可查看实时链路日志信息、在线业务服务列表。
 
-#### ApiBoot 开源群组
+### 安全组件
 
-<p align="left">
-  <img src="http://image.yuqiyu.com/ApiBoot-qq-group-1.png" height="240">
-</p>
+内部通过整合SpringSecurity + OAuth2两大常用资源安全、认证授权框架来保证接口服务的安全性，**内存方式只需要添加几行配置就可以完成整合**，ApiBoot针对SpringSecurity提供了两种查询用户的方式：memory（内存）、jdbc（数据库）。而针对OAuth2则提供了三种方式存储生成后的Token以及Client信息：memory、jdbc、redis等。
 
-### 开源许可
+>  可以直接配置使用JWT格式化OAuth2生成的Token.
 
-`ApiBoot`采用`Apache2`开源许可。
+### 接口文档组件
+
+通过集成`Swagger2`来完成文档的侵入式生成，侵入式文档后期会被替代，`ApiBoot Security Oauth`已默认排除`swagger2`相关的资源路径（如果自定义集成了OAuth2或者SpringSecurity需要手动排除Swagger资源路径）。
+
+### ORM组件（数据库持久化组件）
+
+ApiBoot通过封装Mybatis提供了一款吸取JPA、Mybatis、QueryDSL等主流ORM框架的优点整合框架<a href="https://gitee.com/hengboy/mybatis-enhance" target="_blank">mybatis-enhance</a>，内部提供了常用CRUD方法，无需编写一行SQL就可以完成对数据的持久化操作，提供方法命名规则查询、动态查询等新特性。
+
+### 代码生成组件
+
+ApiBoot为mybatis-enhance提供了专门定制代码生成插件，可为数据库表对应生成数据实体生成、动态查询实体，mybatis-enhance-codegen是一款Maven Plugin，配置数据库链接信息后可根据配置过滤指定的表、全部表、指定前缀的表进行生成。
+
+### 多数据源组件
+
+ApiBoot针对多数据源切换的场景提供了自动化切换的方式，内部提供了两种数据源类型的配置实现，分别是：Druid、HikariCP，通过在类、方法上配置注解的方式切面自动切换为配置数据源，如未配置则使用默认的数据源。
+
+### 自动分页组件
+
+ApiBoot针对Mybatis持久化框架的使用者提供了自动化分页的插件<a href="https://gitee.com/hengboy/mybatis-pageable" target="_blank">mybatis-pageable</a>，这是一款基于Mybatis Plugin实现的插件，根据传递的分页参数可以自动查询出分页信息，如：总页数、每页条数、当前页码、是否存在上一页、下一页等。
+
+> 支持主流的12种数据库。
+
+### 限流组件
+
+ApiBoot针对单应用、分布式集群应用分别提供了一种限流的方式，针对单应用提供了Google的令牌桶方式限流，而针对服务集群环境提供了Redis Lua方式。
+
+> 限流配置秒级QPS访问量。
+
+### 阿里云OSS组件
+
+集成阿里云OSS提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
+
+### 阿里云短信组件
+
+集成阿里云提供的SMS服务，简单配置即可完成短信发送，覆盖全球的短信服务，友好、高效、智能的互联化通讯能力，帮助企业迅速搭建客户触达通道。
+
+### 阿里云邮件组件
+
+集成阿里云提供的Mail服务，简单配置后，通过ApiBoot提供的封装类几行代码就可以完成邮件发送。
+
+## 示例
+
+ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](https://gitee.com/minbox-projects/api-boot/tree/master/api-boot-samples)目录下根据组件名归类。
+
+## 使用指南
+
+请访问作者博客<a href="https://blog.yuqiyu.com" target="_blank">恒宇少年De成长之路</a>获取ApiBoot、MinBox开源组织内开源框架的最新的使用指南。
+
+## 联系作者
+
+作者公众号：
+
+<img src="https://blog.yuqiyu.com/images/open.jpg" style="width:200px;"/>
+
+扫码关注公众号请回复**ApiBoot**获取作者微信号。
+
+## License
+
+ApiBoot采用Apache2开源许可进行编写。
