@@ -1,5 +1,5 @@
 <p align="center">
-<img src="http://image.yuqiyu.com/apiboot-colorful.png" height="200"/>
+<img src="http://apiboot.minbox.io/img/apiboot-colorful.png" height="200"/>
 </p>
 <p align="center">
     <img src="https://www.travis-ci.org/hengboy/api-boot.svg?branch=master" alt="build">
@@ -174,7 +174,7 @@ ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](htt
 
 作者公众号：
 
-<img src="https://blog.yuqiyu.com/images/open.jpg" style="width:200px;"/>
+<img src="http://blog.yuqiyu.com/images/mp.jpg" style="width:200px;"/>
 
 扫码关注公众号请回复**ApiBoot**获取作者微信号。
 
