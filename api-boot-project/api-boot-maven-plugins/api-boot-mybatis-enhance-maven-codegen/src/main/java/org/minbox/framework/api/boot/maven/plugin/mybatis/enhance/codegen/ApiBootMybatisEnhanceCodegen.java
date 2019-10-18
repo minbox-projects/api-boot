@@ -171,8 +171,8 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             // execute the builders created
             // ClassBuilder implementation classes can be added
             Class<? extends ClassBuilder>[] builders = new Class[]{
-                    EntityClassBuilder.class,
-                    DynamicEntityClassBuilder.class
+                EntityClassBuilder.class,
+                DynamicEntityClassBuilder.class
             };
 
             // ignore table prefix
@@ -233,15 +233,16 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
 
     /**
      * load codegen.setting.json parse to CodegenSetting entity
+     * read codegen.setting.json content
      */
     private String loadCodegenSetting() {
         try {
             // formatter codegen.setting.json path
             String settingJsonPath = String.format("%s%s", EnhanceCodegenConstant.CLASSES_PATH.replace(EnhanceCodegenConstant.POINT, File.separator), EnhanceCodegenConstant.SETTING_JSON);
-
-            // read codegen.setting.json content
             File file = new File(projectBaseDir + settingJsonPath);
-            return FileUtils.fileRead(file);
+            if (file.exists()) {
+                return FileUtils.fileRead(file);
+            }
         } catch (Exception e) {
             getLog().error(e);
         }
