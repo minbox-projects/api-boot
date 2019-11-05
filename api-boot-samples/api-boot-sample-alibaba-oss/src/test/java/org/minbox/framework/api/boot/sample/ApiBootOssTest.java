@@ -58,7 +58,7 @@ public class ApiBootOssTest {
      */
     @Test
     public void uploadFile() {
-        ApiBootObjectStorageResponse response = apiBootOssService.upload("11.png", "/Users/yuqiyu/Downloads/logo.png");
+        ApiBootObjectStorageResponse response = apiBootOssService.upload("ApiBoot Security Oauth内存方式集成.mp4", "/Users/yuqiyu/Movies/ApiBoot/ApiBoot Security Oauth内存方式集成.mp4");
         logger.info("文件名称：{}", response.getObjectName());
         logger.info("文件访问路径：{}", response.getObjectUrl());
     }
@@ -70,8 +70,8 @@ public class ApiBootOssTest {
      */
     @Test
     public void uploadInputStream() throws Exception {
-        FileInputStream inputStream = new FileInputStream(new File("/Users/yuqiyu/Downloads/logo.png"));
-        ApiBootObjectStorageResponse response = apiBootOssService.upload("测试.png", inputStream);
+        FileInputStream inputStream = new FileInputStream(new File("/Users/yuqiyu/Downloads/update-release-v10102.apk"));
+        ApiBootObjectStorageResponse response = apiBootOssService.upload("update-release-v10102.apk", inputStream);
         logger.info("文件名称：{}", response.getObjectName());
         logger.info("文件访问路径：{}", response.getObjectUrl());
     }

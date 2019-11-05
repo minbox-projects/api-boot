@@ -7,10 +7,10 @@ api:
       # oss存储地域
       region: beijing
       # id
-      access-key-id: xxxx
+      access-key-id: LTAIf7S3Ph6u5tV9
       # secret
-      access-key-secret: xxxx
+      access-key-secret: LgFCl1uXjCqIkmvopG7skRfiaY2BA6
       # 存储空间名称
-      bucket-name: xxx
+      bucket-name: chapter-video
       # oss所绑定的域名ApiBootDataSource
-      #domain: http://xxx.xxx.xx
+      domain: http://study.yuqiyu.com

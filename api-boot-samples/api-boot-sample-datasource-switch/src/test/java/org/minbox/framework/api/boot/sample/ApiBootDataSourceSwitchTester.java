@@ -1,6 +1,5 @@
 package org.minbox.framework.api.boot.sample;
 
-import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class ApiBootDataSourceSwitchTester {
      * @throws Exception
      */
     @Test
-    @PerfTest(invocations = 10000, threads = 100)
+    //@PerfTest(invocations = 10000, threads = 100)
     public void test() throws Exception {
         masterDataSourceSampleService.print();
     }

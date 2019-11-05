@@ -40,10 +40,9 @@ public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigu
      * 排除安全拦截swagger、actuator等路径
      *
      * @param web web安全构建对象
-     * @throws Exception 异常信息
      */
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         WebSecurity.IgnoredRequestConfigurer ignoredRequestConfigurer = web.ignoring();
         configureIgnoreUrls().stream().forEach(url -> ignoredRequestConfigurer.antMatchers(url));
     }
