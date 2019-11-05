@@ -26,6 +26,7 @@ public class ApiBootDataSourceSwitchAnnotationInterceptor implements MethodInter
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
+        Object methodResult;
         try {
             Class<?> targetClass = (invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null);
             Method specificMethod = ClassUtils.getMostSpecificMethod(invocation.getMethod(), targetClass);
@@ -40,11 +41,12 @@ public class ApiBootDataSourceSwitchAnnotationInterceptor implements MethodInter
                 // setting current thread use data source pool name
                 DataSourceContextHolder.set(dataSourceSwitch.value());
             }
-            return invocation.proceed();
+            methodResult = invocation.proceed();
         } finally {
             // remove current thread use datasource pool name
             DataSourceContextHolder.remove();
         }
+        return methodResult;
 
     }
 }

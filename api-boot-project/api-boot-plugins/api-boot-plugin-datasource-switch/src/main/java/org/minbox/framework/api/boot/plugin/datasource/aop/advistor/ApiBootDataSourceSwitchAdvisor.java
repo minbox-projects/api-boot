@@ -73,4 +73,8 @@ public class ApiBootDataSourceSwitchAdvisor extends AbstractPointcutAdvisor impl
         return pointcut.union(mpc);
     }
 
+    @Override
+    public int getOrder() {
+        return HIGHEST_PRECEDENCE;
+    }
 }
