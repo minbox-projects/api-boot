@@ -1,3 +1,15 @@
+
+## 2.1.5.RELEASE更新日志(2019-11-6日发布)
+
+- 新增ApiBoot Alibaba Oss西南成都地域
+- 修复ApiBoot Logging与Seata提供的openfeign拦截器冲突问题
+- 修复ApiBoot Enhance Codegen生成实体时，不创建codegen.setting.json文件抛出异常问题
+- 升级SpringBoot为2.1.9.RELEASE
+- 修改ApiBoot DataSource Switch多线程切换为Deque方式
+- 修改框架源码描述
+- 修复ReadMe公众号不显示问题
+- 修复Banner输出版本错误问题
+
 ## 2.1.4.RELEASE(2019-9-17日发布)
 
 - Logging 废除`LoggingStorageAutoConfiguration`配置类
