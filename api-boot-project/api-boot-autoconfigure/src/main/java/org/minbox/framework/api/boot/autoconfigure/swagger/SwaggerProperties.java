@@ -45,7 +45,7 @@ public class SwaggerProperties {
     /**
      * 文档版本号
      */
-    private String version = "2.1.6-SNAPSHOT";
+    private String version = "2.2.0-SNAPSHOT";
     /**
      * 文档版权
      */
