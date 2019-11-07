@@ -168,7 +168,7 @@ ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](htt
 
 ## 使用指南
 
-请访问作者博客<a href="https://blog.yuqiyu.com" target="_blank">恒宇少年De成长之路</a>获取ApiBoot、MinBox开源组织内开源框架的最新的使用指南。
+请访问作者博客<a href="http://blog.yuqiyu.com" target="_blank">恒宇少年De成长之路</a>获取ApiBoot、MinBox开源组织内开源框架的最新的使用指南。
 
 ## 联系作者
 
