@@ -14,7 +14,7 @@
     <artifactId>api-boot-dependencies</artifactId>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring.boot.version>2.1.9.RELEASE</spring.boot.version>
+        <spring.boot.version>2.1.10.RELEASE</spring.boot.version>
         <spring.cloud.version>Greenwich.SR3</spring.cloud.version>
 
         <minbox.version>1.0.1.RELEASE</minbox.version>
@@ -32,7 +32,7 @@
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
         <quartz.version>2.3.1</quartz.version>
-        <spring.tx.version>5.1.9.RELEASE</spring.tx.version>
+        <spring.tx.version>5.1.10.RELEASE</spring.tx.version>
         <jpush-client.version>3.3.11</jpush-client.version>
         <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
