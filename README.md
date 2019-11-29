@@ -91,6 +91,13 @@ ApiBoot依赖于SpringBoot，可以使用ApiBoot构建独立的Java应用程序�
 - 请在提出您的问题时提供尽可能有关ApiBoot可能多的信息，比如：ApiBoot的版本、JDK、使用组件等
 - 如果提问题时需要粘贴代码，请尽量使用markdown语法```转义符。
 
+## 分支
+
+ApiBoot由于需要支持SpringBoot的不同分支的代码（SpringBoot版本相互不兼容的问题导致），因此也对应创建的分支。
+
+- `2.1.x` 对应SpringBoot的`2.1.0`及以上版本。
+- `2.2.x` 对应SpringBoot的`2.2.0`及以上版本。
+
 ## 源码方式构建
 
 ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新版本的ApiBoot（版本并未发布），可以直接通过源码的方式进行构建安装到本地使用，前提条件如下所示：

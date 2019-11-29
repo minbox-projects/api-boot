@@ -2,7 +2,6 @@
 - 支持SpringBoot2.2.0以上版本分支
 - 升级SpringCloud版本为Hoxton.RELEASE
 - 升级druid版本为1.1.21
-- 升级Nacos Config版本为0.8.0
 - 升级spring-security-oauth2版本为2.4.0.RELEASE
 - 升级spring-security-jwt版本为1.1.0.RELEASE
 - 修改ApiBootDefaultAuthenticationEntryPoint返回json字符串的方式为fastJson
