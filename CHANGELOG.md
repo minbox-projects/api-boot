@@ -1,3 +1,12 @@
+## 2.2.0.RELEASE更新日志（2019-11-29日发布）
+- 支持SpringBoot2.2.0以上版本分支
+- 升级SpringCloud版本为Hoxton.RELEASE
+- 升级druid版本为1.1.21
+- 升级Nacos Config版本为0.8.0
+- 升级spring-security-oauth2版本为2.4.0.RELEASE
+- 升级spring-security-jwt版本为1.1.0.RELEASE
+- 修改ApiBootDefaultAuthenticationEntryPoint返回json字符串的方式为fastJson
+- 修改ApiBootDefaultAccessDeniedHandler返回json字符串方式为fastJson
 
 ## 2.1.5.RELEASE更新日志(2019-11-6日发布)
 
