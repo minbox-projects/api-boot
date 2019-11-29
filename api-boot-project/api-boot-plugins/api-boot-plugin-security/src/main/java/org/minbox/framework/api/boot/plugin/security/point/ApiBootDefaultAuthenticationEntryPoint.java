@@ -1,6 +1,6 @@
 package org.minbox.framework.api.boot.plugin.security.point;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.alibaba.fastjson.JSON;
 import org.minbox.framework.api.boot.common.model.ApiBootResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +32,11 @@ public class ApiBootDefaultAuthenticationEntryPoint implements AuthenticationEnt
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         logger.error("Unauthorized", e);
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpStatus.FORBIDDEN.value());
         // ApiBoot Result
         ApiBootResult result = ApiBootResult.builder().errorMessage(HttpStatus.UNAUTHORIZED.getReasonPhrase()).errorCode(String.valueOf(HttpStatus.UNAUTHORIZED.value())).build();
         // return json
-        response.getWriter().write(new ObjectMapper().writeValueAsString(result));
+        response.getWriter().write(JSON.toJSONString(result));
     }
 }
