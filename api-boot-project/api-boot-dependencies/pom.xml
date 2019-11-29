@@ -15,16 +15,16 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
         <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
-        <spring.cloud.version>Greenwich.SR3</spring.cloud.version>
+        <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
 
         <minbox.version>1.0.1.RELEASE</minbox.version>
         <minbox-logging.version>1.0.1.RELEASE</minbox-logging.version>
 
-        <druid.version>1.1.20</druid.version>
-        <druid.starter.version>1.1.20</druid.starter.version>
-        <fastjson.version>1.2.60</fastjson.version>
-        <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
-        <spring.security.jwt.version>1.0.10.RELEASE</spring.security.jwt.version>
+        <druid.version>1.1.21</druid.version>
+        <druid.starter.version>1.1.21</druid.starter.version>
+        <fastjson.version>1.2.62</fastjson.version>
+        <security.oauth2.version>2.4.0.RELEASE</security.oauth2.version>
+        <spring.security.jwt.version>1.1.0.RELEASE</spring.security.jwt.version>
         <reflections.version>0.9.11</reflections.version>
         <guava.version>20.0</guava.version>
         <swagger.version>2.9.2</swagger.version>

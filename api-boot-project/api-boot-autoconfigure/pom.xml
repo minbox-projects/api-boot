@@ -21,7 +21,7 @@
         </dependency>
         <!--ApiBoot Common-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-common</artifactId>
         </dependency>
         <!--lombok-->
@@ -86,35 +86,35 @@
 
         <!--ApiBoot Oss Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-alibaba-oss</artifactId>
             <optional>true</optional>
         </dependency>
 
         <!--ApiBoot Sms Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-alibaba-sms</artifactId>
             <optional>true</optional>
         </dependency>
 
         <!--ApiBoot Security Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-security</artifactId>
             <optional>true</optional>
         </dependency>
 
         <!--ApiBoot Oauth Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-oauth</artifactId>
             <optional>true</optional>
         </dependency>
 
         <!--ApiBoot Quartz Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-quartz</artifactId>
             <optional>true</optional>
         </dependency>
@@ -136,14 +136,14 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-datasource-switch</artifactId>
             <optional>true</optional>
         </dependency>
 
         <!--ApiBoot Resource Load-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-resource-load</artifactId>
             <optional>true</optional>
         </dependency>
@@ -156,7 +156,7 @@
 
         <!--ApiBoot Plugin Message Push-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-message-push</artifactId>
             <optional>true</optional>
         </dependency>
@@ -182,7 +182,7 @@
 
         <!--ApiBoot RateLimiter-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-rate-limiter</artifactId>
             <optional>true</optional>
         </dependency>
@@ -196,29 +196,29 @@
 
         <!--ApiBoot Mail-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>api-boot-plugin-mail</artifactId>
             <optional>true</optional>
         </dependency>
 
         <!--MinBox Logging-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>minbox-logging-client</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>minbox-logging-admin</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>minbox-logging-admin-ui</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.minbox.framework</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>minbox-logging-spring-context</artifactId>
             <optional>true</optional>
         </dependency>
