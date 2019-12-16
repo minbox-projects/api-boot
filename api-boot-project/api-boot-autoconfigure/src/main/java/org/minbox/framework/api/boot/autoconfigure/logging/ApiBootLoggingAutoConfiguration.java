@@ -62,7 +62,8 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
     ApiBootLoggingAdminAppointAutoConfiguration.class,
     ApiBootLoggingOpenfeignAutoConfiguration.class,
     ApiBootLoggingRestTemplateAutoConfiguration.class,
-    ApiBootLoggingWebAutoConfiguration.class
+    ApiBootLoggingWebAutoConfiguration.class,
+    ApiBootLoggingGlobalLogStorageAutoConfiguration.class
 })
 public class ApiBootLoggingAutoConfiguration {
     /**
