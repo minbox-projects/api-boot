@@ -80,6 +80,10 @@ public class ApiBootLoggingProperties {
      */
     private LoggingCacheAway loggingCacheAway = LoggingCacheAway.memory;
     /**
+     * global logging storage away
+     */
+    private GlobalLoggingStorageAway globalLoggingStorageAway = GlobalLoggingStorageAway.memory;
+    /**
      * ApiBoot Logging Admin Instance
      */
     private AdminInstance admin = new AdminInstance();
