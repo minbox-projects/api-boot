@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <properties>
         <java.version>1.8</java.version>
-        <api.boot.version>2.2.1-SNAPSHOT</api.boot.version>
+        <api.boot.version>2.2.1.RELEASE</api.boot.version>
     </properties>
     <artifactId>api-boot-sample-integration</artifactId>
     <description>
