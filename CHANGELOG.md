@@ -1,3 +1,13 @@
+## 2.1.6.RELEASE（2019-12-16日发布）
+
+- 升级SpringBoot版本为2.1.11.RELEASE
+- 升级minbox-logging版本为1.0.3.RC1
+- 升级minbox-framework版本为1.0.2.RELEASE
+- 集成minbox-logging内新特性GlobalLog（全局日志，支持error级别的堆栈日志采集）
+- 新增全局日志存储方式枚举GlobalLoggingStorageAway
+- 新增全局日志存储方式自动化配置类ApiBootLoggingGlobalLogStorageAutoConfiguration
+- 添加api.boot.logging.global-logging-storage-away参数配置，默认为memory内存方式
+- 添加logging_global_logs表结构
 
 ## 2.1.5.RELEASE更新日志(2019-11-6日发布)
 
