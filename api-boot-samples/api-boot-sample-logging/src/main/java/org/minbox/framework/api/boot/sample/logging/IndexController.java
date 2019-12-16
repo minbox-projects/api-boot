@@ -18,6 +18,7 @@
 package org.minbox.framework.api.boot.sample.logging;
 
 import lombok.Data;
+import org.minbox.framework.logging.client.global.GlobalLogging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +41,19 @@ public class IndexController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private GlobalLogging logging;
+
     @GetMapping(value = "/index")
     public String user() {
+        logging.info("访问了首页.");
+        // 制造测试异常
+        try {
+            int a = 4 / 0;
+        } catch (Exception e) {
+            logging.error("执行遇到异常.", e);
+        }
+        logging.debug("执行完成了吧？");
         return "xxx";
     }
 
