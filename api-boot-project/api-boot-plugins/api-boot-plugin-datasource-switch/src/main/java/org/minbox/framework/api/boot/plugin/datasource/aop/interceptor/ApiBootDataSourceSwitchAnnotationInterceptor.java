@@ -11,16 +11,11 @@ import org.springframework.util.ClassUtils;
 import java.lang.reflect.Method;
 
 /**
- * ApiBoot DataSource Advice
- * use spring aop
+ * Aspects of the method provided by the ApiBoot DataSource Switch
+ * First get the {@link DataSourceSwitch} annotation instance from the class. If it is null,
+ * use the annotation configuration on the method.
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 16:44
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootDataSourceSwitchAnnotationInterceptor implements MethodInterceptor {
 

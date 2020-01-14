@@ -13,24 +13,30 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.util.Assert;
 
 /**
- * ApiBoot DataSource Switch
+ * ApiBoot DataSource Switch {@link org.springframework.aop.PointcutAdvisor}
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 16:29
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootDataSourceSwitchAdvisor extends AbstractPointcutAdvisor implements BeanFactoryAware {
-
+    /**
+     * Method Aspect Implementation
+     *
+     * @see ApiBootDataSourceSwitchAnnotationInterceptor
+     */
     private Advice advice;
+    /**
+     * use {@link DataSourceSwitch} annotations as entry points
+     */
     private Pointcut pointcut;
+    /**
+     * the spring {@link BeanFactory}
+     */
     private BeanFactory beanFactory;
 
     /**
-     * init config
+     * Initialize global variables using constructor
+     *
+     * @param apiBootDataSourceSwitchAnnotationInterceptor {@link ApiBootDataSourceSwitchAnnotationInterceptor}
      */
     public ApiBootDataSourceSwitchAdvisor(ApiBootDataSourceSwitchAnnotationInterceptor apiBootDataSourceSwitchAnnotationInterceptor) {
         // build pointcut instance
@@ -61,6 +67,10 @@ public class ApiBootDataSourceSwitchAdvisor extends AbstractPointcutAdvisor impl
 
     /**
      * build pointcut instance
+     * use {@link DataSourceSwitch} as a {@link Pointcut}
+     * scope：
+     * 1. {@link DataSourceSwitch} on the class
+     * 2. {@link DataSourceSwitch} on the method
      */
     private Pointcut buildPointcut() {
         // class
@@ -73,6 +83,11 @@ public class ApiBootDataSourceSwitchAdvisor extends AbstractPointcutAdvisor impl
         return pointcut.union(mpc);
     }
 
+    /**
+     * Highest priority
+     *
+     * @return {@link org.springframework.aop.PointcutAdvisor} Priority value
+     */
     @Override
     public int getOrder() {
         return HIGHEST_PRECEDENCE;

@@ -10,27 +10,20 @@ import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootHikariData
 import javax.sql.DataSource;
 
 /**
- * ApiBoot DataSource Switch
- * data source factory
+ * {@link DataSource} Factory Class
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 11:32
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootDataSourceFactoryBean {
     /**
      * create new dataSource instance
      *
-     * @param config dataSource config
-     * @return dataSource Instance
+     * @param config {@link DataSourceConfig}
+     * @return {@link DataSource} the new instance
      */
     public DataSource newDataSource(DataSourceConfig config) {
         DataSource dataSource = null;
-        // not setting data source type class name
+        // if not setting data source type class name
         if (config.getDataSourceType() == null) {
             // use druid data source
             if (checkUseAppointDataSource(DataSourceTypeNames.DRUID)) {
@@ -41,7 +34,7 @@ public class ApiBootDataSourceFactoryBean {
                 dataSource = new ApiBootHikariDataSource((DataSourceHikariConfig) config);
             }
         }
-        // setting data source type class name
+        // if setting data source type class name
         else {
             // druid data source
             if (DataSourceTypeNames.DRUID.equals(config.getDataSourceType().getName())) {

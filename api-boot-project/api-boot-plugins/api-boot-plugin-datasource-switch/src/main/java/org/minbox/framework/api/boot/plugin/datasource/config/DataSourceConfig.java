@@ -9,13 +9,7 @@ import javax.sql.DataSource;
  * for example：
  * username、url、password
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 11:41
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 public class DataSourceConfig {
