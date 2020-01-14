@@ -18,26 +18,21 @@
 package org.minbox.framework.api.boot.plugin.http.converter.filter.enums;
 
 /**
- * 隐藏位置枚举
- * @author：于起宇
- * ===============================
- * Created with IDEA.
- * Date：2018/1/20
- * Time：14:27
- * 简书：http://www.jianshu.com/u/092df3f77bca
- * ================================
+ * Enumeration of hidden locations
+ *
+ * @author 恒宇少年
  */
 public enum ValueHidePositionEnum {
     /**
-     * 从前往后
+     * After going
      */
     START,
     /**
-     * 从后往前
+     * From back to front
      */
     END,
     /**
-     * 中间
+     * intermediate
      */
     MIDDLE
 }

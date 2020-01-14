@@ -24,24 +24,12 @@ import java.lang.reflect.Field;
 
 /**
  * Value Hide Filter
+ * If {@link ApiBootValueHide} is added to the field, according to the configuration parameter value
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-15 17:44
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ValueHideFilter implements ValueFilter {
-    /**
-     * Execute hide value
-     *
-     * @param object object instance
-     * @param name   field name
-     * @param value  filed value
-     * @return hidden values
-     */
+
     @Override
     public Object process(Object object, String name, Object value) {
         if (object != null) {
