@@ -3,15 +3,9 @@ package org.minbox.framework.api.boot.plugin.oss;
 import lombok.Getter;
 
 /**
- * 阿里云Oss存储所处地域，每一个地域对应一个访问域名节点
+ * Alibaba Cloud Oss Region
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-21 11:25
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Getter
 public enum OssRegion {

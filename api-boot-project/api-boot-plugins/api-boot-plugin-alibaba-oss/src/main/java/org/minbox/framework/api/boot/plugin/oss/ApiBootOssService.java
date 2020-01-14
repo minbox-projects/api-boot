@@ -19,35 +19,29 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * ApiBoot提供的Oss文件操作类
+ * Ospi file operation class provided by ApiBoot
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-21 14:02
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootOssService implements ApiBootObjectStorageService {
     /**
-     * 地域性的endpoint
+     * region endpoint
      */
     protected String endpoint;
     /**
-     * 存储空间名称
+     * Storage name
      */
     protected String bucketName;
     /**
-     * 阿里云账号授权id
+     * Alibaba Cloud account authorization id
      */
     protected String accessKeyId;
     /**
-     * 阿里云账号授权secret
+     * Alibaba Cloud account authorization secret
      */
     protected String accessKeySecret;
     /**
-     * 自定义域名
+     * customer domain name
      */
     protected String domain;
     /**
@@ -56,6 +50,15 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
     @Setter
     private ApiBootObjectStorageProgress apiBootObjectStorageProgress;
 
+    /**
+     * Initialize global variables using constructor
+     *
+     * @param endpoint        {@link #endpoint}
+     * @param bucketName      {@link #bucketName}
+     * @param accessKeyId     {@link #accessKeyId}
+     * @param accessKeySecret {@link #accessKeySecret}
+     * @param domain          {@link #domain}
+     */
     public ApiBootOssService(String endpoint, String bucketName, String accessKeyId, String accessKeySecret, String domain) {
         this.endpoint = endpoint;
         this.bucketName = bucketName;
@@ -211,9 +214,9 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
     }
 
     /**
-     * 获取OssClient对象
+     * get oss client instance
      *
-     * @return OssClient
+     * @return {@link OSSClient}
      * @throws ApiBootObjectStorageException ApiBoot Oss Exception
      */
     protected OSSClient getOssClient() throws ApiBootObjectStorageException {
@@ -226,9 +229,9 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
     }
 
     /**
-     * 关闭OssClient对象
+     * close given oss client instance
      *
-     * @param ossClient OssClient
+     * @param ossClient {@link OSSClient}
      * @throws ApiBootObjectStorageException 对象存储异常对象
      */
     protected void closeOssClient(OSSClient ossClient) throws ApiBootObjectStorageException {
@@ -236,21 +239,22 @@ public class ApiBootOssService implements ApiBootObjectStorageService {
     }
 
     /**
-     * 获取默认的文件地址
-     * 使用endpoint外网地址进行组合
+     * get the default file address
+     * Use Alibaba Cloud endpoint external network address for combination
      *
-     * @param objectName 对象文件名称
-     * @return 文件访问地址
+     * @param objectName file name
+     * @return the default object url
      */
     protected String getDefaultObjectUrl(String objectName) {
         return String.format("https://%s.%s/%s", bucketName, endpoint.replace("http://", ""), objectName);
     }
 
     /**
-     * 获取文件地址
+     * get upload file path
+     * If the address is configured, use the custom configuration address, otherwise use the default address
      *
-     * @param objectName 文件对象名称
-     * @return 文件访问地址
+     * @param objectName file name
+     * @return file access address
      */
     protected String getObjectUrl(String objectName) {
         if (domain != null && domain.length() > 0) {
