@@ -27,13 +27,7 @@ import java.lang.annotation.Target;
 /**
  * ApiBoot Value Hide Value Filter
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-15 17:45
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -53,16 +47,17 @@ public @interface ApiBootValueHide {
     int start() default 0;
 
     /**
-     * 隐藏位置枚举
-     * 1、从前往后开始隐藏（排除excludeLength的值个字符）
-     * 2、从后往前开始隐藏（排除excludeLength的值个字符）
+     * Enumeration of hidden locations
+     * Start hiding after going (exclude value characters of excludeLength)
+     * Start hiding from the back (exclude the value of excludeLength characters)
      *
-     * @return ValueHidePositionEnum
+     * @return {@link ValueHidePositionEnum}
      */
     ValueHidePositionEnum position() default ValueHidePositionEnum.MIDDLE;
 
     /**
-     * placeholder
+     * Replaced hidden placeholders
+     * the default value is "*"
      *
      * @return placeholder
      */
