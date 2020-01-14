@@ -75,6 +75,10 @@ ApiBoot依赖于SpringBoot，可以使用ApiBoot构建独立的Java应用程序�
 
 添加完组件我们就可以根据<a href="http://apiboot.minbox.io" target="_blank">官方参考文档</a>找到对应组件的文档进行配置使用了。
 
+## 组件使用
+
+作者针对每一个组件都提供了一系列的文章进行讲解，请访问 [ApiBoot开源框架各个组件的系列使用文章汇总](https://blog.yuqiyu.com/apiboot-all-articles.html) 进行学习。
+
 ## 获取帮助
 
 如果在使用ApiBoot的过程中遇到了问题，你可以通过以下途径获取帮助！
