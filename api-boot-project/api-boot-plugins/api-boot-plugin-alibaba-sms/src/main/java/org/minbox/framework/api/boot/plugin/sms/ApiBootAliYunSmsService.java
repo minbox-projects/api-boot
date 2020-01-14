@@ -14,57 +14,56 @@ import org.minbox.framework.api.boot.plugin.sms.response.ApiBootSmsResponse;
 import javax.annotation.PostConstruct;
 
 /**
- * ApiBoot 阿里云 短信服务
- * 通过该注入该类实现发送短信
+ * ApiBoot provides a unified service interface after integrating Alibaba Cloud's SMS service
+ * When used, directly inject this class
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-22 11:13
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @AllArgsConstructor
 public class ApiBootAliYunSmsService implements ApiBootSmsService {
 
     /**
-     * 阿里云国际短信产品名称
+     * Alibaba Cloud SMS Product Name
      */
     private static final String ALIYUN_PRODUCT = "Dysmsapi";
     /**
-     * 阿里云国际短信产品域名
+     * Alibaba Cloud International SMS Product Domain Name
      */
     private static final String ALIYUN_PRODUCT_DOMAIN = "dysmsapi.aliyuncs.com";
     /**
-     * 发送成功后返回code
+     * Return code after sending successfully
      */
     private static final String SUCCESS_RESULT = "OK";
     /**
-     * RAM账号的AccessKey ID
+     * RAM account Access Key ID
      */
     private String accessKeyId;
     /**
-     * RAM账号Access Key Secret
+     * RAM Account Access Key Secret
      */
     private String accessKeySecret;
     /**
-     * 短信签名
+     * SMS signature
      */
     private String signName;
     /**
-     * 短信环境
+     * SMS profile
      */
     private String profile;
     /**
-     * 短信发送连接超时时长
+     * SMS send connection timeout
      */
     private long connectionTimeout;
     /**
-     * 短信接收消息连接超时时长
+     * SMS message connection timeout
      */
     private long readTimeout;
 
+    /**
+     * setting system properties default value
+     * set send sms connection timeout {@link #connectionTimeout}
+     * set send sms read timeout {@link #readTimeout}
+     */
     @PostConstruct
     public void _init() {
         System.setProperty("sun.net.client.defaultConnectTimeout", String.valueOf(this.connectionTimeout));
@@ -72,11 +71,11 @@ public class ApiBootAliYunSmsService implements ApiBootSmsService {
     }
 
     /**
-     * 发送短信逻辑处理
+     * invoke send SMS
      *
-     * @param request 请求对象
-     * @return 响应
-     * @throws ApiBootException 异常信息
+     * @param request {@link ApiBootSmsRequest}
+     * @return {@link ApiBootSmsResponse}
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public ApiBootSmsResponse send(ApiBootSmsRequest request) throws ApiBootException {
@@ -96,7 +95,7 @@ public class ApiBootAliYunSmsService implements ApiBootSmsService {
             return ApiBootSmsResponse.builder().success(SUCCESS_RESULT.equals(sendSmsResponse.getCode())).build();
 
         } catch (Exception e) {
-            throw new ApiBootException("短信验证码发送送异常" + e.getMessage());
+            throw new ApiBootException("invoke send SMS have Exception：" + e.getMessage());
         }
     }
 }
