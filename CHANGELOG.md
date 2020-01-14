@@ -1,4 +1,15 @@
-## 2.1.6.RELEASE（2019-12-16日发布）
+## 2.1.7.RELEASE更新日志（2020-1-6日发布）
+
+- 支持自定义认证服务器OAuth2认证失败时响应内容，详见：[I17O6B](https://gitee.com/minbox-projects/api-boot/issues/I17O6B)
+- 升级分布式链路日志minbox-logging为1.0.3.RELEASE
+- 提供自定义认证失败使用示例，[CustomAuthorizationDeniedResponse](https://gitee.com/minbox-projects/api-boot/blob/master/api-boot-samples/api-boot-sample-security-oauth-jwt/src/main/java/org/minbox/framework/api/boot/sample/CustomAuthorizationDeniedResponse.java)
+- 提供默认`AuthorizationDeniedResponse`默认实现[DefaultAuthorizationDeniedResponse](https://gitee.com/minbox-projects/api-boot/blob/master/api-boot-project/api-boot-plugins/api-boot-plugin-oauth/src/main/java/org/minbox/framework/api/boot/plugin/oauth/response/DefaultAuthorizationDeniedResponse.java)
+- 修复minbox-logging采集日志发生位置错误问题
+- 统一部分源码类上的注释格式
+- ApiBoot提供`WebResponseExceptionTranslator`实现类[ApiBootWebResponseExceptionTranslator](https://gitee.com/minbox-projects/api-boot/blob/master/api-boot-project/api-boot-plugins/api-boot-plugin-oauth/src/main/java/org/minbox/framework/api/boot/plugin/oauth/translator/ApiBootWebResponseExceptionTranslator.java) ，用于处理OAuth2Exception异常。
+
+
+## 2.1.6.RELEASE更新日志（2019-12-16日发布）
 
 - 升级SpringBoot版本为2.1.11.RELEASE
 - 升级minbox-logging版本为1.0.3.RC1

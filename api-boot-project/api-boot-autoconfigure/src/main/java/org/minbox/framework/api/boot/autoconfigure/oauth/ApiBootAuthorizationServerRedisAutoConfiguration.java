@@ -34,6 +34,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -73,7 +74,9 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
      * @param apiBootOauthProperties ApiBoot Oauth Properties
      * @param redisConnectionFactory Redis Connection Factory
      */
-    public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, RedisConnectionFactory redisConnectionFactory) {
+    public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider,
+                                                            ApiBootOauthProperties apiBootOauthProperties,
+                                                            RedisConnectionFactory redisConnectionFactory) {
         super(objectProvider, apiBootOauthProperties);
         this.redisConnectionFactory = redisConnectionFactory;
     }
@@ -88,11 +91,11 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = clients.inMemory();
         apiBootOauthProperties.getClients().stream().forEach(client -> inMemoryClientDetailsServiceBuilder.withClient(client.getClientId())
-                .secret(passwordEncoder().encode(client.getClientSecret()))
-                .authorizedGrantTypes(client.getGrantTypes())
-                .scopes(client.getScopes())
-                .resourceIds(client.getResourceId())
-                .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds()));
+            .secret(passwordEncoder().encode(client.getClientSecret()))
+            .authorizedGrantTypes(client.getGrantTypes())
+            .scopes(client.getScopes())
+            .resourceIds(client.getResourceId())
+            .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds()));
     }
 
     /**

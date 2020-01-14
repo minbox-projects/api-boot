@@ -6,29 +6,23 @@ import lombok.Getter;
 import java.util.HashMap;
 
 /**
- * ApiBoot 发送短信请求参数
+ * ApiBoot Send SMS Request Parameter Encapsulation Object
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-22 11:27
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Getter
 public class ApiBootSmsRequestParam {
     /**
-     * 参数集合
+     * parameters
      */
     private static final HashMap<String, Object> params = new HashMap();
 
     /**
-     * 写入参数到集合
+     * put one parameter to {@link #params}
      *
-     * @param name  参数名
-     * @param value 参数值
-     * @return 本类实例
+     * @param name  the parameter name
+     * @param value the parameter value
+     * @return {@link ApiBootSmsRequestParam} this object instance
      */
     public ApiBootSmsRequestParam put(String name, Object value) {
         params.put(name, value);
@@ -36,9 +30,9 @@ public class ApiBootSmsRequestParam {
     }
 
     /**
-     * 参数转换为json字符串
+     * get the {@link #params} after formatting the json string
      *
-     * @return json
+     * @return parameters json string
      */
     public String getParamJson() {
         return JSON.toJSONString(params);

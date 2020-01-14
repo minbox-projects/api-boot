@@ -24,20 +24,14 @@ import org.minbox.framework.api.boot.plugin.mail.response.ApiBootMailResponse;
 /**
  * ApiBoot Mail Service Interface
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-06-19 18:53
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public interface ApiBootMailService {
     /**
-     * Send Mail
+     * send mail
      *
-     * @param apiBootMailRequest Send Mail Request Entity
-     * @return Send Mail Response Entity
+     * @param apiBootMailRequest {@link ApiBootMailRequest}
+     * @return {@link ApiBootMailResponse}
      * @throws ApiBootException ApiBoot Exception
      */
     ApiBootMailResponse sendMail(ApiBootMailRequest apiBootMailRequest) throws ApiBootException;

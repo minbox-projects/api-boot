@@ -25,13 +25,7 @@ import org.springframework.util.ObjectUtils;
 /**
  * json tools
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-07-19 14:39
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class JsonTools {
     /**
@@ -45,9 +39,9 @@ public class JsonTools {
             return null;
         }
         return JSON.toJSONString(object,
-                SerializerFeature.PrettyFormat,
-                SerializerFeature.SortField,
-                SerializerFeature.MapSortField
+            SerializerFeature.PrettyFormat,
+            SerializerFeature.SortField,
+            SerializerFeature.MapSortField
         );
     }
 
@@ -62,8 +56,8 @@ public class JsonTools {
             return json;
         }
         return JSON.toJSONString(
-                JSONObject.parse(json),
-                SerializerFeature.PrettyFormat
+            JSONObject.parse(json),
+            SerializerFeature.PrettyFormat
         );
     }
 }

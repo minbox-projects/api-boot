@@ -18,13 +18,14 @@
     <version>${revision}</version>
     <name>api-boot</name>
     <properties>
-        <revision>2.1.7-SNAPSHOT</revision>
+        <revision>2.1.8-SNAPSHOT</revision>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     </properties>
     <description>
+        ApiBoot为接口服务而生。
         ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，
         内部提供了第三方框架的封装集成，让接口开发者可以选择性完成开箱即用，
         不再为搭建接口框架而犯愁，从而极大的提高开发效率。

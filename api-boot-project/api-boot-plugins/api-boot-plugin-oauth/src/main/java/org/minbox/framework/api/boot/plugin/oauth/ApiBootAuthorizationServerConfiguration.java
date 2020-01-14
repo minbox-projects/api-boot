@@ -2,6 +2,9 @@ package org.minbox.framework.api.boot.plugin.oauth;
 
 import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
 import org.minbox.framework.api.boot.plugin.oauth.grant.DefaultApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.plugin.oauth.response.AuthorizationDeniedResponse;
+import org.minbox.framework.api.boot.plugin.oauth.response.DefaultAuthorizationDeniedResponse;
+import org.minbox.framework.api.boot.plugin.oauth.translator.ApiBootWebResponseExceptionTranslator;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -18,6 +21,7 @@ import org.springframework.security.oauth2.provider.client.ClientCredentialsToke
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter;
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.implicit.ImplicitTokenGranter;
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
@@ -40,7 +44,7 @@ import java.util.List;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public class ApiBootAuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public abstract class ApiBootAuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
     /**
      * authentication manager
      */
@@ -65,6 +69,13 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
      * Instance of custom authorization provided by ApiBoot
      */
     private List<ApiBootOauthTokenGranter> apiBootOauthTokenGranters;
+    /**
+     * Authentication server abnormal format processing
+     *
+     * @see ApiBootWebResponseExceptionTranslator
+     */
+    @Autowired
+    private WebResponseExceptionTranslator exceptionTranslator;
 
     public ApiBootAuthorizationServerConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider) {
         this.apiBootOauthTokenGranters = objectProvider.getIfAvailable();
@@ -79,12 +90,12 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
-                .passwordEncoder(passwordEncoder())
-                // Configure open/oauth/token_key access address
-                .tokenKeyAccess("permitAll()")
-                // Configure Open /oauth/check_token Access Address
-                // Access must be accessible after login privileges
-                .checkTokenAccess("isAuthenticated()");
+            .passwordEncoder(passwordEncoder())
+            // Configure open/oauth/token_key access address
+            .tokenKeyAccess("permitAll()")
+            // Configure Open /oauth/check_token Access Address
+            // Access must be accessible after login privileges
+            .checkTokenAccess("isAuthenticated()");
     }
 
     /**
@@ -96,11 +107,17 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .authenticationManager(authenticationManager)
-                .tokenStore(tokenStore)
-                // ApiBoot custom token granter
-                .tokenGranter(tokenGranter())
-                .accessTokenConverter(accessTokenConverter);
+            .authenticationManager(authenticationManager)
+            .tokenStore(tokenStore)
+            // ApiBoot custom token granter
+            .tokenGranter(tokenGranter())
+            .accessTokenConverter(accessTokenConverter);
+
+        // customer setting exceptionTranslator
+        // @see org.minbox.framework.api.boot.plugin.oauth.translator.ApiBootWebResponseExceptionTranslator
+        if (!ObjectUtils.isEmpty(exceptionTranslator)) {
+            endpoints.exceptionTranslator(exceptionTranslator);
+        }
     }
 
     /**
@@ -179,7 +196,7 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
         List<TokenGranter> tokenGranters = new ArrayList<TokenGranter>();
         // code
         tokenGranters.add(new AuthorizationCodeTokenGranter(tokenServices, authorizationCodeServices, clientDetails,
-                requestFactory));
+            requestFactory));
 
         // refresh token
         tokenGranters.add(new RefreshTokenGranter(tokenServices, clientDetails, requestFactory));
@@ -194,7 +211,7 @@ public class ApiBootAuthorizationServerConfiguration extends AuthorizationServer
         // password
         if (authenticationManager != null) {
             tokenGranters.add(new ResourceOwnerPasswordTokenGranter(authenticationManager, tokenServices,
-                    clientDetails, requestFactory));
+                clientDetails, requestFactory));
         }
 
         // have custom token granter

@@ -18,7 +18,7 @@
         <spring.cloud.version>Greenwich.SR3</spring.cloud.version>
 
         <minbox.version>1.0.2.RELEASE</minbox.version>
-        <minbox-logging.version>1.0.3.RC1</minbox-logging.version>
+        <minbox-logging.version>1.0.3.RELEASE</minbox-logging.version>
 
         <druid.version>1.1.20</druid.version>
         <druid.starter.version>1.1.20</druid.starter.version>

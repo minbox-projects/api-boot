@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import org.minbox.framework.api.boot.plugin.sms.request.ApiBootSmsRequest;
 import org.minbox.framework.api.boot.plugin.sms.response.ApiBootSmsResponse;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.PostConstruct;
 
@@ -89,7 +90,9 @@ public class ApiBootAliYunSmsService implements ApiBootSmsService {
             sendSmsRequest.setPhoneNumbers(request.getPhone());
             sendSmsRequest.setSignName(this.signName);
             sendSmsRequest.setTemplateCode(request.getTemplateCode());
-            sendSmsRequest.setTemplateParam(request.getParam().getParamJson());
+            if (!ObjectUtils.isEmpty(request.getParam())) {
+                sendSmsRequest.setTemplateParam(request.getParam().getParamJson());
+            }
 
             SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(sendSmsRequest);
 

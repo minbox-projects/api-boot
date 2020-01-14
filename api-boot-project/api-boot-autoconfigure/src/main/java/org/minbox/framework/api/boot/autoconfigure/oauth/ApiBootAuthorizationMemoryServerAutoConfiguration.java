@@ -27,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
@@ -52,7 +53,8 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @EnableAuthorizationServer
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "memory", matchIfMissing = true)
 public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
-    public ApiBootAuthorizationMemoryServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
+    public ApiBootAuthorizationMemoryServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider,
+                                                             ApiBootOauthProperties apiBootOauthProperties) {
         super(objectProvider, apiBootOauthProperties);
     }
 
@@ -66,11 +68,11 @@ public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = clients.inMemory();
         apiBootOauthProperties.getClients().stream().forEach(client -> inMemoryClientDetailsServiceBuilder.withClient(client.getClientId())
-                .secret(passwordEncoder().encode(client.getClientSecret()))
-                .authorizedGrantTypes(client.getGrantTypes())
-                .scopes(client.getScopes())
-                .resourceIds(client.getResourceId())
-                .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds()));
+            .secret(passwordEncoder().encode(client.getClientSecret()))
+            .authorizedGrantTypes(client.getGrantTypes())
+            .scopes(client.getScopes())
+            .resourceIds(client.getResourceId())
+            .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds()));
     }
 
     /**

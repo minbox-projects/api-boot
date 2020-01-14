@@ -18,9 +18,14 @@ package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
 import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.plugin.oauth.response.AuthorizationDeniedResponse;
+import org.minbox.framework.api.boot.plugin.oauth.response.DefaultAuthorizationDeniedResponse;
+import org.minbox.framework.api.boot.plugin.oauth.translator.ApiBootWebResponseExceptionTranslator;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -30,32 +35,34 @@ import java.util.List;
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
- * ApiBoot授权服务器配置
+ * ApiBoot Authorization Server Configuration
+ * Define {@link AccessTokenConverter} based on configuration
+ * Specify the {@link WebResponseExceptionTranslator} used by the exception
  *
  * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 16:51
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @see JwtAccessTokenConverter
+ * @see DefaultAccessTokenConverter
+ * @see org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator
+ * @see ApiBootWebResponseExceptionTranslator
  */
 public class ApiBootAuthorizationServerAutoConfiguration extends ApiBootAuthorizationServerConfiguration {
     /**
-     * 注入属性配置
+     * Oauth Config Properties
      */
     protected ApiBootOauthProperties apiBootOauthProperties;
 
-    public ApiBootAuthorizationServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
+    public ApiBootAuthorizationServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider,
+                                                       ApiBootOauthProperties apiBootOauthProperties) {
         super(objectProvider);
         this.apiBootOauthProperties = apiBootOauthProperties;
     }
 
     /**
-     * 配置jwt生成token的转换
-     * 使用自定义Sign Key 进行加密
+     * This method will be instantiated if "api.boot.oauth.jwt.enable = true" is configured
+     * The "api.boot.oauth.jwt.sign-key" parameter will be used as the encrypted key value
+     * the sign-key parameter default value is "ApiBoot"
      *
-     * @return Jwt Access Token转换实例
+     * @return {@link AccessTokenConverter}
      */
     @Bean
     @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "jwt.enable", havingValue = "true")
@@ -66,14 +73,42 @@ public class ApiBootAuthorizationServerAutoConfiguration extends ApiBootAuthoriz
     }
 
     /**
-     * 默认token转换
-     * 不配置jwt转换时
+     * The default {@link AccessTokenConverter}
      *
-     * @return AccessTokenConverter
+     * @return {@link DefaultAccessTokenConverter}
      */
     @Bean
     @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "jwt.enable", havingValue = "false", matchIfMissing = true)
     public AccessTokenConverter defaultAccessTokenConverter() {
         return new DefaultAccessTokenConverter();
+    }
+
+    /**
+     * ApiBoot's authentication server refuses to authorize the response interface
+     * Because "@ConditionalOnMissingBean" is used,
+     * only the AuthorizationDeniedResponse interface needs to be implemented when customizing the authentication failure response content,
+     * and then added to the Spring IOC
+     *
+     * @return {@link DefaultAuthorizationDeniedResponse}
+     * @see AuthorizationDeniedResponse
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthorizationDeniedResponse authorizationDeniedResponse() {
+        return new DefaultAuthorizationDeniedResponse();
+    }
+
+    /**
+     * Customize the exception output format of the authentication server
+     *
+     * @return {@link ApiBootWebResponseExceptionTranslator}
+     * @see WebResponseExceptionTranslator
+     * @see org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator
+     * @see ApiBootWebResponseExceptionTranslator
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public WebResponseExceptionTranslator webResponseExceptionTranslator(AuthorizationDeniedResponse response) {
+        return new ApiBootWebResponseExceptionTranslator(response);
     }
 }
