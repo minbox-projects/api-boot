@@ -10,15 +10,9 @@ import org.springframework.jdbc.datasource.DelegatingDataSource;
 import javax.sql.DataSource;
 
 /**
- * basic data source config
+ * The Basic {@link DataSource} config
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 15:08
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootBasicDataSource extends DelegatingDataSource implements ApiBootDataSource {
     private DataSourceConfig config;
@@ -31,16 +25,16 @@ public class ApiBootBasicDataSource extends DelegatingDataSource implements ApiB
     /**
      * create default basic data source
      *
-     * @return DataSource
-     * @throws ApiBootException 异常信息
+     * @return {@link DataSource} instance
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public DataSource build() throws ApiBootException {
         try {
             DataSource dataSource = DataSourceBuilder.create().url(config.getUrl()).username(config.getUsername()).password(config.getPassword()).driverClassName(config.getDriverClassName())
-                    // springboot 2.x default is HikariDataSource
-                    .type(HikariDataSource.class)
-                    .build();
+                // springboot 2.x default is HikariDataSource
+                .type(HikariDataSource.class)
+                .build();
             return dataSource;
         } catch (Exception e) {
             throw new ApiBootException("Create a default data source exception", e);

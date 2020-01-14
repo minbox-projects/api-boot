@@ -8,15 +8,9 @@ import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidCon
 import javax.sql.DataSource;
 
 /**
- * Api Boot Druid Data Source
+ * The Druid {@link DataSource} config
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 15:00
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootDruidDataSource extends DruidDataSource implements ApiBootDataSource {
 
@@ -42,8 +36,8 @@ public class ApiBootDruidDataSource extends DruidDataSource implements ApiBootDa
     /**
      * create new druid dataSource instance
      *
-     * @return DataSource
-     * @throws ApiBootException
+     * @return {@link DataSource} this class instance
+     * @throws ApiBootException ApiBoot Exception
      */
     @Override
     public DataSource build() throws ApiBootException {
