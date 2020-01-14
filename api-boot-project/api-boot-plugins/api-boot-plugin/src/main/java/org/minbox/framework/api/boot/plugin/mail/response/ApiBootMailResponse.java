@@ -21,21 +21,15 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * ApiBoot发送邮件时响应实体
+ * ApiBoot responds to entities when sending mail
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-22 11:24
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 @Builder
 public class ApiBootMailResponse {
     /**
-     * 是否发送成功
+     * Whether to send successfully
      */
     private boolean success;
 }
