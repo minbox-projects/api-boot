@@ -28,13 +28,7 @@ import java.util.Map;
 /**
  * ApiBoot Message Push Body
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-20 15:44
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 @Builder
@@ -43,19 +37,19 @@ public class MessagePushBody {
      * pusher platform
      * default push all platform
      */
-    private PusherPlatform platform = PusherPlatform.ALL;
+    private PusherPlatform platform;
     /**
      * alias list
      */
-    private List<String> alias = Collections.emptyList();
+    private List<String> alias;
     /**
      * tag list
      */
-    private List<String> tags = Collections.emptyList();
+    private List<String> tags;
     /**
      * badge number
      */
-    private int badge = +1;
+    private int badge;
     /**
      * sound
      */

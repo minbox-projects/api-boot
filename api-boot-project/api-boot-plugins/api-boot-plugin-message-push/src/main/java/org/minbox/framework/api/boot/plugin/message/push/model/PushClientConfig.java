@@ -20,13 +20,9 @@ package org.minbox.framework.api.boot.plugin.message.push.model;
 import lombok.Data;
 
 /**
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-20 16:40
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * Push client config
+ *
+ * @author 恒宇少年
  */
 @Data
 public class PushClientConfig {
