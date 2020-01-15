@@ -37,13 +37,7 @@ import java.util.Map;
 /**
  * ApiBoot Message JPush Support
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-20 15:51
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootMessagePushJiGuangServiceImpl extends ApiBootAbstractMessagePushServiceImpl {
     /**
@@ -151,17 +145,17 @@ public class ApiBootMessagePushJiGuangServiceImpl extends ApiBootAbstractMessage
         switch (messagePushBody.getPlatform()) {
             case ALL:
                 notification = Notification.newBuilder()
-                        .addPlatformNotification(getIosNotificationMeta(messagePushBody))
-                        .addPlatformNotification(getAndroidNotificationMeta(messagePushBody))
-                        .build();
+                    .addPlatformNotification(getIosNotificationMeta(messagePushBody))
+                    .addPlatformNotification(getAndroidNotificationMeta(messagePushBody))
+                    .build();
                 break;
             case IOS:
                 notification = Notification.newBuilder()
-                        .addPlatformNotification(getIosNotificationMeta(messagePushBody)).build();
+                    .addPlatformNotification(getIosNotificationMeta(messagePushBody)).build();
                 break;
             case ANDROID:
                 notification = Notification.newBuilder()
-                        .addPlatformNotification(getAndroidNotificationMeta(messagePushBody)).build();
+                    .addPlatformNotification(getAndroidNotificationMeta(messagePushBody)).build();
                 break;
 
         }

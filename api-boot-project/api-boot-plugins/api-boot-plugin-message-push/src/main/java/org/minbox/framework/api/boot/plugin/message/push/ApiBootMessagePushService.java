@@ -24,13 +24,7 @@ import org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig;
 /**
  * ApiBoot Message Push Service
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-20 15:40
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public interface ApiBootMessagePushService {
     /**

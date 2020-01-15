@@ -30,14 +30,9 @@ import java.lang.reflect.Method;
 /**
  * ApiBoot DataSource Advice
  * use spring aop
+ * switch push implementation based on the {@link MessagePushSwitch} configuration on the method
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-01 16:44
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootMessagePushSwitchAnnotationInterceptor implements MethodInterceptor {
 
