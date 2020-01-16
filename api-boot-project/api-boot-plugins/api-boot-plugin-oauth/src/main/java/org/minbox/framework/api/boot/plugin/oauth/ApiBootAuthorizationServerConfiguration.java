@@ -32,13 +32,7 @@ import java.util.List;
 /**
  * ApiBoot 集成Oauth2 相关配置实现
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-25 18:07
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootAuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
     /**
