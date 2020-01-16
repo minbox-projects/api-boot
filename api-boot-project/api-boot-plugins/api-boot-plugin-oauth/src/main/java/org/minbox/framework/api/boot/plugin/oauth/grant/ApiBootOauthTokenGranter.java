@@ -26,13 +26,7 @@ import java.util.Map;
 /**
  * ApiBoot Integrates Oauth2 to Realize Custom Authorization to Acquire Token
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-05-28 09:57
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public interface ApiBootOauthTokenGranter extends Serializable {
     /**
