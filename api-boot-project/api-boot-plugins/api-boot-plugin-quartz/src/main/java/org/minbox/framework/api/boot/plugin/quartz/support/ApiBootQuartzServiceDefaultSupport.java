@@ -17,21 +17,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * ApiBoot Quartz Service 默认实现
- * 提供Quartz操作任务的基本方法实现：
- * - 创建任务
- * - 删除任务
- * - 更新任务Cron表达式
- * - 更新任务执行次数
- * - 暂停任务
- *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-27 10:18
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * Default implement of {@link ApiBootQuartzService}
  */
 public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService {
     /**
@@ -49,10 +35,10 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 获取Quartz Scheduler
+     * Get <code>{@link Scheduler}</code> object instance
      *
-     * @return Scheduler Instance
-     * @throws SchedulerException 调度器异常
+     * @return {@link Scheduler}
+     * @throws SchedulerException Scheduler Exception
      */
     @Override
     public Scheduler getScheduler() throws SchedulerException {
@@ -60,10 +46,18 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 创建新任务
+     * Create new job
+     * <p>
+     * Throws a <code>{@link SchedulerException}</code> if {@link ApiBootJobWrapper} is not passed
+     * If you don't pass {@link ApiBootJobWrapper#getJobKey()} use the default uuid
+     * Create corresponding job based on {@link ApiBootJobWrapper} object type
+     * </p>
      *
-     * @param jobWrapper 定时任务封装对象
-     * @return Job Key
+     * @param jobWrapper {@link ApiBootJobWrapper}
+     * @return {@link ApiBootJobWrapper#getJobKey()}
+     * @see ApiBootOnceJobWrapper
+     * @see ApiBootCronJobWrapper
+     * @see ApiBootLoopJobWrapper
      */
     @Override
     public String newJob(ApiBootJobWrapper jobWrapper) {
@@ -71,20 +65,14 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
             if (ObjectUtils.isEmpty(jobWrapper)) {
                 throw new SchedulerException("When creating a new task, parameters must be passed.");
             }
-            // 默认使用uuid作为Job Key
             if (StringUtils.isEmpty(jobWrapper.getJobKey())) {
                 jobWrapper.setJobKey(UUID.randomUUID().toString());
             }
-            // cron job
             if (jobWrapper instanceof ApiBootCronJobWrapper) {
                 newCronJob((ApiBootCronJobWrapper) jobWrapper);
-            }
-            // loop job
-            else if (jobWrapper instanceof ApiBootLoopJobWrapper) {
+            } else if (jobWrapper instanceof ApiBootLoopJobWrapper) {
                 newLoopJob((ApiBootLoopJobWrapper) jobWrapper);
-            }
-            // once job
-            else if (jobWrapper instanceof ApiBootOnceJobWrapper) {
+            } else if (jobWrapper instanceof ApiBootOnceJobWrapper) {
                 newOnceJob((ApiBootOnceJobWrapper) jobWrapper);
             }
         } catch (Exception e) {
@@ -94,29 +82,34 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 删除任务
+     * Delete a job
+     * <p>
+     * Pause the job from the scheduler based on the {@link TriggerKey}
+     * Removes the job with the specified key from the <code>{@link Scheduler}</code>
+     * Delete job from {@link Scheduler}
+     * </p>
      *
-     * @param jobKey Job Key
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
      */
     @Override
     public void deleteJob(String jobKey) {
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(jobKey);
-            // 暂停触发器
             scheduler.pauseTrigger(triggerKey);
-            // 移除触发器
             scheduler.unscheduleJob(triggerKey);
-            // 删除任务
             scheduler.deleteJob(JobKey.jobKey(jobKey));
         } catch (Exception e) {
-            logger.error("Delete job error.", e);
+            logger.error("I encountered some problems while deleting the job", e);
         }
     }
 
     /**
-     * 删除数组内的所有任务
+     * Delete based on the given jobKey array
+     * <p>
+     * Iterate through each {@link ApiBootJobWrapper#getJobKey()} to delete the job
+     * </p>
      *
-     * @param jobKeys Job Key Array
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey array
      */
     @Override
     public void deleteJobs(String... jobKeys) {
@@ -126,35 +119,41 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 删除集合内的所有任务
+     * Delete based on the given jobKey collection
+     * <p>
+     * Iterate through each {@link ApiBootJobWrapper#getJobKey()} to delete the job
+     * </p>
      *
-     * @param jobKeys Job Key Collection
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey collection
      */
     @Override
     public void deleteJobs(Collection<String> jobKeys) {
         if (!ObjectUtils.isEmpty(jobKeys)) {
-            jobKeys.stream().forEach(jobKey -> deleteJob(jobKey));
+            jobKeys.forEach(jobKey -> deleteJob(jobKey));
         }
     }
 
     /**
-     * 暂停定时任务
+     * Pause job based on jobKey
      *
-     * @param jobKey Job Key
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
      */
     @Override
     public void pauseJob(String jobKey) {
         try {
             scheduler.pauseJob(JobKey.jobKey(jobKey));
         } catch (Exception e) {
-            logger.error("Pause job error.", e);
+            logger.error("I encountered some problems while pausing the job", e);
         }
     }
 
     /**
-     * 暂停数组内的所有定时任务
+     * Pause based on the given jobKey array
+     * <p>
+     * Iterate through each {@link ApiBootJobWrapper#getJobKey()} to pause the job
+     * </p>
      *
-     * @param jobKeys Job Key Array
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey array
      */
     @Override
     public void pauseJobs(String... jobKeys) {
@@ -164,35 +163,41 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 暂停集合内的所有定时任务
+     * Pause based on the given jobKey collection
+     * <p>
+     * Iterate through each {@link ApiBootJobWrapper#getJobKey()} to pause the job
+     * </p>
      *
-     * @param jobKeys Job Key Collection
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey collection
      */
     @Override
     public void pauseJobs(Collection<String> jobKeys) {
         if (!ObjectUtils.isEmpty(jobKeys)) {
-            jobKeys.stream().forEach(jobKey -> pauseJob(jobKey));
+            jobKeys.forEach(jobKey -> pauseJob(jobKey));
         }
     }
 
     /**
-     * 恢复任务执行
+     * Resume a job
      *
-     * @param jobKey Job Key
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
      */
     @Override
     public void resumeJob(String jobKey) {
         try {
             scheduler.resumeJob(JobKey.jobKey(jobKey));
         } catch (Exception e) {
-            logger.error("Resume job error.", e);
+            logger.error("I encountered some problems when resuming a suspended job", e);
         }
     }
 
     /**
-     * 恢复数组内的所有任务执行
+     * Resume based on the given jobKey array
+     * <p>
+     * Iterate through each {@link ApiBootJobWrapper#getJobKey()} to resume the job
+     * </p>
      *
-     * @param jobKeys Job Key Array
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey array
      */
     @Override
     public void resumeJobs(String... jobKeys) {
@@ -202,28 +207,34 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 恢复集合内的所有任务执行
+     * Resume based on the given jobKey collection
+     * <p>
+     * Iterate through each {@link ApiBootJobWrapper#getJobKey()} to resume the job
+     * </p>
      *
-     * @param jobKeys Job Key Collection
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey collection
      */
     @Override
     public void resumeJobs(Collection<String> jobKeys) {
         if (!ObjectUtils.isEmpty(jobKeys)) {
-            jobKeys.stream().forEach(jobKey -> resumeJob(jobKey));
+            jobKeys.forEach(jobKey -> resumeJob(jobKey));
         }
     }
 
     /**
-     * 更新定时任务Cron表达式
+     * Update job cron expression
+     * <p>
+     * This method works for <code>{@link ApiBootCronJobWrapper}</code>
+     * Determine if the cron expression has changed and update
+     * </p>
      *
-     * @param jobKey Job Key
-     * @param cron   Job Cron Expression
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
+     * @param cron   {@link ApiBootCronJobWrapper#getCron()}
      */
     @Override
     public void updateJobCron(String jobKey, String cron) {
         try {
             CronTrigger cronTrigger = (CronTrigger) getTrigger(jobKey);
-            // 如果表达式一致，不执行更新
             if (!cronTrigger.getCronExpression().equals(cron)) {
                 TriggerKey triggerKey = TriggerKey.triggerKey(jobKey);
                 cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(CronScheduleBuilder.cronSchedule(cron)).startNow().build();
@@ -235,19 +246,20 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 更新定时任务启动时间
+     * Update job start time
+     * <p>
+     * This method works for {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper}
+     * or {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper}
+     * </p>
      *
-     * @param jobKey       Job Key
-     * @param jobStartTime Job New Start Time
+     * @param jobKey       {@link ApiBootJobWrapper#getJobKey()}
+     * @param jobStartTime {@link ApiBootJobWrapper#getStartAtTime()} job startAtTime
      */
     @Override
     public void updateJobStartTime(String jobKey, Date jobStartTime) {
         try {
-            // old trigger
             Trigger trigger = getTrigger(jobKey);
-            // update start time
             trigger = TriggerBuilder.newTrigger().withIdentity(trigger.getKey()).withSchedule(trigger.getScheduleBuilder()).startAt(jobStartTime).build();
-
             scheduler.rescheduleJob(trigger.getKey(), trigger);
         } catch (Exception e) {
             logger.error("Update job start time error", e);
@@ -255,9 +267,9 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 启动所有定时任务
+     * Start all jobs in the <code>{@link Scheduler}</code>
      *
-     * @throws SchedulerException 调度器异常
+     * @throws SchedulerException Scheduler Exception
      */
     @Override
     public void startAllJobs() throws SchedulerException {
@@ -265,9 +277,9 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 关闭所有定时任务
+     * Shutdown all jobs in the <code>{@link Scheduler}</code>
      *
-     * @throws SchedulerException 调度器异常
+     * @throws SchedulerException Scheduler Exception
      */
     @Override
     public void shutdownAllJobs() throws SchedulerException {
@@ -277,11 +289,14 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 通过触发器Key名称获取触发器信息
+     * Get {@link Trigger} from {@link Scheduler}
+     * <p>
+     * Throws an {@link SchedulerException} if {@link Trigger} does not exist
+     * </p>
      *
-     * @param triggerKeyName Job Trigger Name
-     * @return Trigger
-     * @throws SchedulerException 调度器异常
+     * @param triggerKeyName {@link TriggerKey#getName()}
+     * @return {@link Trigger}
+     * @throws SchedulerException Scheduler Exception
      */
     protected Trigger getTrigger(String triggerKeyName) throws SchedulerException {
         Trigger trigger = scheduler.getTrigger(TriggerKey.triggerKey(triggerKeyName));
@@ -292,11 +307,14 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 通过定时任务key名称查询定时任务
+     * Get {@link JobDetail} from {@link Scheduler}
+     * <p>
+     * Throws an {@link SchedulerException} if {@link JobDetail} does not exist
+     * </p>
      *
-     * @param jobKey Job Key Name
-     * @return JobDetail
-     * @throws SchedulerException 调度器异常
+     * @param jobKey {@link JobKey#getName()}
+     * @return {@link JobDetail}
+     * @throws SchedulerException Scheduler Exception
      */
     protected JobDetail getJobDetail(String jobKey) throws SchedulerException {
         JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobKey));
@@ -307,38 +325,41 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     }
 
     /**
-     * 获取一个新的JobKey对象
+     * Create a {@link JobKey}
      *
-     * @param jobKey Job Key Name
-     * @return JobKey
-     * @throws SchedulerException 调度器异常
+     * @param jobKey {@link JobKey#getName()}
+     * @return {@link JobKey}
+     * @throws SchedulerException Scheduler Exception
      */
     protected JobKey newJobKey(String jobKey) throws SchedulerException {
         return JobKey.jobKey(jobKey);
     }
 
     /**
-     * New Job Detail
+     * Create a {@link JobDetail}
+     * <p>
+     * Use <code>{@link JobBuilder}</code> to create a new job
+     * Set {@link ApiBootJobWrapper#getJobKey()} as the unique representation of the job
+     * If a parameter exists, set the parameter to {@link JobDetail#getJobDataMap()}
+     * </p>
      *
-     * @param wrapper ApiBoot Job Wrapper
-     * @return Job Detail
+     * @param wrapper {@link ApiBootJobWrapper}
+     * @return {@link JobDetail}
      */
     protected JobDetail newJobDetail(ApiBootJobWrapper wrapper) {
-        // job detail
         JobDetail jobDetail = JobBuilder.newJob(wrapper.getJobClass()).withIdentity(wrapper.getJobKey()).build();
         if (!ObjectUtils.isEmpty(wrapper.getParam())) {
-            // put params
             jobDetail.getJobDataMap().putAll(wrapper.getParam().getAllParam());
         }
         return jobDetail;
     }
 
     /**
-     * 获取一个新的JobKey对象
+     * Create a {@link TriggerKey}
      *
-     * @param triggerKey Trigger Key Name
-     * @return TriggerKey
-     * @throws SchedulerException 调度器异常
+     * @param triggerKey {@link TriggerKey#getName()}
+     * @return {@link TriggerKey}
+     * @throws SchedulerException Scheduler Exception
      */
     protected TriggerKey newTriggerKey(String triggerKey) throws SchedulerException {
         return TriggerKey.triggerKey(triggerKey);
@@ -346,59 +367,60 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
 
 
     /**
-     * 创建一个Cron表达式任务
+     * Create a cron job
+     * <p>
+     * Use cron expressions {@link ApiBootCronJobWrapper#getCron()} to create {@link Trigger}
+     * Adding {@link JobDetail} to the {@link Scheduler}
+     * </p>
      *
-     * @param wrapper Cron表达式任务封装对象
-     * @return Date
-     * @throws SchedulerException 调度器异常
+     * @param wrapper {@link ApiBootCronJobWrapper}
+     * @return The first execute time
+     * @throws SchedulerException Scheduler Exception
+     * @see CronScheduleBuilder#cronSchedule(String)
      */
     protected Date newCronJob(ApiBootCronJobWrapper wrapper) throws SchedulerException {
-        // new trigger key
         TriggerKey triggerKey = newTriggerKey(wrapper.getJobKey());
-
-        // job detail
         JobDetail jobDetail = newJobDetail(wrapper);
-        // trigger
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(CronScheduleBuilder.cronSchedule(wrapper.getCron())).build();
-
         return scheduler.scheduleJob(jobDetail, trigger);
     }
 
     /**
-     * 创建一个Loop循环执行任务
+     * Create a loop job
+     * <p>
+     * Total number of times = first time + repeat times
+     * for example:
+     * 6（total） = 1（first） + 5（repeat）
+     * </p>
      *
-     * @param wrapper Loop任务封装对象
-     * @return Date
-     * @throws SchedulerException 调度器异常
+     * @param wrapper {@link ApiBootLoopJobWrapper}
+     * @return The first execute time
+     * @throws SchedulerException Scheduler Exception
      */
     protected Date newLoopJob(ApiBootLoopJobWrapper wrapper) throws SchedulerException {
-        // new trigger key
         TriggerKey triggerKey = newTriggerKey(wrapper.getJobKey());
-
-        // job detail
         JobDetail jobDetail = newJobDetail(wrapper);
-        // trigger
-        Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(SimpleScheduleBuilder.simpleSchedule().withRepeatCount(wrapper.getRepeatTimes()).withIntervalInMilliseconds(wrapper.getLoopIntervalTime())).startAt(wrapper.getStartAtTime()).build();
-
+        Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withRepeatCount(wrapper.getRepeatTimes()).withIntervalInMilliseconds(wrapper.getLoopIntervalTime()))
+            .startAt(wrapper.getStartAtTime()).build();
         return scheduler.scheduleJob(jobDetail, trigger);
     }
 
     /**
-     * 创建Once任务
+     * Create a once job
+     * <p>
+     * The job is executed only once
+     * </p>
      *
-     * @param wrapper Once任务封装对象
-     * @return Date
-     * @throws SchedulerException 调度器异常
+     * @param wrapper {@link ApiBootOnceJobWrapper}
+     * @return The first execute time
+     * @throws SchedulerException Scheduler Exception
      */
     protected Date newOnceJob(ApiBootOnceJobWrapper wrapper) throws SchedulerException {
-        // new trigger key
         TriggerKey triggerKey = newTriggerKey(wrapper.getJobKey());
-
-        // new job detail
         JobDetail jobDetail = newJobDetail(wrapper);
-        // new trigger
-        Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(SimpleScheduleBuilder.simpleSchedule()).startAt(wrapper.getStartAtTime()).build();
-
+        Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(SimpleScheduleBuilder.simpleSchedule())
+            .startAt(wrapper.getStartAtTime()).build();
         return scheduler.scheduleJob(jobDetail, trigger);
     }
 }
