@@ -6,27 +6,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 任务参数封装对象
+ * Job execution param wrapper class
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-28 15:25
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 public class ApiBootJobParamWrapper {
     /**
-     * 定时任务执行时的参数
+     * job params
      */
     private static Map<String, Object> param = new HashMap();
 
     /**
-     * 实例化参数对象
+     * Disable constructor instantiation
+     */
+    private ApiBootJobParamWrapper() {
+    }
+
+    /**
+     * Create a instance
      *
-     * @return ApiBootJobParamWrapper Instance
+     * @return {@link ApiBootJobParamWrapper}
      */
     public static ApiBootJobParamWrapper wrapper() {
         return new ApiBootJobParamWrapper();
@@ -37,7 +37,7 @@ public class ApiBootJobParamWrapper {
      *
      * @param name  param name
      * @param value param value
-     * @return this object
+     * @return {@link ApiBootJobParamWrapper} current object instance
      */
     public ApiBootJobParamWrapper put(String name, Object value) {
         param.put(name, value);
@@ -47,7 +47,7 @@ public class ApiBootJobParamWrapper {
     /**
      * Get all params
      *
-     * @return map instance
+     * @return {@link #param}
      */
     public Map<String, Object> getAllParam() {
         return param;

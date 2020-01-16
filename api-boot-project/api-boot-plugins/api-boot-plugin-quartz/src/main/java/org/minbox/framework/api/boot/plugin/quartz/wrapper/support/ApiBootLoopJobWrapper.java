@@ -9,43 +9,30 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import java.util.Date;
 
 /**
- * LOOP任务类型封装
+ * Loop job wrapper class，extend {@link ApiBootJobWrapper}
  *
- * @author：于起宇 <p>
- * ================================
- * Created with IDEA.
- * Date：2019-01-23
- * Time：13:43
- * 个人博客：http://blog.yuqiyu.com
- * 简书：http://www.jianshu.com/u/092df3f77bca
- * 码云：https://gitee.com/hengboy
- * GitHub：https://github.com/hengyuboy
- * ================================
- * </p>
+ * @author 恒宇少年
  */
 @Getter
 public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
     /**
-     * 任务执行循环次数
+     * Job execution repeat times
      */
     private int repeatTimes;
     /**
-     * 默认执行任务间隔时间为0
-     * loopIntervalTime gt 0 and loopTimes gt 0 and jobExecuteAway != CRON_EXPRESSION 根据间隔时间以及循环次数进行创建任务
-     * <p>
-     * loopIntervalTime lte 0 || loopTimes lte 0 || jobExecuteAway == CRON_EXPRESSION 根据cron表达式创建
+     * Interval between repeated Job
      */
     private int loopIntervalTime;
 
     /**
-     * 构造函数初始化父类的相关字段
+     * Constructor initialization {@link ApiBootLoopJobWrapper}
      *
-     * @param jobKey           任务key
-     * @param loopIntervalTime 循环间隔次数
-     * @param repeatTimes      重复次数
-     * @param startAtTime      开始时间
-     * @param param            参数
-     * @param jobClass         任务执行类
+     * @param jobKey           {@link ApiBootJobWrapper#getJobKey()}
+     * @param jobClass         {@link ApiBootJobWrapper#getJobClass()}
+     * @param repeatTimes      {@link ApiBootLoopJobWrapper#getRepeatTimes()}
+     * @param loopIntervalTime {@link ApiBootLoopJobWrapper#getLoopIntervalTime()}
+     * @param startAtTime      {@link ApiBootJobWrapper#getStartAtTime()}
+     * @param param            {@link ApiBootJobWrapper#getParam()}
      */
     @Builder(builderMethodName = "Context", buildMethodName = "wrapper")
     public ApiBootLoopJobWrapper(String jobKey, Class<? extends QuartzJobBean> jobClass, int repeatTimes, int loopIntervalTime, Date startAtTime, ApiBootJobParamWrapper param) {
@@ -55,9 +42,9 @@ public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
     }
 
     /**
-     * 获取每次重复之间的间隔时间
+     * Get interval time in milliseconds
      *
-     * @return 间隔时间毫秒值
+     * @return interval time
      */
     public int getLoopIntervalTime() {
         return loopIntervalTime <= 0 ? 1000 : loopIntervalTime;

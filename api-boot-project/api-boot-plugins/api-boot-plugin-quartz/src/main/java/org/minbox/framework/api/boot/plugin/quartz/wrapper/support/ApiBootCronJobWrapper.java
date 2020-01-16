@@ -7,35 +7,24 @@ import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobWrapper;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 /**
- * CRON任务类型封装
+ * Cron job wrapper class，extend {@link ApiBootJobWrapper}
  *
- * @author：于起宇 <p>
- * ================================
- * Created with IDEA.
- * Date：2019-01-23
- * Time：13:42
- * 个人博客：http://blog.yuqiyu.com
- * 简书：http://www.jianshu.com/u/092df3f77bca
- * 码云：https://gitee.com/hengboy
- * GitHub：https://github.com/hengyuboy
- * ================================
- * </p>
+ * @author 恒宇少年
  */
 @Getter
 public class ApiBootCronJobWrapper extends ApiBootJobWrapper {
     /**
-     * cron表达式
-     * 任务执行方式如果为CRON_EXPRESSION时，该方法必须调用并设置值
+     * Job execution cron expression
      */
     private String cron;
 
     /**
-     * 构造函数初始化父类的相关字段
+     * Constructor initialization {@link ApiBootCronJobWrapper}
      *
-     * @param jobKey       任务key
-     * @param cron         cron表达式
-     * @param jobClass     执行任务类
-     * @param param 参数封装对象
+     * @param jobKey   {@link ApiBootJobWrapper#getJobKey()}
+     * @param jobClass {@link ApiBootJobWrapper#getJobClass()}
+     * @param cron     {@link ApiBootCronJobWrapper#getCron()}
+     * @param param    {@link ApiBootJobWrapper#getParam()}
      */
     @Builder(builderMethodName = "Context", buildMethodName = "wrapper")
     public ApiBootCronJobWrapper(String jobKey, Class<? extends QuartzJobBean> jobClass, String cron, ApiBootJobParamWrapper param) {

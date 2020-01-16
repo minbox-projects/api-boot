@@ -9,45 +9,37 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Job封装接口定义
+ * Create a parameter wrapper class for a job
  *
- * @author：于起宇 <p>
- * ================================
- * Created with IDEA.
- * Date：2019-01-23
- * Time：13:04
- * 个人博客：http://blog.yuqiyu.com
- * 简书：http://www.jianshu.com/u/092df3f77bca
- * 码云：https://gitee.com/hengboy
- * GitHub：https://github.com/hengyuboy
- * ================================
- * </p>
+ * @author 恒宇少年
  */
 @Getter
 @AllArgsConstructor
 public class ApiBootJobWrapper implements Serializable {
     /**
-     * 任务key
+     * Job unique key
+     * Can operate jobs based on jobKey
      */
     @Setter
     private String jobKey;
     /**
-     * 任务Class
+     * Job execution class
      */
     private Class<? extends QuartzJobBean> jobClass;
     /**
-     * 开始执行的时间
+     * Start execution time
      */
     private Date startAtTime;
     /**
-     * 参数
+     * Job execution params
      */
     private ApiBootJobParamWrapper param;
 
     /**
-     * 不传递开启时间时，使用当前时间
+     * Get job start time
+     * If {@link #startAtTime} is empty, the current time is used
      *
-     * @return 获取开始时间
+     * @return Job start time
      */
     public Date getStartAtTime() {
         return startAtTime == null ? new Date() : startAtTime;

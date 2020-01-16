@@ -1,6 +1,8 @@
 package org.minbox.framework.api.boot.plugin.quartz;
 
 import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobWrapper;
+import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 
@@ -8,124 +10,130 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * ApiBoot 集成 Quartz 操作任务接口方法定义
- * 添加集成任务添加、暂停、修改、删除等
+ * ApiBoot integrated Quartz operation task interface method definition
+ * Add integration tasksAdd, pause, modify, delete, etc.
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-26 16:25
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
+ * @see Scheduler
  */
 public interface ApiBootQuartzService {
     /**
-     * 获取Quartz 调度器对象实例
+     * Get Quartz scheduler object instance
      *
-     * @return Scheduler
-     * @throws SchedulerException 调度器异常
+     * @return {@link Scheduler}
+     * @throws SchedulerException Scheduler Exception
      */
     Scheduler getScheduler() throws SchedulerException;
 
     /**
-     * 创建一个新任务
+     * Create a new job
      *
-     * @param jobWrapper 定时任务封装对象
-     * @return Job Key
+     * @param jobWrapper {@link ApiBootJobWrapper}
+     * @return {@link ApiBootJobWrapper#getJobKey()}
+     * @see org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper
+     * @see org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper
+     * @see org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper
      */
     String newJob(ApiBootJobWrapper jobWrapper);
 
     /**
-     * 删除一个任务
+     * Delete a job
+     * pause the job first
+     * then remove the job from the scheduler
+     * finally delete the job
      *
-     * @param jobKey Job Key
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
      */
     void deleteJob(String jobKey);
 
     /**
-     * 删除一系列任务
+     * Delete based on the given jobKey array
      *
-     * @param jobKeys Job Key Array
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} job key array
      */
     void deleteJobs(String... jobKeys);
 
     /**
-     * 删除集合内的所有任务
+     * Delete based on the given jobKey collection
      *
-     * @param jobKeys Job Key Collection
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} job key collection
      */
     void deleteJobs(Collection<String> jobKeys);
 
     /**
-     * 暂停一个任务
+     * Pause job based on jobKey
      *
-     * @param jobKey Job Key
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
      */
     void pauseJob(String jobKey);
 
     /**
-     * 暂停传递的所有任务
+     * Pause based on the given jobKey array
      *
-     * @param jobKeys Job Key Array
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey array
      */
     void pauseJobs(String... jobKeys);
 
     /**
-     * 暂停集合内的所有任务
+     * Pause based on the given jobKey collection
      *
-     * @param jobKeys Job Key Collection
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey collection
      */
     void pauseJobs(Collection<String> jobKeys);
 
     /**
-     * 恢复任务执行
+     * Resume a job
      *
-     * @param jobKey Job Key
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
      */
     void resumeJob(String jobKey);
 
     /**
-     * 恢复数组内的所有任务执行
+     * Resume based on the given jobKey array
      *
-     * @param jobKeys Job Key Array
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey array
      */
     void resumeJobs(String... jobKeys);
 
     /**
-     * 恢复集合内的所有任务执行
+     * Resume based on the given jobKey collection
      *
-     * @param jobKeys Job Key Collection
+     * @param jobKeys {@link ApiBootJobWrapper#getJobKey()} jobKey collection
      */
     void resumeJobs(Collection<String> jobKeys);
 
     /**
-     * 更新任务Cron表达式
+     * Update job cron expression
+     * This method works for <code>{@link ApiBootCronJobWrapper}</code>
      *
-     * @param jobKey Job Key
-     * @param cron   Job Cron Expression
+     * @param jobKey {@link ApiBootJobWrapper#getJobKey()}
+     * @param cron   {@link ApiBootCronJobWrapper#getCron()}
      */
     void updateJobCron(String jobKey, String cron);
 
     /**
-     * 更新任务开始时间
+     * Update job start time
+     * <p>
+     * This method works for {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper}
+     * or {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper}
+     * </p>
      *
-     * @param jobKey       Job Key
-     * @param jobStartTime Job New Start Time
+     * @param jobKey       {@link ApiBootJobWrapper#getJobKey()}
+     * @param jobStartTime {@link ApiBootJobWrapper#getStartAtTime()} job startAtTime
      */
     void updateJobStartTime(String jobKey, Date jobStartTime);
 
     /**
-     * 启动所有定时任务
+     * Start all jobs in the <code>{@link Scheduler}</code>
      *
-     * @throws SchedulerException 调度器异常
+     * @throws SchedulerException Scheduler Exception
      */
     void startAllJobs() throws SchedulerException;
 
     /**
-     * 关闭所有定时任务
+     * Shutdown all jobs in the <code>{@link Scheduler}</code>
      *
-     * @throws SchedulerException 调度器异常
+     * @throws SchedulerException Scheduler Exception
      */
     void shutdownAllJobs() throws SchedulerException;
 }
