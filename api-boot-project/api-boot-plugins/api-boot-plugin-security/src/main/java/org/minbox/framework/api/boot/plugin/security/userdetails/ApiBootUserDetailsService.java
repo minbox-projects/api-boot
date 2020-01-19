@@ -27,15 +27,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * ApiBoot整合SpringSecurity用户查询逻辑实现
- *
- * @author：恒宇少年 - 于起宇
+ * The {@link UserDetailsService} implement class
  * <p>
- * DateTime：2019-03-14 16:00
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * ApiBoot integrates spring security user query logic implementation
+ *
+ * @author 恒宇少年
  */
 public class ApiBootUserDetailsService implements UserDetailsService {
     /**
@@ -43,19 +39,19 @@ public class ApiBootUserDetailsService implements UserDetailsService {
      */
     static Logger logger = LoggerFactory.getLogger(ApiBootUserDetailsService.class);
     /**
-     * 注入上下文
+     * Spring {@link ApplicationContext}
      */
     @Autowired
     private ApplicationContext applicationContext;
 
     /**
-     * 根据用户名读取用户基本信息
+     * Query basic user information according to user name
      * <p>
-     * 查询完成用户信息后执行发布LoadUserEvent事件
+     * Publish load user event event event after querying user information
      *
-     * @param username 用户名
-     * @return 查询出该用户名的用户信息
-     * @throws UsernameNotFoundException 用户未找到异常
+     * @param username {@link UserDetails#getUsername()}
+     * @return {@link UserDetails}
+     * @throws UsernameNotFoundException Throw the exception when the user does not exist
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

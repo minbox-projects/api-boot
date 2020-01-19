@@ -30,16 +30,11 @@ import java.lang.reflect.Field;
 import java.sql.*;
 
 /**
- * ApiBoot提供的默认数据委托实现类
- * 注意：需要遵循ApiBoot的表名、表结构创建用户表
- *
- * @author：恒宇少年 - 于起宇
+ * The {@link ApiBootStoreDelegate} default implement
  * <p>
- * DateTime：2019-03-14 16:03
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * Query {@link UserDetails} according to the agreed default table structure
+ *
+ * @author 恒宇少年
  */
 public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     /**
@@ -47,24 +42,36 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
      */
     static Logger logger = LoggerFactory.getLogger(ApiBootDefaultStoreDelegate.class);
     /**
-     * 默认查询用户sql
+     * Query {@link UserDetails} SQL by default
+     *
+     * @see ApiBootDefaultUserDetails
+     * @see org.minbox.framework.api.boot.plugin.security.jdbc.ApiBootDefaultUserEntity
      */
     static String DEFAULT_SELECT_USER_SQL = "SELECT UI_ID, UI_USER_NAME, UI_NICK_NAME, UI_PASSWORD, UI_EMAIL, UI_AGE, UI_ADDRESS, UI_IS_LOCKED, UI_IS_ENABLED, UI_STATUS, UI_CREATE_TIME FROM API_BOOT_USER_INFO WHERE UI_USER_NAME = ?";
     /**
-     * 注入dataSource数据源对象
+     * DataSource Instance
+     * <p>
+     * Get {@link Connection} read {@link UserDetails}
      */
     private DataSource dataSource;
 
+    /**
+     * Initialize {@link DataSource} with constructor
+     *
+     * @param dataSource {@link #dataSource}
+     */
     public ApiBootDefaultStoreDelegate(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     /**
-     * 根据用户名查询用户信息
+     * Query {@link UserDetails}
+     * <p>
+     * Query the user information in the "api_boot_user_info" table by default
      *
-     * @param username 用户名
-     * @return 用户对象信息
-     * @throws UsernameNotFoundException 用户不存的异常跑出
+     * @param username {@link UserDetails#getUsername()}
+     * @return {@link ApiBootDefaultUserDetails}
+     * @throws UsernameNotFoundException Throw the exception when the user does not exist
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -74,11 +81,12 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     }
 
     /**
-     * 查询用户信息
-     * 根据数据源的数据库链接进行执行查询用户信息
+     * Query User
+     * <p>
+     * Query user information according to database link of data source
      *
-     * @param username 用户名
-     * @return 用户实例
+     * @param username {@link UserDetails#getUsername()}
+     * @return {@link ApiBootDefaultUserDetails}
      */
     private ApiBootDefaultUserDetails findUser(String username) {
         Connection connection = null;
@@ -88,9 +96,7 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(DEFAULT_SELECT_USER_SQL);
             ps.setString(1, username);
-            // 执行查询
             resultSet = ps.executeQuery();
-            // 返回转换后的实体对象
             return wrapperOneResult(ApiBootDefaultUserDetails.class, resultSet);
         } catch (Exception e) {
             throw new UsernameNotFoundException("Username：" + username + "，not found.");
@@ -102,10 +108,10 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     }
 
     /**
-     * Cleanup helper method that closes the given <code>ResultSet</code>
+     * Cleanup helper method that closes the given <code>{@link ResultSet}</code>
      * while ignoring any errors.
      *
-     * @param connection 数据链接对象
+     * @param connection {@link Connection}
      */
     private static void closeConnection(Connection connection) {
         if (null != connection) {
@@ -117,10 +123,10 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     }
 
     /**
-     * Cleanup helper method that closes the given <code>ResultSet</code>
+     * Cleanup helper method that closes the given <code>{@link ResultSet}</code>
      * while ignoring any errors.
      *
-     * @param rs restSet对象
+     * @param rs {@link ResultSet}
      */
     private static void closeResultSet(ResultSet rs) {
         if (null != rs) {
@@ -135,7 +141,7 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
      * Cleanup helper method that closes the given <code>Statement</code>
      * while ignoring any errors.
      *
-     * @param statement Statement执行对象
+     * @param statement {@link Statement}
      */
     private static void closeStatement(Statement statement) {
         if (null != statement) {
@@ -147,47 +153,40 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     }
 
     /**
-     * 封装处理单个结果
+     * Encapsulation handles individual results
      * <p>
-     * 约定：返回对象的字段遵循首字母小写，"_"后第一个字母大写规则命名(对应列名)
+     * Convention: return the field of the object to follow the rule of lowercase first letter,
+     * uppercase first letter after '?' (corresponding column name)
      *
-     * @param resultClass 返回对象类型
-     * @param rs          查询结果集
-     * @param <T>         返回对象泛型类型
-     * @return 新对象
+     * @param resultClass Result Object Class
+     * @param rs          {@link ResultSet}
+     * @param <T>         generic types
+     * @return Result Object Instance
      */
     private <T> T wrapperOneResult(Class<T> resultClass, ResultSet rs) throws ApiBootException {
         Object resultObj = null;
         try {
-            // 查询结果的元数据信息
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
 
             while (rs.next()) {
-                // 实例化返回对象
                 resultObj = resultClass.newInstance();
-                // 遍历元数据内的列信息，根据列名进行设置到返回对象的对应字段
                 for (int index = 1; index < columnCount + 1; index++) {
-                    // 列名
                     String columnName = metaData.getColumnName(index);
                     Object columnValue = rs.getObject(columnName);
                     if (columnValue != null) {
-                        // 格式化后的字段名称
                         String fieldName = columnNameToFieldName(columnName);
                         Field field;
                         try {
-                            // 获取本类定义的field
                             field = resultClass.getDeclaredField(fieldName);
                         } catch (NoSuchFieldException e) {
                             try {
-                                // 获取父类定义的field
                                 field = resultClass.getSuperclass().getDeclaredField(fieldName);
                             } catch (NoSuchFieldException e2) {
                                 throw new ApiBootException("No such filed ： " + fieldName);
                             }
                         }
                         field.setAccessible(true);
-                        // 设置字段的值
                         field.set(resultObj, columnValue);
                     }
                 }
@@ -199,15 +198,15 @@ public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     }
 
     /**
-     * 列名转换Field的名称
+     * Column name converts the name of a field
+     * for example：
+     * "user_name" to "userName"
      *
-     * @param columnName 列名
-     * @return Field名称
+     * @param columnName The column name
+     * @return class field name
      */
     private String columnNameToFieldName(String columnName) {
-        // 默认field为全小写的列名
         String fieldName = columnName.toLowerCase();
-        // 返回转换驼峰后的字符串
         return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, fieldName);
     }
 }
