@@ -21,8 +21,11 @@ public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
     private int repeatTimes;
     /**
      * Interval between repeated Job
+     * <p>
+     * Type changed from int to Long
+     * https://gitee.com/minbox-projects/api-boot/issues/I18HTM
      */
-    private int loopIntervalTime;
+    private Long loopIntervalTime;
 
     /**
      * Constructor initialization {@link ApiBootLoopJobWrapper}
@@ -35,7 +38,7 @@ public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
      * @param param            {@link ApiBootJobWrapper#getParam()}
      */
     @Builder(builderMethodName = "Context", buildMethodName = "wrapper")
-    public ApiBootLoopJobWrapper(String jobKey, Class<? extends QuartzJobBean> jobClass, int repeatTimes, int loopIntervalTime, Date startAtTime, ApiBootJobParamWrapper param) {
+    public ApiBootLoopJobWrapper(String jobKey, Class<? extends QuartzJobBean> jobClass, int repeatTimes, Long loopIntervalTime, Date startAtTime, ApiBootJobParamWrapper param) {
         super(jobKey, jobClass, startAtTime, param);
         this.repeatTimes = repeatTimes;
         this.loopIntervalTime = loopIntervalTime;
@@ -46,7 +49,7 @@ public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
      *
      * @return interval time
      */
-    public int getLoopIntervalTime() {
-        return loopIntervalTime <= 0 ? 1000 : loopIntervalTime;
+    public Long getLoopIntervalTime() {
+        return loopIntervalTime <= 0 ? 1000L : loopIntervalTime;
     }
 }
