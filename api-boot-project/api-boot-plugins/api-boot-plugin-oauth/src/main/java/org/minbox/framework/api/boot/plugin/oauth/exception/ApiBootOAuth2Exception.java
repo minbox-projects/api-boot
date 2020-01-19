@@ -1,6 +1,7 @@
 package org.minbox.framework.api.boot.plugin.oauth.exception;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import lombok.Getter;
 import org.minbox.framework.api.boot.plugin.oauth.response.AuthorizationDeniedResponse;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
