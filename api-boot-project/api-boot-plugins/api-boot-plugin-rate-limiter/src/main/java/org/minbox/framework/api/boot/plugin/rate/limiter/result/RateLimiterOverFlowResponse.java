@@ -20,13 +20,7 @@ package org.minbox.framework.api.boot.plugin.rate.limiter.result;
 /**
  * Response results after flow exceeding
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-05-24 17:53
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @FunctionalInterface
 public interface RateLimiterOverFlowResponse {
@@ -34,7 +28,7 @@ public interface RateLimiterOverFlowResponse {
      * Response results after flow exceeding
      *
      * @param methodArgs request method args
-     * @return
+     * @return custom object
      */
     Object overflow(Object[] methodArgs);
 }

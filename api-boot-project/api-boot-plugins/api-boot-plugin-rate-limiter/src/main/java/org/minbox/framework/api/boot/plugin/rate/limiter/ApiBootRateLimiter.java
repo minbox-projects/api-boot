@@ -18,15 +18,20 @@
 package org.minbox.framework.api.boot.plugin.rate.limiter;
 
 /**
- * ApiBoot RateLimiter
- *
- * @author：恒宇少年 - 于起宇
+ * Definition of current limiting interface
  * <p>
- * DateTime：2019-05-05 17:12
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * a unified method for defining current limiting needs
+ * <p>
+ * Basic Abstract implementation class
+ * {@link org.minbox.framework.api.boot.plugin.rate.limiter.support.AbstractRateLimiter}
+ * <p>
+ * Current restriction of token bucket mode of single application provided by Google
+ * {@link org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter}
+ * <p>
+ * Implementation of redis Lua script for microservices and distributed applications
+ * {@link org.minbox.framework.api.boot.plugin.rate.limiter.support.RedisLuaRateLimiter}
+ *
+ * @author 恒宇少年
  */
 public interface ApiBootRateLimiter {
     /**

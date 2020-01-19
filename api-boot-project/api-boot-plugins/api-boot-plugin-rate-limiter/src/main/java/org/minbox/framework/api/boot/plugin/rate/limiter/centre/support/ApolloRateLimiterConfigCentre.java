@@ -20,15 +20,9 @@ package org.minbox.framework.api.boot.plugin.rate.limiter.centre.support;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
 
 /**
- * Apollo Config Support
+ * The {@link org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre} Apollo implementation class
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-05-06 21:52
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApolloRateLimiterConfigCentre extends AbstractRateLimiterConfigCentre {
 

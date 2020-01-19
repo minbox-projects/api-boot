@@ -17,19 +17,14 @@
 
 package org.minbox.framework.api.boot.plugin.rate.limiter.support;
 
+import org.minbox.framework.api.boot.plugin.rate.limiter.annotation.RateLimiter;
 import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
 import org.minbox.framework.api.boot.plugin.rate.limiter.context.ApiBootRateLimiterContext;
 
 /**
- * google guava rate limiter support
+ * Google guava rate limiter support
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-05-05 17:20
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class GoogleGuavaRateLimiter extends AbstractRateLimiter {
     public GoogleGuavaRateLimiter(Long globalQPS, RateLimiterConfigCentre rateLimiterConfigCentre) {
@@ -39,7 +34,7 @@ public class GoogleGuavaRateLimiter extends AbstractRateLimiter {
     /**
      * google guava away
      *
-     * @param annotationQPS RateLimiter QPS value
+     * @param annotationQPS {@link RateLimiter#QPS()}
      * @param requestKey    request key
      * @return true : allow access to
      */
