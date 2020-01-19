@@ -19,28 +19,23 @@ package org.minbox.framework.api.boot.plugin.security;
 import lombok.Data;
 
 /**
- * SpringSecurity 内存方式用户配置
+ * Security user
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 15:42
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 public class SecurityUser {
     /**
-     * 用户名
+     * Username
      */
     private String username;
     /**
-     * 用户密码
+     * Password
      */
     private String password;
     /**
-     * 用户角色集合
+     * User roles
+     * the default value is "api"
      */
     private String[] roles = new String[]{"api"};
 }

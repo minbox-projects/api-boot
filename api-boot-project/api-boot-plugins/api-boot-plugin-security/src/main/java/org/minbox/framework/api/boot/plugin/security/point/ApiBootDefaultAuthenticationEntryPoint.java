@@ -15,13 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author：恒宇少年 - 于起宇
+ * The {@link AuthenticationEntryPoint} implement class
  * <p>
- * DateTime：2019-04-11 10:29
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * The default implementation class of {@link AuthenticationEntryPoint} provided by ApiBoot
+ * @author 恒宇少年
  */
 public class ApiBootDefaultAuthenticationEntryPoint implements AuthenticationEntryPoint {
     /**

@@ -16,44 +16,42 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * ApiBoot 整合SpringSecurity Web Security 配置类
+ * ApiBoot integrates SpringSecurity configuration class
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-25 17:58
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
-     * 配置排除的路径列表
+     * Configure Excluded Path List
      *
-     * @return 排除路径列表
+     * @return Path list
      */
     protected List<String> configureIgnoreUrls() {
         return Collections.emptyList();
     }
 
     /**
-     * 排除安全拦截swagger、actuator等路径
+     * Configure SpringSecurity Web
+     * <p>
+     * Set a list of paths to exclude security intercepts
+     * </p>
      *
-     * @param web web安全构建对象
+     * @param web {@link WebSecurity}
      */
     @Override
     public void configure(WebSecurity web) {
         WebSecurity.IgnoredRequestConfigurer ignoredRequestConfigurer = web.ignoring();
-        configureIgnoreUrls().stream().forEach(url -> ignoredRequestConfigurer.antMatchers(url));
+        configureIgnoreUrls().forEach(url -> ignoredRequestConfigurer.antMatchers(url));
     }
 
     /**
-     * 配置用户认证管理
-     * 1. 设置用户业务逻辑实例
-     * 2. 设置用户密码加密方式为BCrypt
+     * Configure user authentication management
+     * <p>
+     * Password encryption method {@link #passwordEncoder()}
+     * </p>
      *
-     * @param auth 认证管理者构建对象
-     * @throws Exception 异常信息
+     * @param auth {@link AuthenticationManagerBuilder}
+     * @throws Exception exception
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -61,11 +59,10 @@ public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigu
     }
 
     /**
-     * 设置授权管理者
-     * 用于整合oauth2的password授权模式
+     * Authorized manager
      *
-     * @return AuthenticationManager
-     * @throws Exception 异常信息
+     * @return {@link AuthenticationManager}
+     * @throws Exception exception
      */
     @Override
     @Bean
@@ -74,10 +71,10 @@ public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigu
     }
 
     /**
-     * 禁用http basic
+     * Disable basic http
      *
-     * @param http http安全构建对象
-     * @throws Exception 异常信息
+     * @param http {@link HttpSecurity}
+     * @throws Exception exception
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -87,15 +84,15 @@ public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigu
         if (disableCsrf()) {
             http.csrf().disable();
         }
-        // 异常处理器配置
         http.exceptionHandling().accessDeniedHandler(getAccessDeniedHandler());
         http.exceptionHandling().authenticationEntryPoint(getAuthenticationEntryPoint());
     }
 
     /**
-     * 用户登录或者获取Token时的密码加密方式
+     * Password encryption method
      *
-     * @return BCryptPasswordEncoder
+     * @return {@link BCryptPasswordEncoder}
+     * @see PasswordEncoder
      */
     @Bean
     @ConditionalOnMissingBean
@@ -104,32 +101,42 @@ public abstract class ApiBootWebSecurityConfiguration extends WebSecurityConfigu
     }
 
     /**
-     * 获取Spring Security 异常处理器
-     * 该方法留给实现类实现，实现类从项目内获取自定义的AccessDeniedHandler实现类IOC实例
-     * 如果实现类不返回实例则使用默认的ApiBootDefaultAccessDeniedHandler进行返回
+     * Get spring security exception handler
+     * <p>
+     * This method is left to the implementation class to obtain the customized {@link AccessDeniedHandler} implementation class IOC instance from the project
+     * If the implementation class does not return an instance,
+     * the default {@link org.minbox.framework.api.boot.plugin.security.handler.ApiBootDefaultAccessDeniedHandler} is used to return
+     * </p>
      *
-     * @return AccessDeniedHandler
+     * @return {@link AccessDeniedHandler}
      */
     protected abstract AccessDeniedHandler getAccessDeniedHandler();
 
     /**
-     * 获取认证端点处理
+     * Get authentication endpoint processing
      *
-     * @return AuthenticationEntryPoint
+     * @return {@link AuthenticationEntryPoint}
      */
     protected abstract AuthenticationEntryPoint getAuthenticationEntryPoint();
 
     /**
-     * 查询是否禁用http basic
+     * Disable basic http
+     * <p>
+     * This method is an abstract method, and the logic is implemented by subclasses
+     * </p>
      *
-     * @return true：禁用，false：不禁用
+     * @return Disable HttpBasic or not
+     * @see ApiBootWebSecurityConfiguration#configure(HttpSecurity)
      */
     protected abstract boolean disableHttpBasic();
 
     /**
-     * 查询是否禁用csrf
+     * Disable csrf
+     * <p>
+     * This method is an abstract method, and the logic is implemented by subclasses
+     * </p>
      *
-     * @return true：禁用，false：不禁用
+     * @return Disable Csrf or not
      */
     protected abstract boolean disableCsrf();
 }

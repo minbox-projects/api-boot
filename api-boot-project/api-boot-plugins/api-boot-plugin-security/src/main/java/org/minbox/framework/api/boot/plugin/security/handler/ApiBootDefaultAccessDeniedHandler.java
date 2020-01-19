@@ -15,16 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 自定义AccessDeniedHandler异常处理器
- * 实现认证异常自定义返回格式化内容到前端
- *
- * @author：恒宇少年 - 于起宇
+ * {@link AccessDeniedHandler} exception handler
  * <p>
- * DateTime：2019-04-10 16:09
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * Implement authentication exception custom return format content to front end
+ *
+ * @author 恒宇少年
  */
 public class ApiBootDefaultAccessDeniedHandler implements AccessDeniedHandler {
     /**
