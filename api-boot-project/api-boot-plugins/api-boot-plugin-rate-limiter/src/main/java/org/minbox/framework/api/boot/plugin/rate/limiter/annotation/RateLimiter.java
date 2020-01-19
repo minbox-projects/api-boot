@@ -23,13 +23,7 @@ import java.lang.annotation.*;
  * ApiBoot Rate Limiter Annotation
  * Configure to intercept request method
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-26 11:23
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

@@ -27,13 +27,9 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 /**
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-05-06 18:02
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * The {@link RateLimiterConfigCentre} abstract class
+ *
+ * @author 恒宇少年
  */
 public abstract class AbstractRateLimiterConfigCentre implements RateLimiterConfigCentre {
 
