@@ -13,7 +13,6 @@ import java.util.Date;
  *
  * @author 恒宇少年
  */
-@Getter
 @AllArgsConstructor
 public class ApiBootJobWrapper implements Serializable {
     /**
@@ -43,5 +42,17 @@ public class ApiBootJobWrapper implements Serializable {
      */
     public Date getStartAtTime() {
         return startAtTime == null ? new Date() : startAtTime;
+    }
+
+    public String getJobKey() {
+        return jobKey;
+    }
+
+    public Class<? extends QuartzJobBean> getJobClass() {
+        return jobClass;
+    }
+
+    public ApiBootJobParamWrapper getParam() {
+        return param;
     }
 }

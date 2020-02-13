@@ -37,7 +37,7 @@ public class ApiBootMessagePushClientSwitchAdvisor extends AbstractPointcutAdvis
     /**
      * Aspect notice
      *
-     * @see {@link ApiBootMessagePushSwitchAnnotationInterceptor}
+     * @see ApiBootMessagePushSwitchAnnotationInterceptor
      */
     private Advice advice;
     /**

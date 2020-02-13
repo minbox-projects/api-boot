@@ -6,12 +6,12 @@ import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobParamWrappe
 import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobWrapper;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+
 /**
  * Cron job wrapper class，extend {@link ApiBootJobWrapper}
  *
  * @author 恒宇少年
  */
-@Getter
 public class ApiBootCronJobWrapper extends ApiBootJobWrapper {
     /**
      * Job execution cron expression
@@ -30,5 +30,9 @@ public class ApiBootCronJobWrapper extends ApiBootJobWrapper {
     public ApiBootCronJobWrapper(String jobKey, Class<? extends QuartzJobBean> jobClass, String cron, ApiBootJobParamWrapper param) {
         super(jobKey, jobClass, null, param);
         this.cron = cron;
+    }
+
+    public String getCron() {
+        return cron;
     }
 }

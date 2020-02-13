@@ -14,7 +14,6 @@ import java.util.Date;
  *
  * @author 恒宇少年
  */
-@Getter
 public class ApiBootOnceJobWrapper extends ApiBootJobWrapper {
     /**
      * Constructor initialization {@link ApiBootOnceJobWrapper}

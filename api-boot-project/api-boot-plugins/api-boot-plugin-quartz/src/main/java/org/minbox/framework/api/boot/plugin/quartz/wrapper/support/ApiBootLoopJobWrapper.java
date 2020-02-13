@@ -13,7 +13,6 @@ import java.util.Date;
  *
  * @author 恒宇少年
  */
-@Getter
 public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
     /**
      * Job execution repeat times
@@ -51,5 +50,9 @@ public class ApiBootLoopJobWrapper extends ApiBootJobWrapper {
      */
     public Long getLoopIntervalTime() {
         return loopIntervalTime <= 0 ? 1000L : loopIntervalTime;
+    }
+
+    public int getRepeatTimes() {
+        return repeatTimes;
     }
 }
