@@ -17,8 +17,8 @@
         <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
 
-        <minbox.version>1.0.2.RELEASE</minbox.version>
-        <minbox-logging.version>1.0.3.RELEASE</minbox-logging.version>
+        <minbox.version>1.0.3.RELEASE</minbox.version>
+        <minbox-logging.version>1.0.4.RELEASE</minbox-logging.version>
 
         <druid.version>1.1.21</druid.version>
         <druid.starter.version>1.1.21</druid.starter.version>
