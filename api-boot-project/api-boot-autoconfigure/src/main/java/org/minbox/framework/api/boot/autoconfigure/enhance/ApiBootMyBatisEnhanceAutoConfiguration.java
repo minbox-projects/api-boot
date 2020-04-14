@@ -89,16 +89,20 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
 
     private final List<ConfigurationCustomizer> configurationCustomizers;
 
+    private final List<SqlSessionFactoryBeanCustomizer> sqlSessionFactoryBeanCustomizers;
+
     public ApiBootMyBatisEnhanceAutoConfiguration(ApiBootMyBatisEnhanceProperties properties,
                                                   ObjectProvider<Interceptor[]> interceptorsProvider,
                                                   ResourceLoader resourceLoader,
                                                   ObjectProvider<DatabaseIdProvider> databaseIdProvider,
-                                                  ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizersProvider) {
+                                                  ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizersProvider,
+                                                  ObjectProvider<List<SqlSessionFactoryBeanCustomizer>> sqlSessionFactoryBeanCustomizersProvider) {
         this.properties = properties;
         this.interceptors = interceptorsProvider.getIfAvailable();
         this.resourceLoader = resourceLoader;
         this.databaseIdProvider = databaseIdProvider.getIfAvailable();
         this.configurationCustomizers = configurationCustomizersProvider.getIfAvailable();
+        this.sqlSessionFactoryBeanCustomizers = sqlSessionFactoryBeanCustomizersProvider.getIfAvailable();
     }
 
     @PostConstruct
@@ -106,7 +110,7 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
         if (this.properties.isCheckConfigLocation() && StringUtils.hasText(this.properties.getConfigLocation())) {
             Resource resource = this.resourceLoader.getResource(this.properties.getConfigLocation());
             Assert.state(resource.exists(), "Cannot find config location: " + resource
-                    + " (please add config file or check your Mybatis configuration)");
+                + " (please add config file or check your Mybatis configuration)");
         }
     }
 
@@ -158,6 +162,13 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
             factory.setMapperLocations(this.properties.resolveMapperLocations());
         }
 
+        // SqlSessionFactoryBean Customizers
+        if (!CollectionUtils.isEmpty(this.sqlSessionFactoryBeanCustomizers)) {
+            for (SqlSessionFactoryBeanCustomizer factoryBeanCustomizer : this.sqlSessionFactoryBeanCustomizers) {
+                factoryBeanCustomizer.customize(factory);
+            }
+        }
+
         return factory.getObject();
     }
 
@@ -175,6 +186,7 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
     /**
      * EnhanceDslFactory Instance
      * Use to create dsl
+     *
      * @param sqlSession SqlSession
      * @return EnhanceDslFactory
      */
@@ -192,7 +204,7 @@ public class ApiBootMyBatisEnhanceAutoConfiguration {
      * repositories.
      */
     public static class AutoConfiguredMapperScannerRegistrar
-            implements BeanFactoryAware, ImportBeanDefinitionRegistrar, ResourceLoaderAware {
+        implements BeanFactoryAware, ImportBeanDefinitionRegistrar, ResourceLoaderAware {
 
         private BeanFactory beanFactory;
 
