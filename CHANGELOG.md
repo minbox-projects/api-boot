@@ -1,3 +1,9 @@
+## 2.2.3.RELEASE更新日志（2020-4-14日发布）
+- 升级SpringBoot为v2.2.6
+- 添加MyBatis Enhance支持自定义操作SqlSessionFactoryBean接口
+- 升级minbox-logging为v1.0.4
+- 修改javadoc编译错误问题
+
 ## 2.2.2.RELEASE更新日志（2020-1-6日发布）
 - 支持自定义认证服务器OAuth2认证失败时响应内容，详见：[I17O6B](https://gitee.com/minbox-projects/api-boot/issues/I17O6B)
 - 回退fastJson版本为1.2.60
