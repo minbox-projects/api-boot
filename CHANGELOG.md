@@ -1,3 +1,10 @@
+## 2.2.4.RELEASE更新日志（2020-4-29日发布）
+- 指定使用Spring版本为v5.2.5
+- 升级使用MyBatis Enhance版本为v1.1.2
+- 升级使用Nacos版本为v0.2.7
+- 升级使用Quartz使用版本为v2.3.2
+- 升级使用Guava版本为v29.0-jre
+
 ## 2.2.3.RELEASE更新日志（2020-4-14日发布）
 - 升级SpringBoot为v2.2.6
 - 添加MyBatis Enhance支持自定义操作SqlSessionFactoryBean接口
