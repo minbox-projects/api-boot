@@ -14,6 +14,7 @@
     <artifactId>api-boot-dependencies</artifactId>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
+        <spring.version>5.2.5.RELEASE</spring.version>
         <spring.boot.version>2.2.6.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
 
@@ -32,7 +33,6 @@
         <aliyun.sdk.core.version>4.2.0</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.1.0</aliyun.sdk.dysmsapi.version>
         <quartz.version>2.3.1</quartz.version>
-        <spring.tx.version>5.2.3.RELEASE</spring.tx.version>
         <jpush-client.version>3.3.11</jpush-client.version>
         <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
@@ -40,12 +40,12 @@
         <!--Builder Core Version-->
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
         <mybatis.pageable.core.version>1.0.7.RELEASE</mybatis.pageable.core.version>
-        <mybatis.enhance.core.version>1.1.1.RELEASE</mybatis.enhance.core.version>
-        <mybatis.enhance.dsl.version>1.1.1.RELEASE</mybatis.enhance.dsl.version>
+        <mybatis.enhance.core.version>1.1.2.RELEASE</mybatis.enhance.core.version>
+        <mybatis.enhance.dsl.version>1.1.2.RELEASE</mybatis.enhance.dsl.version>
         <mysema.codegen.version>0.6.8</mysema.codegen.version>
 
         <!--Nacos Config-->
-        <nacos.config.version>0.2.3</nacos.config.version>
+        <nacos.config.version>0.2.7</nacos.config.version>
 
         <!--Plugin Versions-->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -147,7 +147,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
-                <version>${spring.tx.version}</version>
+                <version>${spring.version}</version>
             </dependency>
 
             <!--Maven Plugin-->
