@@ -71,11 +71,7 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 @org.springframework.context.annotation.Configuration
-@ConditionalOnClass(name = {
-    "org.apache.ibatis.session.SqlSessionFactory",
-    "org.mybatis.spring.SqlSessionFactoryBean",
-    "com.gitee.hengboy.mybatis.enhance.MapperFactoryBean"
-})
+@ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class, MapperFactoryBean.class})
 @ConditionalOnBean(DataSource.class)
 @EnableConfigurationProperties(ApiBootMyBatisEnhanceProperties.class)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
