@@ -29,10 +29,11 @@
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
         </dependency>
+
+        <!--See: https://github.com/minbox-projects/api-boot/pull/18 -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
         </dependency>
     </dependencies>
 </project>
