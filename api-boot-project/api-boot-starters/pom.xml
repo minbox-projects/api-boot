@@ -31,6 +31,7 @@
         <module>api-boot-starter-mail</module>
         <module>api-boot-starter-logging</module>
         <module>api-boot-starter-logging-admin</module>
+        <module>api-boot-starter-sequence</module>
     </modules>
 
 </project>
