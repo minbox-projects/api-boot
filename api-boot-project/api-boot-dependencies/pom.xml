@@ -453,6 +453,18 @@
                 <artifactId>minbox-logging-spring-context</artifactId>
                 <version>${minbox-logging.version}</version>
             </dependency>
+            <!--Sequence-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-plugin-sequence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-sequence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
