@@ -19,4 +19,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.minbox.framework.api.boot.autoconfigure.mail.ApiBootMailAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootLoggingAdminAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootLoggingAdminSecurityAutoConfiguration
+  org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootLoggingAdminSecurityAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.sequence.ApiBootSequenceAutoConfiguration
