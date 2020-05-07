@@ -43,7 +43,7 @@
         <mybatis.enhance.core.version>1.1.2.RELEASE</mybatis.enhance.core.version>
         <mybatis.enhance.dsl.version>1.1.2.RELEASE</mybatis.enhance.dsl.version>
         <mysema.codegen.version>0.6.8</mysema.codegen.version>
-
+        <javax-annotation-api.version>1.3.2</javax-annotation-api.version>
         <!--Nacos Config-->
         <nacos.config.version>0.2.7</nacos.config.version>
 
@@ -453,7 +453,11 @@
                 <artifactId>minbox-logging-spring-context</artifactId>
                 <version>${minbox-logging.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${javax-annotation-api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
