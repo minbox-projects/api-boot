@@ -14,3 +14,7 @@ api:
     quartz:
       # 配置使用Jdbc方式存储任务
       job-store-type: jdbc
+      # 扩展properties配置列表
+      properties:
+          # key - value形式进行配置
+          org.quartz.scheduler.classLoadHelper.class: "org.quartz.simpl.CascadingClassLoadHelper"
