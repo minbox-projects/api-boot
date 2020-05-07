@@ -1,3 +1,9 @@
+## 2.2.5.RELEASE更新日志（2020-5-8日发布）
+- 集成ApiBoot Sequence分布式高效ID插件
+- 添加ApiBootSequenceContext用于生成String/Long类型的ID
+- 通过ApiBootSequenceProperties可配置数据中心编号、工作机器编号、回拨毫秒量等属性
+- fix bugs
+
 ## 2.2.4.RELEASE更新日志（2020-4-29日发布）
 - 指定使用Spring版本为v5.2.5
 - 升级使用MyBatis Enhance版本为v1.1.2
