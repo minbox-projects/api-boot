@@ -16,7 +16,7 @@
         <!--跳过deploy-->
         <maven.deploy.skip>true</maven.deploy.skip>
         <!--Samples所使用的ApiBoot版本-->
-        <api-boot.version>2.2.3.RELEASE</api-boot.version>
+        <api-boot.version>2.2.5.RELEASE</api-boot.version>
         <!--Samples所使用的SpringBoot版本-->
         <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
     </properties>
@@ -40,5 +40,6 @@
         <module>api-boot-sample-mail</module>
         <module>api-boot-sample-logging</module>
         <module>api-boot-sample-logging-admin</module>
+        <module>api-boot-sample-sequence</module>
     </modules>
 </project>

@@ -1,0 +1,9 @@
+api:
+    boot:
+        sequence:
+            # 工作机器的编号，默认值为1，取值的范围：0 ~ 255
+            worker-id: 2
+            # 数据中心的编号，默认值为：1，取值的范围：0 ~ 3
+            data-center-id: 0
+            # 解决高并发下获取时间戳的性能问题
+            clock: true
