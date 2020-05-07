@@ -9,9 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <properties>
+        <!--跳过test-->
         <maven.test.skip>true</maven.test.skip>
+        <!--跳过javadoc生成-->
         <maven.javadoc.skip>true</maven.javadoc.skip>
+        <!--跳过deploy-->
         <maven.deploy.skip>true</maven.deploy.skip>
+        <!--Samples所使用的ApiBoot版本-->
+        <api-boot.version>2.2.3.RELEASE</api-boot.version>
+        <!--Samples所使用的SpringBoot版本-->
+        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
     </properties>
     <artifactId>api-boot-samples</artifactId>
     <packaging>pom</packaging>
