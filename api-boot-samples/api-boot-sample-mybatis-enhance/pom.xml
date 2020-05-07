@@ -59,7 +59,7 @@
                 <artifactId>api-boot-dependencies</artifactId>
                 <scope>import</scope>
                 <type>pom</type>
-                <version>2.2.2.RELEASE</version>
+                <version>${api-boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -69,7 +69,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.7.RELEASE</version>
+                <version>${spring-boot.version}</version>
             </plugin>
         </plugins>
     </build>
