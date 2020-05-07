@@ -116,7 +116,7 @@ ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新�
 # 进入api-boot源码根目录
 ➜ cd api-boot
 # 执行安装
-➜ mvn clean install
+➜ mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Dgpg.skip
 ```
 
 ## 组件
