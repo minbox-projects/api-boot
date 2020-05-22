@@ -12,6 +12,20 @@
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
+    <developers>
+        <developer>
+            <name>恒宇少年</name>
+            <email>jnyuqy@gmail.com</email>
+            <organization>minbox-projects</organization>
+            <organizationUrl>https://gitee.com/minbox-projects</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://gitee.com/minbox-projects/api-boot.git</connection>
+        <developerConnection>scm:git:https://gitee.com/minbox-projects/api-boot.git</developerConnection>
+        <url>https://gitee.com/minbox-projects/api-boot</url>
+        <tag>HEAD</tag>
+    </scm>
     <dependencies>
         <!--ApiBoot Starter-->
         <dependency>
