@@ -18,7 +18,7 @@
     <version>${revision}</version>
     <name>api-boot</name>
     <properties>
-        <revision>2.2.5.RELEASE</revision>
+        <revision>2.2.6-SNAPSHOT</revision>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,6 +69,18 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>yuqiyu-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://maven.yuqiyu.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>yuqiyu-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://maven.yuqiyu.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <repositories>
         <repository>
             <id>snapshots</id>
