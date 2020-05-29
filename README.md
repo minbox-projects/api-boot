@@ -181,6 +181,18 @@ ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](htt
 
 请访问作者博客<a href="http://blog.yuqiyu.com" target="_blank">恒宇少年De成长之路</a>获取ApiBoot、MinBox开源组织内开源框架的最新的使用指南。
 
+
+
+## 推荐开源项目
+
+| 项目名称               | 作者     | 项目地址                                                     |
+| ---------------------- | -------- | ------------------------------------------------------------ |
+| 分布式链路日志开源框架 | 恒宇少年 | [https://gitee.com/minbox-projects/minbox-logging](https://gitee.com/minbox-projects/minbox-logging) |
+| SpringBoot_v2          | bdj      | [https://gitee.com/bdj/SpringBoot_v2](https://gitee.com/bdj/SpringBoot_v2) |
+| Pear Admin Layui       | 就眠仪式 | [https://gitee.com/Jmysy/Pear-Admin-Layui](https://gitee.com/Jmysy/Pear-Admin-Layui) |
+
+
+
 ## 联系作者
 
 作者公众号：
