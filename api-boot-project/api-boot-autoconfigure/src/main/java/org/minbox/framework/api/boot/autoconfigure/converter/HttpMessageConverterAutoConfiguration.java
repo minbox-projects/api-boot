@@ -55,7 +55,7 @@ import java.util.*;
 @ConditionalOnClass({FastJsonHttpMessageConverter.class, ConfigurationBuilder.class})
 @AutoConfigureBefore(HttpMessageConvertersAutoConfiguration.class)
 @ConditionalOnProperty(
-        prefix = "spring.http.converters",
+        prefix = "spring.mvc.converters",
         value = {"preferred-json-mapper"},
         havingValue = "fastJson",
         matchIfMissing = true
