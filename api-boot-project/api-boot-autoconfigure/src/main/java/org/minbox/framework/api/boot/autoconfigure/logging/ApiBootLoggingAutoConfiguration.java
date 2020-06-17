@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.autoconfigure.logging;
 import org.minbox.framework.logging.client.LoggingFactoryBean;
 import org.minbox.framework.logging.client.admin.discovery.LoggingAdminDiscovery;
 import org.minbox.framework.logging.client.admin.report.LoggingReportScheduled;
+import org.minbox.framework.logging.spring.context.annotation.client.EnableLoggingClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -52,7 +53,7 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnClass(LoggingFactoryBean.class)
+@ConditionalOnClass({LoggingFactoryBean.class, EnableLoggingClient.class})
 @EnableConfigurationProperties(ApiBootLoggingProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @ConditionalOnWebApplication
@@ -92,6 +93,7 @@ public class ApiBootLoggingAutoConfiguration {
                                                  ObjectProvider<List<LoggingFactoryBeanCustomizer>> customizerObjectProvider) {
         LoggingFactoryBean factoryBean = new LoggingFactoryBean();
         factoryBean.setIgnorePaths(apiBootLoggingProperties.getIgnorePaths());
+        factoryBean.setIgnoreHttpStatus(apiBootLoggingProperties.getIgnoreHttpStatus());
         factoryBean.setReportAway(apiBootLoggingProperties.getReportAway());
         factoryBean.setNumberOfRequestLog(apiBootLoggingProperties.getReportNumberOfRequestLog());
         factoryBean.setReportInitialDelaySecond(apiBootLoggingProperties.getReportInitialDelaySecond());

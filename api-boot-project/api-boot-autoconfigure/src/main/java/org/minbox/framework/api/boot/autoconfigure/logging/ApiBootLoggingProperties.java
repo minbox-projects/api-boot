@@ -21,6 +21,10 @@ import lombok.Data;
 import org.minbox.framework.logging.core.ReportAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingProperties.API_BOOT_LOGGING_PREFIX;
 
@@ -51,6 +55,12 @@ public class ApiBootLoggingProperties {
      * Ignore path array
      */
     private String[] ignorePaths;
+    /**
+     * Ignore the {@link HttpStatus} of not logging
+     */
+    private List<HttpStatus> ignoreHttpStatus = new ArrayList() {{
+        add(HttpStatus.NOT_FOUND);
+    }};
     /**
      * Format console log JSON
      */
