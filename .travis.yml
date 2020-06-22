@@ -1,5 +1,7 @@
 language: java
-jdk: openjdk8
+jdk:
+  - openjdk8
+  - openjdk11
 node_js: "10"
 before_script:
   - npm install
@@ -9,3 +11,9 @@ cache:
     - $HOME/.npm
     - node_modules
 install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    - jnyuqy@gmail.com
