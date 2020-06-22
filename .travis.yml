@@ -1,7 +1,6 @@
 language: java
 jdk:
   - openjdk8
-  - openjdk11
 node_js: "10"
 before_script:
   - npm install
