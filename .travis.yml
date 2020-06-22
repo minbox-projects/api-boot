@@ -12,15 +12,15 @@ env:
   global:
     - TRAVIS_WORKER_HARD_TIMEOUT="80m"
     - TRAVIS_WORKER_LOG_TIMEOUT="30m"
-    # Setting Maximum Log Length to 20MB
-    - TRAVIS_WORKER_MAX_LOG_LENGTH=40000000
+    # Setting Maximum Log Length to 100MB
+    - TRAVIS_WORKER_MAX_LOG_LENGTH=100000000
 before_script:
   - npm install
 # See details https://github.com/codecov/example-java-maven
 script:
   - mvn cobertura:cobertura
 # Extend the waiting time for executing commands to 30 minutes
-install: travis_wait 30 ./mvnw clean install -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true -Dmaven.test.skip=true
+install: mvn clean install -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true -Dmaven.test.skip=true
 # Report to codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
