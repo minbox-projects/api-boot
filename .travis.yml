@@ -2,7 +2,6 @@ language: java
 sudo: false # faster builds
 jdk:
   - openjdk8
-  - openjdk11
 node_js: "10"
 cache:
   directories:
@@ -11,12 +10,12 @@ cache:
     - node_modules
 before_script:
   - npm install
-# see details https://github.com/codecov/example-java-maven
+# See details https://github.com/codecov/example-java-maven
 script:
   - mvn cobertura:cobertura
-
+# Extend the waiting time for executing commands to 30 minutes
 install: travis_wait 30 ./mvnw clean install -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true -Dmaven.test.skip=true
-# report to codecov
+# Report to codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 notifications:
