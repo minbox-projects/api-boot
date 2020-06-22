@@ -1,3 +1,11 @@
+## 2.2.6.RELEASE更新日志（2020-6-22日发布）
+- 新增ApiBoot OAuth2的刷新令牌过期配置参数
+- 升级Spring/SpringBoot依赖版本为v5.2.7/v.2.3.1
+- 新增minbox-logging排除指定HttpStatus的参数配置
+- 修改SpringMvc配置首选json-mapper的方式
+- 升级flatten-maven-plugin插件版本
+- 删除默认集成SpringCloud的指定版本（防止与业务系统版本冲突）
+
 ## 2.2.5.RELEASE更新日志（2020-5-8日发布）
 - 集成ApiBoot Sequence分布式高效ID插件
 - 添加ApiBootSequenceContext用于生成String/Long类型的ID
