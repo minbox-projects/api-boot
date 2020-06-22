@@ -18,3 +18,5 @@ api:
     # 默认为：classpath:mappers/*.xml
     enhance:
       mapper-locations: classpath:mappers/*.xml
+      configuration:
+          jdbc-type-for-null: 'null'
