@@ -9,7 +9,7 @@ cache:
     - node_modules
 before_script:
   - npm install
-script: travis_wait 30 ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true
+script: travis_wait 30 ./mvnw install -DskipTests=true -Dgpg.skip -DskipNpmBuild=true
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 notifications:
