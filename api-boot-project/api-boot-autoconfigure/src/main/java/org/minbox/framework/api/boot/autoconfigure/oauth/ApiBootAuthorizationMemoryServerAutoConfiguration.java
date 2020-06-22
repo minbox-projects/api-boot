@@ -66,11 +66,12 @@ public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = clients.inMemory();
         apiBootOauthProperties.getClients().stream().forEach(client -> inMemoryClientDetailsServiceBuilder.withClient(client.getClientId())
-                .secret(passwordEncoder().encode(client.getClientSecret()))
-                .authorizedGrantTypes(client.getGrantTypes())
-                .scopes(client.getScopes())
-                .resourceIds(client.getResourceId())
-                .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds()));
+            .secret(passwordEncoder().encode(client.getClientSecret()))
+            .authorizedGrantTypes(client.getGrantTypes())
+            .scopes(client.getScopes())
+            .resourceIds(client.getResourceId())
+            .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds())
+            .refreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds()));
     }
 
     /**

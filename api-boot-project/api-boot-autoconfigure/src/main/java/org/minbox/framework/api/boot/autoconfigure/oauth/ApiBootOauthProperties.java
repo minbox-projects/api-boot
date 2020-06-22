@@ -29,13 +29,7 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 /**
  * 整合Oauth2 相关属性配置
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 16:52
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 @Configuration
@@ -125,9 +119,15 @@ public class ApiBootOauthProperties {
         private String[] resourceId = new String[]{"api"};
         /**
          * oauth2 access token validity seconds
-         * default value is 7200 second
+         * default value is 2 hours (7200 second)
          */
-        private int accessTokenValiditySeconds = 7200;
+        private int accessTokenValiditySeconds = 60 * 60 * 2;
+        /**
+         * oauth2 refresh token validity seconds
+         * <p>
+         * The default value is 30 days（2592000 seconds）
+         */
+        private int refreshTokenValiditySeconds = 60 * 60 * 24 * 30;
     }
 
     /**

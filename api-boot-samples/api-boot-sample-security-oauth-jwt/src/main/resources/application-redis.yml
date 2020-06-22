@@ -19,5 +19,7 @@ api:
       clients:
         - client-id: admin
           client-secret: admin_secret
+          # 自定义客户端获取refresh token的有效期，默认为30天
+          refresh-token-validity-seconds: 60 * 60 * 24
         - client-id: platform
           client-secret: platform_secret

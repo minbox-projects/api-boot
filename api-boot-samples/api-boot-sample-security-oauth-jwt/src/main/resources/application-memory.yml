@@ -16,6 +16,8 @@ api:
           client-secret: 123456
           # 自定义客户端获取token的有效期
           access-token-validity-seconds: 1000
+          # 自定义客户端获取refresh token的有效期，默认为30天
+          refresh-token-validity-seconds: 60 * 60 * 24
         # 客户端admin基本配置
         - client-id: admin
           client-secret: 123456
