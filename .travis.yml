@@ -8,6 +8,10 @@ cache:
     - $HOME/.m2
     - $HOME/.npm
     - node_modules
+env:
+  global:
+    # Setting Maximum Log Length to 20MB
+    - TRAVIS_WORKER_MAX_LOG_LENGTH=20000000
 before_script:
   - npm install
 # See details https://github.com/codecov/example-java-maven
