@@ -24,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <flatten-maven-plugin.version>1.2.3</flatten-maven-plugin.version>
+        <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
     </properties>
     <description>
         ApiBoot是一款基于SpringBoot1.x、2.x的接口服务集成基础框架，
@@ -67,6 +68,18 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${cobertura-maven-plugin.version}</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                    <check />
+                </configuration>
             </plugin>
         </plugins>
     </build>
