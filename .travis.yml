@@ -2,18 +2,16 @@ language: java
 jdk:
   - openjdk8
 node_js: "10"
-before_script:
-  - npm install
-script: ./travis.sh
 cache:
   directories:
     - $HOME/.m2
     - $HOME/.npm
     - node_modules
-install: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true
+before_script:
+  - npm install
+script: travis_wait 30 ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
 notifications:
   email:
     - jnyuqy@gmail.com
