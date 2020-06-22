@@ -3,6 +3,9 @@
 </p>
 <p align="center">
     <img src="https://www.travis-ci.org/hengboy/api-boot.svg?branch=master" alt="build">
+    <a href="https://codecov.io/gh/minbox-projects/api-boot">
+        <img src="https://codecov.io/gh/minbox-projects/api-boot/branch/master/graph/badge.svg" alt="codecov"/>
+    </a>
     <a href="https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
         <img src="https://badges.gitter.im/api-boot/community.svg" alt="Gitter"/>
     </a>
@@ -22,6 +25,7 @@
         <img src="https://img.shields.io/badge/SpringBoot-2.0+-green.svg" alt="SpringBoot Version">
     </a>
 </p>
+
 
 ApiBoot是接口服务的落地解决方案，提供了一系列开箱即用的组件，通过封装来简化主流第三方框架的集成，从而提高开发者开发效率、学习成本、降低入门门槛，真正的实现开箱即用！！！
 
