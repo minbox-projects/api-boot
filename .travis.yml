@@ -10,8 +10,10 @@ cache:
     - node_modules
 env:
   global:
+    - TRAVIS_WORKER_HARD_TIMEOUT="80m"
+    - TRAVIS_WORKER_LOG_TIMEOUT="30m"
     # Setting Maximum Log Length to 20MB
-    - TRAVIS_WORKER_MAX_LOG_LENGTH=20000000
+    - TRAVIS_WORKER_MAX_LOG_LENGTH=40000000
 before_script:
   - npm install
 # See details https://github.com/codecov/example-java-maven
