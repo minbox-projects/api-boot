@@ -8,6 +8,7 @@ cache:
     - $HOME/.npm
     - node_modules
 before_script:
+  - npm install codecov --save-dev
   - npm install
 script: true
 install: travis_wait 30 ./mvnw clean install -Dmaven.javadoc.skip=true -Dgpg.skip=true -DskipNpmBuild=true -Dmaven.test.skip=true
