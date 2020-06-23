@@ -43,13 +43,7 @@ import java.util.*;
  * 配置fastjson作为数据返回转换
  * 如果没有配置spring.http.converters.preferred-json-mapper参数则使用该配置进行转换数据返回
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 17:00
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass({FastJsonHttpMessageConverter.class, ConfigurationBuilder.class})
