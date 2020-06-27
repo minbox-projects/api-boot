@@ -40,13 +40,7 @@ import javax.sql.DataSource;
 /**
  * ApiBoot Logging Admin Configuration
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-07-19 10:38
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass(LoggingAdminFactoryBean.class)
