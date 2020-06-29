@@ -35,13 +35,7 @@ import static org.minbox.framework.api.boot.autoconfigure.mail.ApiBootMailProper
 /**
  * ApiBoot Mail Auto Configuration
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-06-19 18:41
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass(ApiBootAliYunMailService.class)
