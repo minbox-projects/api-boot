@@ -45,13 +45,9 @@ import java.util.List;
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-07-13 09:35
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * Redis authorization server
+ *
+ * @author 恒宇少年
  */
 @Configuration
 @EnableConfigurationProperties(ApiBootOauthProperties.class)
@@ -97,9 +93,9 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
     }
 
     /**
-     * Redis Token Store
+     * Configure Redis {@link TokenStore}
      *
-     * @return TokenStore
+     * @return {@link RedisTokenStore} instance
      */
     @Bean
     public TokenStore redisTokenStore() {

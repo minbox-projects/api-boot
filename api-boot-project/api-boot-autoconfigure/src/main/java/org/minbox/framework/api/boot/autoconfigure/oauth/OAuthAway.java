@@ -22,26 +22,20 @@ import lombok.Getter;
 /**
  * ApiBoot OAuth Away
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-07-15 11:19
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Getter
 public enum OAuthAway {
     /**
-     * 内存方式
+     * Store tokens in memory
      */
     memory,
     /**
-     * jdbc方式
+     * Store tokens in jdbc
      */
     jdbc,
     /**
-     * redis方式
+     * Store tokens in redis
      */
     redis
 }

@@ -39,15 +39,9 @@ import java.util.List;
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
 
 /**
- * ApiBoot 授权服务器Jdbc方式实现
+ * Jdbc authorization server
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 16:55
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @EnableConfigurationProperties(ApiBootOauthProperties.class)
@@ -70,9 +64,9 @@ public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuth
     }
 
     /**
-     * 配置内存方式令牌存储
+     * Configure Jdbc {@link TokenStore}
      *
-     * @return TokenStore
+     * @return {@link JdbcTokenStore} instance
      */
     @Bean
     public TokenStore jdbcTokenStore() {

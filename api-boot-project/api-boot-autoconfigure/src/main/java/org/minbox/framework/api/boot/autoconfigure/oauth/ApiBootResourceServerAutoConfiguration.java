@@ -27,28 +27,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
- * ApiBoot 接口资源服务器配置
+ * Resource server configuration
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 16:49
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass({ResourceServerConfigurerAdapter.class, SecurityUser.class})
 @EnableConfigurationProperties({ApiBootSecurityProperties.class, ApiBootOauthProperties.class})
 @EnableResourceServer
 public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
-    /**
-     * Spring Security Properties
-     */
+
     private ApiBootSecurityProperties apiBootSecurityProperties;
-    /**
-     * Oauth2 Properties
-     */
     private ApiBootOauthProperties apiBootOauthProperties;
 
     public ApiBootResourceServerAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties, ApiBootOauthProperties apiBootOauthProperties) {
@@ -57,19 +46,19 @@ public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfig
     }
 
     /**
-     * 配置开启对指定前缀路径的认证
+     * Configure resource server auth prefix
      *
-     * @param http http安全构建对象
-     * @throws Exception 异常信息
+     * @param http {@link HttpSecurity}
+     * @throws Exception The exception instance
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .requestMatchers()
-                .antMatchers(apiBootSecurityProperties.getAuthPrefix());
+            .anyRequest()
+            .authenticated()
+            .and()
+            .requestMatchers()
+            .antMatchers(apiBootSecurityProperties.getAuthPrefix());
     }
 
     @Override
