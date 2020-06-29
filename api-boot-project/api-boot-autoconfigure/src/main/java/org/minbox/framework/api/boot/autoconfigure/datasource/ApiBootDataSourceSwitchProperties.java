@@ -12,13 +12,11 @@ import java.util.Map;
 import static org.minbox.framework.api.boot.autoconfigure.datasource.ApiBootDataSourceSwitchProperties.API_BOOT_DATASOURCE_SWITCH_PREFIX;
 
 /**
- * @author：恒宇少年 - 于起宇
+ * ApiBoot DataSource Switch Properties
  * <p>
- * DateTime：2019-04-02 09:48
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * The property configuration class required by the data source switching component
+ *
+ * @author 恒宇少年
  */
 @Data
 @Configuration
