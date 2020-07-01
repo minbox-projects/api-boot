@@ -1,31 +1,16 @@
-<p align="center">
-<img src="http://apiboot.minbox.io/img/apiboot-colorful.png" height="200"/>
-</p>
-<p align="center">
-    <img src="https://www.travis-ci.org/hengboy/api-boot.svg?branch=master" alt="build">
-    <a href="https://codecov.io/gh/minbox-projects/api-boot">
-        <img src="https://codecov.io/gh/minbox-projects/api-boot/branch/master/graph/badge.svg" alt="codecov"/>
-    </a>
-    <a href="https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
-        <img src="https://badges.gitter.im/api-boot/community.svg" alt="Gitter"/>
-    </a>
-    <a href="http://apiboot.minbox.io">
-        <img src="https://img.shields.io/badge/link-官方文档-green.svg?style=flat-square" alt="ApiBoot官网">
-    </a>
-    <a href="https://search.maven.org/search?q=g:org.minbox.framework">
-        <img src="https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central" alt="Maven Center">
-    </a>
-    <a href="https://github.com/weibocom/motan/blob/master/LICENSE">
-        <img src="https://img.shields.io/badge/License-Apache%202.0-green.svg" alt="Apache License">
-    </a>
-    <a href="#">
-        <img src="https://img.shields.io/badge/JDK-1.8+-green.svg" alt="JDK Version">
-    </a>
-      <a href="#">
-        <img src="https://img.shields.io/badge/SpringBoot-2.0+-green.svg" alt="SpringBoot Version">
-    </a>
-</p>
+<img src="http://apiboot.minbox.io/img/apiboot-colorful.png" align="left" height="100" width="426"/>
 
+# ApiBoot：为组件化构建Api服务而生
+
+[![](https://www.travis-ci.org/hengboy/api-boot.svg?branch=master)](https://www.travis-ci.org/github/minbox-projects/api-boot)
+[![](https://codecov.io/gh/minbox-projects/api-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/minbox-projects/api-boot)
+[![](https://badges.gitter.im/api-boot/community.svg)](https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![](https://img.shields.io/badge/link-官方文档-green.svg?style=flat-square)](https://apiboot.minbox.io)
+[![](https://img.shields.io/maven-central/v/org.minbox.framework/api-boot.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:org.minbox.framework)
+[![](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://github.com/weibocom/motan/blob/master/LICENSE)
+![](https://img.shields.io/badge/JDK-1.8+-green.svg)
+
+## 什么是ApiBoot？
 
 ApiBoot是接口服务的落地解决方案，提供了一系列开箱即用的组件，通过封装来简化主流第三方框架的集成，从而提高开发者开发效率、学习成本、降低入门门槛，真正的实现开箱即用！！！
 
