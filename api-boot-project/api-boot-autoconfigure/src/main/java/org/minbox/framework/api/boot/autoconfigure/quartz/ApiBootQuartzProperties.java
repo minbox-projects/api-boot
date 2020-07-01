@@ -15,22 +15,16 @@ import java.util.Map;
 import static org.minbox.framework.api.boot.autoconfigure.quartz.ApiBootQuartzProperties.API_BOOT_QUARTZ_PREFIX;
 
 /**
- * ApiBoot Quartz 配置类
+ * ApiBoot Quartz configuration attribute class
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-27 15:32
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = API_BOOT_QUARTZ_PREFIX)
 public class ApiBootQuartzProperties {
     /**
-     * quartz 配置前缀
+     * properties config prefix
      */
     public static final String API_BOOT_QUARTZ_PREFIX = "api.boot.quartz";
     /**

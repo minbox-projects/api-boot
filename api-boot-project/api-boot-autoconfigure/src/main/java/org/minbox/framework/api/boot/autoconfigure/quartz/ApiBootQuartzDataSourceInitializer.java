@@ -9,15 +9,9 @@ import org.springframework.util.Assert;
 import javax.sql.DataSource;
 
 /**
- * ApiBoot Quartz 数据库初始化后逻辑
+ * {@link AbstractDataSourceInitializer} when using quartz in jdbc mode
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-27 17:12
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 public class ApiBootQuartzDataSourceInitializer extends AbstractDataSourceInitializer {
     private final ApiBootQuartzProperties properties;

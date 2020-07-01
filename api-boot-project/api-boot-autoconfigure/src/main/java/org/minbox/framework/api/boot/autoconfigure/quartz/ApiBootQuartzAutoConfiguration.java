@@ -37,15 +37,12 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * ApiBoot Quartz 自动化配置类
- *
- * @author：恒宇少年 - 于起宇
+ * ApiBoot Quartz automation configuration class
  * <p>
- * DateTime：2019-03-27 15:24
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * This class is executed before{@link QuartzAutoConfiguration}
+ * The main purpose is to create {@link SchedulerFactoryBean} objects in advance
+ *
+ * @author 恒宇少年
  */
 @Configuration
 @EnableConfigurationProperties(ApiBootQuartzProperties.class)
@@ -71,10 +68,10 @@ public class ApiBootQuartzAutoConfiguration {
     }
 
     /**
-     * 实例化ApiBoot Quartz Service
+     * Service interface for registering Quartz tasks
      *
      * @param scheduler Quartz Scheduler Instance
-     * @return ApiBootQuartzService
+     * @return The {@link ApiBootQuartzService} implement class instance
      */
     @Bean
     @ConditionalOnMissingBean(ApiBootQuartzService.class)
