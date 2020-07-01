@@ -1,4 +1,4 @@
-<img src="http://apiboot.minbox.io/img/apiboot-colorful.png" align="left" height="100" width="426"/>
+<img src="http://apiboot.minbox.io/img/apiboot-colorful.png" height="100" width="426"/>
 
 # ApiBoot：为组件化构建Api服务而生
 
