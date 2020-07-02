@@ -1,4 +1,4 @@
-<img src="http://apiboot.minbox.io/img/apiboot-colorful.png" height="100" width="426"/>
+<img src="https://apiboot.minbox.org/img/apiboot-colorful.png" height="100" width="426"/>
 
 # ApiBoot: Born to build Api services as components
 
@@ -34,7 +34,7 @@ Vision:
 
 ## Installation & Getting Started
 
-Please check the use of components<a href="http://apiboot.minbox.io" target="_blank">Official Reference Document</a>，Get started please visit<a href="http://apiboot.minbox.io/zh-cn/docs/quick-start.html" target="_blank">The first ApiBoot application</a>
+Please check the use of components<a href="https://apiboot.minbox.org" target="_blank">Official Reference Document</a>，Get started please visit<a href="https://apiboot.minbox.org/zh-cn/docs/quick-start.html" target="_blank">The first ApiBoot application</a>
 
 If you are using Maven to build the project, you need to add the version dependency of ApiBoot to your pom.xml file as follows:
 
@@ -52,7 +52,7 @@ If you are using Maven to build the project, you need to add the version depende
 </dependencyManagement>
 ```
 
-> Note：**lastVersion**Need to be replaced with the latest ApiBoot version，Please visit<a href="http://apiboot.minbox.io/zh-cn/docs/version-rely.html" target="_blank">Version dependencies- 2. Get the latest ApiBoot dependencies</a>
+> Note：**lastVersion**Need to be replaced with the latest ApiBoot version，Please visit<a href="https://apiboot.minbox.org/zh-cn/docs/version-rely.html" target="_blank">Version dependencies- 2. Get the latest ApiBoot dependencies</a>
 
 After the version dependency is added, we can then add the required ApiBoot components in the project. The following is an example of using the distributed link component minbox-logging:
 
@@ -66,13 +66,13 @@ After the version dependency is added, we can then add the required ApiBoot comp
 </dependencies>
 ```
 
-After adding the components, we can find the corresponding component documentation according to <a href="http://apiboot.minbox.io" target="_blank">official reference document</a> to configure and use.
+After adding the components, we can find the corresponding component documentation according to <a href="https://apiboot.minbox.org" target="_blank">official reference document</a> to configure and use.
 
 ## Get help
 
 If you encounter problems while using ApiBoot, you can get help through the following channels!
 
-- Check the <a href="http://apiboot.minbox.io" target="_blank">official reference document</a>, and every detail used will be reflected in the document.
+- Check the <a href="https://apiboot.minbox.org" target="_blank">official reference document</a>, and every detail used will be reflected in the document.
 
 ## Create Issues
 
