@@ -45,5 +45,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-bean-validators</artifactId>
         </dependency>
+        <!--After SpringBoot 2.3.x version, need to add this dependency-->
+        <!--Solve https://github.com/minbox-projects/api-boot/issues/20-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
     </dependencies>
 </project>
