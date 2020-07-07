@@ -32,7 +32,7 @@ import java.util.List;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface SystemUserMapper extends EnhanceMapper<SystemUser, String> {
+public interface SystemUserMapper extends EnhanceMapper<SystemUser> {
     /**
      * 根据userName查询单条记录
      *

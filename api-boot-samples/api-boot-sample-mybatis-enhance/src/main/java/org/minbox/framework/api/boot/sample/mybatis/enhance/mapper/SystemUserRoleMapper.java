@@ -29,5 +29,5 @@ import org.minbox.framework.api.boot.sample.mybatis.enhance.entity.SystemUserRol
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface SystemUserRoleMapper extends EnhanceMapper<SystemUserRole, Integer> {
+public interface SystemUserRoleMapper extends EnhanceMapper<SystemUserRole> {
 }
