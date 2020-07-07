@@ -44,12 +44,14 @@
         <javax-annotation-api.version>1.3.2</javax-annotation-api.version>
         <!--Nacos Config-->
         <nacos.config.version>0.2.7</nacos.config.version>
+        <aliyun-java-sdk-dm.version>3.3.1</aliyun-java-sdk-dm.version>
+        <mongo-driver-sync.version>4.0.4</mongo-driver-sync.version>
+        <spring-data-mongodb.version>3.0.1.RELEASE</spring-data-mongodb.version>
+        <minbox-mongo-client-settings.version>1.0.0.RELEASE</minbox-mongo-client-settings.version>
 
         <!--Plugin Versions-->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
-
-        <aliyun-java-sdk-dm.version>3.3.1</aliyun-java-sdk-dm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -459,6 +461,27 @@
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
                 <version>${javax-annotation-api.version}</version>
+            </dependency>
+            <!--mongo-->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${mongo-driver-sync.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>${spring-data-mongodb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>minbox-mongo-client-settings</artifactId>
+                <version>${minbox-mongo-client-settings.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-mongo-client-settings</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
