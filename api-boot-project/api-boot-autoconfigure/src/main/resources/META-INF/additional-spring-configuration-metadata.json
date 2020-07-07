@@ -1,0 +1,112 @@
+{
+    "properties": [
+        {
+            "name": "api.boot.mongo.settings.socket.connect-timeout-milli-seconds",
+            "description": "Socket connect timeout milliseconds.",
+            "defaultValue": 10000
+        },
+        {
+            "name": "api.boot.mongo.settings.socket.read-timeout-milli-seconds",
+            "description": "Socket read timeout milliseconds.",
+            "defaultValue": 10000
+        },
+        {
+            "name": "api.boot.mongo.settings.socket.receive-buffer-size",
+            "description": "Socket receive buffer size."
+        },
+        {
+            "name": "api.boot.mongo.settings.socket.send-buffer-size",
+            "description": "Socket send buffer size."
+        },
+        {
+            "name": "api.boot.mongo.settings.heartbeat-socket.connect-timeout-milli-seconds",
+            "description": "Heartbeat socket connect timeout milliseconds.",
+            "defaultValue": 10000
+        },
+        {
+            "name": "api.boot.mongo.settings.heartbeat-socket.read-timeout-milli-seconds",
+            "description": "Heartbeat socket read timeout milliseconds.",
+            "defaultValue": 10000
+        },
+        {
+            "name": "api.boot.mongo.settings.heartbeat-socket.receive-buffer-size",
+            "description": "Heartbeat socket Receive buffer size."
+        },
+        {
+            "name": "api.boot.mongo.settings.heartbeat-socket.send-buffer-size",
+            "description": "Heartbeat socket send buffer size."
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.max-size",
+            "description": "The maximum number of connections allowed.",
+            "defaultValue": 100
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.min-size",
+            "description": "The minimum number of connections."
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.max-wait-time-milli-seconds",
+            "description": "The maximum time that a thread may wait for a connection to become available.",
+            "defaultValue": 120000
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.max-connection-life-time-milli-seconds",
+            "description": "The maximum time a pooled connection can live for."
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.max-connection-idle-time-milli-seconds",
+            "description": "The maximum time a pooled connection can live for."
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.maintenance-initial-delay-milli-seconds",
+            "description": "The period of time to wait before running the first maintenance job on the connection pool."
+        },
+        {
+            "name": "api.boot.mongo.settings.connection-pool.maintenance-frequency-milli-seconds",
+            "description": "The time period between runs of the maintenance job.",
+            "defaultValue": 3600000
+        },
+        {
+            "name": "api.boot.mongo.settings.server.heartbeat-frequency-milli-seconds",
+            "description": "Sets the frequency that the cluster monitor attempts to reach each server.",
+            "defaultValue": 10000
+        },
+        {
+            "name": "api.boot.mongo.settings.server.min-heartbeat-frequency-milli-seconds",
+            "description": "Sets the minimum heartbeat frequency.",
+            "defaultValue": 500
+        },
+        {
+            "name": "api.boot.mongo.settings.cluster.mode",
+            "description": "Sets the mode for this cluster."
+        },
+        {
+            "name": "api.boot.mongo.settings.cluster.required-cluster-type",
+            "description": "Sets the required cluster type for the cluster.",
+            "defaultValue": "UNKNOWN"
+        },
+        {
+            "name": "api.boot.mongo.settings.cluster.required-replica-set-name",
+            "description": "Sets the required replica set name for the cluster."
+        },
+        {
+            "name": "api.boot.mongo.settings.cluster.local-threshold-milli-seconds",
+            "description": "Sets the local threshold.",
+            "defaultValue": 15
+        },
+        {
+            "name": "api.boot.mongo.settings.cluster.server-selection-timeout-milli-seconds",
+            "description": "Sets the timeout to apply when selecting a server.",
+            "defaultValue": 30000
+        },
+        {
+            "name": "api.boot.mongo.settings.ssl.enabled",
+            "description": "Define whether SSL should be enabled."
+        },
+        {
+            "name": "api.boot.mongo.settings.ssl.invalid-host-name-allowed",
+            "description": "Define whether invalid host names should be allowed."
+        }
+    ]
+}
