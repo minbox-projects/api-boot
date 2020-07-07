@@ -79,6 +79,7 @@ public class ApiBootLoggingAutoConfiguration {
      * {@link LoggingFactoryBean}
      *
      * @param loggingAdminDiscoveryObjectProvider Logging Admin Discovery Instance Provider
+     * @param customizerObjectProvider LoggingFactory Bean Customizer
      * @return LoggingFactoryBean
      */
     @Bean
