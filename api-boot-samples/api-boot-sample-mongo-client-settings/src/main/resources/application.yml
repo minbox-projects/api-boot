@@ -5,6 +5,7 @@ spring:
 api:
     boot:
         mongo:
+            # ApiBoot Mongo提供的扩展参数
             settings:
                 connection-pool:
                     max-size: 200
@@ -19,10 +20,10 @@ api:
                     heartbeat-frequency-milli-seconds: 20000
                 cluster:
                     local-threshold-milli-seconds: 20
-                    required-cluster-type: unknown
                     server-selection-timeout-milli-seconds: 50000
-                    required-replica-set-name: xxx
                     mode: single
+                    required-cluster-type: unknown
+                    required-replica-set-name: xxx
                 #ssl:
                 #    enabled: true
                 #    invalid-host-name-allowed: true
