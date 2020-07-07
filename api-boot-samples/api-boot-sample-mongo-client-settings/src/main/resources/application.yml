@@ -1,0 +1,38 @@
+spring:
+    data:
+        mongodb:
+            uri: mongodb://username:password@xx.xx.xx.x:27017/db?authSource=admin&connectTimeoutMS=30000&socketTimeoutMS=30000&serverSelectionTimeoutMS=30000
+api:
+    boot:
+        mongo:
+            settings:
+                connection-pool:
+                    max-size: 200
+                    min-size: 10
+                    max-wait-time-milli-seconds: 120000
+                    max-connection-life-time-milli-seconds: 10000
+                    max-connection-idle-time-milli-seconds: 10000
+                    maintenance-frequency-milli-seconds: 360000
+                    maintenance-initial-delay-milli-seconds: 10000
+                server:
+                    min-heartbeat-frequency-milli-seconds: 600
+                    heartbeat-frequency-milli-seconds: 20000
+                cluster:
+                    local-threshold-milli-seconds: 20
+                    required-cluster-type: unknown
+                    server-selection-timeout-milli-seconds: 50000
+                    required-replica-set-name: xxx
+                    mode: single
+                #ssl:
+                #    enabled: true
+                #    invalid-host-name-allowed: true
+                socket:
+                    connect-timeout-milli-seconds: 20000
+                    read-timeout-milli-seconds: 10000
+                    receive-buffer-size: 1
+                    send-buffer-size: 1
+                heartbeat-socket:
+                    connect-timeout-milli-seconds: 20000
+                    read-timeout-milli-seconds: 10000
+                    receive-buffer-size: 1
+                    send-buffer-size: 1
