@@ -42,5 +42,6 @@
         <module>api-boot-sample-logging-admin</module>
         <module>api-boot-sample-sequence</module>
         <module>api-boot-sample-mongo-client-settings</module>
+        <module>api-boot-sample-tools</module>
     </modules>
 </project>
