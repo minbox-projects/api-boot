@@ -6,4 +6,4 @@
          |
          '
 :: Based On SpringBoot Version : ${spring-boot.formatted-version} ::
-:: ApiBoot Version : v2.2.7.RELEASE ::
+:: ApiBoot Version : ${api.boot.version} ::
