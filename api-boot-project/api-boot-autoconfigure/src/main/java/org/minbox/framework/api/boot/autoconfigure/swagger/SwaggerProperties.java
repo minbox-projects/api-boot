@@ -42,7 +42,7 @@ public class SwaggerProperties {
      * <p>
      * Same as ApiBoot version
      */
-    private String version = "2.2.7.RELEASE";
+    private String version = "v1.0";
     /**
      * Document copyright owner
      */
@@ -50,7 +50,7 @@ public class SwaggerProperties {
     /**
      * Document copyright path
      */
-    private String licenseUrl = "https://github.com/hengboy/api-boot";
+    private String licenseUrl = "https://github.com/minbox-projects/api-boot";
     /**
      * Document writing contact
      */
@@ -72,7 +72,7 @@ public class SwaggerProperties {
         /**
          * Contact website
          */
-        private String website = "http://blog.yuqiyu.com";
+        private String website = "https://blog.yuqiyu.com";
         /**
          * Contact mail address
          */
