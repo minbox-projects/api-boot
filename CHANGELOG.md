@@ -1,4 +1,11 @@
+## 2.2.7.RELEASE更新日志（2020-7-7日发布）
+
+- 新增mongo-client-settings组件（扩展SpringBoot Mongo配置）
+- 修复Swagger组件使用spring-boot-starter-validation（SpringBoot v2.3.x+）
+- 更新部分源码注释内容
+
 ## 2.2.6.RELEASE更新日志（2020-6-22日发布）
+
 - 新增ApiBoot OAuth2的刷新令牌过期配置参数
 - 升级Spring/SpringBoot依赖版本为v5.2.7/v.2.3.1
 - 新增minbox-logging排除指定HttpStatus的参数配置
