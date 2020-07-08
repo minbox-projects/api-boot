@@ -19,5 +19,6 @@
         <module>api-boot-common</module>
         <module>api-boot-plugins</module>
         <module>api-boot-maven-plugins</module>
+        <module>api-boot-tools</module>
     </modules>
 </project>

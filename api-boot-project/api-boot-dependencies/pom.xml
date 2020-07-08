@@ -483,6 +483,12 @@
                 <artifactId>api-boot-starter-mongo-client-settings</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!--apiboot tools-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-tools</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

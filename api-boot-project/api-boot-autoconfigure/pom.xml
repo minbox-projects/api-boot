@@ -253,6 +253,12 @@
             <artifactId>minbox-mongo-client-settings</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!--apiboot tools-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-tools</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <resources>
