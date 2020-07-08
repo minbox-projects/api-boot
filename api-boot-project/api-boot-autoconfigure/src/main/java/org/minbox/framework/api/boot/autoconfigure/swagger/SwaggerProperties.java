@@ -1,7 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.swagger;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,7 +42,7 @@ public class SwaggerProperties {
      * <p>
      * Same as ApiBoot version
      */
-    private String version = "2.2.7-SNAPSHOT";
+    private String version = "2.2.7.RELEASE";
     /**
      * Document copyright owner
      */
