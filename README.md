@@ -104,5 +104,5 @@ ApiBoot is written under the Apache2 open source license。
 
 ## OpenSource Support
 
-<img src="https://apiboot.minbox.org/img/jetbrains.png" width="100" heith="100"/>
+<a href="https://www.jetbrains.com/?from=api-boot"><img src="https://apiboot.minbox.org/img/jetbrains.png" width="100" heith="100"/></a>
 

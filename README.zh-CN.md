@@ -198,4 +198,4 @@ ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](htt
 ApiBoot采用Apache2开源许可进行编写。
 
 ## 开源支持
-<img src="https://apiboot.minbox.org/img/jetbrains.png" width="100" heith="100"/>
+<a href="https://www.jetbrains.com/?from=api-boot"><img src="https://apiboot.minbox.org/img/jetbrains.png" width="100" heith="100"/></a>
