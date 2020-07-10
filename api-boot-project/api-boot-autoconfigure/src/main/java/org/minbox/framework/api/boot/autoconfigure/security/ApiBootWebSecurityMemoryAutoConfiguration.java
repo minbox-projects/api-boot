@@ -27,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -38,15 +39,9 @@ import java.util.List;
 import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
 
 /**
- * ApiBoot SpringSecurity自动化封装配置内存的实现
+ * Automatic configuration to authenticate users using memory
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 15:46
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @EnableWebSecurity
@@ -65,9 +60,17 @@ public class ApiBootWebSecurityMemoryAutoConfiguration extends ApiBootWebSecurit
         InMemoryUserDetailsManager memoryUserDetails = new InMemoryUserDetailsManager();
         List<SecurityUser> users = apiBootSecurityProperties.getUsers();
         if (!ObjectUtils.isEmpty(users)) {
-            for (SecurityUser securityUser : users) {
-                memoryUserDetails.createUser(User.builder().username(securityUser.getUsername()).password(passwordEncoder().encode(securityUser.getPassword())).roles(securityUser.getRoles()).build());
-            }
+            return memoryUserDetails;
+        }
+        for (SecurityUser securityUser : users) {
+            String encoderPassword = passwordEncoder().encode(securityUser.getPassword());
+            UserDetails userDetails =
+                User.builder()
+                    .username(securityUser.getUsername())
+                    .password(encoderPassword)
+                    .roles(securityUser.getRoles())
+                    .build();
+            memoryUserDetails.createUser(userDetails);
         }
         return memoryUserDetails;
     }

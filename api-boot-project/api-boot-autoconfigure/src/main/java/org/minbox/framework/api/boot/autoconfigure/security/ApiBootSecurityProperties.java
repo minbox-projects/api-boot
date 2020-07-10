@@ -20,6 +20,7 @@ import lombok.Data;
 import org.minbox.framework.api.boot.plugin.security.SecurityUser;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,70 +28,73 @@ import java.util.List;
 import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
 
 /**
- * 整合Spring Security 相关属性配置
+ * Integrate the properties of SpringSecurity
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 15:26
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = API_BOOT_SECURITY_PREFIX)
 public class ApiBootSecurityProperties {
     /**
-     * 安全配置前缀
+     * security prefix
      */
     public static final String API_BOOT_SECURITY_PREFIX = "api.boot.security";
     /**
-     * 默认的排除路径列表
+     * Default set of excluded urls
      */
     public static final String[] DEFAULT_IGNORE_URLS = new String[]{
-            "/v2/api-docs",
-            "/swagger-ui.html",
-            "/swagger-resources/configuration/security",
-            "/META-INF/resources/webjars/**",
-            "/webjars/**",
-            "/swagger-resources",
-            "/swagger-resources/configuration/ui",
-            "/actuator/**"
+        "/v2/api-docs",
+        "/swagger-ui.html",
+        "/swagger-resources/configuration/security",
+        "/META-INF/resources/webjars/**",
+        "/webjars/**",
+        "/swagger-resources",
+        "/swagger-resources/configuration/ui",
+        "/actuator/**"
     };
     /**
-     * 认证接口地址的前缀
-     * 默认只拦截/api/**下的接口地址
+     * Authentication address prefix
+     * <p>
+     * By default, only the interface address under "/api/**" is intercepted
      */
     private String[] authPrefix = new String[]{"/api/**"};
     /**
-     * 认证用户存储方式，默认为内存方式
+     * Authentication user storage method
+     * <p>
+     * By default, use {@link SecurityAway#memory} away
      *
      * @see SecurityAway
      */
     private SecurityAway away = SecurityAway.memory;
     /**
-     * 配置内存方式的用户列表
-     * key：用户名
-     * value：密码
+     * List of authenticated users
+     * <p>
+     * This property will only take effect if you use {@link SecurityAway#memory}
      */
     private List<SecurityUser> users = new ArrayList<>();
     /**
-     * 排除路径列表，默认排除swagger2以及actuator路径
+     * Exclude permissions blocked path
+     * <p>
+     * By default, use {@link #DEFAULT_IGNORE_URLS}
      */
     private String[] ignoringUrls;
     /**
-     * 是否启用默认的用户信息存储委托
-     * 如果away=jdbc时，该配置会自动读取api_boot_user_info表内的用户数据
-     * 如果配置该值为false，需要实现ApiBootStoreDelegate接口来完成自定义读取用户数据方法
+     * Whether to enable the default user information storage delegation
+     * <p>
+     * When using {@link SecurityAway#jdbc} to store authenticated users,
+     * the data in the "api_boot_user_info" table will be read by default for authentication
+     * <p>
+     * If the value is set to false,
+     * you need to implement the {@link ApiBootStoreDelegate} interface to complete the custom method of reading user data
      */
     private boolean enableDefaultStoreDelegate = true;
     /**
-     * 禁用Http Basic
+     * Whether to disable http basic authentication
      */
     private boolean disableHttpBasic = true;
     /**
-     * 禁用CSRF
+     * Whether to disable csrf
      */
     private boolean disableCsrf = true;
 }

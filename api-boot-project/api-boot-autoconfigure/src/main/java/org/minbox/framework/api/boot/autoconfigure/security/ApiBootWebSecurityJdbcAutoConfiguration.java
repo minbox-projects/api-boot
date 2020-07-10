@@ -40,15 +40,9 @@ import javax.sql.DataSource;
 import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
 
 /**
- * ApiBoot SpringSecurity自动化封装配置Jdbc的实现
+ * Automatic configuration to authenticate users using jdbc
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-14 15:58
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @EnableWebSecurity
@@ -71,10 +65,10 @@ public class ApiBootWebSecurityJdbcAutoConfiguration extends ApiBootWebSecurityA
     }
 
     /**
-     * 开启使用ApiBoot默认自带的用户信息表
+     * Use the default user authentication storage delegate class
      *
      * @param dataSource DataSource
-     * @return ApiBootStoreDelegate
+     * @return The default {@link ApiBootStoreDelegate}
      */
     @Bean
     @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "enable-default-store-delegate", havingValue = "true", matchIfMissing = true)
