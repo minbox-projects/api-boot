@@ -2,7 +2,7 @@
 
 # ApiBoot：为组件化构建Api服务而生
 
-[![](https://www.travis-ci.org/hengboy/api-boot.svg?branch=master)](https://www.travis-ci.org/github/minbox-projects/api-boot)
+[![](https://www.travis-ci.org/minbox-projects/api-boot.svg?branch=master)](https://www.travis-ci.org/github/minbox-projects/api-boot)
 [![](https://codecov.io/gh/minbox-projects/api-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/minbox-projects/api-boot)
 [![](https://badges.gitter.im/api-boot/community.svg)](https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![](https://img.shields.io/badge/link-官方文档-green.svg?style=flat-square)](https://apiboot.minbox.io)
