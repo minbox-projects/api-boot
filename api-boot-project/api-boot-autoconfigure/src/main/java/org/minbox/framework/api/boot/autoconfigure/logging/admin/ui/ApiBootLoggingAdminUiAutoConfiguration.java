@@ -145,7 +145,7 @@ public class ApiBootLoggingAdminUiAutoConfiguration
      * application title {@link LoggingAdminFactoryBean.AdminUiSetting#getTitle()}
      * page routes {@link LoggingAdminFactoryBean.AdminUiSetting#getRoutes()}
      *
-     * @throws Exception
+     * @throws Exception system exception
      * @see org.minbox.framework.logging.admin.LoggingAdminFactoryBean.AdminUiSetting
      */
     @Override
