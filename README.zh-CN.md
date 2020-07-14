@@ -34,7 +34,7 @@ ApiBoot依赖于SpringBoot，可以使用ApiBoot构建独立的Java应用程序�
 
 组件的使用请查看<a href="https://apiboot.minbox.org" target="_blank">官方参考文档</a>，开始使用请访问<a href="https://apiboot.minbox.org/zh-cn/docs/quick-start.html" target="_blank">第一个ApiBoot应用程序</a>
 
-如果你是使用Maven来构建项目，你需要添加ApiBoot的版本依赖到你的pom.xml文件内，如下所示：
+如果你是使用`Maven`来构建项目，你需要添加`ApiBoot`的固化版本依赖到你的`pom.xml`文件内，如下所示：
 
 ```xml
 <dependencyManagement>
@@ -67,7 +67,7 @@ ApiBoot依赖于SpringBoot，可以使用ApiBoot构建独立的Java应用程序�
 
 添加完组件我们就可以根据<a href="https://apiboot.minbox.org" target="_blank">官方参考文档</a>找到对应组件的文档进行配置使用了。
 
-## 组件使用
+## 使用指南
 
 作者针对每一个组件都提供了一系列的文章进行讲解，请访问 [ApiBoot开源框架各个组件的系列使用文章汇总](https://blog.yuqiyu.com/apiboot-all-articles.html) 进行学习。
 
@@ -87,13 +87,6 @@ ApiBoot依赖于SpringBoot，可以使用ApiBoot构建独立的Java应用程序�
 - 请在提出您的问题时提供尽可能有关ApiBoot可能多的信息，比如：ApiBoot的版本、JDK、使用组件等
 - 如果提问题时需要粘贴代码，请尽量使用markdown语法```转义符。
 
-## 分支
-
-ApiBoot由于需要支持SpringBoot的不同分支的代码（SpringBoot版本相互不兼容的问题导致），因此也对应创建的分支。
-
-- `2.1.x` 对应SpringBoot的`2.1.0`及以上版本。
-- `2.2.x` 对应SpringBoot的`2.2.0`及以上版本。
-
 ## 源码方式构建
 
 ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新版本的ApiBoot（版本并未发布），可以直接通过源码的方式进行构建安装到本地使用，前提条件如下所示：
@@ -111,69 +104,50 @@ ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新�
 ➜ mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Dgpg.skip
 ```
 
-## 组件
+## 模块
 
-ApiBoot内部提供了多个组件，下面简单的介绍组件的用途：
+`ApiBoot`的源码构建使用到了多个模块，下面是一个快速概述：
 
-### 链路日志组件
+### api-boot
 
-内部通过集成整合<a href="https://gitee.com/minbox-projects/minbox-logging" target="_blank">minbox-logging</a>开源框架，提供零侵入式分布式链路日志分析框架的使用，可应用到SpringCloud微服务应用内，提供Admin端点进行采集日志、分析日志、日志告警通知、服务性能分析等。通过Admin Ui可查看实时链路日志信息、在线业务服务列表。
+`api-boot`模块是编译整个项目的根目录，所提供的能力如下所示：
 
-### 安全组件
+- 提供项目统一版本`revision`的配置
+- 提供项目编译时使用的公共插件（`flatten`、`cobertura`...）
+- 提供项目编译时使用的`Maven`仓库配置
+- 统一项目编译的JDK版本
 
-内部通过整合SpringSecurity + OAuth2两大常用资源安全、认证授权框架来保证接口服务的安全性，**内存方式只需要添加几行配置就可以完成整合**，ApiBoot针对SpringSecurity提供了两种查询用户的方式：memory（内存）、jdbc（数据库）。而针对OAuth2则提供了三种方式存储生成后的Token以及Client信息：memory、jdbc、redis等。
+### api-boot-autoconfigure
 
->  可以直接配置使用JWT格式化OAuth2生成的Token.
+`api-boot-autoconfigure`是最为主要的核心模块，内部提供了**全部组件**的`自动化配置类`，这一点完全是利用`SpringBoot`所提供的[条件判断注解](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-condition-annotations)，位于`resources/META-INF`目录下还提供了附加的配置参数元数据定义内容文件：`additional-spring-configuration-metadata.json`，项目启用时我们所看到的`banner`输出内容也位于该模块中。
 
-### 接口文档组件
+### api-boot-dependencies
 
-通过集成`Swagger2`来完成文档的侵入式生成，侵入式文档后期会被替代，`ApiBoot Security Oauth`已默认排除`swagger2`相关的资源路径（如果自定义集成了OAuth2或者SpringSecurity需要手动排除Swagger资源路径）。
+该模块的功能与`spring-boot-dependencies`一致，都是为了固化项目中所使用的依赖版本号，让我们在构建项目中可以很好地对某一个依赖进行升级，不再担心各个依赖之间版本不兼容的困扰。
 
-### ORM组件（数据库持久化组件）
+### api-boot-parent
 
-ApiBoot通过封装Mybatis提供了一款吸取JPA、Mybatis、QueryDSL等主流ORM框架的优点整合框架<a href="https://gitee.com/hengboy/mybatis-enhance" target="_blank">mybatis-enhance</a>，内部提供了常用CRUD方法，无需编写一行SQL就可以完成对数据的持久化操作，提供方法命名规则查询、动态查询等新特性。
+该模块继承自`api-boot-dependencies`，可直接使用固化版本后的依赖，是构建其他模块的统一父依赖。
 
-### 代码生成组件
+### api-boot-plugins
 
-ApiBoot为mybatis-enhance提供了专门定制代码生成插件，可为数据库表对应生成数据实体生成、动态查询实体，mybatis-enhance-codegen是一款Maven Plugin，配置数据库链接信息后可根据配置过滤指定的表、全部表、指定前缀的表进行生成。
+该模块提供了集成第三方依赖的插件列表，每当新增集成一个第三方组件都会在该模块下对应创建一个子模块、
 
-### 多数据源组件
+### api-boot-starters
 
-ApiBoot针对多数据源切换的场景提供了自动化切换的方式，内部提供了两种数据源类型的配置实现，分别是：Druid、HikariCP，通过在类、方法上配置注解的方式切面自动切换为配置数据源，如未配置则使用默认的数据源。
+该模块下定义了开发过程中具体使用的`Starter`依赖，`Starter`依赖内不包含任何的框架代码，只有一个`pom.xml`文件，具体的自动化配置实现以及具体集成第三方的实现分别位于：`api-boot-autoconfigure`、`api-boot-plugins`模块内。
 
-### 自动分页组件
+使用方式与`spring-boot-starter-xxx`一致，比如：在项目中集成限流组件，我们只需要在`pom.xml`中添加`api-boot-starter-rate-limiter`依赖即可，版本也无需添加，因为已经通过`api-boot-dependencies`模块进行了固化版本依赖。
 
-ApiBoot针对Mybatis持久化框架的使用者提供了自动化分页的插件<a href="https://gitee.com/hengboy/mybatis-pageable" target="_blank">mybatis-pageable</a>，这是一款基于Mybatis Plugin实现的插件，根据传递的分页参数可以自动查询出分页信息，如：总页数、每页条数、当前页码、是否存在上一页、下一页等。
+### api-boot-tools
 
-> 支持主流的12种数据库。
+该模块会定义一些常用到的工具类，比如：`ApplicationContext`、`BeanFactory`等。
 
-### 限流组件
-
-ApiBoot针对单应用、分布式集群应用分别提供了一种限流的方式，针对单应用提供了Google的令牌桶方式限流，而针对服务集群环境提供了Redis Lua方式。
-
-> 限流配置秒级QPS访问量。
-
-### 阿里云OSS组件
-
-集成阿里云OSS提供的SDK来完成文件的上传、下载等方法实现，开箱即用。
-
-### 阿里云短信组件
-
-集成阿里云提供的SMS服务，简单配置即可完成短信发送，覆盖全球的短信服务，友好、高效、智能的互联化通讯能力，帮助企业迅速搭建客户触达通道。
-
-### 阿里云邮件组件
-
-集成阿里云提供的Mail服务，简单配置后，通过ApiBoot提供的封装类几行代码就可以完成邮件发送。
+该模块同样是由`api-boot-autoconfigure`进行自动化配置，将部分工具类自动注册到`IOC`。
 
 ## 示例
 
-ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](https://gitee.com/minbox-projects/api-boot/tree/master/api-boot-samples)目录下根据组件名归类。
-
-## 使用指南
-
-请访问作者博客<a href="http://blog.yuqiyu.com" target="_blank">恒宇少年De成长之路</a>获取ApiBoot、MinBox开源组织内开源框架的最新的使用指南。
-
-
+项目源码中`api-boot-samples`模块提供了各个组件的使用示例，也可以结合我博客文章来学习使用，详情请访问：[ApiBoot基础教程](https://blog.yuqiyu.com/apiboot-all-articles.html)。
 
 ## 推荐开源项目
 
@@ -183,19 +157,10 @@ ApiBoot提供了每一个组件的使用示例，在源码[api-boot-samples](htt
 | SpringBoot_v2          | bdj      | [https://gitee.com/bdj/SpringBoot_v2](https://gitee.com/bdj/SpringBoot_v2) |
 | Pear Admin Layui       | 就眠仪式 | [https://gitee.com/Jmysy/Pear-Admin-Layui](https://gitee.com/Jmysy/Pear-Admin-Layui) |
 
-
-
-## 联系作者
-
-作者公众号：
-
-<img src="http://blog.yuqiyu.com/images/mp.jpg" style="width:200px;"/>
-
-扫码关注公众号请回复**ApiBoot**获取作者微信号。
-
 ## License
 
 ApiBoot采用Apache2开源许可进行编写。
 
 ## 开源支持
+
 <a href="https://www.jetbrains.com/?from=api-boot"><img src="https://apiboot.minbox.org/img/jetbrains.png" width="100" heith="100"/></a>
