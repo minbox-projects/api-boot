@@ -28,6 +28,8 @@ import com.mysema.codegen.model.SimpleType;
 import lombok.Data;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.EnhanceCodegenConstant;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -36,6 +38,10 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * data entity class builder
@@ -94,8 +100,12 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                 }
                 // @Column
                 writer.line(getColumnAnnotation(column));
+                // get mapped javaType
+                String javaType = this.mappingJavaType(column.getJdbcTypeName());
+                javaType = Optional.ofNullable(javaType).orElse(column.getJavaType());
                 // private field
-                writer.line(String.format(FIELD, column.getJavaType(), formatterJavaPropertyName(column.getColumnName()), getColumnDefaultValue(column)));
+                writer.line(String.format(FIELD, javaType, formatterJavaPropertyName(column.getColumnName()), getColumnDefaultValue(column)));
+
             }
 
             // end class
@@ -105,6 +115,27 @@ public class EntityClassBuilder extends AbstractClassBuilder {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /**
+     * Get the mapped javaType through jdbcType
+     *
+     * @param jdbcTypeName The column name
+     * @return javaType short name
+     */
+    String mappingJavaType(String jdbcTypeName) {
+        String javaType = null;
+        List<TypeMapping> typeMappingList = getWrapper().getTypeMappings();
+        if (ObjectUtils.isEmpty(typeMappingList)) {
+            return null;
+        }
+        for (TypeMapping typeMapping : typeMappingList) {
+            if (jdbcTypeName.equalsIgnoreCase(typeMapping.getJdbcType())) {
+                javaType = typeMapping.getJavaType();
+                break;
+            }
+        }
+        return javaType;
     }
 
     /**
@@ -124,10 +155,12 @@ public class EntityClassBuilder extends AbstractClassBuilder {
         // import date
         if (table.isHasSqlDate()) {
             writer.imports(Date.class);
+            writer.imports(LocalDate.class);
         }
         // import timeStamp
         if (table.isHasTimeStamp()) {
             writer.imports(Timestamp.class);
+            writer.imports(LocalDateTime.class);
         }
     }
 

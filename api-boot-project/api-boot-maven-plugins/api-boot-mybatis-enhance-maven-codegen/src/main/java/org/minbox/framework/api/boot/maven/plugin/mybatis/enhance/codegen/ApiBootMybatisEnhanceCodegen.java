@@ -35,6 +35,7 @@ import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builde
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl.DynamicEntityClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl.EntityClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.CodegenFile;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.CodegenTemplate;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.tools.CamelTools;
@@ -142,6 +143,11 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     @Parameter
     private boolean ignoreColumnPrefix = false;
+    /**
+     * The mapping relationship between {@link java.sql.Types} and java types
+     */
+    @Parameter
+    private List<TypeMapping> typeMappings;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -149,7 +155,6 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             getLog().warn("Automatic code generation is not turned on. If you need to generate entity classes, configure 【execute=true】");
             return;
         }
-
         // code builder properties
         CodeBuilderProperties codeBuilderProperties = CodeBuilderProperties.builder().dbType(dbType).dbName(dbName).dbUrl(dbUrl).dbUserName(dbUserName).dbPassword(dbPassword).dbDriverClassName(dbDriverClassName).build();
 
@@ -183,7 +188,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             String className = CamelTools.upper(tableName);
 
             // Encapsulated objects needed to perform generation
-            ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName).tableCamelName(className).table(table).ignoreColumnPrefix(ignoreColumnPrefix).build();
+            ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName).tableCamelName(className).table(table).typeMappings(typeMappings).ignoreColumnPrefix(ignoreColumnPrefix).build();
 
             // execute generator
             Arrays.stream(builders).forEach(builderClass -> {

@@ -20,6 +20,9 @@ package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.build
 import com.gitee.hengboy.builder.core.database.model.Table;
 import lombok.Builder;
 import lombok.Data;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
+
+import java.util.List;
 
 /**
  * ClassBuilder Param
@@ -53,4 +56,8 @@ public class ClassBuilderWrapper {
      * ignore column prefix
      */
     private boolean ignoreColumnPrefix;
+    /**
+     * The {@link TypeMapping} collection
+     */
+    private List<TypeMapping> typeMappings;
 }
