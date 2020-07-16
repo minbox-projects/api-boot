@@ -15,21 +15,24 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.mail.response;
+package org.minbox.framework.api.boot.mail;
 
-import lombok.Builder;
-import lombok.Data;
+import org.minbox.framework.api.boot.common.exception.ApiBootException;
+import org.minbox.framework.api.boot.mail.request.ApiBootMailRequest;
+import org.minbox.framework.api.boot.mail.response.ApiBootMailResponse;
 
 /**
- * ApiBoot responds to entities when sending mail
+ * ApiBoot Mail Service Interface
  *
  * @author 恒宇少年
  */
-@Data
-@Builder
-public class ApiBootMailResponse {
+public interface ApiBootMailService {
     /**
-     * Whether to send successfully
+     * send mail
+     *
+     * @param apiBootMailRequest {@link ApiBootMailRequest}
+     * @return {@link ApiBootMailResponse}
+     * @throws ApiBootException ApiBoot Exception
      */
-    private boolean success;
+    ApiBootMailResponse sendMail(ApiBootMailRequest apiBootMailRequest) throws ApiBootException;
 }

@@ -15,15 +15,15 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.mail;
+package org.minbox.framework.api.boot.mail;
 
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailResponse;
 import lombok.AllArgsConstructor;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.mail.request.ApiBootMailRequest;
-import org.minbox.framework.api.boot.plugin.mail.response.ApiBootMailResponse;
+import org.minbox.framework.api.boot.mail.request.ApiBootMailRequest;
+import org.minbox.framework.api.boot.mail.response.ApiBootMailResponse;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 

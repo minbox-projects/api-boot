@@ -19,6 +19,11 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-autoconfigure</artifactId>
         </dependency>
+        <!--ApiBoot Common-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-common</artifactId>
+        </dependency>
         <!--ApiBoot-->
         <dependency>
             <groupId>org.minbox.framework</groupId>

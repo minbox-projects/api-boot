@@ -200,11 +200,15 @@
 
         <!--ApiBoot Mail-->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-mail</artifactId>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dm</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--MinBox Logging-->
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -15,7 +15,7 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.mail;
+package org.minbox.framework.api.boot.mail;
 
 import lombok.Getter;
 

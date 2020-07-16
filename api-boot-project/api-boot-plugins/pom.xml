@@ -28,7 +28,6 @@
         <module>api-boot-plugin-http-converter</module>
         <module>api-boot-plugin-message-push</module>
         <module>api-boot-plugin-rate-limiter</module>
-        <module>api-boot-plugin-mail</module>
         <module>api-boot-plugin-sequence</module>
     </modules>
 </project>

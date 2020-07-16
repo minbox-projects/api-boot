@@ -52,10 +52,13 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot Mail Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-mail</artifactId>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dm</artifactId>
         </dependency>
     </dependencies>
 
