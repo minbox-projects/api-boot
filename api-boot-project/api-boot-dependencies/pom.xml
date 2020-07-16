@@ -224,11 +224,6 @@
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-alibaba-oss</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-alibaba-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
