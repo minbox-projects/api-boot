@@ -18,7 +18,7 @@
 package org.minbox.framework.api.boot.autoconfigure.mail;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.plugin.mail.MailRegion;
+import org.minbox.framework.api.boot.mail.MailRegion;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

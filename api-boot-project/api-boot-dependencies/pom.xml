@@ -373,11 +373,6 @@
             <!--ApiBoot Mail-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-mail</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-mail</artifactId>
                 <version>${project.version}</version>
             </dependency>

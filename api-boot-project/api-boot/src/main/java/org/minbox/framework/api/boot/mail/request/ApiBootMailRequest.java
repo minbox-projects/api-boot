@@ -15,11 +15,11 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.mail.request;
+package org.minbox.framework.api.boot.mail.request;
 
 import lombok.Builder;
 import lombok.Data;
-import org.minbox.framework.api.boot.plugin.mail.ContentType;
+import org.minbox.framework.api.boot.mail.ContentType;
 
 import java.util.List;
 

@@ -19,10 +19,10 @@ package org.minbox.framework.api.boot.sample.mail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.minbox.framework.api.boot.plugin.mail.ApiBootMailService;
-import org.minbox.framework.api.boot.plugin.mail.ContentType;
-import org.minbox.framework.api.boot.plugin.mail.request.ApiBootMailRequest;
-import org.minbox.framework.api.boot.plugin.mail.response.ApiBootMailResponse;
+import org.minbox.framework.api.boot.mail.ApiBootMailService;
+import org.minbox.framework.api.boot.mail.ContentType;
+import org.minbox.framework.api.boot.mail.request.ApiBootMailRequest;
+import org.minbox.framework.api.boot.mail.response.ApiBootMailResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
