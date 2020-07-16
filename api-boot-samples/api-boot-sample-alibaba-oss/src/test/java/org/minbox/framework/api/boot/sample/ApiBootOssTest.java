@@ -2,8 +2,8 @@ package org.minbox.framework.api.boot.sample;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.minbox.framework.api.boot.plugin.oss.ApiBootOssService;
-import org.minbox.framework.api.boot.plugin.storage.response.ApiBootObjectStorageResponse;
+import org.minbox.framework.api.boot.oss.ApiBootOssService;
+import org.minbox.framework.api.boot.storage.response.ApiBootObjectStorageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
