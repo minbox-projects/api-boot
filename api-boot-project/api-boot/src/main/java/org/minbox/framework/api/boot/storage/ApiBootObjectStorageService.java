@@ -1,7 +1,8 @@
-package org.minbox.framework.api.boot.plugin.storage;
+package org.minbox.framework.api.boot.storage;
 
-import org.minbox.framework.api.boot.plugin.storage.exception.ApiBootObjectStorageException;
-import org.minbox.framework.api.boot.plugin.storage.response.ApiBootObjectStorageResponse;
+
+import org.minbox.framework.api.boot.storage.exception.ApiBootObjectStorageException;
+import org.minbox.framework.api.boot.storage.response.ApiBootObjectStorageResponse;
 
 import java.io.InputStream;
 

@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>api-boot</artifactId>
+        <artifactId>api-boot-build</artifactId>
         <groupId>org.minbox.framework</groupId>
         <version>${revision}</version>
         <relativePath>../..</relativePath>
@@ -71,7 +71,12 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
+            <!--ApiBoot-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--ApiBoot Starter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
@@ -216,11 +221,6 @@
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${alibaba.oss.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-alibaba-oss</artifactId>
-                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>

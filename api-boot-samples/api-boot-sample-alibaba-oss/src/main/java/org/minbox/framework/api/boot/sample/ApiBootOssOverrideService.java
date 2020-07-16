@@ -2,7 +2,7 @@ package org.minbox.framework.api.boot.sample;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
-import org.minbox.framework.api.boot.plugin.oss.ApiBootOssService;
+import org.minbox.framework.api.boot.oss.ApiBootOssService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

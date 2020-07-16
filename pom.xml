@@ -14,9 +14,9 @@
         <module>api-boot-samples</module>
     </modules>
     <groupId>org.minbox.framework</groupId>
-    <artifactId>api-boot</artifactId>
+    <artifactId>api-boot-build</artifactId>
     <version>${revision}</version>
-    <name>api-boot</name>
+    <name>ApiBoot Build</name>
     <properties>
         <revision>2.3.0-SNAPSHOT</revision>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>

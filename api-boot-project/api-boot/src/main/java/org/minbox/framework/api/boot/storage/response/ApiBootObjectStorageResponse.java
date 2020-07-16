@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.storage.response;
+package org.minbox.framework.api.boot.storage.response;
 
 import lombok.Builder;
 import lombok.Data;

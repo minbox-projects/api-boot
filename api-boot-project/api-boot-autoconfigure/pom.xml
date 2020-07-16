@@ -19,6 +19,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
+        <!--ApiBoot-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--ApiBoot Common-->
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -83,14 +89,12 @@
             <artifactId>spring-security-jwt</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--ApiBoot Oss Plugin-->
+        <!--Aliyun oss-->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-alibaba-oss</artifactId>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
             <optional>true</optional>
         </dependency>
-
         <!--ApiBoot Sms Plugin-->
         <dependency>
             <groupId>${project.groupId}</groupId>

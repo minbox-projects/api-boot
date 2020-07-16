@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.storage.exception;
+package org.minbox.framework.api.boot.storage.exception;
 
 import lombok.NoArgsConstructor;
 
