@@ -71,7 +71,12 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
+            <!--ApiBoot-->
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--ApiBoot Starter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
