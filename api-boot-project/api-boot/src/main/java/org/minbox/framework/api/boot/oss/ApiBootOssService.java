@@ -1,13 +1,13 @@
-package org.minbox.framework.api.boot.plugin.oss;
+package org.minbox.framework.api.boot.oss;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.*;
 import lombok.Setter;
-import org.minbox.framework.api.boot.plugin.oss.progress.ApiBootObjectStorageProgress;
-import org.minbox.framework.api.boot.plugin.oss.progress.OssProgressListener;
-import org.minbox.framework.api.boot.plugin.storage.ApiBootObjectStorageService;
-import org.minbox.framework.api.boot.plugin.storage.exception.ApiBootObjectStorageException;
-import org.minbox.framework.api.boot.plugin.storage.response.ApiBootObjectStorageResponse;
+import org.minbox.framework.api.boot.oss.progress.ApiBootObjectStorageProgress;
+import org.minbox.framework.api.boot.oss.progress.OssProgressListener;
+import org.minbox.framework.api.boot.storage.ApiBootObjectStorageService;
+import org.minbox.framework.api.boot.storage.exception.ApiBootObjectStorageException;
+import org.minbox.framework.api.boot.storage.response.ApiBootObjectStorageResponse;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

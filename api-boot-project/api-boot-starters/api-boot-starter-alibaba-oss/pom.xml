@@ -33,10 +33,10 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot Alibaba Oss Plugin-->
+        <!--Aliyun oss-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-alibaba-oss</artifactId>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
     </dependencies>
 

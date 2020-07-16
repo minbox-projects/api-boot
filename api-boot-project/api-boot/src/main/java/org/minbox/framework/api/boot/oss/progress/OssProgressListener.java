@@ -15,7 +15,8 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.oss.progress;
+package org.minbox.framework.api.boot.oss.progress;
+
 
 import com.aliyun.oss.event.ProgressEvent;
 import com.aliyun.oss.event.ProgressEventType;

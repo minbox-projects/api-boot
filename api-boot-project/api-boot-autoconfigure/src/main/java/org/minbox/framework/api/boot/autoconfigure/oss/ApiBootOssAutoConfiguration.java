@@ -1,8 +1,8 @@
 package org.minbox.framework.api.boot.autoconfigure.oss;
 
 import com.aliyun.oss.OSSClient;
-import org.minbox.framework.api.boot.plugin.oss.ApiBootOssService;
-import org.minbox.framework.api.boot.plugin.oss.progress.ApiBootObjectStorageProgress;
+import org.minbox.framework.api.boot.oss.ApiBootOssService;
+import org.minbox.framework.api.boot.oss.progress.ApiBootObjectStorageProgress;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

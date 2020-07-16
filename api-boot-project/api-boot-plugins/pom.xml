@@ -18,7 +18,6 @@
         <main.basedir>${basedir}/../..</main.basedir>
     </properties>
     <modules>
-        <module>api-boot-plugin-alibaba-oss</module>
         <module>api-boot-plugin</module>
         <module>api-boot-plugin-alibaba-sms</module>
         <module>api-boot-plugin-security</module>

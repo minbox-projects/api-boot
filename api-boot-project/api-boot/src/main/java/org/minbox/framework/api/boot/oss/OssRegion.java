@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.oss;
+package org.minbox.framework.api.boot.oss;
 
 import lombok.Getter;
 
