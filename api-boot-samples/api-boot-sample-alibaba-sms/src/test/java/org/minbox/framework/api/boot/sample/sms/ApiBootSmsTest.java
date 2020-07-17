@@ -2,10 +2,10 @@ package org.minbox.framework.api.boot.sample.sms;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.minbox.framework.api.boot.plugin.sms.ApiBootSmsService;
-import org.minbox.framework.api.boot.plugin.sms.request.ApiBootSmsRequest;
-import org.minbox.framework.api.boot.plugin.sms.request.ApiBootSmsRequestParam;
-import org.minbox.framework.api.boot.plugin.sms.response.ApiBootSmsResponse;
+import org.minbox.framework.api.boot.sms.ApiBootSmsService;
+import org.minbox.framework.api.boot.sms.request.ApiBootSmsRequest;
+import org.minbox.framework.api.boot.sms.request.ApiBootSmsRequestParam;
+import org.minbox.framework.api.boot.sms.response.ApiBootSmsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

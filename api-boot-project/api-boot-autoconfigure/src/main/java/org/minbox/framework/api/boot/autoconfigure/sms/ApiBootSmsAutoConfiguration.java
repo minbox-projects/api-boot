@@ -1,7 +1,7 @@
 package org.minbox.framework.api.boot.autoconfigure.sms;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import org.minbox.framework.api.boot.plugin.sms.ApiBootAliYunSmsService;
+import org.minbox.framework.api.boot.sms.ApiBootAliYunSmsService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,13 +14,7 @@ import static org.minbox.framework.api.boot.autoconfigure.sms.ApiBootSmsProperti
 /**
  * ApiBoot 短信服务自动化配置
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-22 10:53
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass(SendSmsRequest.class)

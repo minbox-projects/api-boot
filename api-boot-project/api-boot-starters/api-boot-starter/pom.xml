@@ -14,20 +14,21 @@
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
     <dependencies>
-        <!--自动化配置-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-autoconfigure</artifactId>
         </dependency>
-        <!--ApiBoot Common-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-common</artifactId>
         </dependency>
-        <!--ApiBoot-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
     </dependencies>
 </project>

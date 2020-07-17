@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.sms;
+package org.minbox.framework.api.boot.sms;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -8,8 +8,8 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import lombok.AllArgsConstructor;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.sms.request.ApiBootSmsRequest;
-import org.minbox.framework.api.boot.plugin.sms.response.ApiBootSmsResponse;
+import org.minbox.framework.api.boot.sms.request.ApiBootSmsRequest;
+import org.minbox.framework.api.boot.sms.response.ApiBootSmsResponse;
 
 import javax.annotation.PostConstruct;
 

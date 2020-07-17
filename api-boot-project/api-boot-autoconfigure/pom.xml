@@ -95,12 +95,6 @@
             <artifactId>aliyun-sdk-oss</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--ApiBoot Sms Plugin-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-alibaba-sms</artifactId>
-            <optional>true</optional>
-        </dependency>
 
         <!--ApiBoot Security Plugin-->
         <dependency>
@@ -198,7 +192,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!--ApiBoot Mail-->
+        <!--Aliyun-->
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
@@ -206,9 +200,15 @@
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dm</artifactId>
             <optional>true</optional>
         </dependency>
+
         <!--MinBox Logging-->
         <dependency>
             <groupId>${project.groupId}</groupId>
