@@ -1,11 +1,11 @@
 package org.minbox.framework.api.boot.sample.quartz;
 
 import com.alibaba.fastjson.JSON;
-import org.minbox.framework.api.boot.plugin.quartz.ApiBootQuartzService;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobParamWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper;
+import org.minbox.framework.api.boot.quartz.ApiBootQuartzService;
+import org.minbox.framework.api.boot.quartz.wrapper.ApiBootJobParamWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootCronJobWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootLoopJobWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootOnceJobWrapper;
 import org.minbox.framework.api.boot.sample.quartz.jobs.DemoJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +50,7 @@ public class ApiBootQuartzController {
                                         .put("userAge", 24)
                         )
                         // 每次循环的间隔时间，单位：毫秒
-                        .loopIntervalTime(2000)
+                        .loopIntervalTime(2000L)
                         // 循环次数
                         .repeatTimes(5)
                         // 开始时间，10秒后执行

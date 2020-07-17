@@ -1,9 +1,8 @@
-package org.minbox.framework.api.boot.plugin.quartz.wrapper.support;
+package org.minbox.framework.api.boot.quartz.wrapper.support;
 
 import lombok.Builder;
-import lombok.Getter;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobParamWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.ApiBootJobParamWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.ApiBootJobWrapper;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 

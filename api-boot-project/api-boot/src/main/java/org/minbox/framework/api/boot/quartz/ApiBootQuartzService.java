@@ -1,11 +1,10 @@
-package org.minbox.framework.api.boot.plugin.quartz;
+package org.minbox.framework.api.boot.quartz;
 
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper;
-import org.quartz.JobKey;
+
+import org.minbox.framework.api.boot.quartz.wrapper.ApiBootJobWrapper;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootCronJobWrapper;
 import java.util.Collection;
 import java.util.Date;
 
@@ -30,9 +29,9 @@ public interface ApiBootQuartzService {
      *
      * @param jobWrapper {@link ApiBootJobWrapper}
      * @return {@link ApiBootJobWrapper#getJobKey()}
-     * @see org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper
-     * @see org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper
-     * @see org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper
+     * @see org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootOnceJobWrapper
+     * @see org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootLoopJobWrapper
+     * @see org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootCronJobWrapper
      */
     String newJob(ApiBootJobWrapper jobWrapper);
 
@@ -114,8 +113,8 @@ public interface ApiBootQuartzService {
     /**
      * Update job start time
      * <p>
-     * This method works for {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper}
-     * or {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper}
+     * This method works for {@link org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootOnceJobWrapper}
+     * or {@link org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootLoopJobWrapper}
      * </p>
      *
      * @param jobKey       {@link ApiBootJobWrapper#getJobKey()}

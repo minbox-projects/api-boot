@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.quartz.wrapper;
+package org.minbox.framework.api.boot.quartz.wrapper;
 
 import lombok.Data;
 
