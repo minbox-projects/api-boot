@@ -17,13 +17,13 @@
 
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 
-import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
-import org.minbox.framework.api.boot.plugin.rate.limiter.aop.advisor.ApiBootRateLimiterAdvisor;
-import org.minbox.framework.api.boot.plugin.rate.limiter.aop.interceptor.ApiBootRateLimiterMethodInterceptor;
-import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
-import org.minbox.framework.api.boot.plugin.rate.limiter.centre.support.DefaultRateLimiterConfigCentre;
-import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowResponse;
-import org.minbox.framework.api.boot.plugin.rate.limiter.support.GoogleGuavaRateLimiter;
+import org.minbox.framework.api.boot.limiter.ApiBootRateLimiter;
+import org.minbox.framework.api.boot.limiter.aop.advisor.ApiBootRateLimiterAdvisor;
+import org.minbox.framework.api.boot.limiter.aop.interceptor.ApiBootRateLimiterMethodInterceptor;
+import org.minbox.framework.api.boot.limiter.centre.RateLimiterConfigCentre;
+import org.minbox.framework.api.boot.limiter.centre.support.DefaultRateLimiterConfigCentre;
+import org.minbox.framework.api.boot.limiter.result.RateLimiterOverFlowResponse;
+import org.minbox.framework.api.boot.limiter.support.GoogleGuavaRateLimiter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

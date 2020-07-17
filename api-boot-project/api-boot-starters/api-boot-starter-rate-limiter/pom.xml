@@ -49,10 +49,17 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot RateLimiter Plugin-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-rate-limiter</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
     </dependencies>
 

@@ -16,10 +16,9 @@
  */
 
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
-
-import org.minbox.framework.api.boot.plugin.rate.limiter.ApiBootRateLimiter;
-import org.minbox.framework.api.boot.plugin.rate.limiter.centre.RateLimiterConfigCentre;
-import org.minbox.framework.api.boot.plugin.rate.limiter.support.RedisLuaRateLimiter;
+import org.minbox.framework.api.boot.limiter.ApiBootRateLimiter;
+import org.minbox.framework.api.boot.limiter.centre.RateLimiterConfigCentre;
+import org.minbox.framework.api.boot.limiter.support.RedisLuaRateLimiter;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

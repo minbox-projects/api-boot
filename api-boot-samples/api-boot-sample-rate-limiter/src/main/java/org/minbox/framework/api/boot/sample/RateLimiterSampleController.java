@@ -17,7 +17,7 @@
 
 package org.minbox.framework.api.boot.sample;
 
-import org.minbox.framework.api.boot.plugin.rate.limiter.annotation.RateLimiter;
+import org.minbox.framework.api.boot.limiter.annotation.RateLimiter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

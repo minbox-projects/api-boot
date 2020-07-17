@@ -163,13 +163,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!--ApiBoot RateLimiter-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-rate-limiter</artifactId>
-            <optional>true</optional>
-        </dependency>
-
         <!--Nacos Config-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
@@ -254,6 +247,11 @@
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
             <optional>true</optional>
         </dependency>
         <!--apiboot tools-->
