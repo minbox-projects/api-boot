@@ -15,7 +15,7 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.annotation;
+package org.minbox.framework.api.boot.push.annotation;
 
 import java.lang.annotation.*;
 

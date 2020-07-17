@@ -15,7 +15,7 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.support;
+package org.minbox.framework.api.boot.push.support;
 
 import cn.jiguang.common.ClientConfig;
 import cn.jpush.api.JPushClient;
@@ -25,8 +25,8 @@ import cn.jpush.api.push.model.PushPayload;
 import cn.jpush.api.push.model.audience.Audience;
 import cn.jpush.api.push.model.notification.*;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.message.push.model.MessagePushBody;
-import org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig;
+import org.minbox.framework.api.boot.push.model.MessagePushBody;
+import org.minbox.framework.api.boot.push.model.PushClientConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;

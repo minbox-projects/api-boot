@@ -15,12 +15,12 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.support;
+package org.minbox.framework.api.boot.push.support;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.message.push.ApiBootMessagePushService;
-import org.minbox.framework.api.boot.plugin.message.push.aop.holder.MessagePushContextHolder;
-import org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig;
+import org.minbox.framework.api.boot.push.ApiBootMessagePushService;
+import org.minbox.framework.api.boot.push.aop.holder.MessagePushContextHolder;
+import org.minbox.framework.api.boot.push.model.PushClientConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;

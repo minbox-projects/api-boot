@@ -149,13 +149,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!--ApiBoot Plugin Message Push-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-message-push</artifactId>
-            <optional>true</optional>
-        </dependency>
-
         <!--ApiBoot Mybatis Pageable-->
         <dependency>
             <groupId>com.gitee.hengboy</groupId>
@@ -258,7 +251,11 @@
             <artifactId>minbox-mongo-client-settings</artifactId>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--apiboot tools-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
