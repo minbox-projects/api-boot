@@ -1,7 +1,7 @@
 package org.minbox.framework.api.boot.autoconfigure.quartz;
 
-import org.minbox.framework.api.boot.plugin.quartz.ApiBootQuartzService;
-import org.minbox.framework.api.boot.plugin.quartz.support.ApiBootQuartzServiceDefaultSupport;
+import org.minbox.framework.api.boot.quartz.ApiBootQuartzService;
+import org.minbox.framework.api.boot.quartz.support.ApiBootQuartzServiceDefaultSupport;
 import org.quartz.Calendar;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;

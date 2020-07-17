@@ -1,10 +1,10 @@
-package org.minbox.framework.api.boot.plugin.quartz.support;
+package org.minbox.framework.api.boot.quartz.support;
 
-import org.minbox.framework.api.boot.plugin.quartz.ApiBootQuartzService;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.ApiBootJobWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootCronJobWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper;
-import org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper;
+import org.minbox.framework.api.boot.quartz.ApiBootQuartzService;
+import org.minbox.framework.api.boot.quartz.wrapper.ApiBootJobWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootCronJobWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootLoopJobWrapper;
+import org.minbox.framework.api.boot.quartz.wrapper.support.ApiBootOnceJobWrapper;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -248,8 +248,8 @@ public class ApiBootQuartzServiceDefaultSupport implements ApiBootQuartzService 
     /**
      * Update job start time
      * <p>
-     * This method works for {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootOnceJobWrapper}
-     * or {@link org.minbox.framework.api.boot.plugin.quartz.wrapper.support.ApiBootLoopJobWrapper}
+     * This method works for {@link ApiBootOnceJobWrapper}
+     * or {@link ApiBootLoopJobWrapper}
      * </p>
      *
      * @param jobKey       {@link ApiBootJobWrapper#getJobKey()}
