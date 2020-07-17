@@ -34,7 +34,7 @@ public class ApiBootHttpConverterApplication {
         logger.info("「「「「「ApiBoot Http Converter Sample 启动完成.」」」」」");
     }
 
-    @GetMapping(value = "/")
+    @GetMapping
     public ApiBootResult jsonResult() {
         SampleEntity sampleEntity = new SampleEntity();
         sampleEntity.setDecimalValue(new BigDecimal(23.55));

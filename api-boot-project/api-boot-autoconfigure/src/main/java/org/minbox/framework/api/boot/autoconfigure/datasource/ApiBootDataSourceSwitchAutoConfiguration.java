@@ -1,14 +1,14 @@
 package org.minbox.framework.api.boot.autoconfigure.datasource;
 
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSourceFactoryBean;
-import org.minbox.framework.api.boot.plugin.datasource.aop.advistor.ApiBootDataSourceSwitchAdvisor;
-import org.minbox.framework.api.boot.plugin.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceConfig;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidConfig;
-import org.minbox.framework.api.boot.plugin.datasource.routing.ApiBootRoutingDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootDruidDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootHikariDataSource;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSource;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSourceFactoryBean;
+import org.minbox.framework.api.boot.datasource.aop.advistor.ApiBootDataSourceSwitchAdvisor;
+import org.minbox.framework.api.boot.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
+import org.minbox.framework.api.boot.datasource.config.DataSourceConfig;
+import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.api.boot.datasource.routing.ApiBootRoutingDataSource;
+import org.minbox.framework.api.boot.datasource.support.ApiBootDruidDataSource;
+import org.minbox.framework.api.boot.datasource.support.ApiBootHikariDataSource;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ import java.util.Map;
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(ApiBootDataSource.class)
+@ConditionalOnClass({ApiBootDataSource.class, AbstractRoutingDataSource.class})
 @EnableConfigurationProperties(ApiBootDataSourceSwitchProperties.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class ApiBootDataSourceSwitchAutoConfiguration {

@@ -34,6 +34,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <!--fastjson-->
         <dependency>
@@ -131,11 +133,6 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-datasource-switch</artifactId>
             <optional>true</optional>
         </dependency>
 

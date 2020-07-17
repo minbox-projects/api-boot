@@ -93,12 +93,6 @@
             <!--ApiBoot Converter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-http-converter</artifactId>
-                <version>${project.version}</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-http-converter</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -263,11 +257,6 @@
             </dependency>
 
             <!--ApiBoot DataSource Switch-->
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-datasource-switch</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-datasource-switch</artifactId>

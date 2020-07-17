@@ -4,6 +4,6 @@ spring:
   # 配置使用fastJson来处理json数据的格式化驱动
   # 该配置缺省时，默认值为：fastJson
   # 如需修改，参考值：gson、jackson、jsonb
-  http:
-    converters:
-      preferred-json-mapper: fastJson
+  mvc:
+      converters:
+          preferred-json-mapper: fastJson

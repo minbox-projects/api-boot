@@ -32,11 +32,6 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot DataSource Switch Plugin-->
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-datasource-switch</artifactId>
-        </dependency>
         <!--SpringBoot Jdbc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
