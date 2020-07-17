@@ -321,11 +321,6 @@
             <!--ApiBoot RateLimiter-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-rate-limiter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-rate-limiter</artifactId>
                 <version>${project.version}</version>
             </dependency>

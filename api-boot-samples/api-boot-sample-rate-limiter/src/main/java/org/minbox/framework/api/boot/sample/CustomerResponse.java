@@ -18,7 +18,7 @@
 package org.minbox.framework.api.boot.sample;
 
 import org.minbox.framework.api.boot.common.model.ApiBootResult;
-import org.minbox.framework.api.boot.plugin.rate.limiter.result.RateLimiterOverFlowResponse;
+import org.minbox.framework.api.boot.limiter.result.RateLimiterOverFlowResponse;
 import org.springframework.stereotype.Component;
 
 /**
