@@ -265,11 +265,6 @@
             <!--ApiBoot DataSource Switch-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-datasource-switch</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-datasource-switch</artifactId>
                 <version>${project.version}</version>
             </dependency>

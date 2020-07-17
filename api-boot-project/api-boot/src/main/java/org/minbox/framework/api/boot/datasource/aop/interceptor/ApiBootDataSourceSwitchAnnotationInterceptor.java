@@ -1,9 +1,9 @@
-package org.minbox.framework.api.boot.plugin.datasource.aop.interceptor;
+package org.minbox.framework.api.boot.datasource.aop.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.minbox.framework.api.boot.plugin.datasource.annotation.DataSourceSwitch;
-import org.minbox.framework.api.boot.plugin.datasource.routing.DataSourceContextHolder;
+import org.minbox.framework.api.boot.datasource.annotation.DataSourceSwitch;
+import org.minbox.framework.api.boot.datasource.routing.DataSourceContextHolder;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.util.ClassUtils;

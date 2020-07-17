@@ -1,9 +1,9 @@
-package org.minbox.framework.api.boot.plugin.datasource.support;
+package org.minbox.framework.api.boot.datasource.support;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSource;
+import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
 
 import javax.sql.DataSource;
 

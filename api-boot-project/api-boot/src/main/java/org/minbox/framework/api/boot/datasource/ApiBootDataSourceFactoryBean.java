@@ -1,11 +1,11 @@
-package org.minbox.framework.api.boot.plugin.datasource;
+package org.minbox.framework.api.boot.datasource;
 
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceConfig;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidConfig;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceHikariConfig;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootBasicDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootDruidDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootHikariDataSource;
+import org.minbox.framework.api.boot.datasource.config.DataSourceConfig;
+import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.api.boot.datasource.config.DataSourceHikariConfig;
+import org.minbox.framework.api.boot.datasource.support.ApiBootBasicDataSource;
+import org.minbox.framework.api.boot.datasource.support.ApiBootDruidDataSource;
+import org.minbox.framework.api.boot.datasource.support.ApiBootHikariDataSource;
 
 import javax.sql.DataSource;
 

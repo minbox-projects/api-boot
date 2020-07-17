@@ -133,11 +133,6 @@
             <artifactId>druid</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-datasource-switch</artifactId>
-            <optional>true</optional>
-        </dependency>
 
         <!--ApiBoot Resource Load-->
         <dependency>

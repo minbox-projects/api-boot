@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.datasource;
+package org.minbox.framework.api.boot.datasource;
 
 /**
  * {@link javax.sql.DataSource} Types name definition

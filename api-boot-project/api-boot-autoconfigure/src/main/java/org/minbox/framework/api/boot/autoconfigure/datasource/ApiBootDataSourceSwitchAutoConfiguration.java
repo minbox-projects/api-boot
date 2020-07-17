@@ -1,14 +1,14 @@
 package org.minbox.framework.api.boot.autoconfigure.datasource;
 
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSourceFactoryBean;
-import org.minbox.framework.api.boot.plugin.datasource.aop.advistor.ApiBootDataSourceSwitchAdvisor;
-import org.minbox.framework.api.boot.plugin.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceConfig;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidConfig;
-import org.minbox.framework.api.boot.plugin.datasource.routing.ApiBootRoutingDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootDruidDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.support.ApiBootHikariDataSource;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSource;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSourceFactoryBean;
+import org.minbox.framework.api.boot.datasource.aop.advistor.ApiBootDataSourceSwitchAdvisor;
+import org.minbox.framework.api.boot.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
+import org.minbox.framework.api.boot.datasource.config.DataSourceConfig;
+import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.api.boot.datasource.routing.ApiBootRoutingDataSource;
+import org.minbox.framework.api.boot.datasource.support.ApiBootDruidDataSource;
+import org.minbox.framework.api.boot.datasource.support.ApiBootHikariDataSource;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -1,9 +1,9 @@
-package org.minbox.framework.api.boot.plugin.datasource.support;
+package org.minbox.framework.api.boot.datasource.support;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSource;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceConfig;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSource;
+import org.minbox.framework.api.boot.datasource.config.DataSourceConfig;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.datasource.DelegatingDataSource;
 

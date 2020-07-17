@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.datasource.config;
+package org.minbox.framework.api.boot.datasource.config;
 
 import lombok.Data;
 
@@ -20,7 +20,7 @@ public class DataSourceConfig {
     /**
      * data source type
      *
-     * @see org.minbox.framework.api.boot.plugin.datasource.DataSourceTypeNames
+     * @see org.minbox.framework.api.boot.datasource.DataSourceTypeNames
      */
     private Class<? extends DataSource> dataSourceType;
     /**

@@ -1,8 +1,8 @@
-package org.minbox.framework.api.boot.plugin.datasource.aop.advistor;
+package org.minbox.framework.api.boot.datasource.aop.advistor;
 
 import org.aopalliance.aop.Advice;
-import org.minbox.framework.api.boot.plugin.datasource.annotation.DataSourceSwitch;
-import org.minbox.framework.api.boot.plugin.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
+import org.minbox.framework.api.boot.datasource.annotation.DataSourceSwitch;
+import org.minbox.framework.api.boot.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
 import org.springframework.aop.support.ComposablePointcut;

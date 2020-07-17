@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.datasource.config;
+package org.minbox.framework.api.boot.datasource.config;
 
 import lombok.Data;
 

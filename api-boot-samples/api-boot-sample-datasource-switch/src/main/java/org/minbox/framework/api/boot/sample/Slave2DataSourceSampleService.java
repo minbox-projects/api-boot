@@ -1,6 +1,6 @@
 package org.minbox.framework.api.boot.sample;
 
-import org.minbox.framework.api.boot.plugin.datasource.annotation.DataSourceSwitch;
+import org.minbox.framework.api.boot.datasource.annotation.DataSourceSwitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

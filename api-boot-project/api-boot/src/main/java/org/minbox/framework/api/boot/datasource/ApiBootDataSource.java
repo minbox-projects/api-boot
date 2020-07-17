@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.datasource;
+package org.minbox.framework.api.boot.datasource;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
 

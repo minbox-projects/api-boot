@@ -1,7 +1,9 @@
-package org.minbox.framework.api.boot.plugin.datasource.routing;
+package org.minbox.framework.api.boot.datasource.routing;
 
-import org.minbox.framework.api.boot.plugin.datasource.ApiBootDataSourceFactoryBean;
-import org.minbox.framework.api.boot.plugin.datasource.config.DataSourceConfig;
+import org.minbox.framework.api.boot.datasource.ApiBootDataSourceFactoryBean;
+import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.api.boot.datasource.config.DataSourceHikariConfig;
+import org.minbox.framework.api.boot.datasource.config.DataSourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -77,8 +79,8 @@ public class ApiBootRoutingDataSource extends AbstractRoutingDataSource implemen
      * init all datasource by DataSourceConfig
      *
      * @see DataSourceConfig
-     * @see org.minbox.framework.api.boot.plugin.datasource.config.DataSourceDruidConfig
-     * @see org.minbox.framework.api.boot.plugin.datasource.config.DataSourceHikariConfig
+     * @see DataSourceDruidConfig
+     * @see DataSourceHikariConfig
      */
     @Override
     public void afterPropertiesSet() {

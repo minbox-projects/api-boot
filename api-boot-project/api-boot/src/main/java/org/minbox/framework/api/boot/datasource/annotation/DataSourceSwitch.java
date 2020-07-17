@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.datasource.annotation;
+package org.minbox.framework.api.boot.datasource.annotation;
 
 import java.lang.annotation.*;
 

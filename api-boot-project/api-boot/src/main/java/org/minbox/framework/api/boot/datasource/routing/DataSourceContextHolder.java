@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.datasource.routing;
+package org.minbox.framework.api.boot.datasource.routing;
 
 import org.springframework.util.Assert;
 
