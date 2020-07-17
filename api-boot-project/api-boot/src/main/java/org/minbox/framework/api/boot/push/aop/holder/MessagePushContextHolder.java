@@ -15,7 +15,7 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.aop.holder;
+package org.minbox.framework.api.boot.push.aop.holder;
 
 import org.springframework.util.Assert;
 

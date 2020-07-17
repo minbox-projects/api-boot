@@ -15,7 +15,7 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.model;
+package org.minbox.framework.api.boot.push.model;
 
 import lombok.Data;
 

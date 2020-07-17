@@ -15,11 +15,11 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.aop.advistor;
+package org.minbox.framework.api.boot.push.aop.advistor;
 
 import org.aopalliance.aop.Advice;
-import org.minbox.framework.api.boot.plugin.message.push.annotation.MessagePushSwitch;
-import org.minbox.framework.api.boot.plugin.message.push.aop.interceptor.ApiBootMessagePushSwitchAnnotationInterceptor;
+import org.minbox.framework.api.boot.push.annotation.MessagePushSwitch;
+import org.minbox.framework.api.boot.push.aop.interceptor.ApiBootMessagePushSwitchAnnotationInterceptor;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;

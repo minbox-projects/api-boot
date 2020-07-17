@@ -283,11 +283,6 @@
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-message-push</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-message-push</artifactId>
                 <version>${project.version}</version>
             </dependency>

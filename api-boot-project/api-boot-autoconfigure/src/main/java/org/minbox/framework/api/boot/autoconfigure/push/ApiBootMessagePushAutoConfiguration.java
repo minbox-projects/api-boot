@@ -18,11 +18,11 @@
 package org.minbox.framework.api.boot.autoconfigure.push;
 
 import cn.jpush.api.JPushClient;
-import org.minbox.framework.api.boot.plugin.message.push.ApiBootMessagePushService;
-import org.minbox.framework.api.boot.plugin.message.push.aop.advistor.ApiBootMessagePushClientSwitchAdvisor;
-import org.minbox.framework.api.boot.plugin.message.push.aop.interceptor.ApiBootMessagePushSwitchAnnotationInterceptor;
-import org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig;
-import org.minbox.framework.api.boot.plugin.message.push.support.ApiBootMessagePushJiGuangServiceImpl;
+import org.minbox.framework.api.boot.push.ApiBootMessagePushService;
+import org.minbox.framework.api.boot.push.aop.advistor.ApiBootMessagePushClientSwitchAdvisor;
+import org.minbox.framework.api.boot.push.aop.interceptor.ApiBootMessagePushSwitchAnnotationInterceptor;
+import org.minbox.framework.api.boot.push.model.PushClientConfig;
+import org.minbox.framework.api.boot.push.support.ApiBootMessagePushJiGuangServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

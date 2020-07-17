@@ -18,7 +18,7 @@
 package org.minbox.framework.api.boot.autoconfigure.push;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig;
+import org.minbox.framework.api.boot.push.model.PushClientConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

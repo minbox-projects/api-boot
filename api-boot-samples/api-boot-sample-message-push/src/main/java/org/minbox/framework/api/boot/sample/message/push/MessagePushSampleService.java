@@ -17,10 +17,10 @@
 
 package org.minbox.framework.api.boot.sample.message.push;
 
-import org.minbox.framework.api.boot.plugin.message.push.ApiBootMessagePushService;
-import org.minbox.framework.api.boot.plugin.message.push.annotation.MessagePushSwitch;
-import org.minbox.framework.api.boot.plugin.message.push.model.MessagePushBody;
-import org.minbox.framework.api.boot.plugin.message.push.model.PusherPlatform;
+import org.minbox.framework.api.boot.push.ApiBootMessagePushService;
+import org.minbox.framework.api.boot.push.annotation.MessagePushSwitch;
+import org.minbox.framework.api.boot.push.model.MessagePushBody;
+import org.minbox.framework.api.boot.push.model.PusherPlatform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +49,7 @@ public class MessagePushSampleService {
      * 注解 @MessagePushSwitch 添加时配置value，则使用配置的value配置
      * 对应api.boot.push.multiple的key
      *
-     * @see org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig
+     * @see org.minbox.framework.api.boot.push.model.PushClientConfig
      */
     //@MessagePushSwitch
     //@MessagePushSwitch("user")

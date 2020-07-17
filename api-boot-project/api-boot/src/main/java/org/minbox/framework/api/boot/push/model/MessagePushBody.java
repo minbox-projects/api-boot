@@ -15,13 +15,12 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.model;
+package org.minbox.framework.api.boot.push.model;
 
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 

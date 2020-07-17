@@ -15,11 +15,11 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push;
+package org.minbox.framework.api.boot.push;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.message.push.model.MessagePushBody;
-import org.minbox.framework.api.boot.plugin.message.push.model.PushClientConfig;
+import org.minbox.framework.api.boot.push.model.MessagePushBody;
+import org.minbox.framework.api.boot.push.model.PushClientConfig;
 
 /**
  * ApiBoot Message Push Service

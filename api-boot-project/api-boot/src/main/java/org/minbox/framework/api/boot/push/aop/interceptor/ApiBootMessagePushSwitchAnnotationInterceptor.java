@@ -15,12 +15,12 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.message.push.aop.interceptor;
+package org.minbox.framework.api.boot.push.aop.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.minbox.framework.api.boot.plugin.message.push.annotation.MessagePushSwitch;
-import org.minbox.framework.api.boot.plugin.message.push.aop.holder.MessagePushContextHolder;
+import org.minbox.framework.api.boot.push.annotation.MessagePushSwitch;
+import org.minbox.framework.api.boot.push.aop.holder.MessagePushContextHolder;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.util.ClassUtils;

@@ -47,10 +47,13 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot Plugin Message Push-->
         <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-message-push</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
         </dependency>
     </dependencies>
 </project>
