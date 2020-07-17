@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ import java.util.Map;
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(ApiBootDataSource.class)
+@ConditionalOnClass({ApiBootDataSource.class, AbstractRoutingDataSource.class})
 @EnableConfigurationProperties(ApiBootDataSourceSwitchProperties.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class ApiBootDataSourceSwitchAutoConfiguration {
