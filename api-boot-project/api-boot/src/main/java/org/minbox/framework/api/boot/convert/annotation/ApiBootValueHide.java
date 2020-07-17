@@ -15,33 +15,51 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.http.converter.filter.annotation;
+package org.minbox.framework.api.boot.convert.annotation;
+
+import org.minbox.framework.api.boot.convert.enums.ValueHidePositionEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.math.BigDecimal;
 
 /**
- * ApiBoot Decimal Accuracy
+ * ApiBoot Value Hide Value Filter
  *
  * @author 恒宇少年
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiBootDecimalAccuracy {
+public @interface ApiBootValueHide {
     /**
-     * Keep two decimal points
+     * hide length
      *
      * @return number
      */
-    int scale() default 2;
+    int length() default 0;
 
     /**
-     * BigDecimal round mode
+     * start hide position
      *
-     * @return mode
+     * @return start position
      */
-    int roundingMode() default BigDecimal.ROUND_DOWN;
+    int start() default 0;
+
+    /**
+     * Enumeration of hidden locations
+     * Start hiding after going (exclude value characters of excludeLength)
+     * Start hiding from the back (exclude the value of excludeLength characters)
+     *
+     * @return {@link ValueHidePositionEnum}
+     */
+    ValueHidePositionEnum position() default ValueHidePositionEnum.MIDDLE;
+
+    /**
+     * Replaced hidden placeholders
+     * the default value is "*"
+     *
+     * @return placeholder
+     */
+    String placeholder() default "*";
 }

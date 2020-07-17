@@ -15,7 +15,7 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.http.converter.filter.enums;
+package org.minbox.framework.api.boot.convert.enums;
 
 /**
  * Enumeration of hidden locations

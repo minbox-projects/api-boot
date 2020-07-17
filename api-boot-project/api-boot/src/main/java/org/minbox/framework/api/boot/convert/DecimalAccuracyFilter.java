@@ -15,10 +15,10 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.http.converter.filter;
+package org.minbox.framework.api.boot.convert;
 
 import com.alibaba.fastjson.serializer.ValueFilter;
-import org.minbox.framework.api.boot.plugin.http.converter.filter.annotation.ApiBootDecimalAccuracy;
+import org.minbox.framework.api.boot.convert.annotation.ApiBootDecimalAccuracy;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;

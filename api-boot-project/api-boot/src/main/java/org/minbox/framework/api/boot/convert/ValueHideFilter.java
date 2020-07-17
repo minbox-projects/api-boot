@@ -15,10 +15,11 @@
  *
  */
 
-package org.minbox.framework.api.boot.plugin.http.converter.filter;
+package org.minbox.framework.api.boot.convert;
 
 import com.alibaba.fastjson.serializer.ValueFilter;
-import org.minbox.framework.api.boot.plugin.http.converter.filter.annotation.ApiBootValueHide;
+import org.minbox.framework.api.boot.convert.annotation.ApiBootValueHide;
+import org.minbox.framework.api.boot.convert.enums.ValueHidePositionEnum;
 
 import java.lang.reflect.Field;
 
