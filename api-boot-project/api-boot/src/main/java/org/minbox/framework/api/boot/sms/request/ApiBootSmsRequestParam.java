@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.sms.request;
+package org.minbox.framework.api.boot.sms.request;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Getter;

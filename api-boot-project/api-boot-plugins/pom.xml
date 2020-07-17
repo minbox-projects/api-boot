@@ -19,7 +19,6 @@
     </properties>
     <modules>
         <module>api-boot-plugin</module>
-        <module>api-boot-plugin-alibaba-sms</module>
         <module>api-boot-plugin-security</module>
         <module>api-boot-plugin-oauth</module>
         <module>api-boot-plugin-quartz</module>

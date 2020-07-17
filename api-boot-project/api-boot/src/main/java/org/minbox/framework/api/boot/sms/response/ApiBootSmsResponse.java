@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.sms.response;
+package org.minbox.framework.api.boot.sms.response;
 
 import lombok.Builder;
 import lombok.Data;
