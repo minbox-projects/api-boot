@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.sequence;
+package org.minbox.framework.api.boot.sequence;
 
 import java.net.InetAddress;
 import java.util.concurrent.ThreadLocalRandom;

@@ -1,4 +1,4 @@
-package org.minbox.framework.api.boot.plugin.sequence;
+package org.minbox.framework.api.boot.sequence;
 
 
 import java.sql.Timestamp;

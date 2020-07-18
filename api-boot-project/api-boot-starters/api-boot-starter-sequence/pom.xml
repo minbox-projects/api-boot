@@ -42,10 +42,6 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-sequence</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

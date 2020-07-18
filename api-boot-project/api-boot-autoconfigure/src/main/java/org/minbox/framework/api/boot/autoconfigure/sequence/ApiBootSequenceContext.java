@@ -1,6 +1,7 @@
 package org.minbox.framework.api.boot.autoconfigure.sequence;
 
-import org.minbox.framework.api.boot.plugin.sequence.Sequence;
+
+import org.minbox.framework.api.boot.sequence.Sequence;
 
 /**
  * 封装{@link Sequence}的上下文
@@ -13,7 +14,7 @@ public class ApiBootSequenceContext {
     /**
      * 分布式唯一ID实例
      */
-    private Sequence sequence;
+    private final Sequence sequence;
 
     /**
      * 构造函数实例化{@link Sequence}
