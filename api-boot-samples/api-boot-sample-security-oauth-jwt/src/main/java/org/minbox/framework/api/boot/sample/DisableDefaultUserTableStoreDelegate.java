@@ -1,20 +1,11 @@
 package org.minbox.framework.api.boot.sample;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
+import org.minbox.framework.api.boot.secuirty.delegate.ApiBootStoreDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * 禁用默认的用户表结构

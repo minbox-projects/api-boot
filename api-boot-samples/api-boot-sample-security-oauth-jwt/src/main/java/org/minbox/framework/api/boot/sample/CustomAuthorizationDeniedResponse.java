@@ -1,8 +1,8 @@
 package org.minbox.framework.api.boot.sample;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import org.minbox.framework.api.boot.plugin.oauth.exception.ApiBootOAuth2Exception;
-import org.minbox.framework.api.boot.plugin.oauth.response.AuthorizationDeniedResponse;
+import org.minbox.framework.api.boot.oauth.exception.ApiBootOAuth2Exception;
+import org.minbox.framework.api.boot.oauth.response.AuthorizationDeniedResponse;
 import org.springframework.stereotype.Component;
 
 /**

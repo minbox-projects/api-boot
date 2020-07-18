@@ -16,8 +16,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
+import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

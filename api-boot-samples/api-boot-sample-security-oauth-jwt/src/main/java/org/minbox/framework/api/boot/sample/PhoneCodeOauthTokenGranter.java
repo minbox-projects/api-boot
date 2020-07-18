@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.sample;
 
-import org.minbox.framework.api.boot.plugin.oauth.exception.ApiBootTokenException;
-import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.oauth.exception.ApiBootTokenException;
+import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

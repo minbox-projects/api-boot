@@ -16,8 +16,10 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
+import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -51,11 +53,16 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "jdbc")
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootAuthorizationServerJdbcAutoConfiguration.class);
     private DataSource dataSource;
 
     public ApiBootAuthorizationServerJdbcAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, DataSource dataSource) {
         super(objectProvider, apiBootOauthProperties);
         this.dataSource = dataSource;
+        logger.info("ApiBoot Oauth2 initialize using jdbc.");
     }
 
     @Override

@@ -17,10 +17,10 @@
 package org.minbox.framework.api.boot.autoconfigure.security;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.plugin.security.SecurityUser;
+import org.minbox.framework.api.boot.secuirty.SecurityUser;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
+import org.minbox.framework.api.boot.secuirty.delegate.ApiBootStoreDelegate;
 
 import java.util.ArrayList;
 import java.util.List;

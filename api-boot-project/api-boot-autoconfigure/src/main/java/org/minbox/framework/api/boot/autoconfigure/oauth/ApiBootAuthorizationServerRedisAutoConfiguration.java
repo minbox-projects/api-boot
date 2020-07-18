@@ -17,28 +17,25 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
+import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-
-import javax.sql.DataSource;
 
 import java.util.List;
 
@@ -58,6 +55,10 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
     /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootAuthorizationServerRedisAutoConfiguration.class);
+    /**
      * redis connection factory
      */
     private RedisConnectionFactory redisConnectionFactory;
@@ -72,6 +73,7 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
     public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, RedisConnectionFactory redisConnectionFactory) {
         super(objectProvider, apiBootOauthProperties);
         this.redisConnectionFactory = redisConnectionFactory;
+        logger.info("ApiBoot Oauth2 initialize using redis.");
     }
 
     /**
