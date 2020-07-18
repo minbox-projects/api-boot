@@ -382,11 +382,6 @@
             <!--wait remove-->
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-sequence</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-plugin-resource-load</artifactId>
                 <version>${project.version}</version>
             </dependency>

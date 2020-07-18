@@ -202,13 +202,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!--Sequence-->
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-sequence</artifactId>
-            <optional>true</optional>
-        </dependency>
-
         <!--mongo-->
         <dependency>
             <groupId>org.mongodb</groupId>
