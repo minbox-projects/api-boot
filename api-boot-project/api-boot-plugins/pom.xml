@@ -20,6 +20,5 @@
     <modules>
         <module>api-boot-plugin</module>
         <module>api-boot-plugin-resource-load</module>
-        <module>api-boot-plugin-sequence</module>
     </modules>
 </project>

@@ -1,6 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.sequence;
 
-import org.minbox.framework.api.boot.plugin.sequence.Sequence;
+import org.minbox.framework.api.boot.sequence.Sequence;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,7 +19,7 @@ public class ApiBootSequenceAutoConfiguration {
     /**
      * 注入 "Sequence" 所需要的属性配置类
      */
-    private ApiBootSequenceProperties apiBootSequenceProperties;
+    private final ApiBootSequenceProperties apiBootSequenceProperties;
 
     public ApiBootSequenceAutoConfiguration(ApiBootSequenceProperties apiBootSequenceProperties) {
         this.apiBootSequenceProperties = apiBootSequenceProperties;
