@@ -16,10 +16,12 @@
 
 package org.minbox.framework.api.boot.autoconfigure.security;
 
-import org.minbox.framework.api.boot.plugin.security.ApiBootWebSecurityConfiguration;
-import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootDefaultStoreDelegate;
-import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
-import org.minbox.framework.api.boot.plugin.security.userdetails.ApiBootUserDetailsService;
+import org.minbox.framework.api.boot.secuirty.ApiBootWebSecurityConfiguration;
+import org.minbox.framework.api.boot.secuirty.delegate.ApiBootDefaultStoreDelegate;
+import org.minbox.framework.api.boot.secuirty.delegate.ApiBootStoreDelegate;
+import org.minbox.framework.api.boot.secuirty.userdetails.ApiBootUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -53,9 +55,14 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecuri
 @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = "jdbc")
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class ApiBootWebSecurityJdbcAutoConfiguration extends ApiBootWebSecurityAutoConfiguration {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootWebSecurityJdbcAutoConfiguration.class);
 
     public ApiBootWebSecurityJdbcAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties, ObjectProvider<AccessDeniedHandler> accessDeniedHandler, ObjectProvider<AuthenticationEntryPoint> authenticationEntryPoint) {
         super(apiBootSecurityProperties, accessDeniedHandler.getIfAvailable(), authenticationEntryPoint.getIfAvailable());
+        logger.info("ApiBoot Security initialize using jdbc.");
     }
 
     @Override

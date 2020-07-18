@@ -16,8 +16,10 @@
 
 package org.minbox.framework.api.boot.autoconfigure.security;
 
-import org.minbox.framework.api.boot.plugin.security.ApiBootWebSecurityConfiguration;
-import org.minbox.framework.api.boot.plugin.security.SecurityUser;
+import org.minbox.framework.api.boot.secuirty.ApiBootWebSecurityConfiguration;
+import org.minbox.framework.api.boot.secuirty.SecurityUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -50,19 +52,22 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecuri
 @ConditionalOnClass(ApiBootWebSecurityConfiguration.class)
 @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = "memory", matchIfMissing = true)
 public class ApiBootWebSecurityMemoryAutoConfiguration extends ApiBootWebSecurityAutoConfiguration {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootWebSecurityMemoryAutoConfiguration.class);
+
     public ApiBootWebSecurityMemoryAutoConfiguration(ApiBootSecurityProperties apiBootSecurityProperties, ObjectProvider<AccessDeniedHandler> accessDeniedHandler, ObjectProvider<AuthenticationEntryPoint> authenticationEntryPoint) {
         super(apiBootSecurityProperties, accessDeniedHandler.getIfAvailable(), authenticationEntryPoint.getIfAvailable());
+        logger.info("ApiBoot Security initialize using memory.");
     }
 
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager memoryUserDetails = new InMemoryUserDetailsManager();
+        InMemoryUserDetailsManager memoryUserDetailsManager = new InMemoryUserDetailsManager();
         List<SecurityUser> users = apiBootSecurityProperties.getUsers();
-        if (!ObjectUtils.isEmpty(users)) {
-            return memoryUserDetails;
-        }
-        for (SecurityUser securityUser : users) {
+        users.forEach(securityUser -> {
             String encoderPassword = passwordEncoder().encode(securityUser.getPassword());
             UserDetails userDetails =
                 User.builder()
@@ -70,8 +75,8 @@ public class ApiBootWebSecurityMemoryAutoConfiguration extends ApiBootWebSecurit
                     .password(encoderPassword)
                     .roles(securityUser.getRoles())
                     .build();
-            memoryUserDetails.createUser(userDetails);
-        }
-        return memoryUserDetails;
+            memoryUserDetailsManager.createUser(userDetails);
+        });
+        return memoryUserDetailsManager;
     }
 }

@@ -196,16 +196,6 @@
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-security</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-plugin-oauth</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
                 <version>${project.version}</version>
             </dependency>

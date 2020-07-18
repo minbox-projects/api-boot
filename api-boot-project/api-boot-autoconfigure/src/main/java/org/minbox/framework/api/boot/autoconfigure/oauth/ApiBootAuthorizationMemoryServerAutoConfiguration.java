@@ -16,8 +16,10 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.plugin.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.plugin.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
+import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -46,8 +48,14 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @EnableAuthorizationServer
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "memory", matchIfMissing = true)
 public class ApiBootAuthorizationMemoryServerAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(ApiBootAuthorizationMemoryServerAutoConfiguration.class);
+
     public ApiBootAuthorizationMemoryServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
         super(objectProvider, apiBootOauthProperties);
+        logger.info("ApiBoot Oauth2 initialize using memory.");
     }
 
     /**

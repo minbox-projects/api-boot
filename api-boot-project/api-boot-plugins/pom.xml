@@ -19,8 +19,6 @@
     </properties>
     <modules>
         <module>api-boot-plugin</module>
-        <module>api-boot-plugin-security</module>
-        <module>api-boot-plugin-oauth</module>
         <module>api-boot-plugin-resource-load</module>
         <module>api-boot-plugin-sequence</module>
     </modules>

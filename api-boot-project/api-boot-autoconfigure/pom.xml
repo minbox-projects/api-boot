@@ -98,20 +98,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!--ApiBoot Security Plugin-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-security</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--ApiBoot Oauth Plugin-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-oauth</artifactId>
-            <optional>true</optional>
-        </dependency>
-
         <!--ApiBoot Quartz Plugin-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
