@@ -82,11 +82,6 @@
         </dependency>
         <dependency>
             <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-resource-load</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-tools</artifactId>
         </dependency>
 

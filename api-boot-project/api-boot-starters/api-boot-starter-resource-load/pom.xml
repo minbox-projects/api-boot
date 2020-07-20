@@ -50,11 +50,6 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot Resource Load Plugin-->
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-plugin-resource-load</artifactId>
-        </dependency>
         <!--SpringBoot Aop-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

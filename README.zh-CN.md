@@ -129,9 +129,6 @@ ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新�
 
 该模块继承自`api-boot-dependencies`，可直接使用固化版本后的依赖，是构建其他模块的统一父依赖。
 
-### api-boot-plugins
-
-该模块提供了集成第三方依赖的插件列表，每当新增集成一个第三方组件都会在该模块下对应创建一个子模块、
 
 ### api-boot-starters
 

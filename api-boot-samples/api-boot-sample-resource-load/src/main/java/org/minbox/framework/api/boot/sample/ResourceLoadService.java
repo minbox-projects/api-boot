@@ -18,7 +18,7 @@
 package org.minbox.framework.api.boot.sample;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
+import org.minbox.framework.api.boot.resource.ApiBootResourceStoreDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

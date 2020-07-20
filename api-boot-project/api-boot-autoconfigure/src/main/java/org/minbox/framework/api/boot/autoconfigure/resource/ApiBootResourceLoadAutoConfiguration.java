@@ -16,11 +16,11 @@
  */
 package org.minbox.framework.api.boot.autoconfigure.resource;
 
-import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
-import org.minbox.framework.api.boot.plugin.resource.load.aop.advistor.ApiBootResourceLoadAdvisor;
-import org.minbox.framework.api.boot.plugin.resource.load.aop.interceptor.ApiBootResourceLoadMethodInterceptor;
-import org.minbox.framework.api.boot.plugin.resource.load.pusher.ApiBootResourcePusher;
-import org.minbox.framework.api.boot.plugin.resource.load.pusher.support.ApiBootMemoryResourcePusher;
+import org.minbox.framework.api.boot.resource.ApiBootResourceStoreDelegate;
+import org.minbox.framework.api.boot.resource.aop.advistor.ApiBootResourceLoadAdvisor;
+import org.minbox.framework.api.boot.resource.aop.interceptor.ApiBootResourceLoadMethodInterceptor;
+import org.minbox.framework.api.boot.resource.pusher.ApiBootResourcePusher;
+import org.minbox.framework.api.boot.resource.pusher.support.ApiBootMemoryResourcePusher;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -32,13 +32,7 @@ import org.springframework.context.annotation.Import;
 /**
  * ApiBoot Resource Load Auto Config
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-12 13:30
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass(ApiBootResourceStoreDelegate.class)
