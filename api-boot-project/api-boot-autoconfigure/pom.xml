@@ -76,12 +76,12 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-common</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-plugin-resource-load</artifactId>
             <optional>true</optional>
         </dependency>
@@ -107,22 +107,22 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-logging-client</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-logging-admin</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-logging-admin-ui</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-logging-spring-context</artifactId>
             <optional>true</optional>
         </dependency>
