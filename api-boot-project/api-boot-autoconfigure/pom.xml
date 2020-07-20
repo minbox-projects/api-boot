@@ -14,43 +14,141 @@
         <main.basedir>${basedir}/../..</main.basedir>
     </properties>
     <dependencies>
-        <!--自动生成配置信息-->
+        <!--SpringBoot Dependencies-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
-        <!--ApiBoot-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--SpringCloud Dependencies-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--Spring Dependencies-->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--ApiBoot Dependencies-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--ApiBoot Common-->
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-common</artifactId>
+            <optional>true</optional>
         </dependency>
-        <!--lombok-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-plugin-resource-load</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-tools</artifactId>
+        </dependency>
+
+        <!--MinBox Dependencies-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-pageable-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-dsl</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-client</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-admin</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-admin-ui</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-logging-spring-context</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-mongo-client-settings</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--Others-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
-        <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--reflections-->
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -66,97 +164,11 @@
             <artifactId>springfox-bean-validators</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--spring web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--spring boot security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--security oauth2-->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--jwt-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--Aliyun oss-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--ApiBoot Quartz Plugin-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--ApiBoot DataSource Switch-->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--ApiBoot Resource Load-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>api-boot-plugin-resource-load</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!--Spring Boot Redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--ApiBoot Mybatis Pageable-->
-        <dependency>
-            <groupId>com.gitee.hengboy</groupId>
-            <artifactId>mybatis-pageable-core</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--ApiBoot Mybatis Enhance-->
-        <dependency>
-            <groupId>com.gitee.hengboy</groupId>
-            <artifactId>mybatis-enhance-core</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.gitee.hengboy</groupId>
-            <artifactId>mybatis-enhance-dsl</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--Nacos Config-->
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-starter</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--Aliyun-->
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
@@ -172,50 +184,19 @@
             <artifactId>aliyun-java-sdk-dm</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--MinBox Logging-->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>minbox-logging-client</artifactId>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>minbox-logging-admin</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>minbox-logging-admin-ui</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>minbox-logging-spring-context</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--SpringCloud Openfeign-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--mongo-->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>minbox-mongo-client-settings</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -232,11 +213,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <optional>true</optional>
-        </dependency>
-        <!--apiboot tools-->
-        <dependency>
-            <groupId>org.minbox.framework</groupId>
-            <artifactId>api-boot-tools</artifactId>
         </dependency>
     </dependencies>
     <build>
