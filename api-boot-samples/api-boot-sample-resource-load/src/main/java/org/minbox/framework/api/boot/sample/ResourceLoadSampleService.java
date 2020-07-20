@@ -18,10 +18,10 @@
 package org.minbox.framework.api.boot.sample;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceFields;
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceLoad;
-import org.minbox.framework.api.boot.plugin.resource.load.enums.ResourceStoreEvent;
+import org.minbox.framework.api.boot.resource.annotation.ResourceField;
+import org.minbox.framework.api.boot.resource.annotation.ResourceFields;
+import org.minbox.framework.api.boot.resource.annotation.ResourceLoad;
+import org.minbox.framework.api.boot.resource.enums.ResourceStoreEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

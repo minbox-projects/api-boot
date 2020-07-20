@@ -17,7 +17,6 @@
         <module>api-boot-autoconfigure</module>
         <module>api-boot-starters</module>
         <module>api-boot-common</module>
-        <module>api-boot-plugins</module>
         <module>api-boot-maven-plugins</module>
         <module>api-boot-tools</module>
         <module>api-boot</module>

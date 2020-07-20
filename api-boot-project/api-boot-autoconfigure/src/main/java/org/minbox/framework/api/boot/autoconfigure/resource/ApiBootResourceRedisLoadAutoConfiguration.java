@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.resource;
 
-import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
-import org.minbox.framework.api.boot.plugin.resource.load.pusher.support.ApiBootRedisResourcePusher;
+import org.minbox.framework.api.boot.resource.ApiBootResourceStoreDelegate;
+import org.minbox.framework.api.boot.resource.pusher.support.ApiBootRedisResourcePusher;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -29,13 +29,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-19 10:46
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * Automatic configuration implemented by Redis
+ *
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnClass(RedisTemplate.class)
