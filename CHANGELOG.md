@@ -1,10 +1,32 @@
-## 2.2.7.RELEASE更新日志（2020-7-7日发布）
+## v2.3.0（2020-07-21）
+
+- 变更项目根模块的 "artifactId" 为 "api-boot-build"
+- 新增 "api-boot-project/api-boot" 模块
+- 将 "api-boot-plugin-alibaba-oss" 模块代码逻辑迁移至 "api-boot"模块
+- 将 "api-boot-plugin-mail" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-sms" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-datasource-switch" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-http-convert" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-message-push" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-quartz" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-rate-limiter" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-oauth" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-sequence" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-security" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-resource-load" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "${project.groupId}" 变量替换为 "org.minbox.framework"
+- 分组 "api-boot-dependencies" 固化版本的依赖列表
+- 配置banner使用 "${api-boot.version}" 变量，保持输出版本号与项目一致
+- 新增 "api-boot-tools" 模块，提供常用工具类，如：ApplicationContextTools、BeanFactoryTools...
+- "api-boot-mybatis-enhance-maven-codegen" 插件新增 "TypeMapping" 配置项，可配置Jdbc与Java类型的映射
+
+## v2.2.7（2020-07-07）
 
 - 新增mongo-client-settings组件（扩展SpringBoot Mongo配置）
 - 修复Swagger组件使用spring-boot-starter-validation（SpringBoot v2.3.x+）
 - 更新部分源码注释内容
 
-## 2.2.6.RELEASE更新日志（2020-6-22日发布）
+## v2.2.6（2020-06-22）
 
 - 新增ApiBoot OAuth2的刷新令牌过期配置参数
 - 升级Spring/SpringBoot依赖版本为v5.2.7/v.2.3.1
@@ -13,26 +35,26 @@
 - 升级flatten-maven-plugin插件版本
 - 删除默认集成SpringCloud的指定版本（防止与业务系统版本冲突）
 
-## 2.2.5.RELEASE更新日志（2020-5-8日发布）
+## v2.2.5（2020-05-08）
 - 集成ApiBoot Sequence分布式高效ID插件
 - 添加ApiBootSequenceContext用于生成String/Long类型的ID
 - 通过ApiBootSequenceProperties可配置数据中心编号、工作机器编号、回拨毫秒量等属性
 - fix bugs
 
-## 2.2.4.RELEASE更新日志（2020-4-29日发布）
+## v2.2.4（2020-04-29）
 - 指定使用Spring版本为v5.2.5
 - 升级使用MyBatis Enhance版本为v1.1.2
 - 升级使用Nacos版本为v0.2.7
 - 升级使用Quartz使用版本为v2.3.2
 - 升级使用Guava版本为v29.0-jre
 
-## 2.2.3.RELEASE更新日志（2020-4-14日发布）
+## v2.2.3（2020-04-14）
 - 升级SpringBoot为v2.2.6
 - 添加MyBatis Enhance支持自定义操作SqlSessionFactoryBean接口
 - 升级minbox-logging为v1.0.4
 - 修改javadoc编译错误问题
 
-## 2.2.2.RELEASE更新日志（2020-1-6日发布）
+## v2.2.2（2020-01-06）
 - 支持自定义认证服务器OAuth2认证失败时响应内容，详见：[I17O6B](https://gitee.com/minbox-projects/api-boot/issues/I17O6B)
 - 回退fastJson版本为1.2.60
 - 升级分布式链路日志minbox-logging为1.0.3.RELEASE
@@ -42,7 +64,7 @@
 - 统一部分源码类上的注释格式
 - ApiBoot提供`WebResponseExceptionTranslator`实现类[ApiBootWebResponseExceptionTranslator](https://gitee.com/minbox-projects/api-boot/blob/master/api-boot-project/api-boot-plugins/api-boot-plugin-oauth/src/main/java/org/minbox/framework/api/boot/plugin/oauth/translator/ApiBootWebResponseExceptionTranslator.java) ，用于处理OAuth2Exception异常。
 
-## 2.2.1.RELEASE更新日志(2019-12-16日发布)
+## v2.2.1（2019-12-16）
 - 升级SpringBoot版本为2.2.2.RELEASE
 - 升级minbox-logging版本为1.0.3.RC1
 - 升级minbox-framework版本为1.0.2.RELEASE
@@ -52,7 +74,7 @@
 - 添加api.boot.logging.global-logging-storage-away参数配置，默认为memory内存方式
 - 添加logging_global_logs表结构
 
-## 2.2.0.RELEASE更新日志（2019-11-29日发布）
+## v2.2.0（2019-11-29）
 - 支持SpringBoot2.2.0以上版本分支
 - 升级SpringCloud版本为Hoxton.RELEASE
 - 升级druid版本为1.1.21
@@ -61,7 +83,7 @@
 - 修改ApiBootDefaultAuthenticationEntryPoint返回json字符串的方式为fastJson
 - 修改ApiBootDefaultAccessDeniedHandler返回json字符串方式为fastJson
 
-## 2.1.5.RELEASE更新日志(2019-11-6日发布)
+## v2.1.5（2019-11-06）
 
 - 新增ApiBoot Alibaba Oss西南成都地域
 - 修复ApiBoot Logging与Seata提供的openfeign拦截器冲突问题
@@ -72,7 +94,7 @@
 - 修复ReadMe公众号不显示问题
 - 修复Banner输出版本错误问题
 
-## 2.1.4.RELEASE(2019-9-17日发布)
+## v2.1.4（2019-09-17）
 
 - Logging 废除`LoggingStorageAutoConfiguration`配置类
 
@@ -106,7 +128,7 @@
 
   
 
-## 2.1.3.RELEASE (2019-8-15日发布)
+## v2.1.3（2019-08-15）
 
 - 修复 #IZQCY
 - `logging-client`支持`restTemplate`方式透传链路信息
@@ -125,7 +147,7 @@
 - 支持自定义`logging-admin-ui`界面的title
 - `logging-admin-ui`可查看每条链路日志的详情
 
-## 2.1.2.RELEASE（2019-7-24日发布）
+## v2.1.2（2019-07-24）
 
 - ApiBoot Logging
   - 可配置指定路径前缀下的请求采集上报日志
@@ -145,7 +167,8 @@
   - 支持记录具体上报日志的服务信息
   - 支持数据源方式存储请求日志
   - 支持SpringSecurity配置保护日志上报安全性
-### 2.1.1.RELEASE (2019-7-16日发布)
+## v2.1.1 (2019-07-16)
+
 - ApiBoot Logging 初版发布
    - 0侵入代码设计
    - 支持链路日志输出
@@ -164,8 +187,8 @@
    - 丰富示例
    - 官网文档更新
 
+## v2.1.0（2019-06-25）
 
-### 2.1.0.RELEASE（2019-6-25日发布）
 - ApiBoot Mail
   - 初版发布(集成阿里云邮件服务)
 - ApiBoot Mybatis Pageable
