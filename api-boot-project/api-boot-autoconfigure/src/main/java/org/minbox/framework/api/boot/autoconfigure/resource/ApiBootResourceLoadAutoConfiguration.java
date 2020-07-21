@@ -16,11 +16,11 @@
  */
 package org.minbox.framework.api.boot.autoconfigure.resource;
 
-import org.minbox.framework.api.boot.resource.ApiBootResourceStoreDelegate;
-import org.minbox.framework.api.boot.resource.aop.advistor.ApiBootResourceLoadAdvisor;
-import org.minbox.framework.api.boot.resource.aop.interceptor.ApiBootResourceLoadMethodInterceptor;
-import org.minbox.framework.api.boot.resource.pusher.ApiBootResourcePusher;
-import org.minbox.framework.api.boot.resource.pusher.support.ApiBootMemoryResourcePusher;
+import org.minbox.framework.resource.ResourceStoreDelegate;
+import org.minbox.framework.resource.aop.advistor.ResourceLoadAdvisor;
+import org.minbox.framework.resource.aop.interceptor.ResourceLoadMethodInterceptor;
+import org.minbox.framework.resource.pusher.ResourcePusher;
+import org.minbox.framework.resource.pusher.support.MemoryResourcePusher;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -35,15 +35,15 @@ import org.springframework.context.annotation.Import;
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(ApiBootResourceStoreDelegate.class)
+@ConditionalOnClass(ResourceStoreDelegate.class)
 @Import(ApiBootResourceRedisLoadAutoConfiguration.class)
 public class ApiBootResourceLoadAutoConfiguration {
     /**
      * ApiBoot Resource Load Store Delegate
      */
-    private ApiBootResourceStoreDelegate resourceStoreDelegate;
+    private ResourceStoreDelegate resourceStoreDelegate;
 
-    public ApiBootResourceLoadAutoConfiguration(ObjectProvider<ApiBootResourceStoreDelegate> resourceStoreDelegateObjectProvider) {
+    public ApiBootResourceLoadAutoConfiguration(ObjectProvider<ResourceStoreDelegate> resourceStoreDelegateObjectProvider) {
         this.resourceStoreDelegate = resourceStoreDelegateObjectProvider.getIfAvailable();
     }
 
@@ -55,8 +55,8 @@ public class ApiBootResourceLoadAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootResourceLoadAdvisor resourceLoadAdvisor(ApiBootResourceLoadMethodInterceptor resourceLoadMethodInterceptor) {
-        return new ApiBootResourceLoadAdvisor(resourceLoadMethodInterceptor);
+    ResourceLoadAdvisor resourceLoadAdvisor(ResourceLoadMethodInterceptor resourceLoadMethodInterceptor) {
+        return new ResourceLoadAdvisor(resourceLoadMethodInterceptor);
     }
 
     /**
@@ -67,8 +67,8 @@ public class ApiBootResourceLoadAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootResourceLoadMethodInterceptor resourceLoadMethodInterceptor(ApiBootResourcePusher apiBootResourcePusher) {
-        return new ApiBootResourceLoadMethodInterceptor(apiBootResourcePusher);
+    ResourceLoadMethodInterceptor resourceLoadMethodInterceptor(ResourcePusher apiBootResourcePusher) {
+        return new ResourceLoadMethodInterceptor(apiBootResourcePusher);
     }
 
     /**
@@ -80,7 +80,7 @@ public class ApiBootResourceLoadAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnMissingClass("org.springframework.data.redis.core.RedisTemplate")
-    ApiBootMemoryResourcePusher apiBootMemoryResourcePusher() {
-        return new ApiBootMemoryResourcePusher(resourceStoreDelegate);
+    MemoryResourcePusher apiBootMemoryResourcePusher() {
+        return new MemoryResourcePusher(resourceStoreDelegate);
     }
 }
