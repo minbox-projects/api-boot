@@ -17,13 +17,13 @@
 
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
 
-import org.minbox.framework.api.boot.limiter.ApiBootRateLimiter;
-import org.minbox.framework.api.boot.limiter.aop.advisor.ApiBootRateLimiterAdvisor;
-import org.minbox.framework.api.boot.limiter.aop.interceptor.ApiBootRateLimiterMethodInterceptor;
-import org.minbox.framework.api.boot.limiter.centre.RateLimiterConfigCentre;
-import org.minbox.framework.api.boot.limiter.centre.support.DefaultRateLimiterConfigCentre;
-import org.minbox.framework.api.boot.limiter.result.RateLimiterOverFlowResponse;
-import org.minbox.framework.api.boot.limiter.support.GoogleGuavaRateLimiter;
+import org.minbox.framework.limiter.MinBoxRateLimiter;
+import org.minbox.framework.limiter.aop.advisor.RateLimiterAdvisor;
+import org.minbox.framework.limiter.aop.interceptor.RateLimiterMethodInterceptor;
+import org.minbox.framework.limiter.centre.RateLimiterConfigCentre;
+import org.minbox.framework.limiter.centre.support.DefaultRateLimiterConfigCentre;
+import org.minbox.framework.limiter.result.RateLimiterOverFlowResponse;
+import org.minbox.framework.limiter.support.GoogleGuavaRateLimiter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -41,7 +41,7 @@ import org.springframework.context.annotation.Import;
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(ApiBootRateLimiter.class)
+@ConditionalOnClass(MinBoxRateLimiter.class)
 @EnableConfigurationProperties(ApiBootRateLimiterProperties.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 @Import({ApiBootRateLimiterRedisAutoConfiguration.class, ApiBootRateLimiterNacosConfigConfiguration.class})
@@ -69,7 +69,7 @@ public class ApiBootRateLimiterAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnMissingClass("org.springframework.data.redis.core.RedisTemplate")
-    public ApiBootRateLimiter googleGuavaRateLimiter(RateLimiterConfigCentre rateLimiterConfigCentre) {
+    public MinBoxRateLimiter googleGuavaRateLimiter(RateLimiterConfigCentre rateLimiterConfigCentre) {
         return new GoogleGuavaRateLimiter(apiBootRateLimiterProperties.isEnableGlobalQps() ? apiBootRateLimiterProperties.getGlobalQps() : 0L, rateLimiterConfigCentre);
     }
 
@@ -88,13 +88,13 @@ public class ApiBootRateLimiterAutoConfiguration {
     /**
      * ApiBoot RateLimiter Pointcut Advisor
      *
-     * @param apiBootRateLimiterMethodInterceptor ResourceLoad Annotation Method Interceptor
+     * @param rateLimiterMethodInterceptor ResourceLoad Annotation Method Interceptor
      * @return ApiBootRateLimiterAdvisor
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootRateLimiterAdvisor rateLimiterAdvisor(ApiBootRateLimiterMethodInterceptor apiBootRateLimiterMethodInterceptor) {
-        return new ApiBootRateLimiterAdvisor(apiBootRateLimiterMethodInterceptor);
+    RateLimiterAdvisor rateLimiterAdvisor(RateLimiterMethodInterceptor rateLimiterMethodInterceptor) {
+        return new RateLimiterAdvisor(rateLimiterMethodInterceptor);
     }
 
     /**
@@ -106,7 +106,7 @@ public class ApiBootRateLimiterAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootRateLimiterMethodInterceptor rateLimiterMethodInterceptor(ApiBootRateLimiter apiBootRateLimiter) {
-        return new ApiBootRateLimiterMethodInterceptor(apiBootRateLimiter, rateLimiterOverFlowResponse);
+    RateLimiterMethodInterceptor rateLimiterMethodInterceptor(MinBoxRateLimiter apiBootRateLimiter) {
+        return new RateLimiterMethodInterceptor(apiBootRateLimiter, rateLimiterOverFlowResponse);
     }
 }

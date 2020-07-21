@@ -50,6 +50,10 @@
             <artifactId>api-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-ratelimiter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
