@@ -11,7 +11,7 @@
 - 将 "api-boot-plugin-quartz" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-rate-limiter" 插件从项目中抽离作为独立项目存在，[minbox-ratelimiter](https://github.com/minbox-projects/minbox-ratelimiter)
 - 将 "api-boot-plugin-oauth" 模块代码逻辑迁移至 "api-boot" 模块
-- 将 "api-boot-plugin-sequence" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-sequence" 插件从项目中抽离作为独立项目存在，[minbox-sequence](https://github.com/minbox-projects/minbox-sequence)
 - 将 "api-boot-plugin-security" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-resource-load" 插件从项目中抽离作为独立项目存在，[minbox-resource-load](https://github.com/minbox-projects/minbox-resource-load)
 - 将 "${project.groupId}" 变量替换为 "org.minbox.framework"
