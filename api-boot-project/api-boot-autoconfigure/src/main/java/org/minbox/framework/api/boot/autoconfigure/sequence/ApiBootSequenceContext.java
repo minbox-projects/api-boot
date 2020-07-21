@@ -1,7 +1,7 @@
 package org.minbox.framework.api.boot.autoconfigure.sequence;
 
 
-import org.minbox.framework.api.boot.sequence.Sequence;
+import org.minbox.framework.sequence.Sequence;
 
 /**
  * 封装{@link Sequence}的上下文
