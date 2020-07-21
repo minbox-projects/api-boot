@@ -126,6 +126,16 @@
             <artifactId>minbox-mongo-client-settings</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-ratelimiter</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-resource-load</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <!--Others-->
         <dependency>

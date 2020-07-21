@@ -16,9 +16,9 @@
  */
 
 package org.minbox.framework.api.boot.autoconfigure.ratelimiter;
-import org.minbox.framework.api.boot.limiter.ApiBootRateLimiter;
-import org.minbox.framework.api.boot.limiter.centre.RateLimiterConfigCentre;
-import org.minbox.framework.api.boot.limiter.support.RedisLuaRateLimiter;
+import org.minbox.framework.limiter.MinBoxRateLimiter;
+import org.minbox.framework.limiter.centre.RateLimiterConfigCentre;
+import org.minbox.framework.limiter.support.RedisLuaRateLimiter;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -56,7 +56,7 @@ public class ApiBootRateLimiterRedisAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootRateLimiter redisLuaRateLimiter(RedisTemplate redisTemplate, RateLimiterConfigCentre rateLimiterConfigCentre) {
+    public MinBoxRateLimiter redisLuaRateLimiter(RedisTemplate redisTemplate, RateLimiterConfigCentre rateLimiterConfigCentre) {
         return new RedisLuaRateLimiter(apiBootRateLimiterProperties.isEnableGlobalQps() ? apiBootRateLimiterProperties.getGlobalQps() : 0L, rateLimiterConfigCentre, redisTemplate);
     }
 }

@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.resource;
 
-import org.minbox.framework.api.boot.resource.ApiBootResourceStoreDelegate;
-import org.minbox.framework.api.boot.resource.pusher.support.ApiBootRedisResourcePusher;
+import org.minbox.framework.resource.ResourceStoreDelegate;
+import org.minbox.framework.resource.pusher.support.RedisResourcePusher;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -40,9 +40,9 @@ public class ApiBootResourceRedisLoadAutoConfiguration {
     /**
      * ApiBoot Resource Load Store Delegate
      */
-    private ApiBootResourceStoreDelegate resourceStoreDelegate;
+    private ResourceStoreDelegate resourceStoreDelegate;
 
-    public ApiBootResourceRedisLoadAutoConfiguration(ObjectProvider<ApiBootResourceStoreDelegate> resourceStoreDelegateObjectProvider) {
+    public ApiBootResourceRedisLoadAutoConfiguration(ObjectProvider<ResourceStoreDelegate> resourceStoreDelegateObjectProvider) {
         this.resourceStoreDelegate = resourceStoreDelegateObjectProvider.getIfAvailable();
     }
 
@@ -54,7 +54,7 @@ public class ApiBootResourceRedisLoadAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootRedisResourcePusher apiBootRedisResourcePusher(RedisTemplate redisTemplate) {
-        return new ApiBootRedisResourcePusher(resourceStoreDelegate, redisTemplate);
+    RedisResourcePusher apiBootRedisResourcePusher(RedisTemplate redisTemplate) {
+        return new RedisResourcePusher(resourceStoreDelegate, redisTemplate);
     }
 }
