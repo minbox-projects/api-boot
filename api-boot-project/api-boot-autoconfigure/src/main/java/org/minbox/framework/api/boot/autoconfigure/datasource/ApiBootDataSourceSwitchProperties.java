@@ -1,8 +1,8 @@
 package org.minbox.framework.api.boot.autoconfigure.datasource;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
-import org.minbox.framework.api.boot.datasource.config.DataSourceHikariConfig;
+import org.minbox.framework.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.datasource.config.DataSourceHikariConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

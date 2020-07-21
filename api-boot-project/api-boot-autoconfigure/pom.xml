@@ -136,6 +136,12 @@
             <artifactId>minbox-resource-load</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-datasource-switch</artifactId>
+            <optional>true</optional>
+        </dependency>
+
 
         <!--Others-->
         <dependency>
