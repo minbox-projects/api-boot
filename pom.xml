@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.minbox.framework</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>0.1.0.RELEASE</version>
+        <version>0.2.0.RELEASE</version>
         <relativePath>../oss-parent</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -18,7 +18,7 @@
     <version>${revision}</version>
     <name>ApiBoot Build</name>
     <properties>
-        <revision>2.3.0-SNAPSHOT</revision>
+        <revision>2.3.0.RELEASE</revision>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +29,22 @@
     <description>
         ApiBoot is a component service solution.
     </description>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>hengboy</id>
+            <name>恒宇少年 - 于起宇</name>
+            <url>https://blog.yuqiyu.com</url>
+            <organization>minbox-projects</organization>
+            <organizationUrl>https://gitee.com/minbox-projects</organizationUrl>
+            <email>jnyuqy@gmail.com</email>
+        </developer>
+    </developers>
     <build>
         <plugins>
             <!--jdk version-->
