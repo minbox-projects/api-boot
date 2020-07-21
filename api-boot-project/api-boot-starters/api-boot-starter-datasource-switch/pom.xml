@@ -27,17 +27,14 @@
         <tag>HEAD</tag>
     </scm>
     <dependencies>
-        <!--ApiBoot Starter-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--SpringBoot Jdbc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <!--SpringBoot Aop-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -45,6 +42,10 @@
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-datasource-switch</artifactId>
         </dependency>
     </dependencies>
 </project>

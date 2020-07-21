@@ -1,14 +1,15 @@
 package org.minbox.framework.api.boot.autoconfigure.datasource;
 
-import org.minbox.framework.api.boot.datasource.ApiBootDataSource;
-import org.minbox.framework.api.boot.datasource.ApiBootDataSourceFactoryBean;
-import org.minbox.framework.api.boot.datasource.aop.advistor.ApiBootDataSourceSwitchAdvisor;
-import org.minbox.framework.api.boot.datasource.aop.interceptor.ApiBootDataSourceSwitchAnnotationInterceptor;
-import org.minbox.framework.api.boot.datasource.config.DataSourceConfig;
-import org.minbox.framework.api.boot.datasource.config.DataSourceDruidConfig;
-import org.minbox.framework.api.boot.datasource.routing.ApiBootRoutingDataSource;
-import org.minbox.framework.api.boot.datasource.support.ApiBootDruidDataSource;
-import org.minbox.framework.api.boot.datasource.support.ApiBootHikariDataSource;
+import com.alibaba.druid.pool.DruidDataSource;
+import org.minbox.framework.datasource.DataSourceFactoryBean;
+import org.minbox.framework.datasource.MinBoxDataSource;
+import org.minbox.framework.datasource.aop.advistor.DataSourceSwitchAdvisor;
+import org.minbox.framework.datasource.aop.interceptor.DataSourceSwitchAnnotationInterceptor;
+import org.minbox.framework.datasource.config.DataSourceConfig;
+import org.minbox.framework.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.datasource.routing.ApiBootRoutingDataSource;
+import org.minbox.framework.datasource.support.MinBoxDruidDataSource;
+import org.minbox.framework.datasource.support.MinBoxHikariDataSource;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass({ApiBootDataSource.class, AbstractRoutingDataSource.class})
+@ConditionalOnClass({MinBoxDataSource.class, AbstractRoutingDataSource.class})
 @EnableConfigurationProperties(ApiBootDataSourceSwitchProperties.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class ApiBootDataSourceSwitchAutoConfiguration {
@@ -51,8 +52,8 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootDataSourceFactoryBean apiBootDataSourceFactoryBean() {
-        return new ApiBootDataSourceFactoryBean();
+    public DataSourceFactoryBean dataSourceFactoryBean() {
+        return new DataSourceFactoryBean();
     }
 
     /**
@@ -60,12 +61,12 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
      * switch use datasource
      * {@link DataSource}
      *
-     * @param apiBootDataSourceFactoryBean ApiBoot DataSource FactoryBean
+     * @param dataSourceFactoryBean ApiBoot DataSource FactoryBean
      * @return DataSource
      */
     @Bean
     @ConditionalOnMissingBean
-    public DataSource dataSource(ApiBootDataSourceFactoryBean apiBootDataSourceFactoryBean) {
+    public DataSource dataSource(DataSourceFactoryBean dataSourceFactoryBean) {
         List<DataSourceConfig> dataSourceConfigList = new LinkedList();
         Map<String, DataSourceConfig> dataSourceConfigMap = new HashMap(1);
 
@@ -80,13 +81,13 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
             // set data source pool name
             dataSourceConfig.setPoolName(poolName);
             // datasource type
-            dataSourceConfig.setDataSourceType(dataSourceConfig instanceof DataSourceDruidConfig ? ApiBootDruidDataSource.class : ApiBootHikariDataSource.class);
+            dataSourceConfig.setDataSourceType(dataSourceConfig instanceof DataSourceDruidConfig ? MinBoxDruidDataSource.class : MinBoxHikariDataSource.class);
 
             // after convert add to data source list
             dataSourceConfigList.add(dataSourceConfig);
         });
 
-        return new ApiBootRoutingDataSource(apiBootDataSourceFactoryBean, apiBootDataSourceSwitchProperties.getPrimary(), dataSourceConfigList);
+        return new ApiBootRoutingDataSource(dataSourceFactoryBean, apiBootDataSourceSwitchProperties.getPrimary(), dataSourceConfigList);
     }
 
     /**
@@ -96,21 +97,21 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootDataSourceSwitchAnnotationInterceptor apiBootDataSourceSwitchAnnotationInterceptor() {
-        return new ApiBootDataSourceSwitchAnnotationInterceptor();
+    public DataSourceSwitchAnnotationInterceptor dataSourceSwitchAnnotationInterceptor() {
+        return new DataSourceSwitchAnnotationInterceptor();
     }
 
     /**
      * ApiBoot DataSource Switch Advisor
      * Used to get @DataSourceSwitch annotation define
      *
-     * @param apiBootDataSourceSwitchAnnotationInterceptor ApiBoot DataSource Annotation Interceptor
+     * @param dataSourceSwitchAnnotationInterceptor ApiBoot DataSource Annotation Interceptor
      * @return ApiBootDataSourceSwitchAdvisor
      */
     @Bean
     @ConditionalOnMissingBean
-    public ApiBootDataSourceSwitchAdvisor apiBootDataSourceSwitchAdvisor(ApiBootDataSourceSwitchAnnotationInterceptor apiBootDataSourceSwitchAnnotationInterceptor) {
-        return new ApiBootDataSourceSwitchAdvisor(apiBootDataSourceSwitchAnnotationInterceptor);
+    public DataSourceSwitchAdvisor apiBootDataSourceSwitchAdvisor(DataSourceSwitchAnnotationInterceptor dataSourceSwitchAnnotationInterceptor) {
+        return new DataSourceSwitchAdvisor(dataSourceSwitchAnnotationInterceptor);
     }
 
 }
