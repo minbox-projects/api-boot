@@ -5,15 +5,15 @@
 - 将 "api-boot-plugin-alibaba-oss" 模块代码逻辑迁移至 "api-boot"模块
 - 将 "api-boot-plugin-mail" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-sms" 模块代码逻辑迁移至 "api-boot" 模块
-- 将 "api-boot-plugin-datasource-switch" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-datasource-switch" 插件从项目中抽离作为独立项目存在，[minbox-datasource-switch](https://github.com/minbox-projects/minbox-datasource-switch)
 - 将 "api-boot-plugin-http-convert" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-message-push" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-quartz" 模块代码逻辑迁移至 "api-boot" 模块
-- 将 "api-boot-plugin-rate-limiter" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-rate-limiter" 插件从项目中抽离作为独立项目存在，[minbox-ratelimiter](https://github.com/minbox-projects/minbox-ratelimiter)
 - 将 "api-boot-plugin-oauth" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-sequence" 模块代码逻辑迁移至 "api-boot" 模块
 - 将 "api-boot-plugin-security" 模块代码逻辑迁移至 "api-boot" 模块
-- 将 "api-boot-plugin-resource-load" 模块代码逻辑迁移至 "api-boot" 模块
+- 将 "api-boot-plugin-resource-load" 插件从项目中抽离作为独立项目存在，[minbox-resource-load](https://github.com/minbox-projects/minbox-resource-load)
 - 将 "${project.groupId}" 变量替换为 "org.minbox.framework"
 - 分组 "api-boot-dependencies" 固化版本的依赖列表
 - 配置banner使用 "${api-boot.version}" 变量，保持输出版本号与项目一致
