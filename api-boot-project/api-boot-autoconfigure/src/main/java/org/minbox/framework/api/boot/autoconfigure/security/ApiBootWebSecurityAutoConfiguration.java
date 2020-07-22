@@ -16,9 +16,9 @@
 
 package org.minbox.framework.api.boot.autoconfigure.security;
 
-import org.minbox.framework.api.boot.secuirty.ApiBootWebSecurityConfiguration;
-import org.minbox.framework.api.boot.secuirty.handler.ApiBootDefaultAccessDeniedHandler;
-import org.minbox.framework.api.boot.secuirty.point.ApiBootDefaultAuthenticationEntryPoint;
+import org.minbox.framework.security.WebSecurityConfiguration;
+import org.minbox.framework.security.handler.DefaultSecurityAccessDeniedHandler;
+import org.minbox.framework.security.point.DefaultSecurityAuthenticationEntryPoint;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.util.ObjectUtils;
@@ -33,7 +33,7 @@ import java.util.List;
  * @see ApiBootWebSecurityMemoryAutoConfiguration
  * @see ApiBootWebSecurityJdbcAutoConfiguration
  */
-public class ApiBootWebSecurityAutoConfiguration extends ApiBootWebSecurityConfiguration {
+public class ApiBootWebSecurityAutoConfiguration extends WebSecurityConfiguration {
 
     protected ApiBootSecurityProperties apiBootSecurityProperties;
     private AccessDeniedHandler accessDeniedHandler;
@@ -63,12 +63,12 @@ public class ApiBootWebSecurityAutoConfiguration extends ApiBootWebSecurityConfi
 
     @Override
     protected AccessDeniedHandler getAccessDeniedHandler() {
-        return ObjectUtils.isEmpty(this.accessDeniedHandler) ? new ApiBootDefaultAccessDeniedHandler() : this.accessDeniedHandler;
+        return ObjectUtils.isEmpty(this.accessDeniedHandler) ? new DefaultSecurityAccessDeniedHandler() : this.accessDeniedHandler;
     }
 
     @Override
     protected AuthenticationEntryPoint getAuthenticationEntryPoint() {
-        return ObjectUtils.isEmpty(this.authenticationEntryPoint) ? new ApiBootDefaultAuthenticationEntryPoint() : this.authenticationEntryPoint;
+        return ObjectUtils.isEmpty(this.authenticationEntryPoint) ? new DefaultSecurityAuthenticationEntryPoint() : this.authenticationEntryPoint;
     }
 
     @Override

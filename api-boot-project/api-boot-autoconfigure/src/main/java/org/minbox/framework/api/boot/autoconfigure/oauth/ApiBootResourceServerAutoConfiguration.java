@@ -17,7 +17,7 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties;
-import org.minbox.framework.api.boot.secuirty.SecurityUser;
+import org.minbox.framework.security.SecurityUser;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

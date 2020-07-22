@@ -31,11 +31,6 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--spring boot security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <!--security oauth2-->
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
@@ -57,6 +52,10 @@
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-oauth</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-security</artifactId>
         </dependency>
     </dependencies>
 

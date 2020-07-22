@@ -16,10 +16,10 @@
 
 package org.minbox.framework.api.boot.autoconfigure.security;
 
-import org.minbox.framework.api.boot.secuirty.ApiBootWebSecurityConfiguration;
-import org.minbox.framework.api.boot.secuirty.delegate.ApiBootDefaultStoreDelegate;
-import org.minbox.framework.api.boot.secuirty.delegate.ApiBootStoreDelegate;
-import org.minbox.framework.api.boot.secuirty.userdetails.ApiBootUserDetailsService;
+import org.minbox.framework.security.WebSecurityConfiguration;
+import org.minbox.framework.security.delegate.DefaultSecurityStoreDelegate;
+import org.minbox.framework.security.delegate.SecurityStoreDelegate;
+import org.minbox.framework.security.userdetails.SecurityUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -50,7 +50,7 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecuri
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(ApiBootSecurityProperties.class)
-@ConditionalOnClass(ApiBootWebSecurityConfiguration.class)
+@ConditionalOnClass(WebSecurityConfiguration.class)
 @ConditionalOnBean(DataSource.class)
 @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = "jdbc")
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
@@ -68,18 +68,18 @@ public class ApiBootWebSecurityJdbcAutoConfiguration extends ApiBootWebSecurityA
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        return new ApiBootUserDetailsService();
+        return new SecurityUserDetailsService();
     }
 
     /**
      * Use the default user authentication storage delegate class
      *
      * @param dataSource DataSource
-     * @return The default {@link ApiBootStoreDelegate}
+     * @return The default {@link SecurityStoreDelegate}
      */
     @Bean
     @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "enable-default-store-delegate", havingValue = "true", matchIfMissing = true)
-    public ApiBootStoreDelegate apiBootStoreDelegate(DataSource dataSource) {
-        return new ApiBootDefaultStoreDelegate(dataSource);
+    public SecurityStoreDelegate apiBootStoreDelegate(DataSource dataSource) {
+        return new DefaultSecurityStoreDelegate(dataSource);
     }
 }

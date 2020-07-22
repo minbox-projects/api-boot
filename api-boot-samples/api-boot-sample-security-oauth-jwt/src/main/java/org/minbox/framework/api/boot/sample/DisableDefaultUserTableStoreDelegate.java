@@ -1,6 +1,6 @@
 package org.minbox.framework.api.boot.sample;
 
-import org.minbox.framework.api.boot.secuirty.delegate.ApiBootStoreDelegate;
+import org.minbox.framework.security.delegate.SecurityStoreDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,7 +20,7 @@ import org.springframework.util.ObjectUtils;
  * GitHub：https://github.com/hengboy
  */
 @Component
-public class DisableDefaultUserTableStoreDelegate implements ApiBootStoreDelegate {
+public class DisableDefaultUserTableStoreDelegate implements SecurityStoreDelegate {
 
     @Autowired
     private SystemUserMapper systemUserMapper;

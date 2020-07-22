@@ -16,8 +16,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.security;
 
-import org.minbox.framework.api.boot.secuirty.ApiBootWebSecurityConfiguration;
-import org.minbox.framework.api.boot.secuirty.SecurityUser;
+import org.minbox.framework.security.SecurityUser;
+import org.minbox.framework.security.WebSecurityConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -49,7 +49,7 @@ import static org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecuri
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(ApiBootSecurityProperties.class)
-@ConditionalOnClass(ApiBootWebSecurityConfiguration.class)
+@ConditionalOnClass(WebSecurityConfiguration.class)
 @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = "memory", matchIfMissing = true)
 public class ApiBootWebSecurityMemoryAutoConfiguration extends ApiBootWebSecurityAutoConfiguration {
     /**
