@@ -17,10 +17,9 @@
 package org.minbox.framework.api.boot.autoconfigure.security;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.secuirty.SecurityUser;
+import org.minbox.framework.security.SecurityUser;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.minbox.framework.api.boot.secuirty.delegate.ApiBootStoreDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +85,7 @@ public class ApiBootSecurityProperties {
      * the data in the "api_boot_user_info" table will be read by default for authentication
      * <p>
      * If the value is set to false,
-     * you need to implement the {@link ApiBootStoreDelegate} interface to complete the custom method of reading user data
+     * you need to implement the {@link org.minbox.framework.security.delegate.SecurityStoreDelegate} interface to complete the custom method of reading user data
      */
     private boolean enableDefaultStoreDelegate = true;
     /**

@@ -151,6 +151,11 @@
             <artifactId>minbox-oauth</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-security</artifactId>
+            <optional>true</optional>
+        </dependency>
 
 
         <!--Others-->
