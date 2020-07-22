@@ -156,6 +156,11 @@
             <artifactId>minbox-security</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-oss</artifactId>
+            <optional>true</optional>
+        </dependency>
 
 
         <!--Others-->

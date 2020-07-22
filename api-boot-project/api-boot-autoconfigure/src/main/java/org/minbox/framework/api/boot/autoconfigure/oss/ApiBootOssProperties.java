@@ -1,7 +1,7 @@
 package org.minbox.framework.api.boot.autoconfigure.oss;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.oss.OssRegion;
+import org.minbox.framework.oss.OssRegion;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

@@ -2,7 +2,7 @@ package org.minbox.framework.api.boot.sample;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
-import org.minbox.framework.api.boot.oss.ApiBootOssService;
+import org.minbox.framework.oss.support.aliyun.AliyunObjectStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public class ApiBootOssOverrideService extends ApiBootOssService {
+public class ApiBootOssOverrideService extends AliyunObjectStorageService {
     /**
      * logger instance
      */
