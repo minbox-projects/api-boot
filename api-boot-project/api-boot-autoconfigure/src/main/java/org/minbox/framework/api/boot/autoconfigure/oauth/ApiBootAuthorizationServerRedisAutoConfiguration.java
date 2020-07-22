@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.oauth.AuthorizationServerConfiguration;
+import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -50,7 +50,7 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @EnableConfigurationProperties(ApiBootOauthProperties.class)
 @EnableAuthorizationServer
 @ConditionalOnBean(RedisConnectionFactory.class)
-@ConditionalOnClass({ApiBootAuthorizationServerConfiguration.class})
+@ConditionalOnClass({AuthorizationServerConfiguration.class})
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "redis")
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
@@ -70,7 +70,7 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
      * @param apiBootOauthProperties ApiBoot Oauth Properties
      * @param redisConnectionFactory Redis Connection Factory
      */
-    public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, RedisConnectionFactory redisConnectionFactory) {
+    public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<OAuth2TokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, RedisConnectionFactory redisConnectionFactory) {
         super(objectProvider, apiBootOauthProperties);
         this.redisConnectionFactory = redisConnectionFactory;
         logger.info("ApiBoot Oauth2 initialize using redis.");

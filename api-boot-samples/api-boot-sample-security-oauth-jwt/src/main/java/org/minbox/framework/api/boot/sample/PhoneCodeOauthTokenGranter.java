@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.sample;
 
-import org.minbox.framework.api.boot.oauth.exception.ApiBootTokenException;
-import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.oauth.exception.OAuth2TokenException;
+import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,7 +40,7 @@ import java.util.Map;
  * GitHub：https://github.com/hengboy
  */
 @Component
-public class PhoneCodeOauthTokenGranter implements ApiBootOauthTokenGranter {
+public class PhoneCodeOauthTokenGranter implements OAuth2TokenGranter {
     /**
      * logger instance
      */
@@ -72,10 +72,10 @@ public class PhoneCodeOauthTokenGranter implements ApiBootOauthTokenGranter {
      *
      * @param parameters parameter map
      * @return UserDetails
-     * @throws ApiBootTokenException ApiBoot Exception
+     * @throws OAuth2TokenException oauth exception
      */
     @Override
-    public UserDetails loadByParameter(Map<String, String> parameters) throws ApiBootTokenException {
+    public UserDetails loadByParameter(Map<String, String> parameters) throws OAuth2TokenException {
         // 获取Token路径：/oauth/token?grant_type=phone_code&phone=171xxxxx&code=196523
         String phone = parameters.get(PARAM_PHONE);
         String code = parameters.get(PARAM_CODE);

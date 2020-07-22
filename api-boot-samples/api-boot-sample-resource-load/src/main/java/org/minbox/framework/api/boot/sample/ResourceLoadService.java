@@ -18,7 +18,7 @@
 package org.minbox.framework.api.boot.sample;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.resource.ApiBootResourceStoreDelegate;
+import org.minbox.framework.resource.ResourceStoreDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 @Service
-public class ResourceLoadService implements ApiBootResourceStoreDelegate {
+public class ResourceLoadService implements ResourceStoreDelegate {
     /**
      * logger instance
      */

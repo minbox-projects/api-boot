@@ -144,6 +144,12 @@
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>minbox-sequence</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-oauth</artifactId>
+            <optional>true</optional>
         </dependency>
 
 

@@ -1,8 +1,8 @@
 package org.minbox.framework.api.boot.sample;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import org.minbox.framework.api.boot.oauth.exception.ApiBootOAuth2Exception;
-import org.minbox.framework.api.boot.oauth.response.AuthorizationDeniedResponse;
+import org.minbox.framework.oauth.exception.OAuth2Exception;
+import org.minbox.framework.oauth.response.AuthorizationDeniedResponse;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthorizationDeniedResponse implements AuthorizationDeniedResponse {
     @Override
-    public void serializeResponse(ApiBootOAuth2Exception e, JsonGenerator generator) {
+    public void serializeResponse(OAuth2Exception e, JsonGenerator generator) {
         try {
             generator.writeObjectField("code", e.getHttpErrorCode());
             generator.writeObjectField("message", e.getMessage());

@@ -16,8 +16,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.oauth.AuthorizationServerConfiguration;
+import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -35,7 +35,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
-
 import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
@@ -49,7 +48,7 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
 @EnableConfigurationProperties(ApiBootOauthProperties.class)
 @EnableAuthorizationServer
 @ConditionalOnBean(DataSource.class)
-@ConditionalOnClass(ApiBootAuthorizationServerConfiguration.class)
+@ConditionalOnClass(AuthorizationServerConfiguration.class)
 @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "away", havingValue = "jdbc")
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuthorizationServerAutoConfiguration {
@@ -59,7 +58,7 @@ public class ApiBootAuthorizationServerJdbcAutoConfiguration extends ApiBootAuth
     static Logger logger = LoggerFactory.getLogger(ApiBootAuthorizationServerJdbcAutoConfiguration.class);
     private DataSource dataSource;
 
-    public ApiBootAuthorizationServerJdbcAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, DataSource dataSource) {
+    public ApiBootAuthorizationServerJdbcAutoConfiguration(ObjectProvider<List<OAuth2TokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, DataSource dataSource) {
         super(objectProvider, apiBootOauthProperties);
         this.dataSource = dataSource;
         logger.info("ApiBoot Oauth2 initialize using jdbc.");

@@ -16,8 +16,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
-import org.minbox.framework.api.boot.oauth.ApiBootAuthorizationServerConfiguration;
-import org.minbox.framework.api.boot.oauth.grant.ApiBootOauthTokenGranter;
+import org.minbox.framework.oauth.AuthorizationServerConfiguration;
+import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -34,11 +34,11 @@ import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProp
  *
  * @author 恒宇少年
  */
-public class ApiBootAuthorizationServerAutoConfiguration extends ApiBootAuthorizationServerConfiguration {
+public class ApiBootAuthorizationServerAutoConfiguration extends AuthorizationServerConfiguration {
 
     protected ApiBootOauthProperties apiBootOauthProperties;
 
-    public ApiBootAuthorizationServerAutoConfiguration(ObjectProvider<List<ApiBootOauthTokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
+    public ApiBootAuthorizationServerAutoConfiguration(ObjectProvider<List<OAuth2TokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
         super(objectProvider);
         this.apiBootOauthProperties = apiBootOauthProperties;
     }
