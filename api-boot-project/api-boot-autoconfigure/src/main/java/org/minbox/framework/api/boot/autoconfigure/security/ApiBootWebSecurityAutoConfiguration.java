@@ -23,6 +23,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class ApiBootWebSecurityAutoConfiguration extends WebSecurityConfiguratio
      */
     @Override
     protected List<String> configureIgnoreUrls() {
-        List<String> ignoringUrls = Arrays.asList(ApiBootSecurityProperties.DEFAULT_IGNORE_URLS);
+        List<String> ignoringUrls = new ArrayList(Arrays.asList(ApiBootSecurityProperties.DEFAULT_IGNORE_URLS));
         if (!ObjectUtils.isEmpty(apiBootSecurityProperties.getIgnoringUrls())) {
             ignoringUrls.addAll(Arrays.asList(apiBootSecurityProperties.getIgnoringUrls()));
         }
