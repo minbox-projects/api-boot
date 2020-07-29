@@ -97,7 +97,7 @@ ApiBoot正式版本都会发布到Maven Center，如果你想使用源码最新�
 
 ```sh
 # 下载master分支源码到本地
-➜ git clone https://gitee.com/minbox-projects/api-boot.git
+➜ git clone https://github.com/minbox-projects/api-boot.git
 # 进入api-boot源码根目录
 ➜ cd api-boot
 # 执行安装
