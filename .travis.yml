@@ -26,4 +26,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 notifications:
   email:
-    - jnyuqy@gmail.com
+    recipients:
+      - apiboot@minbox.org
+      on_success: change
+      on_failure: always

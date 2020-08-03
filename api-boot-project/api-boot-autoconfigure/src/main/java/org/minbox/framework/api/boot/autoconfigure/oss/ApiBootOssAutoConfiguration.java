@@ -1,8 +1,9 @@
 package org.minbox.framework.api.boot.autoconfigure.oss;
 
 import com.aliyun.oss.OSSClient;
-import org.minbox.framework.api.boot.oss.ApiBootOssService;
-import org.minbox.framework.api.boot.oss.progress.ApiBootObjectStorageProgress;
+import org.minbox.framework.oss.ObjectStorageProgress;
+import org.minbox.framework.oss.ObjectStorageService;
+import org.minbox.framework.oss.support.aliyun.AliyunObjectStorageService;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -36,9 +37,9 @@ public class ApiBootOssAutoConfiguration {
     /**
      * ApiBoot Progress Provider
      */
-    private ApiBootObjectStorageProgress apiBootObjectStorageProgress;
+    private ObjectStorageProgress apiBootObjectStorageProgress;
 
-    public ApiBootOssAutoConfiguration(ApiBootOssProperties apiBootOssProperties, ObjectProvider<ApiBootObjectStorageProgress> apiBootProgressProvider) {
+    public ApiBootOssAutoConfiguration(ApiBootOssProperties apiBootOssProperties, ObjectProvider<ObjectStorageProgress> apiBootProgressProvider) {
         this.apiBootOssProperties = apiBootOssProperties;
         this.apiBootObjectStorageProgress = apiBootProgressProvider.getIfAvailable();
     }
@@ -50,9 +51,9 @@ public class ApiBootOssAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    ApiBootOssService apiBootOssService() {
-        ApiBootOssService apiBootOssService = new ApiBootOssService(apiBootOssProperties.getRegion().getEndpoint(), apiBootOssProperties.getBucketName(), apiBootOssProperties.getAccessKeyId(), apiBootOssProperties.getAccessKeySecret(), apiBootOssProperties.getDomain());
-        apiBootOssService.setApiBootObjectStorageProgress(apiBootObjectStorageProgress);
-        return apiBootOssService;
+    ObjectStorageService apiBootOssService() {
+        AliyunObjectStorageService objectStorageService = new AliyunObjectStorageService(apiBootOssProperties.getRegion().getEndpoint(), apiBootOssProperties.getBucketName(), apiBootOssProperties.getAccessKeyId(), apiBootOssProperties.getAccessKeySecret(), apiBootOssProperties.getDomain());
+        objectStorageService.setObjectStorageProgress(apiBootObjectStorageProgress);
+        return objectStorageService;
     }
 }

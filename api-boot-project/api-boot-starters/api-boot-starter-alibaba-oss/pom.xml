@@ -28,15 +28,13 @@
         <tag>HEAD</tag>
     </scm>
     <dependencies>
-        <!--ApiBoot Starter-->
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--Aliyun oss-->
         <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-oss</artifactId>
         </dependency>
     </dependencies>
 

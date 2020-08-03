@@ -92,7 +92,7 @@ The official version of ApiBoot will be released to Maven Center. If you want to
 
 ```sh
 # Download master branch source code to local
-➜ git clone https://gitee.com/minbox-projects/api-boot.git
+➜ git clone https://github.com/minbox-projects/api-boot.git
 ➜ cd api-boot
 # install
 ➜ mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Dgpg.skip
