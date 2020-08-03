@@ -25,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,6 +40,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLoggingProperties.API_BOOT_LOGGING_PREFIX;
 
@@ -74,18 +77,24 @@ public class ApiBootLoggingAutoConfiguration {
         this.apiBootLoggingProperties = apiBootLoggingProperties;
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    public LoggingFactoryBeanCustomizers loggingFactoryBeanCustomizers(ObjectProvider<LoggingFactoryBeanCustomizer> customizers) {
+        return new LoggingFactoryBeanCustomizers(customizers.orderedStream().collect(Collectors.toList()));
+    }
+
     /**
      * logging factory bean
      * {@link LoggingFactoryBean}
      *
      * @param loggingAdminDiscoveryObjectProvider Logging Admin Discovery Instance Provider
-     * @param customizerObjectProvider LoggingFactory Bean Customizer
+     * @param customizers                         LoggingFactory Bean Customizers
      * @return LoggingFactoryBean
      */
     @Bean
     @ConditionalOnMissingBean
     public LoggingFactoryBean loggingFactoryBean(ObjectProvider<LoggingAdminDiscovery> loggingAdminDiscoveryObjectProvider,
-                                                 ObjectProvider<List<LoggingFactoryBeanCustomizer>> customizerObjectProvider) {
+                                                 LoggingFactoryBeanCustomizers customizers) {
         LoggingFactoryBean factoryBean = new LoggingFactoryBean();
         factoryBean.setIgnorePaths(apiBootLoggingProperties.getIgnorePaths());
         factoryBean.setIgnoreHttpStatus(apiBootLoggingProperties.getIgnoreHttpStatus());
@@ -97,12 +106,8 @@ public class ApiBootLoggingAutoConfiguration {
         factoryBean.setShowConsoleLog(apiBootLoggingProperties.isShowConsoleLog());
         factoryBean.setFormatConsoleLog(apiBootLoggingProperties.isFormatConsoleLogJson());
 
-        List<LoggingFactoryBeanCustomizer> customizers = customizerObjectProvider.getIfAvailable();
-        if (!ObjectUtils.isEmpty(customizers)) {
-            customizers.stream().forEach(customizer -> customizer.customize(factoryBean));
-        }
         logger.info("【LoggingFactoryBean】init successfully.");
-        return factoryBean;
+        return customizers.customize(factoryBean);
     }
 
     /**
