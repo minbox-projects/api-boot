@@ -15,28 +15,18 @@ import org.springframework.context.annotation.Configuration;
 import static org.minbox.framework.api.boot.autoconfigure.oss.ApiBootOssProperties.API_BOOT_OSS_PREFIX;
 
 /**
- * ApiBoot 整合阿里云Oss对象存储自动化配置
+ * Object storage automation configuration
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-03-21 11:12
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
+ * @see AliyunObjectStorageService
  */
 @Configuration
 @EnableConfigurationProperties(ApiBootOssProperties.class)
 @ConditionalOnClass(OSSClient.class)
 @ConditionalOnProperty(prefix = API_BOOT_OSS_PREFIX, name = {"region", "access-key-id", "access-key-secret", "bucket-name"})
 public class ApiBootOssAutoConfiguration {
-    /**
-     * ApiBoot Oss 属性配置
-     */
+
     private ApiBootOssProperties apiBootOssProperties;
-    /**
-     * ApiBoot Progress Provider
-     */
     private ObjectStorageProgress apiBootObjectStorageProgress;
 
     public ApiBootOssAutoConfiguration(ApiBootOssProperties apiBootOssProperties, ObjectProvider<ObjectStorageProgress> apiBootProgressProvider) {
@@ -45,9 +35,9 @@ public class ApiBootOssAutoConfiguration {
     }
 
     /**
-     * 实例化ApiBootOssService
+     * Register {@link ObjectStorageService}
      *
-     * @return ApiBootOssService 实例
+     * @return The {@link ObjectStorageService} implement class instance
      */
     @Bean
     @ConditionalOnMissingBean
