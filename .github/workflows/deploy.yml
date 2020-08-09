@@ -6,9 +6,13 @@ name: Publish package to the Maven Central Repository
 # events but only for the master branch
 on:
   push:
-    branches: [ develop ]
+    branches:
+        - master
+        - 2.3.x
   pull_request:
-    branches: [ develop ]
+    branches:
+        - master
+        - 2.3.x
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
