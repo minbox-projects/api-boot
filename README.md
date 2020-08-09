@@ -2,7 +2,8 @@
 
 # ApiBoot: Born to build Api services as components
 
-[![](https://www.travis-ci.org/minbox-projects/api-boot.svg?branch=master)](https://www.travis-ci.org/github/minbox-projects/api-boot)
+
+[![](https://github.com/minbox-projects/api-boot/workflows/Publish%20package%20to%20the%20Maven%20Central%20Repository/badge.svg)](https://github.com/minbox-projects/api-boot/actions)
 [![](https://codecov.io/gh/minbox-projects/api-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/minbox-projects/api-boot)
 [![](https://badges.gitter.im/api-boot/community.svg)](https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![](https://img.shields.io/badge/link-官方文档-green.svg?style=flat-square)](https://apiboot.minbox.io)
