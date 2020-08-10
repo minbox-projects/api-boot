@@ -21,6 +21,17 @@
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-datasource-switch</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.minbox.framework</groupId>
+                    <artifactId>minbox-datasource-switch</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>minbox-datasource-switch</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
         <!--SpringBoot Test-->
         <dependency>
@@ -31,6 +42,14 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
         <!--性能测试依赖-->
         <dependency>

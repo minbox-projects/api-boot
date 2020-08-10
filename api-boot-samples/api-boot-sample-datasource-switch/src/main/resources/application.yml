@@ -6,8 +6,14 @@ api:
     datasource:
       # 默认的数据源，默认值为master
       primary: master
-      # 配置使用hikari数据源
       hikari:
+        # slave 2
+        slave_2:
+          url: jdbc:mysql://localhost:3306/iot-logging?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+      # 配置使用hikari数据源
+      druid:
         # master datasource config
         master:
           url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=Asia/Shanghai
@@ -18,10 +24,5 @@ api:
         # slave 1
         slave_1:
           url: jdbc:mysql://localhost:3306/iot-oauth?characterEncoding=utf8&serverTimezone=Asia/Shanghai
-          username: root
-          password: 123456
-        # slave 2
-        slave_2:
-          url: jdbc:mysql://localhost:3306/iot-logging?characterEncoding=utf8&serverTimezone=Asia/Shanghai
           username: root
           password: 123456
