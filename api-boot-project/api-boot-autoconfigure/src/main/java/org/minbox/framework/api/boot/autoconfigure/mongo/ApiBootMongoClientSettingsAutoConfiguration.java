@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @EnableConfigurationProperties(ApiBootMongoClientSettingsProperties.class)
-@ConditionalOnClass(MongoClient.class)
+@ConditionalOnClass(MongoClientSettingsBean.class)
 @AutoConfigureBefore(MongoAutoConfiguration.class)
 public class ApiBootMongoClientSettingsAutoConfiguration {
     private MongoClientSettingsBean clientSettingsBean;
