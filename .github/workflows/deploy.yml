@@ -25,15 +25,17 @@ jobs:
     steps:
       # Checkout source code
       - uses: actions/checkout@v2
+      # Cache maven .m2 directory
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+              ${{ runner.os }}-maven-
       # Install Java 1.8
       - uses: actions/setup-java@v1
         with:
           server-id: hengyu
           java-version: 1.8
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
       # Publish to Apache Maven Central
       - run: mvn clean compile
-        env:
-          MAVEN_USERNAME: ${{ secrets.MAVEN_CENTER_USER_NAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_CENTER_PASSWORD }}
