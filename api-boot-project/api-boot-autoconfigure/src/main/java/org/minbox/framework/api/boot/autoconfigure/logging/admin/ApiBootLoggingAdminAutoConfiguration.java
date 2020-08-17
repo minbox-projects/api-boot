@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 import org.minbox.framework.api.boot.autoconfigure.logging.admin.ui.ApiBootLoggingAdminUiAutoConfiguration;
 import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
 import org.minbox.framework.logging.admin.storage.LoggingDataSourceStorage;
+import org.minbox.framework.logging.spring.context.annotation.admin.EnableLoggingAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanCreationException;
@@ -51,6 +52,7 @@ import javax.sql.DataSource;
     ApiBootLoggingAdminUiAutoConfiguration.class
 })
 @EnableAsync
+@EnableLoggingAdmin
 public class ApiBootLoggingAdminAutoConfiguration {
     /**
      * logger instance
