@@ -63,6 +63,7 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.ApiBootLogging
     ApiBootLoggingWebAutoConfiguration.class,
     ApiBootLoggingGlobalLogStorageAutoConfiguration.class
 })
+@EnableLoggingClient
 public class ApiBootLoggingAutoConfiguration {
     /**
      * logger instance
