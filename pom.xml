@@ -44,6 +44,18 @@
             <email>jnyuqy@gmail.com</email>
         </developer>
     </developers>
+    <repositories>
+        <repository>
+            <id>aliyun-spring</id>
+            <url>https://maven.aliyun.com/repository/spring</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <!--jdk version-->
