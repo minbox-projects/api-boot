@@ -89,4 +89,12 @@ public interface SystemUserMapper extends EnhanceMapper<SystemUser> {
      * @param userStatus
      */
     void removeByUserNameAndStatus(@Param("userName") String userName, @Param("status") Integer userStatus);
+
+    /**
+     * XML方式查询用户
+     *
+     * @param user 查询条件
+     * @return 返回的结果
+     */
+    List<SystemUser> selectUsers(@Param("userName") String userName);
 }
