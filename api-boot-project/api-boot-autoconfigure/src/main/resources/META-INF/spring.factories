@@ -22,4 +22,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootLoggingAdminSecurityAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.sequence.ApiBootSequenceAutoConfiguration,\
   org.minbox.framework.api.boot.autoconfigure.mongo.ApiBootMongoClientSettingsAutoConfiguration,\
-  org.minbox.framework.api.boot.autoconfigure.tools.ApiBootToolsAutoConfiguration
+  org.minbox.framework.api.boot.autoconfigure.tools.ApiBootToolsAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.message.pipe.client.MessagePipeClientAutoConfiguration,\
+  org.minbox.framework.api.boot.autoconfigure.message.pipe.server.MessagePipeServerAutoConfiguration

@@ -16,12 +16,13 @@
         <main.basedir>${basedir}/../..</main.basedir>
 
         <!--Spring Projects-->
-        <spring.version>5.2.7.RELEASE</spring.version>
+        <spring.version>5.2.8.RELEASE</spring.version>
         <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
 
         <!--Minbox Projects-->
-        <minbox-bom.version>1.0.1-SNAPSHOT</minbox-bom.version>
+        <minbox-bom.version>1.0.1.RELEASE</minbox-bom.version>
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
+        <message-pipe.version>1.0.0.RELEASE</message-pipe.version>
 
         <!--Others-->
         <druid.starter.version>1.1.21</druid.starter.version>
@@ -56,6 +57,14 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>message-pipe-bom</artifactId>
+                <version>${message-pipe.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
             <!--SpringBoot Related Dependencies-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -188,6 +197,16 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-starter-mongo-client-settings</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-message-pipe-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.minbox.framework</groupId>
+                <artifactId>api-boot-starter-message-pipe-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

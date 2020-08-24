@@ -43,5 +43,7 @@
         <module>api-boot-sample-sequence</module>
         <module>api-boot-sample-mongo-client-settings</module>
         <module>api-boot-sample-tools</module>
+        <module>api-boot-sample-message-pipe-client</module>
+        <module>api-boot-sample-message-pipe-server</module>
     </modules>
 </project>
