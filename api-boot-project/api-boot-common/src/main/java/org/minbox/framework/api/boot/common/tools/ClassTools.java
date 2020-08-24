@@ -55,6 +55,7 @@ public class ClassTools {
      * 获取指定package下的接口实现类
      *
      * @param scannerPackage 扫描的package
+     * @param clazz          The class type
      * @return 实现类集合
      */
     public static Collection<?> getSubClassList(String scannerPackage, Class clazz) {
