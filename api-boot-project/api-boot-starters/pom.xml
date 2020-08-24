@@ -33,6 +33,8 @@
         <module>api-boot-starter-logging-admin</module>
         <module>api-boot-starter-sequence</module>
         <module>api-boot-starter-mongo-client-settings</module>
+        <module>api-boot-starter-message-pipe-client</module>
+        <module>api-boot-starter-message-pipe-server</module>
     </modules>
 
 </project>
