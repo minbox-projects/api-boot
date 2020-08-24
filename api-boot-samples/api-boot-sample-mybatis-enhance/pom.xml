@@ -38,6 +38,11 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-mybatis-enhance</artifactId>
         </dependency>
+        <!--ApiBoot Mybatis Pageable-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-mybatis-pageable</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>

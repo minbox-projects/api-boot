@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.minbox.framework.api.boot.sample.mybatis.enhance.mapper.SystemUserMapper">
+
+    <select id="selectUsers" resultType="org.minbox.framework.api.boot.sample.mybatis.enhance.entity.SystemUser">
+        select * from iot_system_user
+        <where>
+            <if test="userName!=null">
+                and su_user_name = #{userName}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+spring:
+  redis:
+    port: 6379
+    timeout: 10000
+    database: 1
+    lettuce:
+      pool:
+        max-active: 200
+        max-idle: 200
+server:
+  port: 8082
+api:
+    boot:
+        message:
+            pipe:
+                client:
+                    configuration:
+                        # Server地址，默认为 "localhost"
+                        server-address: localhost
+                        # Server端口号，默认为 "5200"
+                        server-port: 5200
+                        # 本地Client端口号，默认为 "5201"
+                        local-port: 5201

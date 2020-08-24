@@ -1,0 +1,20 @@
+spring:
+  redis:
+    port: 6379
+    timeout: 10000
+    database: 1
+    lettuce:
+      pool:
+        max-active: 200
+        max-idle: 200
+server:
+  port: 8081
+
+api:
+    boot:
+        message:
+            pipe:
+                server:
+                    configuration:
+                        # 配置监听端口号，默认为5200
+                        server-port: 5200

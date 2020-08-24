@@ -35,8 +35,8 @@ public class ListTools {
     /**
      * value converter to list
      *
-     * @param value
-     * @return
+     * @param value The object value
+     * @return list collection
      */
     public static List<String> convertToList(Object value) {
         List<String> resourceUrls = new ArrayList<>();

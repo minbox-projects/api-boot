@@ -161,6 +161,21 @@
             <artifactId>minbox-oss</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>message-pipe-client</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>message-pipe-server</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>message-pipe-spring-context</artifactId>
+            <optional>true</optional>
+        </dependency>
 
 
         <!--Others-->

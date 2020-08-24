@@ -17,8 +17,14 @@
 
 package org.minbox.framework.api.boot.sample.mybatis.enhance;
 
+import com.alibaba.fastjson.JSON;
+import com.gitee.hengboy.mybatis.enhance.dsl.factory.EnhanceDslFactory;
+import com.gitee.hengboy.mybatis.pageable.Page;
+import com.gitee.hengboy.mybatis.pageable.request.PageableRequest;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.minbox.framework.api.boot.sample.mybatis.enhance.dsl.DSystemUser;
 import org.minbox.framework.api.boot.sample.mybatis.enhance.dto.SystemUserDTO;
 import org.minbox.framework.api.boot.sample.mybatis.enhance.entity.SystemUser;
 import org.minbox.framework.api.boot.sample.mybatis.enhance.mapper.SystemUserMapper;
@@ -52,6 +58,9 @@ public class ApiBootEnhanceSampleTest {
 
     @Autowired
     private SystemUserService systemUserService;
+
+    @Autowired
+    private EnhanceDslFactory dslFactory;
 
     @Autowired
     private SystemUserMapper systemUserMapper;
@@ -184,4 +193,19 @@ public class ApiBootEnhanceSampleTest {
         systemUserMapper.removeByUserNameAndStatus("admin", 0);
     }
 
+    @Test
+    public void selectUsers() {
+        Page<SystemUser> userPage = PageableRequest.of(1, 1).request(() -> {
+            DSystemUser dSystemUser = DSystemUser.DSL();
+            dslFactory.createSearchable()
+                .selectFrom(dSystemUser)
+                .where(dSystemUser.userName.eq("admin"))
+                .resultType(SystemUser.class)
+                .fetch();
+        });
+        System.out.println(userPage.getTotalElements());
+        List<SystemUser> users = userPage.getData();
+        Assert.assertNotNull(users);
+        System.out.println(JSON.toJSONString(users));
+    }
 }
