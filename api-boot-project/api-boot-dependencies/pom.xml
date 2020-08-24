@@ -20,7 +20,7 @@
         <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
 
         <!--Minbox Projects-->
-        <minbox-bom.version>1.0.1-SNAPSHOT</minbox-bom.version>
+        <minbox-bom.version>1.0.1.RELEASE</minbox-bom.version>
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
 
         <!--Others-->
