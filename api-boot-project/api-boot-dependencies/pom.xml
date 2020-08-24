@@ -16,7 +16,7 @@
         <main.basedir>${basedir}/../..</main.basedir>
 
         <!--Spring Projects-->
-        <spring.version>5.2.7.RELEASE</spring.version>
+        <spring.version>5.2.8.RELEASE</spring.version>
         <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
 
         <!--Minbox Projects-->
