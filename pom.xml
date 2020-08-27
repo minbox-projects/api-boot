@@ -18,7 +18,7 @@
     <version>${revision}</version>
     <name>ApiBoot Build</name>
     <properties>
-        <revision>2.3.1.RELEASE</revision>
+        <revision>2.3.2-SNAPSHOT</revision>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
