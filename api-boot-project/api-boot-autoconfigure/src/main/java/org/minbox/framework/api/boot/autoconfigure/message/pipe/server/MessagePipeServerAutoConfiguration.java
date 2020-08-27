@@ -26,7 +26,7 @@ public class MessagePipeServerAutoConfiguration {
      * Create {@link ServerConfiguration} instance
      *
      * @return The {@link ServerConfiguration} instance
-     * @see MessagePipeServerProperties#getConfiguration
+     * @see MessagePipeServerProperties
      */
     @Bean
     public ServerConfiguration serverConfiguration() {

@@ -25,7 +25,7 @@ public class MessagePipeClientAutoConfiguration {
      * Create {@link ClientConfiguration} instance
      *
      * @return The {@link ClientConfiguration} instance
-     * @see MessagePipeClientProperties#getConfiguration
+     * @see MessagePipeClientProperties
      */
     @Bean
     public ClientConfiguration clientConfiguration() {
