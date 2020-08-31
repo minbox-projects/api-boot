@@ -2,8 +2,8 @@
 
 # ApiBoot: Born to build Api services as components
 
-
 [![Ci Builder](https://github.com/minbox-projects/api-boot/workflows/Ci%20Builder/badge.svg)](https://github.com/minbox-projects/api-boot/actions)
+![](https://tokei.rs/b1/github/minbox-projects/api-boot?category=lines)
 [![](https://codecov.io/gh/minbox-projects/api-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/minbox-projects/api-boot)
 [![](https://badges.gitter.im/api-boot/community.svg)](https://gitter.im/api-boot/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![](https://img.shields.io/badge/link-官方文档-green.svg?style=flat-square)](https://apiboot.minbox.io)
