@@ -20,8 +20,8 @@ public class TestMessageProcessor implements MessageProcessor {
     }
 
     @Override
-    public boolean processing(String requestId, byte[] messageBody) {
-        log.info("消费消息：{}，内容：{}", requestId, new String(messageBody));
+    public boolean processing(String specificPipeName, String requestId, byte[] messageBody) {
+        log.info("具体管道：{}，消费消息：{}，内容：{}", specificPipeName, requestId, new String(messageBody));
         return true;
     }
 }
