@@ -54,7 +54,7 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-dependencies</artifactId>
-                <version>2.2.2.RELEASE</version>
+                <version>${api-boot.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -65,12 +65,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.7.RELEASE</version>
+                <version>${spring-boot.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
-                <version>2.1.5.RELEASE</version>
+                <version>${api-boot.version}</version>
                 <dependencies>
                     <!--数据驱动依赖-->
                     <dependency>
