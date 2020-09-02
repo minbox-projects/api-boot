@@ -9,3 +9,6 @@ spring:
     password: 123456
   profiles:
     active: memory
+
+server:
+    port: 9091

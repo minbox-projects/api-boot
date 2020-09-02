@@ -1,13 +1,13 @@
 package org.minbox.framework.knowledge.library.service.banner.service;
 
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceLoad;
 import org.minbox.framework.knowledge.library.common.base.BaseService;
 import org.minbox.framework.knowledge.library.common.constants.Constant;
 import org.minbox.framework.knowledge.library.common.dsl.DBannerInfoEntity;
 import org.minbox.framework.knowledge.library.common.exception.KnowledgeException;
 import org.minbox.framework.knowledge.library.service.banner.dto.BannerInfoDTO;
 import org.minbox.framework.knowledge.library.service.constants.ResourceType;
+import org.minbox.framework.resource.annotation.ResourceField;
+import org.minbox.framework.resource.annotation.ResourceLoad;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

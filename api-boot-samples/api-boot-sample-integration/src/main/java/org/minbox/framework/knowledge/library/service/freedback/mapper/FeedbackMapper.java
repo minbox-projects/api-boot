@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.FeedbackEntity;
  * ================================
  */
 public interface FeedbackMapper
-     extends EnhanceMapper<FeedbackEntity, Integer> {
+     extends EnhanceMapper<FeedbackEntity> {
 
 }

@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.UserInfoEntity;
  * ================================
  */
 public interface UserInfoMapper
-     extends EnhanceMapper<UserInfoEntity, String> {
+     extends EnhanceMapper<UserInfoEntity> {
 
 }

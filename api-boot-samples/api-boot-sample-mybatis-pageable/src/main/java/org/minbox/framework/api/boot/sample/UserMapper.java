@@ -30,5 +30,5 @@ import com.gitee.hengboy.mybatis.enhance.mapper.EnhanceMapper;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface UserMapper extends EnhanceMapper<UserEntity, String> {
+public interface UserMapper extends EnhanceMapper<UserEntity> {
 }

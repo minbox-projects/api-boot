@@ -1,8 +1,6 @@
 package org.minbox.framework.knowledge.library.service.article.service;
 
 import com.gitee.hengboy.mybatis.enhance.sort.SortEnum;
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceField;
-import org.minbox.framework.api.boot.plugin.resource.load.annotation.ResourceLoad;
 import org.minbox.framework.knowledge.library.common.base.BaseService;
 import org.minbox.framework.knowledge.library.common.constants.Constant;
 import org.minbox.framework.knowledge.library.common.dsl.DArticleTopicInfoEntity;
@@ -11,6 +9,8 @@ import org.minbox.framework.knowledge.library.common.entity.ArticleTopicInfoEnti
 import org.minbox.framework.knowledge.library.common.exception.KnowledgeException;
 import org.minbox.framework.knowledge.library.service.article.dto.ArticleTopicInfoDTO;
 import org.minbox.framework.knowledge.library.service.constants.ResourceType;
+import org.minbox.framework.resource.annotation.ResourceField;
+import org.minbox.framework.resource.annotation.ResourceLoad;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
