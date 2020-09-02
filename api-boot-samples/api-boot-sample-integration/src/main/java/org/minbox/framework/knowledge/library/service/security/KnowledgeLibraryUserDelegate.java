@@ -1,8 +1,8 @@
 package org.minbox.framework.knowledge.library.service.security;
 
-import org.minbox.framework.api.boot.plugin.security.delegate.ApiBootStoreDelegate;
 import org.minbox.framework.knowledge.library.common.entity.UserInfoEntity;
 import org.minbox.framework.knowledge.library.service.user.service.UserInfoService;
+import org.minbox.framework.security.delegate.SecurityStoreDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +22,7 @@ import org.springframework.util.ObjectUtils;
  * GitHub：https://github.com/hengboy
  */
 @Service
-public class KnowledgeLibraryUserDelegate implements ApiBootStoreDelegate {
+public class KnowledgeLibraryUserDelegate implements SecurityStoreDelegate {
     /**
      * 用户业务逻辑注入
      */

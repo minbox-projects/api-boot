@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.CommonResourceEntity
  * ================================
  */
 public interface CommonResourceMapper
-     extends EnhanceMapper<CommonResourceEntity, Integer> {
+     extends EnhanceMapper<CommonResourceEntity> {
 
 }

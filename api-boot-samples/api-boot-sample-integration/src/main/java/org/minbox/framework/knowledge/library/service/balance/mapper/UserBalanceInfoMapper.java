@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.UserBalanceInfoEntit
  * ================================
  */
 public interface UserBalanceInfoMapper
-     extends EnhanceMapper<UserBalanceInfoEntity, String> {
+     extends EnhanceMapper<UserBalanceInfoEntity> {
 
 }

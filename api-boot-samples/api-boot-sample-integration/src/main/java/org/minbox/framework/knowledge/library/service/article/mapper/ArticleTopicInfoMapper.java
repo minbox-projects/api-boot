@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.ArticleTopicInfoEnti
  * ================================
  */
 public interface ArticleTopicInfoMapper
-     extends EnhanceMapper<ArticleTopicInfoEntity, String> {
+     extends EnhanceMapper<ArticleTopicInfoEntity> {
 
 }
