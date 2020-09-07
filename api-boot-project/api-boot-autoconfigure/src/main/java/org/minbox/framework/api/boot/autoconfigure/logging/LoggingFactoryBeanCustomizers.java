@@ -1,8 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.logging;
 
 import org.minbox.framework.logging.client.LoggingFactoryBean;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.util.LambdaSafe;
 
 import java.util.ArrayList;
