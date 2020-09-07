@@ -70,7 +70,7 @@
             <plugin>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
-                <version>${api-boot.version}</version>
+                <version>2.3.1.RELEASE</version>
                 <dependencies>
                     <!--数据驱动依赖-->
                     <dependency>
