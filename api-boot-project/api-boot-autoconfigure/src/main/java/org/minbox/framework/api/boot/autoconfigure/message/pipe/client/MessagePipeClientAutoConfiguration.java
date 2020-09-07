@@ -1,7 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.message.pipe.client;
 
 import org.minbox.framework.message.pipe.client.config.ClientConfiguration;
-import org.minbox.framework.message.pipe.spring.annotation.client.EnableMessagePipeClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Bean;
  */
 @ConditionalOnClass(ClientConfiguration.class)
 @EnableConfigurationProperties(MessagePipeClientProperties.class)
-@EnableMessagePipeClient
 public class MessagePipeClientAutoConfiguration {
     private MessagePipeClientProperties messagePipeClientProperties;
 
@@ -25,7 +23,7 @@ public class MessagePipeClientAutoConfiguration {
      * Create {@link ClientConfiguration} instance
      *
      * @return The {@link ClientConfiguration} instance
-     * @see MessagePipeClientProperties#getConfiguration
+     * @see MessagePipeClientProperties
      */
     @Bean
     public ClientConfiguration clientConfiguration() {

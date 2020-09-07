@@ -1,8 +1,8 @@
 package org.minbox.framework.knowledge.library.service.resource.store;
 
 import org.minbox.framework.api.boot.common.exception.ApiBootException;
-import org.minbox.framework.api.boot.plugin.resource.load.ApiBootResourceStoreDelegate;
 import org.minbox.framework.knowledge.library.service.resource.service.CommonResourceService;
+import org.minbox.framework.resource.ResourceStoreDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 @Service
-public class KnowledgeResourceService implements ApiBootResourceStoreDelegate {
+public class KnowledgeResourceService implements ResourceStoreDelegate {
     /**
      * 资源加载
      */

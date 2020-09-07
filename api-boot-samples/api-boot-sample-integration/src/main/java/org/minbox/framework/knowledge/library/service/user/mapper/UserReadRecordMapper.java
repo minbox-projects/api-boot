@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.UserReadRecordEntity
  * ================================
  */
 public interface UserReadRecordMapper
-     extends EnhanceMapper<UserReadRecordEntity, Integer> {
+     extends EnhanceMapper<UserReadRecordEntity> {
 
 }

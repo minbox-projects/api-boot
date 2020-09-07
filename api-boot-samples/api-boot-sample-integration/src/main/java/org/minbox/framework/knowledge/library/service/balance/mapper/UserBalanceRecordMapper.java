@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.UserBalanceRecordEnt
  * ================================
  */
 public interface UserBalanceRecordMapper
-     extends EnhanceMapper<UserBalanceRecordEntity, Integer> {
+     extends EnhanceMapper<UserBalanceRecordEntity> {
 
 }

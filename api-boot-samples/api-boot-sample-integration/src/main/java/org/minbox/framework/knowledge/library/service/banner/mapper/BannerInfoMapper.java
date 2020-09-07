@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.BannerInfoEntity;
  * ================================
  */
 public interface BannerInfoMapper
-     extends EnhanceMapper<BannerInfoEntity, Integer> {
+     extends EnhanceMapper<BannerInfoEntity> {
 
 }

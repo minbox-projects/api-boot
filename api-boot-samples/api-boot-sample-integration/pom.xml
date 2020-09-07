@@ -27,7 +27,6 @@
     <modelVersion>4.0.0</modelVersion>
     <properties>
         <java.version>1.8</java.version>
-        <api.boot.version>2.2.2.RELEASE</api.boot.version>
     </properties>
     <artifactId>api-boot-sample-integration</artifactId>
     <description>
@@ -135,12 +134,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.2.2.RELEASE</version>
+                <version>${spring-boot.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
-                <version>2.1.5.RELEASE</version>
+                <version>${api-boot.version}</version>
                 <dependencies>
                     <!--数据驱动依赖-->
                     <dependency>
@@ -175,7 +174,7 @@
             <dependency>
                 <groupId>org.minbox.framework</groupId>
                 <artifactId>api-boot-dependencies</artifactId>
-                <version>${api.boot.version}</version>
+                <version>${api-boot.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

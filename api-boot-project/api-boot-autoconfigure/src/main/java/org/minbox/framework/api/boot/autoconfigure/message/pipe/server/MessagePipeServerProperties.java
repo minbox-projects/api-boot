@@ -37,5 +37,11 @@ public class MessagePipeServerProperties {
     /**
      * The number of threads in the message thread pool
      */
+    @Deprecated
     private int distributionMessagePoolSize = 10;
+    /**
+     * The interval time for each message pipeline to perform monitoring
+     * time unit: milliseconds
+     */
+    private long messagePipeMonitorMillis = 10000L;
 }

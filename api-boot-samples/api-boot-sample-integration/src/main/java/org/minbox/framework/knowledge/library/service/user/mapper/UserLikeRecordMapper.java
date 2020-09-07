@@ -19,6 +19,6 @@ import org.minbox.framework.knowledge.library.common.entity.UserLikeRecordEntity
  * ================================
  */
 public interface UserLikeRecordMapper
-     extends EnhanceMapper<UserLikeRecordEntity, Integer> {
+     extends EnhanceMapper<UserLikeRecordEntity> {
 
 }
