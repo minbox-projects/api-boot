@@ -1,5 +1,7 @@
 package org.minbox.framework.api.boot.sample.message.pipe.client;
 
+import org.minbox.framework.message.pipe.spring.annotation.ServerServiceType;
+import org.minbox.framework.message.pipe.spring.annotation.client.EnableMessagePipeClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
