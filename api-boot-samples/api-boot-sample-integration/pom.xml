@@ -129,42 +129,51 @@
             <version>4.5.1</version>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>codegen</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.minbox.framework</groupId>
+                        <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
+                        <version>${api-boot.version}</version>
+                        <dependencies>
+                            <!--数据驱动依赖-->
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>5.1.47</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generator</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!--为true时执行自动生成-->
+                            <execute>false</execute>
+                            <dbName>knowledge</dbName>
+                            <dbUrl>jdbc:mysql://localhost:3306</dbUrl>
+                            <dbUserName>root</dbUserName>
+                            <dbPassword>123456</dbPassword>
+                            <packageName>org.minbox.framework.knowledge.library.common.entity</packageName>
+                            <tableNamePattern>kl%</tableNamePattern>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
-                <version>${api-boot.version}</version>
-                <dependencies>
-                    <!--数据驱动依赖-->
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.47</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generator</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!--为true时执行自动生成-->
-                    <execute>false</execute>
-                    <dbName>knowledge</dbName>
-                    <dbUrl>jdbc:mysql://localhost:3306</dbUrl>
-                    <dbUserName>root</dbUserName>
-                    <dbPassword>123456</dbPassword>
-                    <packageName>org.minbox.framework.knowledge.library.common.entity</packageName>
-                    <tableNamePattern>kl%</tableNamePattern>
-                </configuration>
             </plugin>
         </plugins>
     </build>
