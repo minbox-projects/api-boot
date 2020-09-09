@@ -21,6 +21,11 @@
             <version>3.13.3</version>
         </dependency>
         <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-message-pipe-client</artifactId>
         </dependency>

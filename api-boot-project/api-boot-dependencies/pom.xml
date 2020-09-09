@@ -22,7 +22,7 @@
         <!--Minbox Projects-->
         <minbox-bom.version>1.0.1.RELEASE</minbox-bom.version>
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
-        <message-pipe-bom.version>1.0.2.RELEASE</message-pipe-bom.version>
+        <message-pipe-bom.version>1.0.3-SNAPSHOT</message-pipe-bom.version>
 
         <!--Others-->
         <druid.starter.version>1.1.21</druid.starter.version>
