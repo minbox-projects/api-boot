@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  *
  * @author 恒宇少年
  */
-@ConditionalOnClass(ServerConfiguration.class)
+@ConditionalOnClass({ServerConfiguration.class, RedisMessageListenerContainer.class})
 @EnableConfigurationProperties(MessagePipeServerProperties.class)
 public class MessagePipeServerAutoConfiguration {
     private MessagePipeServerProperties messagePipeServerProperties;
