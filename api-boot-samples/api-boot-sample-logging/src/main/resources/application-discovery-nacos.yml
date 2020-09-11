@@ -1,0 +1,18 @@
+api:
+  boot:
+    logging:
+      format-console-log-json: true
+      number-of-request-log: 2
+      discovery:
+        service-id: api-boot-sample-logging-admin
+        username: user
+        password: 123456
+      ignore-paths:
+        - /actuator/health
+
+# Nacos config
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: open.nacos.yuqiyu.com:80

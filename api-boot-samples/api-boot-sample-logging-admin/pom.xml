@@ -50,6 +50,11 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>-->
         <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2.2.1.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter-mybatis-enhance</artifactId>
         </dependency>

@@ -2,7 +2,7 @@ spring:
   application:
     name: api-boot-sample-logging
   profiles:
-    active: appoint
+    active: discovery-nacos
 server:
   port: 8080
 
