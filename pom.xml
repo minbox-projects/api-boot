@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.minbox.framework</groupId>
         <artifactId>minbox-parent</artifactId>
-        <version>1.0.1.RELEASE</version>
+        <version>1.0.3-SNAPSHOT</version>
         <relativePath/>
     </parent>
     <packaging>pom</packaging>
@@ -44,26 +44,27 @@
             <email>jnyuqy@gmail.com</email>
         </developer>
     </developers>
+    <!--配置拉取仓库地址-->
     <repositories>
         <repository>
-            <id>aliyun-spring</id>
-            <url>https://maven.aliyun.com/repository/spring</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>aliyun-central</id>
-            <url>https://maven.aliyun.com/repository/central</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+            <id>aliyun-central</id>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>yuqiyu-snapshots</id>
+            <url>http://maven.yuqiyu.com/repository/maven-snapshots/</url>
         </repository>
     </repositories>
     <build>
