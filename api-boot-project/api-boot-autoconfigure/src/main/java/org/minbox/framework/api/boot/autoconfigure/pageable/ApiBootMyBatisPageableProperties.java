@@ -22,21 +22,15 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Field;
 import java.util.Properties;
 
 import static org.minbox.framework.api.boot.autoconfigure.pageable.ApiBootMyBatisPageableProperties.API_BOOT_PAGEABLE_PREFIX;
 
 
 /**
- * mybatis-pageable自动化配置属性
+ * Mybatis pageable properties
  *
- * @author：于起宇 ===============================
- * Created with IDEA.
- * Date：2018/8/4
- * Time：2:22 PM
- * 简书：http://www.jianshu.com/u/092df3f77bca
- * ================================
+ * @author 恒宇少年
  */
 @Data
 @Configuration
@@ -47,39 +41,20 @@ public class ApiBootMyBatisPageableProperties {
      */
     public static final String API_BOOT_PAGEABLE_PREFIX = "api.boot.pageable";
     /**
-     * 数据库方言
-     * 默认使用mysql数据库方言
+     * The database dialect
+     * <p>
+     * default use {@link DialectEnum#MYSQL}
      */
     private DialectEnum dialect = DialectEnum.MYSQL;
 
     /**
-     * 获取属性配置
+     * Convert this instance to {@link Properties}
      *
-     * @return 配置文件对象
+     * @return The {@link Properties} config instance
      */
-    public Properties getProperties() {
-
-        // 返回的配置对象
+    public Properties convertProperties() {
         Properties properties = new Properties();
-        /*
-         * 获取本类内创建的field列表
-         * 添加到配置对象集合内
-         */
-        Field[] fields = this.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            try {
-                field.setAccessible(true);
-                // 数据库方言
-                if ("dialect".equals(field.getName())) {
-                    properties.setProperty(field.getName(), dialect.getValue().getName());
-                } else {
-                    properties.setProperty(field.getName(), String.valueOf(field.get(this)));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+        properties.setProperty(PropertiesNames.DATABASE_DIALECT, dialect.getValue().getName());
         return properties;
     }
 }
