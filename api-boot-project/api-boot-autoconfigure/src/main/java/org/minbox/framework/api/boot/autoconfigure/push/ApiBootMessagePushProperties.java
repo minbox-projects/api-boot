@@ -29,32 +29,26 @@ import static org.minbox.framework.api.boot.autoconfigure.push.ApiBootMessagePus
 /**
  * ApiBoot Message Push Properties
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-20 14:52
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = API_BOOT_PUSH_PREFIX)
 public class ApiBootMessagePushProperties {
     /**
-     * push 配置前缀
+     * config prefix
      */
     public static final String API_BOOT_PUSH_PREFIX = "api.boot.push";
     /**
-     * 极光推送客户端配置
+     * The simple push client config parameters
      */
     private PushClientConfig client;
     /**
-     * 多个推送客户端配置集合
+     * The multiple push client config parameters
      */
     private Map<String, PushClientConfig> multiple;
     /**
-     * 配置是否生产环境推送，适用IOS平台
+     * Configure whether to push in the production environment, applicable to IOS platform
      */
     private boolean production = false;
 }
