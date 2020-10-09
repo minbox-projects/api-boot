@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
  *
  * @author 恒宇少年
  */
-@ConditionalOnClass(ServerConfiguration.class)
+@ConditionalOnClass({ServerConfiguration.class, RedisMessageListenerContainer.class})
 @EnableConfigurationProperties(MessagePipeServerProperties.class)
 public class MessagePipeServerAutoConfiguration {
     private MessagePipeServerProperties messagePipeServerProperties;
@@ -34,6 +36,22 @@ public class MessagePipeServerAutoConfiguration {
     @Bean
     public ServerConfiguration serverConfiguration() {
         return messagePipeServerProperties.getConfiguration();
+    }
+
+    /**
+     * Instantiate {@link RedisMessageListenerContainer}
+     * <p>
+     * This instance is required by the message pipeline, but here is just the default configuration
+     *
+     * @param redisConnectionFactory The {@link RedisConnectionFactory} redis connectory factory instance
+     * @return The {@link RedisMessageListenerContainer} instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory redisConnectionFactory) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(redisConnectionFactory);
+        return container;
     }
 
     /**

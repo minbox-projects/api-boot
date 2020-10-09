@@ -31,17 +31,12 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * ApiBoot Mybatis Pageable Auto Configuration
  *
- * @author：恒宇少年 - 于起宇
- * <p>
- * DateTime：2019-04-25 14:53
- * Blog：http://blog.yuqiyu.com
- * WebSite：http://www.jianshu.com/u/092df3f77bca
- * Gitee：https://gitee.com/hengboy
- * GitHub：https://github.com/hengboy
+ * @author 恒宇少年
  */
 @Configuration
 @ConditionalOnBean(SqlSessionFactory.class)
@@ -50,9 +45,9 @@ import java.util.List;
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class ApiBootMybatisPageableAutoConfiguration {
     /**
-     * myabtis pageable properties
+     * mybatis pageable properties
      */
-    private ApiBootMyBatisPageableProperties myBatisPageableProperties;
+    private ApiBootMyBatisPageableProperties pageableProperties;
     /**
      * mybatis sqlSession factory
      */
@@ -65,7 +60,7 @@ public class ApiBootMybatisPageableAutoConfiguration {
     public ApiBootMybatisPageableAutoConfiguration(ApiBootMyBatisPageableProperties myBatisPageableProperties,
                                                    ObjectProvider<List<SqlSessionFactory>> interceptorsProvider,
                                                    ObjectProvider<PageableConfigurer> pageableConfigurerObjectProvider) {
-        this.myBatisPageableProperties = myBatisPageableProperties;
+        this.pageableProperties = myBatisPageableProperties;
         this.sqlSessionFactoryList = interceptorsProvider.getIfAvailable();
         this.pageableConfigurer = pageableConfigurerObjectProvider.getIfAvailable();
     }
@@ -77,7 +72,8 @@ public class ApiBootMybatisPageableAutoConfiguration {
     void addInterceptors() {
         Interceptor interceptor = new MyBatisExecutePageableInterceptor();
         // set properties to interceptor
-        interceptor.setProperties(myBatisPageableProperties.getProperties());
+        Properties properties = pageableProperties.convertProperties();
+        interceptor.setProperties(properties);
 
         for (SqlSessionFactory sqlSessionFactory : sqlSessionFactoryList) {
             // pre
@@ -90,9 +86,9 @@ public class ApiBootMybatisPageableAutoConfiguration {
     }
 
     /**
-     * pre interceptors
+     * add pre interceptors
      *
-     * @param sqlSessionFactory sqlSessionFactory对象实例
+     * @param sqlSessionFactory The {@link SqlSessionFactory} instance
      */
     void addPreInterceptors(SqlSessionFactory sqlSessionFactory) {
         if (allowPageableConfigurer() && pageableConfigurer.prePlugins() != null) {
@@ -101,9 +97,9 @@ public class ApiBootMybatisPageableAutoConfiguration {
     }
 
     /**
-     * after interceptors
+     * add after interceptors
      *
-     * @param sqlSessionFactory sqlSessionFactory对象实例
+     * @param sqlSessionFactory The {@link SqlSessionFactory} instance
      */
     void addPostInterceptors(SqlSessionFactory sqlSessionFactory) {
         if (allowPageableConfigurer() && pageableConfigurer.postPlugins() != null) {

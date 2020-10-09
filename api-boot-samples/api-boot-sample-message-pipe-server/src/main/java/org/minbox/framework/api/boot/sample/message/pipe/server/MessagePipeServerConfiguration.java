@@ -23,22 +23,6 @@ import java.util.Properties;
 @EnableMessagePipeServer(serverType = ServerServiceType.NACOS)
 public class MessagePipeServerConfiguration {
     /**
-     * 配置Redis监听容器
-     * <p>
-     * 新消息写入消息管道时，
-     * 会触发{@link PushMessageEvent}事件，而该事件的监听方式则是采用的Redis的KeyEvent的形式
-     *
-     * @param connectionFactory Redis连接工厂对象
-     * @return The {@link RedisMessageListenerContainer} instance
-     */
-    @Bean
-    public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory connectionFactory) {
-        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        return container;
-    }
-
-    /**
      * 配置Nacos {@link NamingService}实例
      *
      * @return

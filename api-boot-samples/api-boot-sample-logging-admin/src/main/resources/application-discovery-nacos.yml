@@ -1,0 +1,6 @@
+# Nacos config
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: open.nacos.yuqiyu.com:80

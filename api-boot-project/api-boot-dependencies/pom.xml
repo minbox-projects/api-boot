@@ -16,13 +16,10 @@
         <main.basedir>${basedir}/../..</main.basedir>
 
         <!--Spring Projects-->
-        <spring.version>5.2.8.RELEASE</spring.version>
-        <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
+        <spring.version>5.2.9.RELEASE</spring.version>
+        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
 
-        <!--Minbox Projects-->
-        <minbox-bom.version>1.0.1.RELEASE</minbox-bom.version>
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
-        <message-pipe-bom.version>1.0.3-SNAPSHOT</message-pipe-bom.version>
 
         <!--Others-->
         <druid.starter.version>1.1.21</druid.starter.version>
@@ -49,20 +46,6 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>minbox-bom</artifactId>
-                <version>${minbox-bom.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>message-pipe-bom</artifactId>
-                <version>${message-pipe-bom.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
             </dependency>
 
             <!--SpringBoot Related Dependencies-->
