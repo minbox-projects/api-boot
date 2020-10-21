@@ -28,14 +28,32 @@ public class MessagePipeServerAutoConfiguration {
     }
 
     /**
+     * Instantiate the wrapper class of {@link ServerConfigurationCustomizer}
+     *
+     * @param customizers The {@link ServerConfigurationCustomizer} object provider
+     * @return The {@link ServerConfigurationCustomizers} instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ServerConfigurationCustomizers serverConfigurationCustomizers(
+        ObjectProvider<ServerConfigurationCustomizer> customizers) {
+        List<ServerConfigurationCustomizer> sortedCustomizers =
+            customizers.orderedStream().collect(Collectors.toList());
+        return new ServerConfigurationCustomizers(sortedCustomizers);
+    }
+
+    /**
      * Create {@link ServerConfiguration} instance
      *
      * @return The {@link ServerConfiguration} instance
      * @see MessagePipeServerProperties
+     * @see ServerConfigurationCustomizer
+     * @see ServerConfigurationCustomizers
      */
     @Bean
-    public ServerConfiguration serverConfiguration() {
-        return messagePipeServerProperties.getConfiguration();
+    public ServerConfiguration serverConfiguration(ServerConfigurationCustomizers customizers) {
+        ServerConfiguration configuration = messagePipeServerProperties.getConfiguration();
+        return customizers.customizer(configuration);
     }
 
     /**
