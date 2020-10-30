@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.sample;
 
+import org.minbox.framework.api.boot.common.model.ApiBootResult;
 import org.minbox.framework.limiter.annotation.RateLimiter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class RateLimiterSampleController {
      */
     @GetMapping(value = "/")
     @RateLimiter(QPS = 10)
-    public String getContent() {
-        return "访问资源";
+    public ApiBootResult getContent() {
+        return ApiBootResult.builder().data("访问了资源").build();
     }
 }
