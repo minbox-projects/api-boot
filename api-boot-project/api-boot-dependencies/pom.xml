@@ -16,8 +16,8 @@
         <main.basedir>${basedir}/../..</main.basedir>
 
         <!--Spring Projects-->
-        <spring.version>5.2.9.RELEASE</spring.version>
-        <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
+        <spring.version>5.3.0.RELEASE</spring.version>
+        <spring.boot.version>2.3.5.RELEASE</spring.boot.version>
 
         <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
 
