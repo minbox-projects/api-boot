@@ -14,7 +14,7 @@
     <artifactId>api-boot-dependencies</artifactId>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring.boot.version>2.3.5.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.6.RELEASE</spring.boot.version>
         <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
     </properties>
