@@ -176,7 +176,11 @@
             <artifactId>message-pipe-spring-context</artifactId>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>ssh-agent</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <!--Others-->
         <dependency>
@@ -260,6 +264,7 @@
             <artifactId>guava</artifactId>
             <optional>true</optional>
         </dependency>
+
     </dependencies>
     <build>
         <resources>
