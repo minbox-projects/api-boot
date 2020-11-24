@@ -1,0 +1,18 @@
+api:
+    boot:
+        ssh-agent:
+            configs:
+                # 用户名、密码方式代理端口转发
+                - authentication-method: USERNAME_PASSWORD
+                  username: metadata
+                  password: xxxxx
+                  server-ip: xxx.xxx.xxx.xxx
+                  local-port: 3307
+                  forward-target-port: 3306
+                # ssh private key 方式代理端口转发
+                # 默认使用RSA加密方式的 ~/.ssh/id_rsa 文件
+                # authentication-method默认配置为：SSH_PRIVATE_KEY
+                - username: metadata
+                  server-ip: xxx.xxx.xxx.xxx
+                  local-port: 3307
+                  forward-target-port: 3306

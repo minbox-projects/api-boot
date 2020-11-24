@@ -35,6 +35,7 @@
         <module>api-boot-starter-mongo-client-settings</module>
         <module>api-boot-starter-message-pipe-client</module>
         <module>api-boot-starter-message-pipe-server</module>
+        <module>api-boot-starter-ssh-agent</module>
     </modules>
 
 </project>

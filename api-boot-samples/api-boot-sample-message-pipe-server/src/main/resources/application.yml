@@ -18,3 +18,4 @@ api:
                     configuration:
                         # 配置监听端口号，默认为5200
                         server-port: 5200
+                        exclude-pipe-name-patterns: "test-1"

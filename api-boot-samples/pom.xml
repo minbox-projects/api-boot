@@ -45,5 +45,6 @@
         <module>api-boot-sample-tools</module>
         <module>api-boot-sample-message-pipe-client</module>
         <module>api-boot-sample-message-pipe-server</module>
+        <module>api-boot-sample-ssh-agent</module>
     </modules>
 </project>

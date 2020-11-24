@@ -1,3 +1,33 @@
+## v2.3.2（2020-10-09）
+ - 升级使用Message Pipe版本为v1.0.3
+ - 修改Message Client示例项目支持新版本变动
+ - 修改Banner输出内容以及样式
+ - 新增MessagePipeConfiguration配置类的Customizer接口
+ - 修复Ci自动构建时遇到的错误问题
+ - 修复mybatis enhance plugin无法找到版本问题
+ - 添加消息管道需要的默认RedisMessageListenerContainer
+ - 配置RedisMessageListenerContainer类作为实例化消息管道配置条件
+ - 适配使用默认的RedisMessageListenerContainer
+ - 删除JsonTools，请使用JsonUtils
+ - 升级Spring/SpringBoot版本为v5.2.9/v2.3.4
+ - 修改pageable属性类转换方式
+ - 独立Oauth客户端配置信息
+ 
+## v2.3.1（2020-8-24）
+- 修复Security排除路径集合问题
+- 新增自定义LoggingFactoryBean接口集合类LoggingFactoryBeanCustomizers
+- 修改部分类注释
+- 集成GitHub Actions
+- 排除默认的数据源（HikariCP）
+- 删除项目的Maven Central配置路径列表
+- 升级SpringBoot版本为v2.3.3
+- 修改MongoAutoConfiguration自动化配置类条件
+- 默认启用配置@EnableLoggingClient/@EnableLoggingAdmin注解
+- 配置GitHub Actions缓存
+- 升级Spring版本为v5.2.8
+- 升级minbox-bom版本为v1.0.1
+- 整合message-pipe顺序消息管道
+
 ## v2.3.0（2020-07-21）
 
 - 变更项目根模块的 "artifactId" 为 "api-boot-build"

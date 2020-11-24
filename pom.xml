@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.minbox.framework</groupId>
         <artifactId>minbox-parent</artifactId>
-        <version>1.0.3.RELEASE</version>
+        <version>1.0.4</version>
         <relativePath/>
     </parent>
     <packaging>pom</packaging>
@@ -18,11 +18,10 @@
     <version>${revision}</version>
     <name>ApiBoot Build</name>
     <properties>
-        <revision>2.3.2.RELEASE</revision>
+        <revision>2.3.3.RELEASE</revision>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <flatten-maven-plugin.version>1.2.3</flatten-maven-plugin.version>
         <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
     </properties>
     <description>
@@ -41,7 +40,7 @@
             <url>https://blog.yuqiyu.com</url>
             <organization>minbox-projects</organization>
             <organizationUrl>https://gitee.com/minbox-projects</organizationUrl>
-            <email>jnyuqy@gmail.com</email>
+            <email>hengboy@minbox.org</email>
         </developer>
     </developers>
     <!--配置拉取仓库地址-->
@@ -77,31 +76,6 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>${flatten-maven-plugin.version}</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
