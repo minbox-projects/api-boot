@@ -18,9 +18,15 @@ package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.oauth.AuthorizationServerConfiguration;
 import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
+import org.minbox.framework.oauth.response.AuthorizationDeniedResponse;
+import org.minbox.framework.oauth.response.DefaultAuthorizationDeniedResponse;
+import org.minbox.framework.oauth.translator.DefaultWebResponseExceptionTranslator;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -71,5 +77,32 @@ public class ApiBootAuthorizationServerAutoConfiguration extends AuthorizationSe
     @ConditionalOnProperty(prefix = API_BOOT_OAUTH_PREFIX, name = "jwt.enable", havingValue = "false", matchIfMissing = true)
     public AccessTokenConverter defaultAccessTokenConverter() {
         return new DefaultAccessTokenConverter();
+    }
+
+    /**
+     * Configure custom serialization authentication error format
+     *
+     * @return The {@link DefaultAuthorizationDeniedResponse} instance
+     * @see DefaultAuthorizationDeniedResponse
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthorizationDeniedResponse authorizationDeniedResponse() {
+        return new DefaultAuthorizationDeniedResponse();
+    }
+
+    /**
+     * Configure {@link WebResponseExceptionTranslator}
+     *
+     * @param authorizationDeniedResponse The {@link AuthorizationDeniedResponse} instance
+     * @return {@link WebResponseExceptionTranslator} instance
+     * @see AuthorizationServerConfiguration#configure(org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer)
+     * @see DefaultWebResponseExceptionTranslator
+     */
+    @Bean
+    @ConditionalOnBean(AuthorizationDeniedResponse.class)
+    @ConditionalOnMissingBean
+    public WebResponseExceptionTranslator webResponseExceptionTranslator(AuthorizationDeniedResponse authorizationDeniedResponse) {
+        return new DefaultWebResponseExceptionTranslator(authorizationDeniedResponse);
     }
 }
