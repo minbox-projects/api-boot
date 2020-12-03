@@ -1,3 +1,12 @@
+## v2.3.3（2020-11-24）
+- [ [#67](https://github.com/minbox-projects/api-boot/issues/67)  ] 新增消息管道ServerConfiguration的自定义配置类
+- [ [#72](https://github.com/minbox-projects/api-boot/issues/72) ] 集成ssh-agent代理组件
+- 删除项目配置的flatten插件，使用minbox-build插件配置
+- 删除第三方依赖，使用api-boot-bom项目内的依赖版本
+- 升级minbox-parent版本为v1.0.4
+- 升级SpringBoot版本为v2.3.6
+- 升级Spring版本为v5.2.11
+
 ## v2.3.2（2020-10-09）
  - 升级使用Message Pipe版本为v1.0.3
  - 修改Message Client示例项目支持新版本变动
