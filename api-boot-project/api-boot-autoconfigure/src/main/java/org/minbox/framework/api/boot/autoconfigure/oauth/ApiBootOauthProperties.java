@@ -17,7 +17,6 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import lombok.Data;
-import org.minbox.framework.api.boot.autoconfigure.security.SecurityAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,7 +46,12 @@ public class ApiBootOauthProperties {
      * @see OAuthAway
      */
     private OAuthAway away = OAuthAway.memory;
-
+    /**
+     * Whether to generate a new token every time the "/oauth/token" interface is called
+     * <p>
+     * The previous one is used by default
+     */
+    private boolean alwaysCreateToken = false;
     /**
      * Oauth2 clientId
      * 2.1.1. After the RELEASE version, the attribute is discarded and replaced by clients.

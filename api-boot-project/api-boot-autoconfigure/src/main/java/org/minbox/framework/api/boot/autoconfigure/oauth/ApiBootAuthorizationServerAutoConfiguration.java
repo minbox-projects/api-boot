@@ -17,6 +17,7 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.oauth.AuthorizationServerConfiguration;
+import org.minbox.framework.oauth.OAuthConfigProperties;
 import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
 import org.minbox.framework.oauth.response.AuthorizationDeniedResponse;
 import org.minbox.framework.oauth.response.DefaultAuthorizationDeniedResponse;
@@ -47,6 +48,19 @@ public class ApiBootAuthorizationServerAutoConfiguration extends AuthorizationSe
     public ApiBootAuthorizationServerAutoConfiguration(ObjectProvider<List<OAuth2TokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties) {
         super(objectProvider);
         this.apiBootOauthProperties = apiBootOauthProperties;
+    }
+
+    /**
+     * Configure {@link OAuthConfigProperties}
+     *
+     * @return {@link OAuthConfigProperties}
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public OAuthConfigProperties oAuthConfigProperties() {
+        OAuthConfigProperties properties = new OAuthConfigProperties();
+        properties.setAlwaysCreateToken(this.apiBootOauthProperties.isAlwaysCreateToken());
+        return properties;
     }
 
     /**
