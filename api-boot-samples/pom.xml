@@ -18,7 +18,7 @@
         <!--Samples所使用的ApiBoot版本-->
         <api-boot.version>${project.version}</api-boot.version>
         <!--Samples所使用的SpringBoot版本-->
-        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.5</spring-boot.version>
     </properties>
     <artifactId>api-boot-samples</artifactId>
     <packaging>pom</packaging>

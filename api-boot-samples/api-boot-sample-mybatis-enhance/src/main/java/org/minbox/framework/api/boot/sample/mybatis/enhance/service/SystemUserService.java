@@ -17,12 +17,10 @@
 
 package org.minbox.framework.api.boot.sample.mybatis.enhance.service;
 
-import com.gitee.hengboy.mybatis.enhance.dsl.factory.EnhanceDsl;
 import com.gitee.hengboy.mybatis.enhance.dsl.factory.EnhanceDslFactory;
 import com.gitee.hengboy.mybatis.enhance.dsl.serach.Searchable;
 import com.gitee.hengboy.mybatis.enhance.dsl.update.filter.SetFilter;
 import com.gitee.hengboy.mybatis.enhance.sort.SortEnum;
-import org.junit.Test;
 import org.minbox.framework.api.boot.sample.mybatis.enhance.dsl.DSystemUser;
 import org.minbox.framework.api.boot.sample.mybatis.enhance.dsl.DSystemUserRole;
 import org.minbox.framework.api.boot.sample.mybatis.enhance.dto.SystemUserDTO;
