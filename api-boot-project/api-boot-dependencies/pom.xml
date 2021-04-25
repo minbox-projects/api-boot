@@ -14,7 +14,6 @@
     <artifactId>api-boot-dependencies</artifactId>
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <minbox-bom.version>1.0.5</minbox-bom.version>
         <spring.boot.version>2.4.5</spring.boot.version>
         <spring-cloud.version>2.2.6.RELEASE</spring-cloud.version>
         <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
@@ -28,13 +27,6 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.minbox.framework</groupId>
-                <artifactId>minbox-bom</artifactId>
-                <version>${minbox-bom.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.minbox.framework</groupId>
