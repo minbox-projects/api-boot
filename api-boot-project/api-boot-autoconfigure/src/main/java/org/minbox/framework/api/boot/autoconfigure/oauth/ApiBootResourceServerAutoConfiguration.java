@@ -17,14 +17,20 @@
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
 import org.minbox.framework.api.boot.autoconfigure.security.ApiBootSecurityProperties;
+import org.minbox.framework.oauth.entrypoint.AccessTokenInvalidAuthenticationEntryPoint;
+import org.minbox.framework.oauth.response.AccessTokenInvalidResponse;
+import org.minbox.framework.oauth.response.DefaultAccessTokenInvalidResponse;
 import org.minbox.framework.security.SecurityUser;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
  * Resource server configuration
@@ -61,8 +67,32 @@ public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfig
             .antMatchers(apiBootSecurityProperties.getAuthPrefix());
     }
 
+    /**
+     * Configure custom serialization authentication error format
+     *
+     * @return The {@link DefaultAccessTokenInvalidResponse} instance
+     * @see DefaultAccessTokenInvalidResponse
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public AccessTokenInvalidResponse tokenInvalidResponse() {
+        return new DefaultAccessTokenInvalidResponse();
+    }
+
+    /**
+     * Instance {@link AuthenticationEntryPoint} support class
+     *
+     * @return {@link AccessTokenInvalidAuthenticationEntryPoint}
+     */
+    @Bean
+    public AuthenticationEntryPoint tokenInvalidAuthenticationEntryPoint() {
+        return new AccessTokenInvalidAuthenticationEntryPoint(tokenInvalidResponse());
+    }
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId(apiBootOauthProperties.getResourceId());
+        resources
+            .resourceId(apiBootOauthProperties.getResourceId())
+            .authenticationEntryPoint(tokenInvalidAuthenticationEntryPoint());
     }
 }
