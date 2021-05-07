@@ -75,7 +75,7 @@ public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfig
      */
     @Bean
     @ConditionalOnMissingBean
-    public AccessTokenInvalidResponse tokenInvalidResponse() {
+    public AccessTokenInvalidResponse accessTokenInvalidResponse() {
         return new DefaultAccessTokenInvalidResponse();
     }
 
@@ -86,7 +86,7 @@ public class ApiBootResourceServerAutoConfiguration extends ResourceServerConfig
      */
     @Bean
     public AuthenticationEntryPoint tokenInvalidAuthenticationEntryPoint() {
-        return new AccessTokenInvalidAuthenticationEntryPoint(tokenInvalidResponse());
+        return new AccessTokenInvalidAuthenticationEntryPoint(accessTokenInvalidResponse());
     }
 
     @Override
