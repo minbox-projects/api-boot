@@ -54,9 +54,13 @@ public class SshAgentServletContextListener implements ServletContextListener {
             return;
         }
         configs.stream().forEach(config -> {
-            AgentConnection connection = new DefaultAgentConnection(config);
-            this.connections.add(connection);
-            connection.connect();
+            try {
+                AgentConnection connection = new DefaultAgentConnection(config);
+                this.connections.add(connection);
+                connection.connect();
+            } catch (Exception e) {
+                log.error("Connection：{}:{}，try agent failure.", config.getServerIp(), config.getForwardTargetPort(), e);
+            }
         });
     }
 
