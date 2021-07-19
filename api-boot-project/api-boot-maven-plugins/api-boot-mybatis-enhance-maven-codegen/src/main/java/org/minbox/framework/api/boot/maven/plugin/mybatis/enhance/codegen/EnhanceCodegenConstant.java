@@ -40,7 +40,7 @@ public interface EnhanceCodegenConstant {
     /**
      * timestamp default value
      */
-    String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
+    String CURRENT_TIMESTAMP = "current_timestamp()";
     /**
      * classes path
      */

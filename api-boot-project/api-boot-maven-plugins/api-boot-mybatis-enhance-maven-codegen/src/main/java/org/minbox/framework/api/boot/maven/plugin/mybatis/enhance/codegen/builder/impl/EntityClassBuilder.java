@@ -26,6 +26,7 @@ import com.mysema.codegen.CodeWriter;
 import com.mysema.codegen.JavaWriter;
 import com.mysema.codegen.model.SimpleType;
 import lombok.Data;
+import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.EnhanceCodegenConstant;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
@@ -55,6 +56,10 @@ import java.util.Optional;
  * GitHub：https://github.com/hengboy
  */
 public class EntityClassBuilder extends AbstractClassBuilder {
+    /**
+     * The system stream log instance
+     */
+    private static final SystemStreamLog LOG = new SystemStreamLog();
 
     public EntityClassBuilder(ClassBuilderWrapper classBuilderWrapper) {
         super(classBuilderWrapper);
@@ -105,7 +110,9 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                 javaType = Optional.ofNullable(javaType).orElse(column.getJavaType());
                 // private field
                 writer.line(String.format(FIELD, javaType, formatterJavaPropertyName(column.getColumnName()), getColumnDefaultValue(column)));
-
+                LOG.info("Field：" + column.getJavaProperty() + "，Column：" + column.getColumnName() + "，" +
+                    "Java Type：" + column.getJavaType() + "，Jdbc Type：" + column.getJdbcTypeName() + "，" +
+                    "Default Value：" + column.getDefaultValue() + "， Mark：" + column.getRemark() + ".");
             }
 
             // end class

@@ -54,7 +54,7 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
     /**
      * Column Insertable Annotation
      */
-    public static final String COLUMN_INSERTABLE_ANNOTATION = "@Column(name = \"%s\",insertable = false)";
+    public static final String COLUMN_INSERTABLE_ANNOTATION = "@Column(name = \"%s\", insertable = false)";
     /**
      * Id auto Annotation
      */
