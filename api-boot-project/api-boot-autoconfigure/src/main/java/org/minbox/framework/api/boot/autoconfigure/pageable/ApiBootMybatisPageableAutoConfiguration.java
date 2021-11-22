@@ -17,10 +17,10 @@
 
 package org.minbox.framework.api.boot.autoconfigure.pageable;
 
-import com.gitee.hengboy.mybatis.pageable.config.PageableConfigurer;
-import com.gitee.hengboy.mybatis.pageable.interceptor.MyBatisExecutePageableInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.minbox.framework.mybatis.pageable.common.configure.PageableConfigurer;
+import org.minbox.framework.mybatis.pageable.interceptor.MyBatisExecutePageableInterceptor;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -91,8 +91,8 @@ public class ApiBootMybatisPageableAutoConfiguration {
      * @param sqlSessionFactory The {@link SqlSessionFactory} instance
      */
     void addPreInterceptors(SqlSessionFactory sqlSessionFactory) {
-        if (allowPageableConfigurer() && pageableConfigurer.prePlugins() != null) {
-            loopAddInterceptor(pageableConfigurer.prePlugins(), sqlSessionFactory);
+        if (allowPageableConfigurer() && pageableConfigurer.getPrePlugins() != null) {
+            loopAddInterceptor(pageableConfigurer.getPrePlugins(), sqlSessionFactory);
         }
     }
 
@@ -102,8 +102,8 @@ public class ApiBootMybatisPageableAutoConfiguration {
      * @param sqlSessionFactory The {@link SqlSessionFactory} instance
      */
     void addPostInterceptors(SqlSessionFactory sqlSessionFactory) {
-        if (allowPageableConfigurer() && pageableConfigurer.postPlugins() != null) {
-            loopAddInterceptor(pageableConfigurer.postPlugins(), sqlSessionFactory);
+        if (allowPageableConfigurer() && pageableConfigurer.getPostPlugins() != null) {
+            loopAddInterceptor(pageableConfigurer.getPostPlugins(), sqlSessionFactory);
         }
     }
 

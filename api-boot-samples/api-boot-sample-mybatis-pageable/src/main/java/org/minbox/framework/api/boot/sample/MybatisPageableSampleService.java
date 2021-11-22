@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.sample;
 
-import com.gitee.hengboy.mybatis.pageable.Page;
-import com.gitee.hengboy.mybatis.pageable.request.PageableRequest;
+import org.minbox.framework.mybatis.pageable.Page;
+import org.minbox.framework.mybatis.pageable.request.PageableRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

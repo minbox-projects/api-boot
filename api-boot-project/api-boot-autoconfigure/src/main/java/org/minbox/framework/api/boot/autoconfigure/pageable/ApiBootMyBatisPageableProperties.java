@@ -17,8 +17,8 @@
 
 package org.minbox.framework.api.boot.autoconfigure.pageable;
 
-import com.gitee.hengboy.mybatis.pageable.common.enums.DialectEnum;
 import lombok.Data;
+import org.minbox.framework.mybatis.pageable.common.DataBaseDialect;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,9 +43,9 @@ public class ApiBootMyBatisPageableProperties {
     /**
      * The database dialect
      * <p>
-     * default use {@link DialectEnum#MYSQL}
+     * default use {@link DataBaseDialect#MYSQL}
      */
-    private DialectEnum dialect = DialectEnum.MYSQL;
+    private DataBaseDialect dialect = DataBaseDialect.MYSQL;
 
     /**
      * Convert this instance to {@link Properties}

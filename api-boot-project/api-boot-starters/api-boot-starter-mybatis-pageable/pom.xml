@@ -49,10 +49,9 @@
             <groupId>org.minbox.framework</groupId>
             <artifactId>api-boot-starter</artifactId>
         </dependency>
-        <!--ApiBoot Mybatis Pageable-->
         <dependency>
-            <groupId>com.gitee.hengboy</groupId>
-            <artifactId>mybatis-pageable-core</artifactId>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>mybatis-pageable</artifactId>
         </dependency>
     </dependencies>
 

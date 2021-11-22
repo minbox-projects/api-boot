@@ -17,7 +17,7 @@
 
 package org.minbox.framework.api.boot.sample;
 
-import com.gitee.hengboy.mybatis.pageable.Page;
+import org.minbox.framework.mybatis.pageable.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
