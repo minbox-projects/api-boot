@@ -36,6 +36,7 @@
         <module>api-boot-starter-message-pipe-client</module>
         <module>api-boot-starter-message-pipe-server</module>
         <module>api-boot-starter-ssh-agent</module>
+        <module>api-boot-starter-grace</module>
     </modules>
 
 </project>
