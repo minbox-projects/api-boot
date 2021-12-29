@@ -1,0 +1,6 @@
+api:
+    boot:
+        grace:
+            # 如果不配置则使用SpringBoot项目默认package
+            function-scan-base-packages:
+                - org.minbox.framework.sample.grace
