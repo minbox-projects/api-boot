@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.autoconfigure.oauth;
 
+import org.minbox.framework.api.boot.common.exception.ApiBootException;
 import org.minbox.framework.oauth.AuthorizationServerConfiguration;
 import org.minbox.framework.oauth.grant.OAuth2TokenGranter;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 import static org.minbox.framework.api.boot.autoconfigure.oauth.ApiBootOauthProperties.API_BOOT_OAUTH_PREFIX;
@@ -62,17 +64,15 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
      * redis connection factory
      */
     private RedisConnectionFactory redisConnectionFactory;
+    private DataSource dataSource;
 
-    /**
-     * constructor instance redis connection factory
-     *
-     * @param objectProvider         ApiBoot Token Granter
-     * @param apiBootOauthProperties ApiBoot Oauth Properties
-     * @param redisConnectionFactory Redis Connection Factory
-     */
-    public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<OAuth2TokenGranter>> objectProvider, ApiBootOauthProperties apiBootOauthProperties, RedisConnectionFactory redisConnectionFactory) {
+    public ApiBootAuthorizationServerRedisAutoConfiguration(ObjectProvider<List<OAuth2TokenGranter>> objectProvider,
+                                                            ApiBootOauthProperties apiBootOauthProperties,
+                                                            ObjectProvider<RedisConnectionFactory> connectionFactoryProvider,
+                                                            ObjectProvider<DataSource> dataSourceProvider) {
         super(objectProvider, apiBootOauthProperties);
-        this.redisConnectionFactory = redisConnectionFactory;
+        this.redisConnectionFactory = connectionFactoryProvider.getIfAvailable();
+        this.dataSource = dataSourceProvider.getIfAvailable();
         logger.info("ApiBoot Oauth2 initialize using redis.");
     }
 
@@ -84,14 +84,24 @@ public class ApiBootAuthorizationServerRedisAutoConfiguration extends ApiBootAut
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = clients.inMemory();
-        apiBootOauthProperties.getClients().stream().forEach(client -> inMemoryClientDetailsServiceBuilder.withClient(client.getClientId())
-            .secret(passwordEncoder().encode(client.getClientSecret()))
-            .authorizedGrantTypes(client.getGrantTypes())
-            .scopes(client.getScopes())
-            .resourceIds(client.getResourceId())
-            .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds())
-            .refreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds()));
+        if (OAuthClientStorageAway.jdbc == apiBootOauthProperties.getClientStorageAway() && dataSource == null) {
+            throw new ApiBootException("If you use jdbc to store the client, please instantiate the datasource.");
+        }
+        switch (apiBootOauthProperties.getClientStorageAway()) {
+            case memory:
+                InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = clients.inMemory();
+                apiBootOauthProperties.getClients().stream().forEach(client -> inMemoryClientDetailsServiceBuilder.withClient(client.getClientId())
+                    .secret(passwordEncoder().encode(client.getClientSecret()))
+                    .authorizedGrantTypes(client.getGrantTypes())
+                    .scopes(client.getScopes())
+                    .resourceIds(client.getResourceId())
+                    .accessTokenValiditySeconds(client.getAccessTokenValiditySeconds())
+                    .refreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds()));
+                break;
+            case jdbc:
+                clients.jdbc(dataSource);
+                break;
+        }
     }
 
     /**

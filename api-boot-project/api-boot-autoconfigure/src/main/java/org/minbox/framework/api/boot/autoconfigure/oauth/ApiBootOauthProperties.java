@@ -45,7 +45,12 @@ public class ApiBootOauthProperties {
      *
      * @see OAuthAway
      */
+    @Deprecated
     private OAuthAway away = OAuthAway.memory;
+    /**
+     * 配置OAuth2客户端列表存储方式
+     */
+    private OAuthClientStorageAway clientStorageAway = OAuthClientStorageAway.memory;
     /**
      * Whether to generate a new token every time the "/oauth/token" interface is called
      * <p>
