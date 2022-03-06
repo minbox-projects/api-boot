@@ -3,6 +3,7 @@ package org.minbox.framework.api.boot.autoconfigure.ssh;
 import lombok.Data;
 import org.minbox.framework.ssh.agent.config.AgentConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -27,5 +28,6 @@ public class SshAgentProperties {
      * <p>
      * Use this parameter to configure proxy multiple remote server port forwarding information
      */
+    @NestedConfigurationProperty
     private List<AgentConfig> configs;
 }
