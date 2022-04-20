@@ -19,24 +19,18 @@ package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
 import org.minbox.framework.api.boot.autoconfigure.logging.admin.ui.ApiBootLoggingAdminUiAutoConfiguration;
 import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
-import org.minbox.framework.logging.admin.storage.LoggingDataSourceStorage;
+import org.minbox.framework.logging.admin.storage.LoggingStorage;
 import org.minbox.framework.logging.spring.context.annotation.admin.EnableLoggingAdmin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
-
-import javax.sql.DataSource;
 
 /**
  * ApiBoot Logging Admin Configuration
@@ -45,14 +39,13 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ConditionalOnClass(LoggingAdminFactoryBean.class)
-@ConditionalOnBean(DataSource.class)
 @EnableConfigurationProperties(ApiBootLoggingAdminProperties.class)
-@AutoConfigureAfter(DataSourceAutoConfiguration.class)
 @Import({
     ApiBootLoggingAdminUiAutoConfiguration.class
 })
 @EnableAsync
 @EnableLoggingAdmin
+@AutoConfigureAfter({ApiBootLoggingAdminDataBaseAutoConfiguration.class, ApiBootLoggingAdminMongoAutoConfiguration.class})
 public class ApiBootLoggingAdminAutoConfiguration {
     /**
      * logger instance
@@ -68,45 +61,19 @@ public class ApiBootLoggingAdminAutoConfiguration {
     }
 
     /**
-     * {@link org.minbox.framework.logging.admin.storage.LoggingStorage} database
-     * @param dataSource {@link DataSource}
-     * @return {@link LoggingDataSourceStorage}
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public LoggingDataSourceStorage loggingDataSourceStorage(DataSource dataSource) {
-        LoggingDataSourceStorage storage = new LoggingDataSourceStorage(dataSource);
-        return storage;
-    }
-
-    /**
      * instantiation {@link LoggingAdminFactoryBean}
      *
-     * @param loggingDataSourceStorage {@link LoggingDataSourceStorage}
+     * @param loggingStorage The logging storage object instance
      * @return LoggingAdminFactoryBean
      */
     @Bean
     @ConditionalOnMissingBean
-    public LoggingAdminFactoryBean loggingAdminFactoryBean(LoggingDataSourceStorage loggingDataSourceStorage) {
+    public LoggingAdminFactoryBean loggingAdminFactoryBean(LoggingStorage loggingStorage) {
         LoggingAdminFactoryBean factoryBean = new LoggingAdminFactoryBean();
-        factoryBean.setLoggingStorage(loggingDataSourceStorage);
+        factoryBean.setLoggingStorage(loggingStorage);
         factoryBean.setShowConsoleReportLog(apiBootLoggingAdminProperties.isShowConsoleReportLog());
         factoryBean.setFormatConsoleLogJson(apiBootLoggingAdminProperties.isFormatConsoleLogJson());
         logger.info("【LoggingAdminFactoryBean】init successfully.");
         return factoryBean;
-    }
-
-    /**
-     * Verify that the {@link DataSource} exists and perform an exception alert when it does not exist
-     *
-     * @see org.minbox.framework.api.boot.autoconfigure.enhance.ApiBootMyBatisEnhanceAutoConfiguration
-     */
-    @Configuration
-    @ConditionalOnMissingBean(DataSource.class)
-    public static class DataSourceNotFoundConfiguration implements InitializingBean {
-        @Override
-        public void afterPropertiesSet() throws Exception {
-            throw new BeanCreationException("No " + DataSource.class.getName() + " Found.");
-        }
     }
 }

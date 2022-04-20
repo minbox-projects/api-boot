@@ -18,6 +18,7 @@
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
 import lombok.Data;
+import org.minbox.framework.api.boot.autoconfigure.logging.LoggingStorageAway;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -44,4 +45,8 @@ public class ApiBootLoggingAdminProperties {
      * Format console log JSON
      */
     private boolean formatConsoleLogJson = false;
+    /**
+     * The logging storage away
+     */
+    private LoggingStorageAway storageAway = LoggingStorageAway.jdbc;
 }
