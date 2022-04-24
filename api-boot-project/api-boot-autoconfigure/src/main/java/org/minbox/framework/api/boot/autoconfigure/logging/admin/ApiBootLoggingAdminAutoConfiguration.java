@@ -58,6 +58,7 @@ public class ApiBootLoggingAdminAutoConfiguration {
 
     public ApiBootLoggingAdminAutoConfiguration(ApiBootLoggingAdminProperties apiBootLoggingAdminProperties) {
         this.apiBootLoggingAdminProperties = apiBootLoggingAdminProperties;
+        logger.info("LoggingAdmin storage away uses {}.", apiBootLoggingAdminProperties.getStorageAway());
     }
 
     /**
@@ -73,7 +74,8 @@ public class ApiBootLoggingAdminAutoConfiguration {
         factoryBean.setLoggingStorage(loggingStorage);
         factoryBean.setShowConsoleReportLog(apiBootLoggingAdminProperties.isShowConsoleReportLog());
         factoryBean.setFormatConsoleLogJson(apiBootLoggingAdminProperties.isFormatConsoleLogJson());
-        logger.info("【LoggingAdminFactoryBean】init successfully.");
+        factoryBean.setCleanerSetting(apiBootLoggingAdminProperties.getCleanerSetting());
+        logger.info("LoggingAdminFactoryBean init successfully.");
         return factoryBean;
     }
 }

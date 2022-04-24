@@ -103,7 +103,7 @@ public class ApiBootLoggingAutoConfiguration {
         factoryBean.setShowConsoleLog(apiBootLoggingProperties.isShowConsoleLog());
         factoryBean.setFormatConsoleLog(apiBootLoggingProperties.isFormatConsoleLogJson());
 
-        logger.info("【LoggingFactoryBean】init successfully.");
+        logger.info("LoggingFactoryBean init successfully.");
         return customizers.customize(factoryBean);
     }
 

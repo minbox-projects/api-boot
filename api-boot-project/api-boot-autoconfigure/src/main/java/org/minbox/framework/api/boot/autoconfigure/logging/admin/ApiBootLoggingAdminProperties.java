@@ -19,7 +19,9 @@ package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
 import lombok.Data;
 import org.minbox.framework.api.boot.autoconfigure.logging.LoggingStorageAway;
+import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 import static org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootLoggingAdminProperties.API_BOOT_LOGGING_ADMIN_PREFIX;
@@ -49,4 +51,9 @@ public class ApiBootLoggingAdminProperties {
      * The logging storage away
      */
     private LoggingStorageAway storageAway = LoggingStorageAway.jdbc;
+    /**
+     * The expired data cleaner setting
+     */
+    @NestedConfigurationProperty
+    private LoggingAdminFactoryBean.CleanerSetting cleanerSetting = new LoggingAdminFactoryBean.CleanerSetting();
 }
