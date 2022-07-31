@@ -36,10 +36,13 @@ import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builde
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl.EntityClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
+import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.setting.SshProxySetting;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.CodegenFile;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.template.CodegenTemplate;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.tools.CamelTools;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.writer.JavaClassWriter;
+import org.minbox.framework.ssh.agent.AgentConnection;
+import org.minbox.framework.ssh.agent.DefaultAgentConnection;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
@@ -158,12 +161,26 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     @Parameter
     private boolean appendLombokAccessorsChain = false;
+    /**
+     * 是否启用ssh代理方式连接数据库
+     */
+    @Parameter
+    private boolean enableSshProxy = false;
+    /**
+     * Ssh Proxy代理参数设置
+     */
+    @Parameter
+    private SshProxySetting sshProxySetting;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (!execute) {
             getLog().warn("Automatic code generation is not turned on. If you need to generate entity classes, configure 【execute=true】");
             return;
+        }
+        AgentConnection agentConnection = null;
+        if (enableSshProxy) {
+            agentConnection = this.startingSshProxy(sshProxySetting);
         }
         // code builder properties
         CodeBuilderProperties codeBuilderProperties = CodeBuilderProperties.builder().dbType(dbType).dbName(dbName).dbUrl(dbUrl).dbUserName(dbUserName).dbPassword(dbPassword).dbDriverClassName(dbDriverClassName).build();
@@ -247,6 +264,22 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
                 }
             }
         });
+        // 断开ssh连接
+        if (!ObjectUtils.isEmpty(agentConnection)) {
+            agentConnection.disconnect();
+            getLog().info("Ssh connection disconnected successfully");
+        }
+    }
+
+    private AgentConnection startingSshProxy(SshProxySetting setting) {
+        AgentConnection connection = null;
+        try {
+            connection = new DefaultAgentConnection(setting);
+            connection.connect();
+        } catch (Exception e) {
+            getLog().error("Connection：" + setting.getServerIp() + ":" + setting.getForwardTargetPort() + "，try agent failure.", e);
+        }
+        return connection;
     }
 
     /**

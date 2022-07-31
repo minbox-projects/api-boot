@@ -69,6 +69,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--Ssh Agent-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>ssh-agent</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>
