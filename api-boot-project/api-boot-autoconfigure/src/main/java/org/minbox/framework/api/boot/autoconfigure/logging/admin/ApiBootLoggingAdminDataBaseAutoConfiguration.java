@@ -1,5 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
+import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
 import org.minbox.framework.logging.admin.storage.LoggingDataSourceStorage;
 import org.minbox.framework.logging.admin.storage.LoggingStorage;
 import org.springframework.beans.factory.BeanCreationException;
@@ -23,7 +24,7 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootL
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(DataSource.class)
+@ConditionalOnClass({DataSource.class, LoggingAdminFactoryBean.class})
 @ConditionalOnBean(DataSource.class)
 @ConditionalOnProperty(prefix = API_BOOT_LOGGING_ADMIN_PREFIX, name = "storage-away", havingValue = "jdbc")
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)

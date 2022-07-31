@@ -1,5 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.logging.admin;
 
+import org.minbox.framework.logging.admin.LoggingAdminFactoryBean;
 import org.minbox.framework.logging.admin.storage.LoggingDataSourceStorage;
 import org.minbox.framework.logging.admin.storage.LoggingStorage;
 import org.minbox.framework.logging.admin.storage.mongo.LoggingMongoStorage;
@@ -21,7 +22,7 @@ import static org.minbox.framework.api.boot.autoconfigure.logging.admin.ApiBootL
  * @author 恒宇少年
  */
 @Configuration
-@ConditionalOnClass(MongoTemplate.class)
+@ConditionalOnClass({MongoTemplate.class, LoggingAdminFactoryBean.class})
 @ConditionalOnBean(MongoTemplate.class)
 @ConditionalOnProperty(prefix = API_BOOT_LOGGING_ADMIN_PREFIX, name = "storage-away", havingValue = "mongo")
 @AutoConfigureAfter(MongoDataAutoConfiguration.class)
