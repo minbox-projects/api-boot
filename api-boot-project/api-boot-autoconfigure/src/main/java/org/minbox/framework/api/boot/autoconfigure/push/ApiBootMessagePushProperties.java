@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.autoconfigure.push;
 import lombok.Data;
 import org.minbox.framework.api.boot.push.model.PushClientConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
@@ -42,6 +43,7 @@ public class ApiBootMessagePushProperties {
     /**
      * The simple push client config parameters
      */
+    @NestedConfigurationProperty
     private PushClientConfig client;
     /**
      * The multiple push client config parameters
