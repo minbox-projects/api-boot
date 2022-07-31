@@ -64,6 +64,10 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
      */
     public static final String ID_UUID_ANNOTATION = "@Id(generatorType = KeyGeneratorTypeEnum.UUID)";
     /**
+     * Id SEQUENCE Annotation
+     */
+    public static final String ID_SEQUENCE_ANNOTATION = "@Id(generatorType = KeyGeneratorTypeEnum.SEQUENCE)";
+    /**
      * Table Annotation
      */
     public static final String TABLE_ANNOTATION = "@Table(name = \"%s\")";

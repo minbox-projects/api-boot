@@ -39,6 +39,7 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,6 +61,8 @@ public class EntityClassBuilder extends AbstractClassBuilder {
      * The system stream log instance
      */
     private static final SystemStreamLog LOG = new SystemStreamLog();
+    private static final int SEQUENCE_ID_COLUMN_LENGTH = 20;
+    private static final int UUID_ID_COLUMN_LENGTH = 32;
 
     public EntityClassBuilder(ClassBuilderWrapper classBuilderWrapper) {
         super(classBuilderWrapper);
@@ -101,7 +104,13 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                 // comment
                 writer.javadoc(column.getRemark());
                 if (column.isPrimaryKey()) {
-                    writer.line(column.isAutoincrement() ? ID_AUTO_ANNOTATION : ID_UUID_ANNOTATION);
+                    if (column.isAutoincrement()) {
+                        writer.line(ID_AUTO_ANNOTATION);
+                    } else if (Types.VARCHAR == column.getJdbcType() && column.getSize() == SEQUENCE_ID_COLUMN_LENGTH) {
+                        writer.line(ID_SEQUENCE_ANNOTATION);
+                    } else if (Types.VARCHAR == column.getJdbcType() && column.getSize() == UUID_ID_COLUMN_LENGTH) {
+                        writer.line(ID_UUID_ANNOTATION);
+                    }
                 }
                 // @Column
                 writer.line(getColumnAnnotation(column));
