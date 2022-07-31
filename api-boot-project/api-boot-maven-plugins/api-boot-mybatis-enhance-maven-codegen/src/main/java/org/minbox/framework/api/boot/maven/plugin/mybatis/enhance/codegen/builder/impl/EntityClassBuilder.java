@@ -26,6 +26,7 @@ import com.mysema.codegen.CodeWriter;
 import com.mysema.codegen.JavaWriter;
 import com.mysema.codegen.model.SimpleType;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.EnhanceCodegenConstant;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
@@ -90,8 +91,15 @@ public class EntityClassBuilder extends AbstractClassBuilder {
             writer.javadoc(table.getRemark(), AUTHOR);
 
             // begin class
-            writer.annotation(Data.class);
-            // @table
+            // @Data
+            if (getWrapper().isAppendLombokData()) {
+                writer.line(LOMBOK_DATA_ANNOTATION);
+            }
+            // @Accessors(chain=true)
+            if (getWrapper().isAppendLombokAccessorsChain()) {
+                writer.line(LOMBOK_ACCESSORS_CHAIN_ANNOTATION);
+            }
+            // @Table
             writer.line(String.format(TABLE_ANNOTATION, table.getTableName()));
 
             // serializable
@@ -162,7 +170,15 @@ public class EntityClassBuilder extends AbstractClassBuilder {
      */
     void chooseImport(com.gitee.hengboy.builder.core.database.model.Table table, CodeWriter writer) throws IOException {
         // basic imports
-        writer.imports(Column.class, Id.class, Table.class, KeyGeneratorTypeEnum.class, Data.class, Serializable.class);
+        writer.imports(Column.class, Id.class, Table.class, KeyGeneratorTypeEnum.class, Serializable.class);
+
+        // lombok imports
+        if (getWrapper().isAppendLombokData()) {
+            writer.imports(Data.class);
+        }
+        if (getWrapper().isAppendLombokAccessorsChain()) {
+            writer.imports(Accessors.class);
+        }
 
         // import bigDecimal
         if (table.isHasBigDecimal()) {

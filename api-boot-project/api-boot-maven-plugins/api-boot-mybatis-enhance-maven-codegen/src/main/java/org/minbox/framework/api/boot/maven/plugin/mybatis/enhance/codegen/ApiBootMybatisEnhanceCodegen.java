@@ -148,6 +148,16 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     @Parameter
     private List<TypeMapping> typeMappings;
+    /**
+     * 是否在类上追加Lombok "@Data"注解
+     */
+    @Parameter
+    private boolean appendLombokData = false;
+    /**
+     * 是否在类上追加Lombok "@Accessors(chain=true)"注解
+     */
+    @Parameter
+    private boolean appendLombokAccessorsChain = false;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -188,7 +198,10 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             String className = CamelTools.upper(tableName);
 
             // Encapsulated objects needed to perform generation
-            ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName).tableCamelName(className).table(table).typeMappings(typeMappings).ignoreColumnPrefix(ignoreColumnPrefix).build();
+            ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName)
+                .tableCamelName(className).table(table).typeMappings(typeMappings).ignoreColumnPrefix(ignoreColumnPrefix)
+                .appendLombokData(appendLombokData).appendLombokAccessorsChain(appendLombokAccessorsChain)
+                .build();
 
             // execute generator
             Arrays.stream(builders).forEach(builderClass -> {

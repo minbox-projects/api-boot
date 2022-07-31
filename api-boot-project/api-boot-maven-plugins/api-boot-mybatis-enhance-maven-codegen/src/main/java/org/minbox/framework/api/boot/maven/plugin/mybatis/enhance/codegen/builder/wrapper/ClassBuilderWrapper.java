@@ -20,6 +20,7 @@ package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.build
 import com.gitee.hengboy.builder.core.database.model.Table;
 import lombok.Builder;
 import lombok.Data;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
 
 import java.util.List;
@@ -60,4 +61,12 @@ public class ClassBuilderWrapper {
      * The {@link TypeMapping} collection
      */
     private List<TypeMapping> typeMappings;
+    /**
+     * 是否在类上追加Lombok "@Data"注解
+     */
+    private boolean appendLombokData;
+    /**
+     * 是否在类上追加Lombok "@Accessors(chain=true)"注解
+     */
+    private boolean appendLombokAccessorsChain;
 }

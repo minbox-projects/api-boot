@@ -19,6 +19,7 @@ package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.build
 
 import com.gitee.hengboy.builder.common.util.StringUtil;
 import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.ClassBuilder;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.wrapper.ClassBuilderWrapper;
 
@@ -67,6 +68,14 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
      * Id SEQUENCE Annotation
      */
     public static final String ID_SEQUENCE_ANNOTATION = "@Id(generatorType = KeyGeneratorTypeEnum.SEQUENCE)";
+    /**
+     * Lombok "@Data"
+     */
+    public static final String LOMBOK_DATA_ANNOTATION = "@Data";
+    /**
+     * Lombok "@Accessors(chain=true)"
+     */
+    public static final String LOMBOK_ACCESSORS_CHAIN_ANNOTATION = "@Accessors(chain=true)";
     /**
      * Table Annotation
      */
