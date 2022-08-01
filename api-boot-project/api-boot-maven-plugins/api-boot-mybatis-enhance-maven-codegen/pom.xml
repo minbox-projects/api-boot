@@ -28,6 +28,7 @@
     <packaging>maven-plugin</packaging>
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
+        <mysql-connector-java.version>5.1.49</mysql-connector-java.version>
     </properties>
     <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
     <dependencies>
@@ -67,6 +68,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
             <optional>true</optional>
         </dependency>
         <!--Ssh Agent-->
