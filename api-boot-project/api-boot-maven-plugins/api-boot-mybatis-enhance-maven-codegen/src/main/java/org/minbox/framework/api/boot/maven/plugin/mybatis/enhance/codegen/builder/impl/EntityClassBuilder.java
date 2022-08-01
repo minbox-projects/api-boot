@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.builder.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.gitee.hengboy.builder.common.enums.JavaTypeEnum;
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Column;
 import com.gitee.hengboy.mybatis.enhance.common.annotation.Id;
@@ -127,9 +128,9 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                 javaType = Optional.ofNullable(javaType).orElse(column.getJavaType());
                 // private field
                 writer.line(String.format(FIELD, javaType, formatterJavaPropertyName(column.getColumnName()), getColumnDefaultValue(column)));
-                LOG.info("Field：" + column.getJavaProperty() + "，Column：" + column.getColumnName() + "，" +
-                    "Java Type：" + column.getJavaType() + "，Jdbc Type：" + column.getJdbcTypeName() + "，" +
-                    "Default Value：" + column.getDefaultValue() + "， Mark：" + column.getRemark() + ".");
+                if (getWrapper().isOutputFieldInTheConsole()) {
+                    LOG.info(JSON.toJSONString(column));
+                }
             }
 
             // end class

@@ -20,7 +20,6 @@ package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.build
 import com.gitee.hengboy.builder.core.database.model.Table;
 import lombok.Builder;
 import lombok.Data;
-import org.apache.maven.plugins.annotations.Parameter;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.mapping.TypeMapping;
 
 import java.util.List;
@@ -69,4 +68,8 @@ public class ClassBuilderWrapper {
      * 是否在类上追加Lombok "@Accessors(chain=true)"注解
      */
     private boolean appendLombokAccessorsChain;
+    /**
+     * 是否在控制台输出字段信息
+     */
+    private boolean outputFieldInTheConsole;
 }
