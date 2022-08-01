@@ -17,6 +17,7 @@
 
 package org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen;
 
+import com.alibaba.fastjson.JSON;
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
 import com.gitee.hengboy.builder.common.enums.DbTypeEnum;
 import com.gitee.hengboy.builder.core.database.DataBase;
@@ -47,8 +48,12 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.EnhanceCodegenConstant.EMPTY_STRING;
 
 /**
  * ApiBoot Mybatis Enhance Codegen Maven Plugin
@@ -171,6 +176,11 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     @Parameter
     private SshProxySetting sshProxySetting;
+    /**
+     * 是否在控制台输出字段信息
+     */
+    @Parameter
+    private boolean outputFieldInTheConsole = false;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -192,13 +202,18 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
         String codegenSetting = loadCodegenSetting();
 
         List<String> tableNames = ObjectUtils.isEmpty(tables) ? getTableNames(dataBase) : tables;
-
+        if (!ObjectUtils.isEmpty(tableNames)) {
+            getLog().info("The entity class corresponding to the " + tableNames.size() + " tables will be generated，and the table name list: " +
+                JSON.toJSONString(tableNames));
+        }
         tableNames.stream().forEach(tableName -> {
-
+            LocalDateTime startGetInfoTime = LocalDateTime.now();
             // get table
             Table table = dataBase.getTable(tableName);
-
-            getLog().info("Execution table: 【" + tableName + "】 - " + table.getRemark() + " entity creation.");
+            getLog().info(EMPTY_STRING);
+            getLog().info("----------------< Start Generating " + tableName + "(" + table.getRemark() + ") >----------------");
+            getLog().info("Get information is complete, time consuming " +
+                Duration.between(startGetInfoTime, LocalDateTime.now()).toMillis() + " ms.");
 
             // execute the builders created
             // ClassBuilder implementation classes can be added
@@ -209,7 +224,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
 
             // ignore table prefix
             if (!StringUtils.isEmpty(ignoreTablePrefix)) {
-                tableName = tableName.replace(ignoreTablePrefix, EnhanceCodegenConstant.EMPTY_STRING);
+                tableName = tableName.replace(ignoreTablePrefix, EMPTY_STRING);
             }
             // formatter class name
             String className = CamelTools.upper(tableName);
@@ -218,6 +233,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName)
                 .tableCamelName(className).table(table).typeMappings(typeMappings).ignoreColumnPrefix(ignoreColumnPrefix)
                 .appendLombokData(appendLombokData).appendLombokAccessorsChain(appendLombokAccessorsChain)
+                .outputFieldInTheConsole(outputFieldInTheConsole)
                 .build();
 
             // execute generator
@@ -228,7 +244,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
                     wrapper.setTableCamelName(builder.getDefaultPrefix() + wrapper.getTableCamelName());
 
                     // setting prefix dir
-                    if (!StringUtils.isEmpty(builder.getPrefixDir())) {
+                    if (!ObjectUtils.isEmpty(builder.getPrefixDir())) {
                         wrapper.setPackageName(wrapper.getPackageName() + EnhanceCodegenConstant.POINT + builder.getPrefixDir());
                     }
                     // class file path
@@ -237,6 +253,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
                     String classContent = builder.getClassContent();
                     // invoke content write
                     JavaClassWriter.writeToJavaFile(classPath, classContent);
+                    getLog().info("Generated class [" + classPath + "] at " + LocalDateTime.now());
                 }
             });
 
@@ -267,7 +284,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
         // 断开ssh连接
         if (!ObjectUtils.isEmpty(agentConnection)) {
             agentConnection.disconnect();
-            getLog().info("Ssh connection disconnected successfully");
+            getLog().info("SSH Connection disconnected successfully");
         }
     }
 
@@ -277,7 +294,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             connection = new DefaultAgentConnection(setting);
             connection.connect();
         } catch (Exception e) {
-            getLog().error("Connection：" + setting.getServerIp() + ":" + setting.getForwardTargetPort() + "，try agent failure.", e);
+            getLog().error("SSH Connection：" + setting.getServerIp() + ":" + setting.getForwardTargetPort() + "，try agent failure.", e);
         }
         return connection;
     }
