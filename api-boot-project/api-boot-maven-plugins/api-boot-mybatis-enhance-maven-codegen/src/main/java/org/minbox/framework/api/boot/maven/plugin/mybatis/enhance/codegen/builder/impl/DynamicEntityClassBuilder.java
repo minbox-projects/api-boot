@@ -97,7 +97,7 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
             writer.javadoc(table.getRemark(), AUTHOR);
             // begin class
             writer.beginClass(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()),
-                    new SimpleType(superClassName, EnhanceCodegenConstant.EMPTY_STRING, superClassName));
+                new SimpleType(superClassName, EnhanceCodegenConstant.EMPTY_STRING, superClassName));
 
             // constructor
             writer.beginConstructor(new Parameter(CONSTRUCTOR_PARAMETER_NAME, Types.STRING));
@@ -106,7 +106,8 @@ public class DynamicEntityClassBuilder extends AbstractClassBuilder {
 
             // dsl method
             writer.beginStaticMethod(new SimpleType(getWrapper().getTableCamelName(), EnhanceCodegenConstant.EMPTY_STRING, getWrapper().getTableCamelName()), DYNAMIC_METHOD_NAME);
-            writer.line(String.format(DYNAMIC_INSTANCE, getWrapper().getTableCamelName(), table.getTableName()));
+            writer.line(String.format(DYNAMIC_INSTANCE, getWrapper().getTableCamelName(),
+                getWrapper().isAppendSchemaBeforeTableName() ? getWrapper().getDataBaseName() + "." + table.getTableName() : table.getTableName()));
             writer.end();
 
             StringBuffer columns = new StringBuffer();

@@ -181,6 +181,11 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
      */
     @Parameter
     private boolean outputFieldInTheConsole = false;
+    /**
+     * 是否在表名前追加schema
+     */
+    @Parameter
+    private boolean appendSchemaBeforeTableName = true;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -233,7 +238,8 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             ClassBuilderWrapper wrapper = ClassBuilderWrapper.builder().packageName(packageName)
                 .tableCamelName(className).table(table).typeMappings(typeMappings).ignoreColumnPrefix(ignoreColumnPrefix)
                 .appendLombokData(appendLombokData).appendLombokAccessorsChain(appendLombokAccessorsChain)
-                .outputFieldInTheConsole(outputFieldInTheConsole)
+                .outputFieldInTheConsole(outputFieldInTheConsole).appendSchemaBeforeTableName(appendSchemaBeforeTableName)
+                .dataBaseName(dbName)
                 .build();
 
             // execute generator

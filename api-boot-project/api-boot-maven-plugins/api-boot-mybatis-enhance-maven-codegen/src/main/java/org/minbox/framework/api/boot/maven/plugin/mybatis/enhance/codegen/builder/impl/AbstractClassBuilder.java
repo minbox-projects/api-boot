@@ -80,6 +80,10 @@ public abstract class AbstractClassBuilder implements ClassBuilder {
      */
     public static final String TABLE_ANNOTATION = "@Table(name = \"%s\")";
     /**
+     * 带有schema前置的Table Annotation
+     */
+    public static final String TABLE_WITH_SCHEMA_ANNOTATION = "@Table(name = \"%s.%s\")";
+    /**
      * Table Expression
      */
     public static final String TABLE_EXPRESSION = "TableExpression<%s>";

@@ -72,4 +72,12 @@ public class ClassBuilderWrapper {
      * 是否在控制台输出字段信息
      */
     private boolean outputFieldInTheConsole;
+    /**
+     * 是否在表名前追加schema
+     */
+    private boolean appendSchemaBeforeTableName;
+    /**
+     * 数据库名称
+     */
+    private String dataBaseName;
 }

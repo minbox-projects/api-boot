@@ -101,7 +101,9 @@ public class EntityClassBuilder extends AbstractClassBuilder {
                 writer.line(LOMBOK_ACCESSORS_CHAIN_ANNOTATION);
             }
             // @Table
-            writer.line(String.format(TABLE_ANNOTATION, table.getTableName()));
+            writer.line(getWrapper().isAppendSchemaBeforeTableName() ?
+                String.format(TABLE_WITH_SCHEMA_ANNOTATION, getWrapper().getDataBaseName(), table.getTableName())
+                : String.format(TABLE_ANNOTATION, table.getTableName()));
 
             // serializable
             SimpleType serializableInterface = new SimpleType(Serializable.class.getName(), EnhanceCodegenConstant.EMPTY_STRING, Serializable.class.getName());
