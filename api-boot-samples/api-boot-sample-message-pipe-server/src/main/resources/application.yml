@@ -1,21 +1,12 @@
-spring:
-  redis:
-    port: 6379
-    timeout: 10000
-    database: 1
-    lettuce:
-      pool:
-        max-active: 200
-        max-idle: 200
 server:
   port: 8081
-
-api:
-    boot:
-        message:
-            pipe:
-                server:
-                    configuration:
-                        # 配置监听端口号，默认为5200
-                        server-port: 5200
-                        exclude-pipe-name-patterns: "test-1"
+spring:
+    application:
+        name: api-boot-sample-message-pipe-server
+    cloud:
+        nacos:
+            server-addr: 127.0.0.1:8848
+            username: nacos
+            password: nacos
+        compatibility-verifier:
+            enabled: false
