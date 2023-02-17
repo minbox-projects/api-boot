@@ -13,4 +13,4 @@ Version : ${api.boot.version}
 
 WebSite : https://apiboot.minbox.org
 
-Study Articles : https://blog.yuqiyu.com/apiboot-all-articles.html
+Study Articles : https://blog.minbox.org/apiboot-all-articles.html
