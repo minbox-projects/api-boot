@@ -18,7 +18,8 @@
         <!--Samples所使用的ApiBoot版本-->
         <api-boot.version>${project.version}</api-boot.version>
         <!--Samples所使用的SpringBoot版本-->
-        <spring-boot.version>2.7.3</spring-boot.version>
+        <spring-boot.version>2.7.15</spring-boot.version>
+        <mysql.version>8.0.33</mysql.version>
     </properties>
     <artifactId>api-boot-samples</artifactId>
     <packaging>pom</packaging>
@@ -48,4 +49,13 @@
         <module>api-boot-sample-ssh-agent</module>
         <module>api-boot-sample-grace</module>
     </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
