@@ -1,14 +1,14 @@
 package org.minbox.framework.api.boot.autoconfigure.datasource;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.minbox.framework.datasource.DataSourceFactoryBean;
 import org.minbox.framework.datasource.MinBoxDataSource;
 import org.minbox.framework.datasource.aop.advistor.DataSourceSwitchAdvisor;
 import org.minbox.framework.datasource.aop.interceptor.DataSourceSwitchAnnotationInterceptor;
 import org.minbox.framework.datasource.config.DataSourceConfig;
 import org.minbox.framework.datasource.config.DataSourceDruidConfig;
+import org.minbox.framework.datasource.environment.DataSourceSwitchEnvironment;
+import org.minbox.framework.datasource.environment.customizer.DataSourceEnvironmentSelectionCustomizer;
 import org.minbox.framework.datasource.routing.MinBoxSwitchRoutingDataSource;
-import org.minbox.framework.datasource.routing.customizer.DataSourceSelectionCustomizer;
 import org.minbox.framework.datasource.support.MinBoxDruidDataSource;
 import org.minbox.framework.datasource.support.MinBoxHikariDataSource;
 import org.springframework.beans.factory.ObjectProvider;
@@ -22,10 +22,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * ApiBoot DataSource Switch AutoConfiguration
@@ -41,12 +39,12 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
      * ApiBoot DataSource Switch Properties
      */
     private ApiBootDataSourceSwitchProperties dataSourceSwitchProperties;
-    private DataSourceSelectionCustomizer selectionCustomizer;
+    private DataSourceEnvironmentSelectionCustomizer environmentSelectionCustomizer;
 
     public ApiBootDataSourceSwitchAutoConfiguration(ApiBootDataSourceSwitchProperties dataSourceSwitchProperties,
-                                                    ObjectProvider<DataSourceSelectionCustomizer> customizerObjectProvider) {
+                                                    ObjectProvider<DataSourceEnvironmentSelectionCustomizer> customizerObjectProvider) {
         this.dataSourceSwitchProperties = dataSourceSwitchProperties;
-        this.selectionCustomizer = customizerObjectProvider.getIfAvailable();
+        this.environmentSelectionCustomizer = customizerObjectProvider.getIfAvailable();
     }
 
     /**
@@ -72,27 +70,34 @@ public class ApiBootDataSourceSwitchAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public DataSource dataSource(DataSourceFactoryBean dataSourceFactoryBean) {
-        List<DataSourceConfig> dataSourceConfigList = new LinkedList();
-        Map<String, DataSourceConfig> dataSourceConfigMap = new HashMap(1);
+        List<DataSourceSwitchEnvironment> switchEnvironments = this.dataSourceSwitchProperties.getEnvironments().keySet()
+            .stream()
+            .map(environment -> {
+                ApiBootDataSourceSwitchEnvironmentProperties environmentProperties = this.dataSourceSwitchProperties.getEnvironments().get(environment);
 
-        // put druid datasource config to map
-        dataSourceConfigMap.putAll(dataSourceSwitchProperties.getDruid());
-        // put hikari datasource config to map
-        dataSourceConfigMap.putAll(dataSourceSwitchProperties.getHikari());
+                Map<String, DataSourceConfig> dataSourceConfigMap = new HashMap<>();
+                dataSourceConfigMap.putAll(environmentProperties.getDruid());
+                dataSourceConfigMap.putAll(environmentProperties.getHikari());
 
-        // convert all datasource config
-        dataSourceConfigMap.keySet().stream().forEach(poolName -> {
-            DataSourceConfig dataSourceConfig = dataSourceConfigMap.get(poolName);
-            // set data source pool name
-            dataSourceConfig.setPoolName(poolName);
-            // datasource type
-            dataSourceConfig.setDataSourceType(dataSourceConfig instanceof DataSourceDruidConfig ? MinBoxDruidDataSource.class : MinBoxHikariDataSource.class);
-
-            // after convert add to data source list
-            dataSourceConfigList.add(dataSourceConfig);
-        });
-
-        return new MinBoxSwitchRoutingDataSource(dataSourceFactoryBean, dataSourceSwitchProperties.getPrimary(), dataSourceConfigList, selectionCustomizer);
+                // @formatter:off
+                List<DataSourceConfig> configs = dataSourceConfigMap.keySet()
+                    .stream()
+                    .map(poolName -> {
+                        DataSourceConfig dataSourceConfig = dataSourceConfigMap.get(poolName);
+                        dataSourceConfig.setPoolName(poolName);
+                        dataSourceConfig.setDataSourceType(dataSourceConfig instanceof DataSourceDruidConfig ? MinBoxDruidDataSource.class : MinBoxHikariDataSource.class);
+                        return dataSourceConfig;
+                    })
+                    .collect(Collectors.toList());
+                return DataSourceSwitchEnvironment.initialization()
+                    .environment(environment)
+                    .primaryPoolName(environmentProperties.getPrimary())
+                    .configs(configs)
+                    .build();
+                // @formatter:on
+            })
+            .collect(Collectors.toList());
+        return new MinBoxSwitchRoutingDataSource(dataSourceFactoryBean, environmentSelectionCustomizer, dataSourceSwitchProperties.getActiveEnvironment(), switchEnvironments);
     }
 
     /**

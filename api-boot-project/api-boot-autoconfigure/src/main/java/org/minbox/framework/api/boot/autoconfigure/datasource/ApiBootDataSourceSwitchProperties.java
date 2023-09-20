@@ -1,8 +1,6 @@
 package org.minbox.framework.api.boot.autoconfigure.datasource;
 
 import lombok.Data;
-import org.minbox.framework.datasource.config.DataSourceDruidConfig;
-import org.minbox.framework.datasource.config.DataSourceHikariConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,16 +25,12 @@ public class ApiBootDataSourceSwitchProperties {
      */
     public static final String API_BOOT_DATASOURCE_SWITCH_PREFIX = "api.boot.datasource";
     /**
-     * primary datasource pool name
-     * default is master
+     * active environment
      */
-    private String primary = "master";
+    private String activeEnvironment = "default";
+
     /**
-     * config druid type datasource list
+     * Multi-environment data source configuration
      */
-    public Map<String, DataSourceDruidConfig> druid = new HashMap();
-    /**
-     * config hikari type datasource list
-     */
-    public Map<String, DataSourceHikariConfig> hikari = new HashMap();
+    private Map<String, ApiBootDataSourceSwitchEnvironmentProperties> environments = new HashMap<>();
 }
