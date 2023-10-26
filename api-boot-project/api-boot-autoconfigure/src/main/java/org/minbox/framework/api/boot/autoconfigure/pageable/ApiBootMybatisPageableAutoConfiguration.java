@@ -38,7 +38,6 @@ import java.util.Properties;
  *
  * @author 恒宇少年
  */
-@Configuration
 @ConditionalOnBean(SqlSessionFactory.class)
 @EnableConfigurationProperties(ApiBootMyBatisPageableProperties.class)
 @ConditionalOnClass(MyBatisExecutePageableInterceptor.class)
