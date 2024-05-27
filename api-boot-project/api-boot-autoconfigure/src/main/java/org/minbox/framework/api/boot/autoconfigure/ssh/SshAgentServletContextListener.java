@@ -2,8 +2,10 @@ package org.minbox.framework.api.boot.autoconfigure.ssh;
 
 import lombok.extern.slf4j.Slf4j;
 import org.minbox.framework.ssh.agent.AgentConnection;
-import org.minbox.framework.ssh.agent.DefaultAgentConnection;
+import org.minbox.framework.ssh.agent.AgentSupport;
+import org.minbox.framework.ssh.agent.apache.ApacheMinaSshdAgentConnection;
 import org.minbox.framework.ssh.agent.config.AgentConfig;
+import org.minbox.framework.ssh.agent.jsch.JSchAgentConnection;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 
@@ -28,11 +30,11 @@ public class SshAgentServletContextListener implements ServletContextListener {
     /**
      * The ssh-agent auto config properties
      */
-    private SshAgentProperties sshAgentProperties;
+    private final SshAgentProperties sshAgentProperties;
     /**
      * Cache a list of AgentConnection objects
      */
-    private List<AgentConnection> connections = new ArrayList<>();
+    private final List<AgentConnection> connections = new ArrayList<>();
 
     public SshAgentServletContextListener(SshAgentProperties sshAgentProperties) {
         this.sshAgentProperties = sshAgentProperties;
@@ -44,7 +46,8 @@ public class SshAgentServletContextListener implements ServletContextListener {
      * Create an {@link AgentConnection} instance according to each {@link AgentConfig} and perform port forwarding connection
      *
      * @param sce The {@link ServletContextEvent} instance
-     * @see DefaultAgentConnection
+     * @see JSchAgentConnection
+     * @see ApacheMinaSshdAgentConnection
      */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -53,9 +56,10 @@ public class SshAgentServletContextListener implements ServletContextListener {
             log.warn("ssh-agent agent does not take effect, reason: agent information is not configured.");
             return;
         }
-        configs.stream().forEach(config -> {
+        configs.forEach(config -> {
             try {
-                AgentConnection connection = new DefaultAgentConnection(config);
+                AgentSupport agentSupport = sshAgentProperties.getAgentSupport();
+                AgentConnection connection = (AgentConnection) Class.forName(agentSupport.getClassName()).getDeclaredConstructor(AgentConfig.class).newInstance(config);
                 this.connections.add(connection);
                 connection.connect();
             } catch (Exception e) {
@@ -73,6 +77,6 @@ public class SshAgentServletContextListener implements ServletContextListener {
      */
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        connections.stream().forEach(connection -> connection.disconnect());
+        connections.forEach(AgentConnection::disconnect);
     }
 }

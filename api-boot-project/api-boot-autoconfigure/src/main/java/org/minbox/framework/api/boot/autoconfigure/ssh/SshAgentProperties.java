@@ -1,6 +1,7 @@
 package org.minbox.framework.api.boot.autoconfigure.ssh;
 
 import lombok.Data;
+import org.minbox.framework.ssh.agent.AgentSupport;
 import org.minbox.framework.ssh.agent.config.AgentConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
@@ -30,4 +31,8 @@ public class SshAgentProperties {
      */
     @NestedConfigurationProperty
     private List<AgentConfig> configs;
+    /**
+     * 使用的Ssh代理
+     */
+    private AgentSupport agentSupport = AgentSupport.mina;
 }
