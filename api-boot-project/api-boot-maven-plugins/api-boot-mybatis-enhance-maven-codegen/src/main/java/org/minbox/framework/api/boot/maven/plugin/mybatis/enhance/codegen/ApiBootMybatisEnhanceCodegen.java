@@ -43,7 +43,9 @@ import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.templa
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.tools.CamelTools;
 import org.minbox.framework.api.boot.maven.plugin.mybatis.enhance.codegen.writer.JavaClassWriter;
 import org.minbox.framework.ssh.agent.AgentConnection;
-import org.minbox.framework.ssh.agent.DefaultAgentConnection;
+import org.minbox.framework.ssh.agent.AgentSupport;
+import org.minbox.framework.ssh.agent.apache.ApacheMinaSshdAgentConnection;
+import org.minbox.framework.ssh.agent.config.AgentConfig;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
@@ -172,6 +174,11 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
     @Parameter
     private boolean enableSshProxy = false;
     /**
+     * ssh代理连接方式，默认为Apache Mina
+     */
+    @Parameter
+    private AgentSupport sshProxySupport = AgentSupport.mina;
+    /**
      * Ssh Proxy代理参数设置
      */
     @Parameter
@@ -211,7 +218,7 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
             getLog().info("The entity class corresponding to the " + tableNames.size() + " tables will be generated，and the table name list: " +
                 JSON.toJSONString(tableNames));
         }
-        tableNames.stream().forEach(tableName -> {
+        tableNames.forEach(tableName -> {
             LocalDateTime startGetInfoTime = LocalDateTime.now();
             // get table
             Table table = dataBase.getTable(tableName);
@@ -297,7 +304,8 @@ public class ApiBootMybatisEnhanceCodegen extends AbstractMojo {
     private AgentConnection startingSshProxy(SshProxySetting setting) {
         AgentConnection connection = null;
         try {
-            connection = new DefaultAgentConnection(setting);
+            this.sshProxySupport = this.sshProxySupport == null ? AgentSupport.mina : this.sshProxySupport;
+            connection = (AgentConnection) Class.forName(this.sshProxySupport.getClassName()).getDeclaredConstructor(AgentConfig.class).newInstance(setting);
             connection.connect();
         } catch (Exception e) {
             getLog().error("SSH Connection：" + setting.getServerIp() + ":" + setting.getForwardTargetPort() + "，try agent failure.", e);

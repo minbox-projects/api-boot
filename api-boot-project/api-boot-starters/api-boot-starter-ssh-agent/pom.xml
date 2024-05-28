@@ -34,6 +34,7 @@
         <dependency>
             <groupId>org.minbox.framework</groupId>
             <artifactId>ssh-agent</artifactId>
+            <version>${ssh-agent.version}</version>
         </dependency>
     </dependencies>
 </project>
