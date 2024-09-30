@@ -28,7 +28,7 @@
     <packaging>maven-plugin</packaging>
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
-        <mysql-connector-java.version>5.1.49</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
     </properties>
     <artifactId>api-boot-mybatis-enhance-maven-codegen</artifactId>
     <dependencies>
