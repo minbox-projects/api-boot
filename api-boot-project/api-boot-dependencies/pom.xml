@@ -21,6 +21,7 @@
         <xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
         <minbox-datasource-switch.version>1.0.4</minbox-datasource-switch.version>
         <ssh-agent.version>1.0.4</ssh-agent.version>
+        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
